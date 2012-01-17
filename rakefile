@@ -1,0 +1,39 @@
+require 'yaml'
+require_relative 'rakelib/command_definition_file'
+require_relative 'rakelib/command_module'
+require_relative 'rakelib/code_writer'
+
+task :default => [:generate_all_commands]
+
+def process_command_definition_file f
+  command_definition_file = CommandDefinitionFile.new f
+  command_definition = command_definition_file.load
+  command_module = CommandModule.new command_definition
+  File.open("lib/fluent_command_builder/command_builders/#{command_definition_file.file_name_without_extension}.rb", 'w') do |f|
+    writer = CodeWriter.new f
+    command_module.write_command_module writer
+  end
+end
+
+generate_command_tasks = []
+
+Dir['command_definitions/*.txt'].each do |f|
+  command_name = File.basename f, '.*'
+  task_name = "generate_#{command_name}_command"
+  desc "Generate #{command_name} command"
+  task task_name do
+    process_command_definition_file f
+  end
+  generate_command_tasks << task_name
+end
+
+desc 'Generate all commands'
+task :generate_all_commands => generate_command_tasks do
+  Dir.chdir 'lib' do
+    File.open 'fluent_command_builder.rb', 'w' do |f|
+      Dir['fluent_command_builder/command_builders/*.rb'].each do |command_builder_file|
+        f.puts %Q[require File.expand_path(File.dirname(__FILE__) + '/#{command_builder_file}')]
+      end
+    end
+  end
+end
