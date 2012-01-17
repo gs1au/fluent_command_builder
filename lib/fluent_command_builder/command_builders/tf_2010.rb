@@ -2043,6 +2043,10 @@ module FluentCommandBuilder
         
       end
       
+      def tf
+        Tf.new
+      end
+      
     end
     
   end

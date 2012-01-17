@@ -430,6 +430,10 @@ module FluentCommandBuilder
         
       end
       
+      def netsh
+        Netsh.new
+      end
+      
     end
     
   end

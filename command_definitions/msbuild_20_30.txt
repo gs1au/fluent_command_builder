@@ -1,0 +1,15 @@
+2.0, 3.0
+MSBuild
+    <projectFile>
+    /help
+    /noLogo
+    /version
+    @<file>
+    /noAutoResponse
+    /target:<target;>
+    /property:<property=;>
+    /logger:<logger>
+    /consoleLoggerParameters:<parameters>
+    /verbosity:<level>
+    /noConsoleLogger
+    /validate:<schema>

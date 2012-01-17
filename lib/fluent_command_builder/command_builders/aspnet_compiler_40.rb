@@ -91,6 +91,10 @@ module FluentCommandBuilder
         
       end
       
+      def aspnet_compiler
+        AspnetCompiler.new
+      end
+      
     end
     
   end

@@ -41,6 +41,10 @@ module FluentCommandBuilder
         
       end
       
+      def installutil
+        InstallUtil.new
+      end
+      
     end
     
   end

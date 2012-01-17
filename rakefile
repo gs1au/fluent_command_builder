@@ -1,34 +1,23 @@
-require 'yaml'
-require_relative 'rakelib/command_definition_file'
-require_relative 'rakelib/command_module'
-require_relative 'rakelib/code_writer'
+require 'rake/clean'
+require_relative 'rakelib/code_generator'
 
-task :default => [:generate_all_commands]
+COMMAND_DEFINITIONS_DIR = 'command_definitions'
+GENERATED_CODE_DIR = 'lib/fluent_command_builder/command_builders'
 
-def process_command_definition_file f
-  command_definition_file = CommandDefinitionFile.new f
-  command_definition = command_definition_file.load
-  command_module = CommandModule.new command_definition
-  File.open("lib/fluent_command_builder/command_builders/#{command_definition_file.file_name_without_extension}.rb", 'w') do |f|
-    writer = CodeWriter.new f
-    command_module.write_command_module writer
-  end
+CLOBBER.include GENERATED_CODE_DIR
+
+directory GENERATED_CODE_DIR
+
+task :default => [:generate_code]
+
+desc 'Generate code.'
+task :generate_code => [:clobber, GENERATED_CODE_DIR] do
+  code_generator = CodeGenerator.new COMMAND_DEFINITIONS_DIR, GENERATED_CODE_DIR
+  code_generator.generate_code
+  generate_fluent_command_builder_rb
 end
 
-generate_command_tasks = []
-
-Dir['command_definitions/*.txt'].each do |f|
-  command_name = File.basename f, '.*'
-  task_name = "generate_#{command_name}_command"
-  desc "Generate #{command_name} command"
-  task task_name do
-    process_command_definition_file f
-  end
-  generate_command_tasks << task_name
-end
-
-desc 'Generate all commands'
-task :generate_all_commands => generate_command_tasks do
+def generate_fluent_command_builder_rb
   Dir.chdir 'lib' do
     File.open 'fluent_command_builder.rb', 'w' do |f|
       Dir['fluent_command_builder/command_builders/*.rb'].each do |command_builder_file|

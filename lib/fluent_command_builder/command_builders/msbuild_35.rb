@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 
 module FluentCommandBuilder
   module MSBuild
-    module V40
+    module V35
       class MSBuild
         def initialize command=nil
           @builder = CommandBuilder.new command
@@ -95,51 +95,6 @@ module FluentCommandBuilder
           self
         end
         
-        def file_logger1 
-          @builder.append "/fileLogger1"
-          self
-        end
-        
-        def file_logger2 
-          @builder.append "/fileLogger2"
-          self
-        end
-        
-        def file_logger3 
-          @builder.append "/fileLogger3"
-          self
-        end
-        
-        def file_logger4 
-          @builder.append "/fileLogger4"
-          self
-        end
-        
-        def file_logger5 
-          @builder.append "/fileLogger5"
-          self
-        end
-        
-        def file_logger6 
-          @builder.append "/fileLogger6"
-          self
-        end
-        
-        def file_logger7 
-          @builder.append "/fileLogger7"
-          self
-        end
-        
-        def file_logger8 
-          @builder.append "/fileLogger8"
-          self
-        end
-        
-        def file_logger9 
-          @builder.append "/fileLogger9"
-          self
-        end
-        
         def distributed_file_logger 
           @builder.append "/distributedFileLogger"
           self
@@ -147,51 +102,6 @@ module FluentCommandBuilder
         
         def file_logger_parameters parameters
           @builder.format(parameters, ';', '=') { |v| @builder.append "/fileLoggerParameters:#{v}" }
-          self
-        end
-        
-        def file_logger_parameters1 parameters
-          @builder.format(parameters, ';', '=') { |v| @builder.append "/fileLoggerParameters1:#{v}" }
-          self
-        end
-        
-        def file_logger_parameters2 parameters
-          @builder.format(parameters, ';', '=') { |v| @builder.append "/fileLoggerParameters2:#{v}" }
-          self
-        end
-        
-        def file_logger_parameters3 parameters
-          @builder.format(parameters, ';', '=') { |v| @builder.append "/fileLoggerParameters3:#{v}" }
-          self
-        end
-        
-        def file_logger_parameters4 parameters
-          @builder.format(parameters, ';', '=') { |v| @builder.append "/fileLoggerParameters4:#{v}" }
-          self
-        end
-        
-        def file_logger_parameters5 parameters
-          @builder.format(parameters, ';', '=') { |v| @builder.append "/fileLoggerParameters5:#{v}" }
-          self
-        end
-        
-        def file_logger_parameters6 parameters
-          @builder.format(parameters, ';', '=') { |v| @builder.append "/fileLoggerParameters6:#{v}" }
-          self
-        end
-        
-        def file_logger_parameters7 parameters
-          @builder.format(parameters, ';', '=') { |v| @builder.append "/fileLoggerParameters7:#{v}" }
-          self
-        end
-        
-        def file_logger_parameters8 parameters
-          @builder.format(parameters, ';', '=') { |v| @builder.append "/fileLoggerParameters8:#{v}" }
-          self
-        end
-        
-        def file_logger_parameters9 parameters
-          @builder.format(parameters, ';', '=') { |v| @builder.append "/fileLoggerParameters9:#{v}" }
           self
         end
         
@@ -211,12 +121,16 @@ module FluentCommandBuilder
         
       end
       
+      def msbuild
+        MSBuild.new
+      end
+      
     end
     
   end
   
-  def msbuild40
-    MSBuild::V40::MSBuild.new
+  def msbuild35
+    MSBuild::V35::MSBuild.new
   end
   
 end

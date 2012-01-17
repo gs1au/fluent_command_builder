@@ -131,6 +131,10 @@ module FluentCommandBuilder
         
       end
       
+      def rake
+        Rake.new
+      end
+      
     end
     
   end

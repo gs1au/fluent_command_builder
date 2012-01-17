@@ -1,12 +1,8 @@
-require_relative 'command'
-require_relative 'option'
-
 class CommandModule
 
-  def initialize command_definition
-    @version = command_definition[0].keys[0]
-    @root_command = Command.new command_definition[1].keys[0]
-    process_array command_definition[1].values[0], @root_command
+  def initialize root_command, version
+    @root_command = root_command
+    @version = version
   end
 
   def write_command_module writer
@@ -17,6 +13,9 @@ class CommandModule
       w.write_block "module #{@root_command.class_name}" do
         w.write_block "module V#{version}" do
           write_command @root_command, w
+          w.write_block "def #{@root_command.method_name}" do
+            w.write_line "#{@root_command.class_name}.new"
+          end
         end
       end
       w.write_block "def #{@root_command.method_name}#{version}" do
@@ -34,25 +33,6 @@ class CommandModule
   def write_command command, writer
     command.write_command_class writer
     command.sub_commands.each { |c| write_command c, writer }
-  end
-
-  def process_array array, parent_command=nil
-    array.each do |hash|
-      process_hash hash, parent_command
-    end
-  end
-
-  def process_hash hash, parent_command
-    hash.each_pair do |k, v|
-      line = CommandDefinitionLine.new k
-      if line.command_name.nil?
-        parent_command.options << Option.new(k)
-      else
-        sub_command = Command.new k
-        parent_command.sub_commands << sub_command
-        process_array v, sub_command unless v.nil?
-      end
-    end
   end
 
 end

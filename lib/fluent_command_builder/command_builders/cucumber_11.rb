@@ -161,6 +161,10 @@ module FluentCommandBuilder
         
       end
       
+      def cucumber
+        Cucumber.new
+      end
+      
     end
     
   end

@@ -285,6 +285,10 @@ module FluentCommandBuilder
         
       end
       
+      def dotcover
+        DotCover.new
+      end
+      
     end
     
   end

@@ -166,6 +166,10 @@ module FluentCommandBuilder
         
       end
       
+      def msdeploy
+        MSDeploy.new
+      end
+      
     end
     
   end

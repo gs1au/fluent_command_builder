@@ -121,6 +121,10 @@ module FluentCommandBuilder
         
       end
       
+      def nunit_console
+        NunitConsole.new
+      end
+      
     end
     
   end

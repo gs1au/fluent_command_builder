@@ -1,0 +1,23 @@
+3.5
+MSBuild
+    <projectFile>
+    /help
+    /noLogo
+    /version
+    @<file>
+    /noAutoResponse
+    /target:<target;>
+    /property:<property=;>
+    /logger:<logger>
+    /distributedLogger:<logger>
+    /consoleLoggerParameters:<parameters>
+    /verbosity:<level>
+    /noConsoleLogger
+    /validate:<schema>
+    /maxCpuCount:<number>
+    /ignoreProjectExtensions:<extensions;>
+    /fileLogger
+    /distributedFileLogger
+    /fileLoggerParameters:<parameters=;>
+    /toolsVersion:<version>
+    /nodeReuse:<parameters>
