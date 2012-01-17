@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'fluent_command_builder'
-  s.version     = '0.1.1'
+  s.version     = '0.1.2'
   s.summary     = "A command line builder with a fluent interface written in Ruby."
   s.description = "A command line builder with a fluent interface written in Ruby."
   s.authors     = ["Matthew Riley"]
