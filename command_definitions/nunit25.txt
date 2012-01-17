@@ -1,0 +1,28 @@
+2.5
+nunit-console
+    <assembly>
+    /run:<test>
+    /fixture:<fixture>
+    /framework:<framework>
+    /include:<category>
+    /exclude:<category>
+    /out:<file>
+    /err:<file>
+    /labels
+    /xml:<file>
+    /config:<config>
+    /process:<process>
+    /domain:<domain>
+    /timeout:<timeout>
+    /trace:<level>
+    /noShadow
+    /noThread
+    /wait
+    /xmlConsole
+    /noLogo
+    /help
+
+
+
+
+

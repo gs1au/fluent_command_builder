@@ -1,0 +1,17 @@
+4.0
+aspnet_compiler
+    <targetDir>
+    -m <metabasePath>
+    -v <virtualPath>
+    -p <physicalPath>
+    -u
+    -f
+    -d
+    -fixedNames
+    -c
+    -errorStack
+    -noLogo
+    -keyFile <file>
+    -keyContainer <container>
+    -aptca
+    -delaySign

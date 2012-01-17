@@ -1,0 +1,31 @@
+1.1
+cucumber
+    --require <library>
+    --i18n <lang>
+    --format <format>
+    --out <file>
+    --tags <tagExpression,>
+    --name <name>
+    --exclude <pattern>
+    --profile <profile>
+    --no-profile
+    --color
+    --no-color
+    --dry-run
+    --autoformat <dir>
+    --no-multiline
+    --no-source
+    --no-snippets
+    --quiet
+    --backtrace
+    --strict
+    --wip
+    --verbose
+    --guess
+    --lines <lines>
+    --expand
+    --drb
+    --port <port>
+    --dotcucumber <dir>
+    --version
+    --help

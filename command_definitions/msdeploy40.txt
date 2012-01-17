@@ -1,0 +1,33 @@
+4.0
+MSDeploy
+    -allowUntrusted:<bool>
+    -appHostConfigDir:<path>
+    -declareParam:<param=,>
+    -declareParamFile:<xmlFile>
+    -dest:<provider>
+    -disableLink:<linkExtension>
+    -disableRule:<rule,>
+    -disableSkipDirective:<skipDirectiveName>
+    -enableLink:<linkExtension>
+    -enableRule:<rule,>
+    -enableSkipDirective:<skipDirectiveName>
+    -postSync:<command>
+    -preSync:<command>
+    -removeParam:<param>
+    -replace:<arg>
+    -retryAttempts:<number>
+    -retryInterval:<milliseconds>
+    -setParam:<param=,>
+    -setParamFile:<xmlFile>
+    -showSecure
+    -skip:<arg>
+    -source:<provider>
+    -unicode
+    -useCheckSum
+    -verb:<verbName>
+    -verbose
+    -webServerDir:<path>
+    -whatif
+    -xml
+    -xpath:<path>
+

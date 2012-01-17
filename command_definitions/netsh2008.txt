@@ -1,0 +1,68 @@
+2008
+netsh
+    advfirewall
+        add rule
+            name=<ruleName>
+            dir=<direction>
+            action=<action>
+            program=<path>
+            service=<serviceShortName>
+            description=<ruleDescription>
+            enable=<enable>
+            profile=<profile>
+            localip=<addresses>
+            remoteip=<addresses>
+            localport=<port>
+            remoteport=<port>
+            protocol=<protocol>
+            interfaceType=<type>
+            rmtcomputergrp=<sddlString>
+            rmtusgrp=<sddlString>
+            edge=<edge>
+            security=<security>
+        delete rule
+            name=<ruleName>
+            dir=<direction>
+            profile=<profile>
+            program=<path>
+            service=<serviceShortName>
+            localip=<addresses>
+            remoteip=<addresses>
+            localport=<port>
+            remoteport=<port>
+            protocol=<protocol>
+        set rule
+            group=<groupName>
+            dir=<direction>
+            profile=<profile>
+            program=<path>
+            service=<serviceShortName>
+            localip=<addresses>
+            remoteip=<addresses>
+            localport=<port>
+            remoteport=<port>
+            protocol=<protocol>
+            new
+                name=<ruleName>
+                dir=<direction>
+                program=<path>
+                service=<serviceShortName>
+                action=<action>
+                description=<ruleDescription>
+                enable=<enable>
+                profile=<profile>
+                localip=<addresses>
+                remoteip=<addresses>
+                localport=<port>
+                remoteport=<port>
+                protocol=<protocol>
+                interfaceType=<type>
+                rmtcomputergrp=<sddlString>
+                rmtusgrp=<sddlString>
+                edge=<edge>
+                security=<security>
+        show rule
+            name=<ruleName>
+            profile=<profile>
+            type=<type>
+            verbose

@@ -1,0 +1,7 @@
+4.0
+installUtil
+    /LogFile=<fileName>
+    /AssemblyName=<assemblyName>
+    /LogToConsole=<bool>
+    /ShowCallStack
+    /Uninstall
