@@ -1,7 +1,7 @@
 require 'test/unit'
-require '../rakelib/command_definition_line'
+require_relative '../rakelib/command_definition_line'
 
-class CommandDefinitionLineTests < Test::Unit::TestCase
+class TestCommandDefinitionLine < Test::Unit::TestCase
 
   def test_get_command_name
     line = CommandDefinitionLine.new 'MSBuild'

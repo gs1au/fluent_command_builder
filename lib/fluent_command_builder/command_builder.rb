@@ -1,7 +1,7 @@
 module FluentCommandBuilder
   class CommandBuilder
 
-    def initialize command
+    def initialize command=nil
       @command = command.to_s
     end
 
@@ -14,13 +14,22 @@ module FluentCommandBuilder
     end
 
     def to_s
-      @command
+      @command.strip
     end
 
     private
 
     def format_value value, delimiter=nil, key_value_separator=nil
-      quote_if_includes_space(array_to_s([value].flatten.map { |v| v.kind_of?(Hash) ? hash_to_array(v, key_value_separator) : value }, delimiter)) unless value.nil?
+      value_as_array = case
+                         when value.kind_of?(Hash)
+                           hash_to_array value, key_value_separator
+                         when value.kind_of?(Array)
+                           value
+                         else
+                           [value.to_s]
+                       end
+      value_as_string = array_to_s value_as_array, delimiter
+      quote_if_includes_space value_as_string
     end
 
     def hash_to_array hash, key_value_separator

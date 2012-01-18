@@ -5,11 +5,11 @@ class CommandDefinitionLine
   end
 
   def command_name
-    match /^(\w[\w -]+)$/
+    match /^(\w[\w -]*)$/
   end
 
   def option_name
-    match /([\w-]+)/
+    match /(\w[\w-]*)/
   end
 
   def arg_name
