@@ -41,12 +41,12 @@ module FluentCommandBuilder
         end
         
         def target target
-          @builder.format(target, ';') { |v| @builder.append "/target:#{v}" }
+          @builder.append_format(target, ';') { |v| "/target:#{v}" }
           self
         end
         
         def property property
-          @builder.format(property, ';', '=') { |v| @builder.append "/property:#{v}" }
+          @builder.append_format(property, ';', '=') { |v| "/property:#{v}" }
           self
         end
         

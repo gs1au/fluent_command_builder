@@ -9,8 +9,8 @@ module FluentCommandBuilder
       @command << value + ' '
     end
 
-    def format value, delimiter=nil, key_value_separator=nil
-      yield(format_value(value, delimiter, key_value_separator))
+    def append_format value, delimiter=nil, key_value_separator=nil
+      append yield format_value(value, delimiter, key_value_separator)
     end
 
     def to_s

@@ -21,7 +21,7 @@ module FluentCommandBuilder
         end
         
         def declare_param param
-          @builder.format(param, ',', '=') { |v| @builder.append "-declareParam:#{v}" }
+          @builder.append_format(param, ',', '=') { |v| "-declareParam:#{v}" }
           self
         end
         
@@ -41,7 +41,7 @@ module FluentCommandBuilder
         end
         
         def disable_rule rule
-          @builder.format(rule, ',') { |v| @builder.append "-disableRule:#{v}" }
+          @builder.append_format(rule, ',') { |v| "-disableRule:#{v}" }
           self
         end
         
@@ -56,7 +56,7 @@ module FluentCommandBuilder
         end
         
         def enable_rule rule
-          @builder.format(rule, ',') { |v| @builder.append "-enableRule:#{v}" }
+          @builder.append_format(rule, ',') { |v| "-enableRule:#{v}" }
           self
         end
         
@@ -96,7 +96,7 @@ module FluentCommandBuilder
         end
         
         def set_param param
-          @builder.format(param, ',', '=') { |v| @builder.append "-setParam:#{v}" }
+          @builder.append_format(param, ',', '=') { |v| "-setParam:#{v}" }
           self
         end
         

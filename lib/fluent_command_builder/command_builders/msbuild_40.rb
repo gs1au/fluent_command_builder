@@ -41,12 +41,12 @@ module FluentCommandBuilder
         end
         
         def target target
-          @builder.format(target, ';') { |v| @builder.append "/target:#{v}" }
+          @builder.append_format(target, ';') { |v| "/target:#{v}" }
           self
         end
         
         def property property
-          @builder.format(property, ';', '=') { |v| @builder.append "/property:#{v}" }
+          @builder.append_format(property, ';', '=') { |v| "/property:#{v}" }
           self
         end
         
@@ -86,7 +86,7 @@ module FluentCommandBuilder
         end
         
         def ignore_project_extensions extensions
-          @builder.format(extensions, ';') { |v| @builder.append "/ignoreProjectExtensions:#{v}" }
+          @builder.append_format(extensions, ';') { |v| "/ignoreProjectExtensions:#{v}" }
           self
         end
         
@@ -146,52 +146,52 @@ module FluentCommandBuilder
         end
         
         def file_logger_parameters parameters
-          @builder.format(parameters, ';', '=') { |v| @builder.append "/fileLoggerParameters:#{v}" }
+          @builder.append_format(parameters, ';', '=') { |v| "/fileLoggerParameters:#{v}" }
           self
         end
         
         def file_logger_parameters1 parameters
-          @builder.format(parameters, ';', '=') { |v| @builder.append "/fileLoggerParameters1:#{v}" }
+          @builder.append_format(parameters, ';', '=') { |v| "/fileLoggerParameters1:#{v}" }
           self
         end
         
         def file_logger_parameters2 parameters
-          @builder.format(parameters, ';', '=') { |v| @builder.append "/fileLoggerParameters2:#{v}" }
+          @builder.append_format(parameters, ';', '=') { |v| "/fileLoggerParameters2:#{v}" }
           self
         end
         
         def file_logger_parameters3 parameters
-          @builder.format(parameters, ';', '=') { |v| @builder.append "/fileLoggerParameters3:#{v}" }
+          @builder.append_format(parameters, ';', '=') { |v| "/fileLoggerParameters3:#{v}" }
           self
         end
         
         def file_logger_parameters4 parameters
-          @builder.format(parameters, ';', '=') { |v| @builder.append "/fileLoggerParameters4:#{v}" }
+          @builder.append_format(parameters, ';', '=') { |v| "/fileLoggerParameters4:#{v}" }
           self
         end
         
         def file_logger_parameters5 parameters
-          @builder.format(parameters, ';', '=') { |v| @builder.append "/fileLoggerParameters5:#{v}" }
+          @builder.append_format(parameters, ';', '=') { |v| "/fileLoggerParameters5:#{v}" }
           self
         end
         
         def file_logger_parameters6 parameters
-          @builder.format(parameters, ';', '=') { |v| @builder.append "/fileLoggerParameters6:#{v}" }
+          @builder.append_format(parameters, ';', '=') { |v| "/fileLoggerParameters6:#{v}" }
           self
         end
         
         def file_logger_parameters7 parameters
-          @builder.format(parameters, ';', '=') { |v| @builder.append "/fileLoggerParameters7:#{v}" }
+          @builder.append_format(parameters, ';', '=') { |v| "/fileLoggerParameters7:#{v}" }
           self
         end
         
         def file_logger_parameters8 parameters
-          @builder.format(parameters, ';', '=') { |v| @builder.append "/fileLoggerParameters8:#{v}" }
+          @builder.append_format(parameters, ';', '=') { |v| "/fileLoggerParameters8:#{v}" }
           self
         end
         
         def file_logger_parameters9 parameters
-          @builder.format(parameters, ';', '=') { |v| @builder.append "/fileLoggerParameters9:#{v}" }
+          @builder.append_format(parameters, ';', '=') { |v| "/fileLoggerParameters9:#{v}" }
           self
         end
         

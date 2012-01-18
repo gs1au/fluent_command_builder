@@ -41,12 +41,12 @@ module FluentCommandBuilder
         end
         
         def target target
-          @builder.format(target, ';') { |v| @builder.append "/target:#{v}" }
+          @builder.append_format(target, ';') { |v| "/target:#{v}" }
           self
         end
         
         def property property
-          @builder.format(property, ';', '=') { |v| @builder.append "/property:#{v}" }
+          @builder.append_format(property, ';', '=') { |v| "/property:#{v}" }
           self
         end
         
@@ -86,7 +86,7 @@ module FluentCommandBuilder
         end
         
         def ignore_project_extensions extensions
-          @builder.format(extensions, ';') { |v| @builder.append "/ignoreProjectExtensions:#{v}" }
+          @builder.append_format(extensions, ';') { |v| "/ignoreProjectExtensions:#{v}" }
           self
         end
         
@@ -101,7 +101,7 @@ module FluentCommandBuilder
         end
         
         def file_logger_parameters parameters
-          @builder.format(parameters, ';', '=') { |v| @builder.append "/fileLoggerParameters:#{v}" }
+          @builder.append_format(parameters, ';', '=') { |v| "/fileLoggerParameters:#{v}" }
           self
         end
         

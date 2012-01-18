@@ -31,7 +31,7 @@ module FluentCommandBuilder
         end
         
         def tags tag_expression
-          @builder.format(tag_expression, ',') { |v| @builder.append "--tags #{v}" }
+          @builder.append_format(tag_expression, ',') { |v| "--tags #{v}" }
           self
         end
         

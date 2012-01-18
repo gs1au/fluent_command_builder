@@ -16,7 +16,7 @@ class Option
                      when needs_formatting?
                        append_arg = @option_text.gsub ARG_PATTERN, '#{v}'
                        format_args = [arg_name, [delimiter, key_value_separator].compact.map { |v| "'#{v}'" }].flatten
-                       format_statement format_args, append_arg
+                       append_format_statement format_args, append_arg
                      when has_arg?
                        append_arg = @option_text.gsub ARG_PATTERN, "\#{#{arg_name}}"
                        append_statement append_arg
@@ -57,8 +57,8 @@ class Option
     %Q[@builder.append "#{append_arg}"]
   end
 
-  def format_statement format_args, append_arg
-    %Q[@builder.format(#{format_args.join ', '}) { |v| #{append_statement append_arg} }]
+  def append_format_statement format_args, append_arg
+    %Q[@builder.append_format(#{format_args.join ', '}) { |v| "#{append_arg}" }]
   end
 
   def camel_case_to_underscore_separated value
