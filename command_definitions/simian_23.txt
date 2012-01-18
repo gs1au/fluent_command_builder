@@ -1,0 +1,25 @@
+2.3
+simian
+    -formatter=<formatter>
+    -threshold=<threshold>
+    -language=<language>
+    -defaultLanguage=<language>
+    -failOnDuplication=<bool>
+    -reportDuplicateText=<bool>
+    -ignoreBlocks=<markers>
+    -ignoreCurlyBraces=<bool>
+    -ignoreIdentifiers=<bool>
+    -ignoreIdentifierCase=<bool>
+    -ignoreRegions=<bool>
+    -ignoreStrings=<bool>
+    -ignoreStringCase=<bool>
+    -ignoreNumbers=<bool>
+    -ignoreCharacters=<bool>
+    -ignoreCharacterCase=<bool>
+    -ignoreLiterals=<bool>
+    -ignoreSubtypeNames=<bool>
+    -ignoreModifiers=<bool>
+    -ignoreVariableNames=<bool>
+    -balanceParentheses=<bool>
+    -balanceCurlyBraces=<bool>
+    -balanceSquareBrackets=<bool>

@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 
 module FluentCommandBuilder
   module InstallUtil
-    module V40
+    module V11
       class InstallUtil
         def initialize command=nil
           @builder = CommandBuilder.new command
@@ -17,16 +17,6 @@ module FluentCommandBuilder
         
         def help 
           @builder.append "/help"
-          self
-        end
-        
-        def assembly_name assembly_strong_name
-          @builder.append "/assemblyName=#{assembly_strong_name}"
-          self
-        end
-        
-        def install_state_dir directory_name
-          @builder.append "/installStateDir=#{directory_name}"
           self
         end
         
@@ -64,8 +54,8 @@ module FluentCommandBuilder
     
   end
   
-  def installutil40
-    InstallUtil::V40::InstallUtil.new
+  def installutil11
+    InstallUtil::V11::InstallUtil.new
   end
   
 end
