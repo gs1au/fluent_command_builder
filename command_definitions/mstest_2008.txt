@@ -1,0 +1,19 @@
+2008
+MSTest
+    /testContainer:<fileName>
+    /testMetadata:<fileName>
+    /testList:<listListPath>
+    /test:<testName>
+    /noIsolation
+    /runConfig:<fileName>
+    /resultsFile:<fileName>
+    /unique
+    /detail:<propertyId>
+    /help
+    /noLogo
+    /publish:<serverName>
+    /publishResultsFile:<fileName>
+    /publishBuild:<buildId>
+    /teamProject:<teamProjectName>
+    /platform:<platform>
+    /flavor:<flavor>

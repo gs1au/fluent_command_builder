@@ -1,0 +1,22 @@
+2010
+MSTest
+    /testContainer:<fileName>
+    /testMetadata:<fileName>
+    /testList:<listListPath>
+    /category:<testCategoryFilter>
+    /test:<testName>
+    /noIsolation
+    /testSettings:<fileName>
+    /runConfig:<fileName>
+    /resultsFile:<fileName>
+    /unique
+    /detail:<propertyId>
+    /help
+    /noLogo
+    /useStdErr
+    /publish:<serverName>
+    /publishResultsFile:<fileName>
+    /publishBuild:<buildId>
+    /teamProject:<teamProjectName>
+    /platform:<platform>
+    /flavor:<flavor>
