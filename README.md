@@ -29,10 +29,10 @@ The first scenario involves including the modules for a specific version of each
 require 'fluent_command_builder'
 include FluentCommandBuilder::MSBuild::V40
 include FluentCommandBuilder::NunitConsole::V25
-```
 
 system msbuild.project_file('sample.csproj').target('rebuild').property({ :configuration => 'release' })
 system nunit_console.assembly('sample.dll').include('unit-tests').exclude('integration-tests')
+```
 
 In this case, the msbuild method refers to MSBuild 4.0, and the nunit method refers to NUnit 2.5.
 
