@@ -25,22 +25,26 @@ Fluent Command Builder supports multiple versions of each command and offers two
 
 The first scenario involves including the modules for a specific version of each command:
 
-    require 'fluent_command_builder'
-    include FluentCommandBuilder::MSBuild::V40
-    include FluentCommandBuilder::NunitConsole::V25
+```ruby
+require 'fluent_command_builder'
+include FluentCommandBuilder::MSBuild::V40
+include FluentCommandBuilder::NunitConsole::V25
+```
 
-    system msbuild.project_file('sample.csproj').target('rebuild').property({ :configuration => 'release' })
-    system nunit_console.assembly('sample.dll').include('unit-tests').exclude('integration-tests')
+system msbuild.project_file('sample.csproj').target('rebuild').property({ :configuration => 'release' })
+system nunit_console.assembly('sample.dll').include('unit-tests').exclude('integration-tests')
 
 In this case, the msbuild method refers to MSBuild 4.0, and the nunit method refers to NUnit 2.5.
 
 The second scenario involves calling a method for a specific version of each command:
 
-    require 'fluent_command_builder'
-    include FluentCommandBuilder
+```ruby
+require 'fluent_command_builder'
+include FluentCommandBuilder
 
-    system msbuild40.project_file('sample.csproj').target('rebuild').property({ :configuration => 'release' })
-    system nunit_console25.assembly('sample.dll').include('unit-tests').exclude('integration-tests')
+system msbuild40.project_file('sample.csproj').target('rebuild').property({ :configuration => 'release' })
+system nunit_console25.assembly('sample.dll').include('unit-tests').exclude('integration-tests')
+```
 
 Notice how the version number forms part of the method itself.
 
