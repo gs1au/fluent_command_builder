@@ -4,10 +4,15 @@ Fluent Command Builder is designed to ease the process of building command line 
 
 Each supported command is represented by a class that provides a fluent interface by means of method chaining.
 
-## Examples
+## Example
 
-    msbuild.project_file('sample.csproj').target('rebuild').property({ :configuration => 'release' })
-    => MSBuild sample.csproj /target:rebuild /property:configuration=release
+```ruby
+msbuild.project_file('sample.csproj').target('rebuild').property({ :configuration => 'release' })
+```
+
+Produces:
+
+    MSBuild sample.csproj /target:rebuild /property:configuration=release
 
 ## Intellisense
 
