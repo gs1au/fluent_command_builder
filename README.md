@@ -13,6 +13,12 @@ Each supported command is represented by a class that provides a fluent interfac
     msbuild.project_file('sample.csproj').target('rebuild').property({ :configuration => 'release' })
     => MSBuild sample.csproj /target:rebuild /property:configuration=release
 
+## Intellisense
+
+Extremely effective with [RubyMine](http://www.jetbrains.com/ruby/) intellisense.
+
+![MSBuild intellisense](https://github.com/mattriley/fluent_command_builder/raw/master/readme/msbuild_intellisense.png)
+
 ## Supported Commands
 
 - aspnet_compiler 2.0, 3.5, 4.0
