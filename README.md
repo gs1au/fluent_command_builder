@@ -1,9 +1,5 @@
 # Fluent Command Builder
 
-A command line builder with a fluent interface written in Ruby.
-
-## About
-
 Fluent Command Builder is designed to ease the process of building command line strings.
 
 Each supported command is represented by a class that provides a fluent interface by means of method chaining.
@@ -17,7 +13,37 @@ Each supported command is represented by a class that provides a fluent interfac
 
 Extremely effective with [RubyMine](http://www.jetbrains.com/ruby/) intellisense.
 
-![MSBuild intellisense](https://github.com/mattriley/fluent_command_builder/raw/master/readme/msbuild_intellisense.png)
+![RubyMine intellisense for MSBuild](https://github.com/mattriley/fluent_command_builder/raw/master/readme/msbuild_intellisense.png)
+
+## Installation
+
+    gem install fluent_command_builder
+
+## Usage
+
+Fluent Command Builder supports multiple versions of each command and offers two main usage scenarios.
+
+The first scenario involves including the modules for a specific version of each command:
+
+    require 'fluent_command_builder'
+    include FluentCommandBuilder::MSBuild::V40
+    include FluentCommandBuilder::NunitConsole::V25
+
+    system msbuild.project_file('sample.csproj').target('rebuild').property({ :configuration => 'release' })
+    system nunit_console.assembly('sample.dll').include('unit-tests').exclude('integration-tests')
+
+In this case, the msbuild method refers to MSBuild 4.0, and the nunit method refers to NUnit 2.5.
+
+The second scenario involves calling a method for a specific version of each command:
+
+    require 'fluent_command_builder'
+    include FluentCommandBuilder
+
+    system msbuild40.project_file('sample.csproj').target('rebuild').property({ :configuration => 'release' })
+    system nunit_console25.assembly('sample.dll').include('unit-tests').exclude('integration-tests')
+
+Notice how the version number forms part of the method itself.
+
 
 ## Supported Commands
 
