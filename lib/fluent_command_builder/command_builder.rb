@@ -6,7 +6,7 @@ module FluentCommandBuilder
     end
 
     def append value
-      @command << value + ' '
+      @command << value
     end
 
     def append_format value, delimiter=nil, key_value_separator=nil

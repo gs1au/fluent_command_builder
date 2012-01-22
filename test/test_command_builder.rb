@@ -21,4 +21,11 @@ class TestCommandBuilder < Test::Unit::TestCase
     assert_equal 'a=1;b=2;c=3', builder.to_s
   end
 
+  def test_should_not_contain_trailing_space
+    builder = CommandBuilder.new
+    builder.append('MSBuild')
+    builder.append('/property:a=1')
+    assert_no_match /\s$/, builder.to_s
+  end
+
 end
