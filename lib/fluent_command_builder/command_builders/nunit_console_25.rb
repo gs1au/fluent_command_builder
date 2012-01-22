@@ -11,7 +11,7 @@ module FluentCommandBuilder
         end
         
         def assembly assembly
-          @builder.append "#{assembly}"
+          @builder.append_format(assembly, ' ') { |v| "#{v}" }
           self
         end
         

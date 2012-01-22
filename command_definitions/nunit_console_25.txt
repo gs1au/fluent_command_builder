@@ -1,6 +1,6 @@
 2.5
 nunit-console
-    <assembly>
+    <assembly >
     /run:<test>
     /fixture:<fixture>
     /framework:<framework>
