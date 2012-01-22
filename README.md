@@ -35,8 +35,8 @@ require 'fluent_command_builder'
 include FluentCommandBuilder::MSBuild::V40
 include FluentCommandBuilder::NunitConsole::V25
 
-system msbuild.project_file('sample.csproj').target('rebuild').property({ :configuration => 'release' })
-system nunit_console.assembly('sample.dll').include('unit-tests').exclude('integration-tests')
+system msbuild.project_file('sample.csproj').target('rebuild').property({ :configuration => 'release' }).to_s
+system nunit_console.assembly('sample.dll').include('unit-tests').exclude('integration-tests').to_s
 ```
 
 In this case, the msbuild method refers to MSBuild 4.0, and the nunit method refers to NUnit 2.5.
@@ -47,8 +47,8 @@ The second scenario involves calling a method for a specific version of each com
 require 'fluent_command_builder'
 include FluentCommandBuilder
 
-system msbuild40.project_file('sample.csproj').target('rebuild').property({ :configuration => 'release' })
-system nunit_console25.assembly('sample.dll').include('unit-tests').exclude('integration-tests')
+system msbuild40.project_file('sample.csproj').target('rebuild').property({ :configuration => 'release' }).to_s
+system nunit_console25.assembly('sample.dll').include('unit-tests').exclude('integration-tests').to_s
 ```
 
 Notice how the version number forms part of the method itself.
@@ -61,6 +61,7 @@ Notice how the version number forms part of the method itself.
 - dotcover 1.1
 - installutil 1.1, 2.0, 3.5, 4.0
 - msbuild 2.0, 3.0, 3.5, 4.0
+- msdeploy 4.0
 - mstest 2005, 2008, 2010
 - netsh 2008 (advfirewall only at present)
 - nunit-console 2.5
@@ -68,7 +69,7 @@ Notice how the version number forms part of the method itself.
 - simian 2.3
 - tf 2010
 
-Please note that this project is *not* constrained to the Microsoft platform.
+Please note that this project is not constrained to the Microsoft platform.
 
 Suggestions for additional commands are most welcome.
 
