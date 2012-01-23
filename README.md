@@ -7,7 +7,7 @@ Each supported command is represented by a class that provides a fluent interfac
 ## Example
 
 ```ruby
-msbuild.project_file('sample.csproj').target('rebuild').property({ :configuration => 'release' })
+msbuild.project_file('sample.csproj').target(:rebuild).property({ :configuration => :release })
 ```
 
 Produces:
