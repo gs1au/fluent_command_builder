@@ -11,23 +11,31 @@ class CommandModule
     w.write_line
     w.write_block 'module FluentCommandBuilder' do
       w.write_block "module #{@root_command.class_name}" do
-        w.write_block "module V#{version}" do
+        w.write_block "module #{version_module_name}" do
           write_command @root_command, w
           w.write_block "def #{@root_command.method_name}" do
             w.write_line "#{@root_command.class_name}.new"
           end
         end
       end
-      w.write_block "def #{@root_command.method_name}#{version}" do
-        w.write_line "#{@root_command.class_name}::V#{version}::#{@root_command.class_name}.new"
+      w.write_block "def #{version_method_name}" do
+        w.write_line "#{@root_command.class_name}::#{version_module_name}::#{@root_command.class_name}.new"
       end
     end
+  end
+
+  def version_module_name
+    (version =~ /^\d/).nil? ? version : "V#{version}"
+  end
+
+  def version_method_name
+    "#{@root_command.method_name}_#{version}".downcase
   end
 
   private
 
   def version
-    @version.gsub /\D/, ''
+    @version.gsub(/[\.]/, '').gsub(/ /, '_')
   end
 
   def write_command command, writer

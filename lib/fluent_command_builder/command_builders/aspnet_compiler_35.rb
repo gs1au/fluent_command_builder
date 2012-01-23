@@ -5,88 +5,88 @@ module FluentCommandBuilder
     module V35
       class AspnetCompiler
         def initialize command=nil
-          @builder = CommandBuilder.new command
-          @builder.append 'aspnet_compiler'
+          @b = CommandBuilder.new command
+          @b.append 'aspnet_compiler'
           self
         end
         
         def target_dir target_dir
-          @builder.append "#{target_dir}"
+          @b.append "#{@b.format target_dir}"
           self
         end
         
         def m metabase_path
-          @builder.append "-m #{metabase_path}"
+          @b.append "-m #{@b.format metabase_path}"
           self
         end
         
         def v virtual_path
-          @builder.append "-v #{virtual_path}"
+          @b.append "-v #{@b.format virtual_path}"
           self
         end
         
         def p physical_path
-          @builder.append "-p #{physical_path}"
+          @b.append "-p #{@b.format physical_path}"
           self
         end
         
         def u 
-          @builder.append "-u"
+          @b.append '-u'
           self
         end
         
         def f 
-          @builder.append "-f"
+          @b.append '-f'
           self
         end
         
         def d 
-          @builder.append "-d"
+          @b.append '-d'
           self
         end
         
         def fixed_names 
-          @builder.append "-fixedNames"
+          @b.append '-fixedNames'
           self
         end
         
         def c 
-          @builder.append "-c"
+          @b.append '-c'
           self
         end
         
         def error_stack 
-          @builder.append "-errorStack"
+          @b.append '-errorStack'
           self
         end
         
         def no_logo 
-          @builder.append "-noLogo"
+          @b.append '-noLogo'
           self
         end
         
         def key_file file
-          @builder.append "-keyFile #{file}"
+          @b.append "-keyFile #{@b.format file}"
           self
         end
         
         def key_container container
-          @builder.append "-keyContainer #{container}"
+          @b.append "-keyContainer #{@b.format container}"
           self
         end
         
         def aptca 
-          @builder.append "-aptca"
+          @b.append '-aptca'
           self
         end
         
         def delay_sign 
-          @builder.append "-delaySign"
+          @b.append '-delaySign'
           self
         end
         
         def to_s
-          @builder.to_s
+          @b.to_s
         end
         
       end
@@ -99,7 +99,7 @@ module FluentCommandBuilder
     
   end
   
-  def aspnet_compiler35
+  def aspnet_compiler_35
     AspnetCompiler::V35::AspnetCompiler.new
   end
   

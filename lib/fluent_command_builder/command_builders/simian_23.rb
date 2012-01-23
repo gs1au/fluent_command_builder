@@ -5,128 +5,128 @@ module FluentCommandBuilder
     module V23
       class Simian
         def initialize command=nil
-          @builder = CommandBuilder.new command
-          @builder.append 'simian'
+          @b = CommandBuilder.new command
+          @b.append 'simian'
           self
         end
         
         def formatter formatter
-          @builder.append "-formatter=#{formatter}"
+          @b.append "-formatter=#{@b.format formatter}"
           self
         end
         
         def threshold threshold
-          @builder.append "-threshold=#{threshold}"
+          @b.append "-threshold=#{@b.format threshold}"
           self
         end
         
         def language language
-          @builder.append "-language=#{language}"
+          @b.append "-language=#{@b.format language}"
           self
         end
         
         def default_language language
-          @builder.append "-defaultLanguage=#{language}"
+          @b.append "-defaultLanguage=#{@b.format language}"
           self
         end
         
         def fail_on_duplication bool
-          @builder.append "-failOnDuplication=#{bool}"
+          @b.append "-failOnDuplication=#{@b.format bool}"
           self
         end
         
         def report_duplicate_text bool
-          @builder.append "-reportDuplicateText=#{bool}"
+          @b.append "-reportDuplicateText=#{@b.format bool}"
           self
         end
         
         def ignore_blocks markers
-          @builder.append "-ignoreBlocks=#{markers}"
+          @b.append "-ignoreBlocks=#{@b.format markers}"
           self
         end
         
         def ignore_curly_braces bool
-          @builder.append "-ignoreCurlyBraces=#{bool}"
+          @b.append "-ignoreCurlyBraces=#{@b.format bool}"
           self
         end
         
         def ignore_identifiers bool
-          @builder.append "-ignoreIdentifiers=#{bool}"
+          @b.append "-ignoreIdentifiers=#{@b.format bool}"
           self
         end
         
         def ignore_identifier_case bool
-          @builder.append "-ignoreIdentifierCase=#{bool}"
+          @b.append "-ignoreIdentifierCase=#{@b.format bool}"
           self
         end
         
         def ignore_regions bool
-          @builder.append "-ignoreRegions=#{bool}"
+          @b.append "-ignoreRegions=#{@b.format bool}"
           self
         end
         
         def ignore_strings bool
-          @builder.append "-ignoreStrings=#{bool}"
+          @b.append "-ignoreStrings=#{@b.format bool}"
           self
         end
         
         def ignore_string_case bool
-          @builder.append "-ignoreStringCase=#{bool}"
+          @b.append "-ignoreStringCase=#{@b.format bool}"
           self
         end
         
         def ignore_numbers bool
-          @builder.append "-ignoreNumbers=#{bool}"
+          @b.append "-ignoreNumbers=#{@b.format bool}"
           self
         end
         
         def ignore_characters bool
-          @builder.append "-ignoreCharacters=#{bool}"
+          @b.append "-ignoreCharacters=#{@b.format bool}"
           self
         end
         
         def ignore_character_case bool
-          @builder.append "-ignoreCharacterCase=#{bool}"
+          @b.append "-ignoreCharacterCase=#{@b.format bool}"
           self
         end
         
         def ignore_literals bool
-          @builder.append "-ignoreLiterals=#{bool}"
+          @b.append "-ignoreLiterals=#{@b.format bool}"
           self
         end
         
         def ignore_subtype_names bool
-          @builder.append "-ignoreSubtypeNames=#{bool}"
+          @b.append "-ignoreSubtypeNames=#{@b.format bool}"
           self
         end
         
         def ignore_modifiers bool
-          @builder.append "-ignoreModifiers=#{bool}"
+          @b.append "-ignoreModifiers=#{@b.format bool}"
           self
         end
         
         def ignore_variable_names bool
-          @builder.append "-ignoreVariableNames=#{bool}"
+          @b.append "-ignoreVariableNames=#{@b.format bool}"
           self
         end
         
         def balance_parentheses bool
-          @builder.append "-balanceParentheses=#{bool}"
+          @b.append "-balanceParentheses=#{@b.format bool}"
           self
         end
         
         def balance_curly_braces bool
-          @builder.append "-balanceCurlyBraces=#{bool}"
+          @b.append "-balanceCurlyBraces=#{@b.format bool}"
           self
         end
         
         def balance_square_brackets bool
-          @builder.append "-balanceSquareBrackets=#{bool}"
+          @b.append "-balanceSquareBrackets=#{@b.format bool}"
           self
         end
         
         def to_s
-          @builder.to_s
+          @b.to_s
         end
         
       end
@@ -139,7 +139,7 @@ module FluentCommandBuilder
     
   end
   
-  def simian23
+  def simian_23
     Simian::V23::Simian.new
   end
   

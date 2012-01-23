@@ -5,48 +5,48 @@ module FluentCommandBuilder
     module V35
       class InstallUtil
         def initialize command=nil
-          @builder = CommandBuilder.new command
-          @builder.append 'installUtil'
+          @b = CommandBuilder.new command
+          @b.append 'installUtil'
           self
         end
         
         def assembly_file_name assembly_file_name
-          @builder.append "#{assembly_file_name}"
+          @b.append "#{@b.format assembly_file_name}"
           self
         end
         
         def help 
-          @builder.append "/help"
+          @b.append '/help'
           self
         end
         
         def log_file file_name
-          @builder.append "/logFile=#{file_name}"
+          @b.append "/logFile=#{@b.format file_name}"
           self
         end
         
         def assembly_name assembly_strong_name
-          @builder.append "/assemblyName=#{assembly_strong_name}"
+          @b.append "/assemblyName=#{@b.format assembly_strong_name}"
           self
         end
         
         def log_to_console bool
-          @builder.append "/logToConsole=#{bool}"
+          @b.append "/logToConsole=#{@b.format bool}"
           self
         end
         
         def show_call_stack 
-          @builder.append "/showCallStack"
+          @b.append '/showCallStack'
           self
         end
         
         def uninstall 
-          @builder.append "/uninstall"
+          @b.append '/uninstall'
           self
         end
         
         def to_s
-          @builder.to_s
+          @b.to_s
         end
         
       end
@@ -59,7 +59,7 @@ module FluentCommandBuilder
     
   end
   
-  def installutil35
+  def installutil_35
     InstallUtil::V35::InstallUtil.new
   end
   

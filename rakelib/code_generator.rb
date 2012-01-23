@@ -20,7 +20,7 @@ class CodeGenerator
     command_definition = CommandDefinition.new source_file
     command_definition.versions.each do |version|
       command_module = CommandModule.new command_definition.root_command, version
-      dest_file_name = "#{command_definition.root_command.method_name}_#{version.gsub /\D/, ''}.rb"
+      dest_file_name = "#{command_module.version_method_name}.rb"
       dest_file = File.join @dest_dir, dest_file_name
       File.open dest_file, 'w' do |f|
         writer = CodeWriter.new f

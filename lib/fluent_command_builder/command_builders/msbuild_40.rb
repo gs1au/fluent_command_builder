@@ -5,208 +5,208 @@ module FluentCommandBuilder
     module V40
       class MSBuild
         def initialize command=nil
-          @builder = CommandBuilder.new command
-          @builder.append 'MSBuild'
+          @b = CommandBuilder.new command
+          @b.append 'MSBuild'
           self
         end
         
         def project_file project_file
-          @builder.append "#{project_file}"
+          @b.append "#{@b.format project_file}"
           self
         end
         
         def help 
-          @builder.append "/help"
+          @b.append '/help'
           self
         end
         
         def no_logo 
-          @builder.append "/noLogo"
+          @b.append '/noLogo'
           self
         end
         
         def version 
-          @builder.append "/version"
+          @b.append '/version'
           self
         end
         
         def file file
-          @builder.append "@#{file}"
+          @b.append "@#{@b.format file}"
           self
         end
         
         def no_auto_response 
-          @builder.append "/noAutoResponse"
+          @b.append '/noAutoResponse'
           self
         end
         
         def target target
-          @builder.append_format(target, ';') { |v| "/target:#{v}" }
+          @b.append "/target:#{@b.format target, ';'}"
           self
         end
         
         def property property
-          @builder.append_format(property, ';', '=') { |v| "/property:#{v}" }
+          @b.append "/property:#{@b.format property, ';', '='}"
           self
         end
         
         def logger logger
-          @builder.append "/logger:#{logger}"
+          @b.append "/logger:#{@b.format logger}"
           self
         end
         
         def distributed_logger logger
-          @builder.append "/distributedLogger:#{logger}"
+          @b.append "/distributedLogger:#{@b.format logger}"
           self
         end
         
         def console_logger_parameters parameters
-          @builder.append "/consoleLoggerParameters:#{parameters}"
+          @b.append "/consoleLoggerParameters:#{@b.format parameters}"
           self
         end
         
         def verbosity level
-          @builder.append "/verbosity:#{level}"
+          @b.append "/verbosity:#{@b.format level}"
           self
         end
         
         def no_console_logger 
-          @builder.append "/noConsoleLogger"
+          @b.append '/noConsoleLogger'
           self
         end
         
         def validate schema
-          @builder.append "/validate:#{schema}"
+          @b.append "/validate:#{@b.format schema}"
           self
         end
         
         def max_cpu_count number
-          @builder.append "/maxCpuCount:#{number}"
+          @b.append "/maxCpuCount:#{@b.format number}"
           self
         end
         
         def ignore_project_extensions extensions
-          @builder.append_format(extensions, ';') { |v| "/ignoreProjectExtensions:#{v}" }
+          @b.append "/ignoreProjectExtensions:#{@b.format extensions, ';'}"
           self
         end
         
         def file_logger 
-          @builder.append "/fileLogger"
+          @b.append '/fileLogger'
           self
         end
         
         def file_logger1 
-          @builder.append "/fileLogger1"
+          @b.append '/fileLogger1'
           self
         end
         
         def file_logger2 
-          @builder.append "/fileLogger2"
+          @b.append '/fileLogger2'
           self
         end
         
         def file_logger3 
-          @builder.append "/fileLogger3"
+          @b.append '/fileLogger3'
           self
         end
         
         def file_logger4 
-          @builder.append "/fileLogger4"
+          @b.append '/fileLogger4'
           self
         end
         
         def file_logger5 
-          @builder.append "/fileLogger5"
+          @b.append '/fileLogger5'
           self
         end
         
         def file_logger6 
-          @builder.append "/fileLogger6"
+          @b.append '/fileLogger6'
           self
         end
         
         def file_logger7 
-          @builder.append "/fileLogger7"
+          @b.append '/fileLogger7'
           self
         end
         
         def file_logger8 
-          @builder.append "/fileLogger8"
+          @b.append '/fileLogger8'
           self
         end
         
         def file_logger9 
-          @builder.append "/fileLogger9"
+          @b.append '/fileLogger9'
           self
         end
         
         def distributed_file_logger 
-          @builder.append "/distributedFileLogger"
+          @b.append '/distributedFileLogger'
           self
         end
         
         def file_logger_parameters parameters
-          @builder.append_format(parameters, ';', '=') { |v| "/fileLoggerParameters:#{v}" }
+          @b.append "/fileLoggerParameters:#{@b.format parameters, ';', '='}"
           self
         end
         
         def file_logger_parameters1 parameters
-          @builder.append_format(parameters, ';', '=') { |v| "/fileLoggerParameters1:#{v}" }
+          @b.append "/fileLoggerParameters1:#{@b.format parameters, ';', '='}"
           self
         end
         
         def file_logger_parameters2 parameters
-          @builder.append_format(parameters, ';', '=') { |v| "/fileLoggerParameters2:#{v}" }
+          @b.append "/fileLoggerParameters2:#{@b.format parameters, ';', '='}"
           self
         end
         
         def file_logger_parameters3 parameters
-          @builder.append_format(parameters, ';', '=') { |v| "/fileLoggerParameters3:#{v}" }
+          @b.append "/fileLoggerParameters3:#{@b.format parameters, ';', '='}"
           self
         end
         
         def file_logger_parameters4 parameters
-          @builder.append_format(parameters, ';', '=') { |v| "/fileLoggerParameters4:#{v}" }
+          @b.append "/fileLoggerParameters4:#{@b.format parameters, ';', '='}"
           self
         end
         
         def file_logger_parameters5 parameters
-          @builder.append_format(parameters, ';', '=') { |v| "/fileLoggerParameters5:#{v}" }
+          @b.append "/fileLoggerParameters5:#{@b.format parameters, ';', '='}"
           self
         end
         
         def file_logger_parameters6 parameters
-          @builder.append_format(parameters, ';', '=') { |v| "/fileLoggerParameters6:#{v}" }
+          @b.append "/fileLoggerParameters6:#{@b.format parameters, ';', '='}"
           self
         end
         
         def file_logger_parameters7 parameters
-          @builder.append_format(parameters, ';', '=') { |v| "/fileLoggerParameters7:#{v}" }
+          @b.append "/fileLoggerParameters7:#{@b.format parameters, ';', '='}"
           self
         end
         
         def file_logger_parameters8 parameters
-          @builder.append_format(parameters, ';', '=') { |v| "/fileLoggerParameters8:#{v}" }
+          @b.append "/fileLoggerParameters8:#{@b.format parameters, ';', '='}"
           self
         end
         
         def file_logger_parameters9 parameters
-          @builder.append_format(parameters, ';', '=') { |v| "/fileLoggerParameters9:#{v}" }
+          @b.append "/fileLoggerParameters9:#{@b.format parameters, ';', '='}"
           self
         end
         
         def tools_version version
-          @builder.append "/toolsVersion:#{version}"
+          @b.append "/toolsVersion:#{@b.format version}"
           self
         end
         
         def node_reuse parameters
-          @builder.append "/nodeReuse:#{parameters}"
+          @b.append "/nodeReuse:#{@b.format parameters}"
           self
         end
         
         def to_s
-          @builder.to_s
+          @b.to_s
         end
         
       end
@@ -219,7 +219,7 @@ module FluentCommandBuilder
     
   end
   
-  def msbuild40
+  def msbuild_40
     MSBuild::V40::MSBuild.new
   end
   

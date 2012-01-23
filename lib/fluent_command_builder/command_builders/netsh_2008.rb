@@ -5,8 +5,8 @@ module FluentCommandBuilder
     module V2008
       class Netsh
         def initialize command=nil
-          @builder = CommandBuilder.new command
-          @builder.append 'netsh'
+          @b = CommandBuilder.new command
+          @b.append 'netsh'
           self
         end
         
@@ -15,15 +15,15 @@ module FluentCommandBuilder
         end
         
         def to_s
-          @builder.to_s
+          @b.to_s
         end
         
       end
       
       class Advfirewall
         def initialize command=nil
-          @builder = CommandBuilder.new command
-          @builder.append 'advfirewall'
+          @b = CommandBuilder.new command
+          @b.append 'advfirewall'
           self
         end
         
@@ -44,181 +44,181 @@ module FluentCommandBuilder
         end
         
         def to_s
-          @builder.to_s
+          @b.to_s
         end
         
       end
       
       class AddRule
         def initialize command=nil
-          @builder = CommandBuilder.new command
-          @builder.append 'add rule'
+          @b = CommandBuilder.new command
+          @b.append 'add rule'
           self
         end
         
         def name rule_name
-          @builder.append "name=#{rule_name}"
+          @b.append "name=#{@b.format rule_name}"
           self
         end
         
         def dir direction
-          @builder.append "dir=#{direction}"
+          @b.append "dir=#{@b.format direction}"
           self
         end
         
         def action action
-          @builder.append "action=#{action}"
+          @b.append "action=#{@b.format action}"
           self
         end
         
         def program path
-          @builder.append "program=#{path}"
+          @b.append "program=#{@b.format path}"
           self
         end
         
         def service service_short_name
-          @builder.append "service=#{service_short_name}"
+          @b.append "service=#{@b.format service_short_name}"
           self
         end
         
         def description rule_description
-          @builder.append "description=#{rule_description}"
+          @b.append "description=#{@b.format rule_description}"
           self
         end
         
         def enable enable
-          @builder.append "enable=#{enable}"
+          @b.append "enable=#{@b.format enable}"
           self
         end
         
         def profile profile
-          @builder.append "profile=#{profile}"
+          @b.append "profile=#{@b.format profile}"
           self
         end
         
         def localip addresses
-          @builder.append "localip=#{addresses}"
+          @b.append "localip=#{@b.format addresses}"
           self
         end
         
         def remoteip addresses
-          @builder.append "remoteip=#{addresses}"
+          @b.append "remoteip=#{@b.format addresses}"
           self
         end
         
         def localport port
-          @builder.append "localport=#{port}"
+          @b.append "localport=#{@b.format port}"
           self
         end
         
         def remoteport port
-          @builder.append "remoteport=#{port}"
+          @b.append "remoteport=#{@b.format port}"
           self
         end
         
         def protocol protocol
-          @builder.append "protocol=#{protocol}"
+          @b.append "protocol=#{@b.format protocol}"
           self
         end
         
         def interface_type type
-          @builder.append "interfaceType=#{type}"
+          @b.append "interfaceType=#{@b.format type}"
           self
         end
         
         def rmtcomputergrp sddl_string
-          @builder.append "rmtcomputergrp=#{sddl_string}"
+          @b.append "rmtcomputergrp=#{@b.format sddl_string}"
           self
         end
         
         def rmtusgrp sddl_string
-          @builder.append "rmtusgrp=#{sddl_string}"
+          @b.append "rmtusgrp=#{@b.format sddl_string}"
           self
         end
         
         def edge edge
-          @builder.append "edge=#{edge}"
+          @b.append "edge=#{@b.format edge}"
           self
         end
         
         def security security
-          @builder.append "security=#{security}"
+          @b.append "security=#{@b.format security}"
           self
         end
         
         def to_s
-          @builder.to_s
+          @b.to_s
         end
         
       end
       
       class DeleteRule
         def initialize command=nil
-          @builder = CommandBuilder.new command
-          @builder.append 'delete rule'
+          @b = CommandBuilder.new command
+          @b.append 'delete rule'
           self
         end
         
         def name rule_name
-          @builder.append "name=#{rule_name}"
+          @b.append "name=#{@b.format rule_name}"
           self
         end
         
         def dir direction
-          @builder.append "dir=#{direction}"
+          @b.append "dir=#{@b.format direction}"
           self
         end
         
         def profile profile
-          @builder.append "profile=#{profile}"
+          @b.append "profile=#{@b.format profile}"
           self
         end
         
         def program path
-          @builder.append "program=#{path}"
+          @b.append "program=#{@b.format path}"
           self
         end
         
         def service service_short_name
-          @builder.append "service=#{service_short_name}"
+          @b.append "service=#{@b.format service_short_name}"
           self
         end
         
         def localip addresses
-          @builder.append "localip=#{addresses}"
+          @b.append "localip=#{@b.format addresses}"
           self
         end
         
         def remoteip addresses
-          @builder.append "remoteip=#{addresses}"
+          @b.append "remoteip=#{@b.format addresses}"
           self
         end
         
         def localport port
-          @builder.append "localport=#{port}"
+          @b.append "localport=#{@b.format port}"
           self
         end
         
         def remoteport port
-          @builder.append "remoteport=#{port}"
+          @b.append "remoteport=#{@b.format port}"
           self
         end
         
         def protocol protocol
-          @builder.append "protocol=#{protocol}"
+          @b.append "protocol=#{@b.format protocol}"
           self
         end
         
         def to_s
-          @builder.to_s
+          @b.to_s
         end
         
       end
       
       class SetRule
         def initialize command=nil
-          @builder = CommandBuilder.new command
-          @builder.append 'set rule'
+          @b = CommandBuilder.new command
+          @b.append 'set rule'
           self
         end
         
@@ -227,168 +227,168 @@ module FluentCommandBuilder
         end
         
         def group group_name
-          @builder.append "group=#{group_name}"
+          @b.append "group=#{@b.format group_name}"
           self
         end
         
         def dir direction
-          @builder.append "dir=#{direction}"
+          @b.append "dir=#{@b.format direction}"
           self
         end
         
         def profile profile
-          @builder.append "profile=#{profile}"
+          @b.append "profile=#{@b.format profile}"
           self
         end
         
         def program path
-          @builder.append "program=#{path}"
+          @b.append "program=#{@b.format path}"
           self
         end
         
         def service service_short_name
-          @builder.append "service=#{service_short_name}"
+          @b.append "service=#{@b.format service_short_name}"
           self
         end
         
         def localip addresses
-          @builder.append "localip=#{addresses}"
+          @b.append "localip=#{@b.format addresses}"
           self
         end
         
         def remoteip addresses
-          @builder.append "remoteip=#{addresses}"
+          @b.append "remoteip=#{@b.format addresses}"
           self
         end
         
         def localport port
-          @builder.append "localport=#{port}"
+          @b.append "localport=#{@b.format port}"
           self
         end
         
         def remoteport port
-          @builder.append "remoteport=#{port}"
+          @b.append "remoteport=#{@b.format port}"
           self
         end
         
         def protocol protocol
-          @builder.append "protocol=#{protocol}"
+          @b.append "protocol=#{@b.format protocol}"
           self
         end
         
         def to_s
-          @builder.to_s
+          @b.to_s
         end
         
       end
       
       class New
         def initialize command=nil
-          @builder = CommandBuilder.new command
-          @builder.append 'new'
+          @b = CommandBuilder.new command
+          @b.append 'new'
           self
         end
         
         def name rule_name
-          @builder.append "name=#{rule_name}"
+          @b.append "name=#{@b.format rule_name}"
           self
         end
         
         def dir direction
-          @builder.append "dir=#{direction}"
+          @b.append "dir=#{@b.format direction}"
           self
         end
         
         def program path
-          @builder.append "program=#{path}"
+          @b.append "program=#{@b.format path}"
           self
         end
         
         def service service_short_name
-          @builder.append "service=#{service_short_name}"
+          @b.append "service=#{@b.format service_short_name}"
           self
         end
         
         def action action
-          @builder.append "action=#{action}"
+          @b.append "action=#{@b.format action}"
           self
         end
         
         def description rule_description
-          @builder.append "description=#{rule_description}"
+          @b.append "description=#{@b.format rule_description}"
           self
         end
         
         def enable enable
-          @builder.append "enable=#{enable}"
+          @b.append "enable=#{@b.format enable}"
           self
         end
         
         def profile profile
-          @builder.append "profile=#{profile}"
+          @b.append "profile=#{@b.format profile}"
           self
         end
         
         def localip addresses
-          @builder.append "localip=#{addresses}"
+          @b.append "localip=#{@b.format addresses}"
           self
         end
         
         def remoteip addresses
-          @builder.append "remoteip=#{addresses}"
+          @b.append "remoteip=#{@b.format addresses}"
           self
         end
         
         def localport port
-          @builder.append "localport=#{port}"
+          @b.append "localport=#{@b.format port}"
           self
         end
         
         def remoteport port
-          @builder.append "remoteport=#{port}"
+          @b.append "remoteport=#{@b.format port}"
           self
         end
         
         def protocol protocol
-          @builder.append "protocol=#{protocol}"
+          @b.append "protocol=#{@b.format protocol}"
           self
         end
         
         def interface_type type
-          @builder.append "interfaceType=#{type}"
+          @b.append "interfaceType=#{@b.format type}"
           self
         end
         
         def rmtcomputergrp sddl_string
-          @builder.append "rmtcomputergrp=#{sddl_string}"
+          @b.append "rmtcomputergrp=#{@b.format sddl_string}"
           self
         end
         
         def rmtusgrp sddl_string
-          @builder.append "rmtusgrp=#{sddl_string}"
+          @b.append "rmtusgrp=#{@b.format sddl_string}"
           self
         end
         
         def edge edge
-          @builder.append "edge=#{edge}"
+          @b.append "edge=#{@b.format edge}"
           self
         end
         
         def security security
-          @builder.append "security=#{security}"
+          @b.append "security=#{@b.format security}"
           self
         end
         
         def to_s
-          @builder.to_s
+          @b.to_s
         end
         
       end
       
       class ShowRule
         def initialize command=nil
-          @builder = CommandBuilder.new command
-          @builder.append 'show rule'
+          @b = CommandBuilder.new command
+          @b.append 'show rule'
           self
         end
         
@@ -397,35 +397,35 @@ module FluentCommandBuilder
         end
         
         def name rule_name
-          @builder.append "name=#{rule_name}"
+          @b.append "name=#{@b.format rule_name}"
           self
         end
         
         def profile profile
-          @builder.append "profile=#{profile}"
+          @b.append "profile=#{@b.format profile}"
           self
         end
         
         def type type
-          @builder.append "type=#{type}"
+          @b.append "type=#{@b.format type}"
           self
         end
         
         def to_s
-          @builder.to_s
+          @b.to_s
         end
         
       end
       
       class Verbose
         def initialize command=nil
-          @builder = CommandBuilder.new command
-          @builder.append 'verbose'
+          @b = CommandBuilder.new command
+          @b.append 'verbose'
           self
         end
         
         def to_s
-          @builder.to_s
+          @b.to_s
         end
         
       end
@@ -438,7 +438,7 @@ module FluentCommandBuilder
     
   end
   
-  def netsh2008
+  def netsh_2008
     Netsh::V2008::Netsh.new
   end
   

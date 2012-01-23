@@ -5,128 +5,128 @@ module FluentCommandBuilder
     module V09
       class Rake
         def initialize command=nil
-          @builder = CommandBuilder.new command
-          @builder.append 'rake'
+          @b = CommandBuilder.new command
+          @b.append 'rake'
           self
         end
         
         def classic_namespace 
-          @builder.append "--classic-namespace"
+          @b.append '--classic-namespace'
           self
         end
         
         def describe pattern
-          @builder.append "--describe #{pattern}"
+          @b.append "--describe #{@b.format pattern}"
           self
         end
         
         def dry_run 
-          @builder.append "--dry-run"
+          @b.append '--dry-run'
           self
         end
         
         def execute code
-          @builder.append "--execute #{code}"
+          @b.append "--execute #{@b.format code}"
           self
         end
         
         def execute_print code
-          @builder.append "--execute-print #{code}"
+          @b.append "--execute-print #{@b.format code}"
           self
         end
         
         def execute_continue code
-          @builder.append "--execute-continue #{code}"
+          @b.append "--execute-continue #{@b.format code}"
           self
         end
         
         def libdir lib_dir
-          @builder.append "--libdir #{lib_dir}"
+          @b.append "--libdir #{@b.format lib_dir}"
           self
         end
         
         def no_search 
-          @builder.append "--no-search"
+          @b.append '--no-search'
           self
         end
         
         def prereqs 
-          @builder.append "--prereqs"
+          @b.append '--prereqs'
           self
         end
         
         def quiet 
-          @builder.append "--quiet"
+          @b.append '--quiet'
           self
         end
         
         def rakefile file
-          @builder.append "--rakefile #{file}"
+          @b.append "--rakefile #{@b.format file}"
           self
         end
         
         def rakelibdir rake_lib_dir
-          @builder.append "--rakelibdir #{rake_lib_dir}"
+          @b.append "--rakelibdir #{@b.format rake_lib_dir}"
           self
         end
         
         def require _module
-          @builder.append "--require #{_module}"
+          @b.append "--require #{@b.format _module}"
           self
         end
         
         def rules 
-          @builder.append "--rules"
+          @b.append '--rules'
           self
         end
         
         def silent 
-          @builder.append "--silent"
+          @b.append '--silent'
           self
         end
         
         def no_system 
-          @builder.append "--no-system"
+          @b.append '--no-system'
           self
         end
         
         def tasks pattern
-          @builder.append "--tasks #{pattern}"
+          @b.append "--tasks #{@b.format pattern}"
           self
         end
         
         def trace 
-          @builder.append "--trace"
+          @b.append '--trace'
           self
         end
         
         def verbose 
-          @builder.append "--verbose"
+          @b.append '--verbose'
           self
         end
         
         def version 
-          @builder.append "--version"
+          @b.append '--version'
           self
         end
         
         def where pattern
-          @builder.append "--where #{pattern}"
+          @b.append "--where #{@b.format pattern}"
           self
         end
         
         def no_deprecation_warnings 
-          @builder.append "--no-deprecation-warnings"
+          @b.append '--no-deprecation-warnings'
           self
         end
         
         def help 
-          @builder.append "--help"
+          @b.append '--help'
           self
         end
         
         def to_s
-          @builder.to_s
+          @b.to_s
         end
         
       end
@@ -139,7 +139,7 @@ module FluentCommandBuilder
     
   end
   
-  def rake09
+  def rake_09
     Rake::V09::Rake.new
   end
   

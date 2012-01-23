@@ -1,3 +1,5 @@
+require_relative 'command_argument'
+
 class CommandDefinitionLine
 
   def initialize line
@@ -12,16 +14,8 @@ class CommandDefinitionLine
     match /(\w[\w-]*)/
   end
 
-  def arg_name
-    match /<(\w+)/
-  end
-
-  def key_value_separator
-    match /(\W)\W>/
-  end
-
-  def delimiter
-    match /(\W)>/
+  def args
+    @line.scan(/<.+?>/).flatten.map { |m| CommandArgument.new m }
   end
 
   private

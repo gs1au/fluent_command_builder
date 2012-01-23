@@ -5,118 +5,118 @@ module FluentCommandBuilder
     module V25
       class NunitConsole
         def initialize command=nil
-          @builder = CommandBuilder.new command
-          @builder.append 'nunit-console'
+          @b = CommandBuilder.new command
+          @b.append 'nunit-console'
           self
         end
         
         def assembly assembly
-          @builder.append "#{assembly}"
+          @b.append "#{@b.format assembly}"
           self
         end
         
         def run test
-          @builder.append "/run:#{test}"
+          @b.append "/run:#{@b.format test}"
           self
         end
         
         def fixture fixture
-          @builder.append "/fixture:#{fixture}"
+          @b.append "/fixture:#{@b.format fixture}"
           self
         end
         
         def framework framework
-          @builder.append "/framework:#{framework}"
+          @b.append "/framework:#{@b.format framework}"
           self
         end
         
         def include category
-          @builder.append "/include:#{category}"
+          @b.append "/include:#{@b.format category}"
           self
         end
         
         def exclude category
-          @builder.append "/exclude:#{category}"
+          @b.append "/exclude:#{@b.format category}"
           self
         end
         
         def out file
-          @builder.append "/out:#{file}"
+          @b.append "/out:#{@b.format file}"
           self
         end
         
         def err file
-          @builder.append "/err:#{file}"
+          @b.append "/err:#{@b.format file}"
           self
         end
         
         def labels 
-          @builder.append "/labels"
+          @b.append '/labels'
           self
         end
         
         def xml file
-          @builder.append "/xml:#{file}"
+          @b.append "/xml:#{@b.format file}"
           self
         end
         
         def config config
-          @builder.append "/config:#{config}"
+          @b.append "/config:#{@b.format config}"
           self
         end
         
         def process process
-          @builder.append "/process:#{process}"
+          @b.append "/process:#{@b.format process}"
           self
         end
         
         def domain domain
-          @builder.append "/domain:#{domain}"
+          @b.append "/domain:#{@b.format domain}"
           self
         end
         
         def timeout timeout
-          @builder.append "/timeout:#{timeout}"
+          @b.append "/timeout:#{@b.format timeout}"
           self
         end
         
         def trace level
-          @builder.append "/trace:#{level}"
+          @b.append "/trace:#{@b.format level}"
           self
         end
         
         def no_shadow 
-          @builder.append "/noShadow"
+          @b.append '/noShadow'
           self
         end
         
         def no_thread 
-          @builder.append "/noThread"
+          @b.append '/noThread'
           self
         end
         
         def wait 
-          @builder.append "/wait"
+          @b.append '/wait'
           self
         end
         
         def xml_console 
-          @builder.append "/xmlConsole"
+          @b.append '/xmlConsole'
           self
         end
         
         def no_logo 
-          @builder.append "/noLogo"
+          @b.append '/noLogo'
           self
         end
         
         def help 
-          @builder.append "/help"
+          @b.append '/help'
           self
         end
         
         def to_s
-          @builder.to_s
+          @b.to_s
         end
         
       end
@@ -129,7 +129,7 @@ module FluentCommandBuilder
     
   end
   
-  def nunit_console25
+  def nunit_console_25
     NunitConsole::V25::NunitConsole.new
   end
   

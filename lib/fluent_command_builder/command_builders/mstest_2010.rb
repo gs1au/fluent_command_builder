@@ -5,113 +5,113 @@ module FluentCommandBuilder
     module V2010
       class MSTest
         def initialize command=nil
-          @builder = CommandBuilder.new command
-          @builder.append 'MSTest'
+          @b = CommandBuilder.new command
+          @b.append 'MSTest'
           self
         end
         
         def test_container file_name
-          @builder.append "/testContainer:#{file_name}"
+          @b.append "/testContainer:#{@b.format file_name}"
           self
         end
         
         def test_metadata file_name
-          @builder.append "/testMetadata:#{file_name}"
+          @b.append "/testMetadata:#{@b.format file_name}"
           self
         end
         
         def test_list list_list_path
-          @builder.append "/testList:#{list_list_path}"
+          @b.append "/testList:#{@b.format list_list_path}"
           self
         end
         
         def category test_category_filter
-          @builder.append "/category:#{test_category_filter}"
+          @b.append "/category:#{@b.format test_category_filter}"
           self
         end
         
         def test test_name
-          @builder.append "/test:#{test_name}"
+          @b.append "/test:#{@b.format test_name}"
           self
         end
         
         def no_isolation 
-          @builder.append "/noIsolation"
+          @b.append '/noIsolation'
           self
         end
         
         def test_settings file_name
-          @builder.append "/testSettings:#{file_name}"
+          @b.append "/testSettings:#{@b.format file_name}"
           self
         end
         
         def run_config file_name
-          @builder.append "/runConfig:#{file_name}"
+          @b.append "/runConfig:#{@b.format file_name}"
           self
         end
         
         def results_file file_name
-          @builder.append "/resultsFile:#{file_name}"
+          @b.append "/resultsFile:#{@b.format file_name}"
           self
         end
         
         def unique 
-          @builder.append "/unique"
+          @b.append '/unique'
           self
         end
         
         def detail property_id
-          @builder.append "/detail:#{property_id}"
+          @b.append "/detail:#{@b.format property_id}"
           self
         end
         
         def help 
-          @builder.append "/help"
+          @b.append '/help'
           self
         end
         
         def no_logo 
-          @builder.append "/noLogo"
+          @b.append '/noLogo'
           self
         end
         
         def use_std_err 
-          @builder.append "/useStdErr"
+          @b.append '/useStdErr'
           self
         end
         
         def publish server_name
-          @builder.append "/publish:#{server_name}"
+          @b.append "/publish:#{@b.format server_name}"
           self
         end
         
         def publish_results_file file_name
-          @builder.append "/publishResultsFile:#{file_name}"
+          @b.append "/publishResultsFile:#{@b.format file_name}"
           self
         end
         
         def publish_build build_id
-          @builder.append "/publishBuild:#{build_id}"
+          @b.append "/publishBuild:#{@b.format build_id}"
           self
         end
         
         def team_project team_project_name
-          @builder.append "/teamProject:#{team_project_name}"
+          @b.append "/teamProject:#{@b.format team_project_name}"
           self
         end
         
         def platform platform
-          @builder.append "/platform:#{platform}"
+          @b.append "/platform:#{@b.format platform}"
           self
         end
         
         def flavor flavor
-          @builder.append "/flavor:#{flavor}"
+          @b.append "/flavor:#{@b.format flavor}"
           self
         end
         
         def to_s
-          @builder.to_s
+          @b.to_s
         end
         
       end
@@ -124,7 +124,7 @@ module FluentCommandBuilder
     
   end
   
-  def mstest2010
+  def mstest_2010
     MSTest::V2010::MSTest.new
   end
   

@@ -5,78 +5,78 @@ module FluentCommandBuilder
     module V20
       class MSBuild
         def initialize command=nil
-          @builder = CommandBuilder.new command
-          @builder.append 'MSBuild'
+          @b = CommandBuilder.new command
+          @b.append 'MSBuild'
           self
         end
         
         def project_file project_file
-          @builder.append "#{project_file}"
+          @b.append "#{@b.format project_file}"
           self
         end
         
         def help 
-          @builder.append "/help"
+          @b.append '/help'
           self
         end
         
         def no_logo 
-          @builder.append "/noLogo"
+          @b.append '/noLogo'
           self
         end
         
         def version 
-          @builder.append "/version"
+          @b.append '/version'
           self
         end
         
         def file file
-          @builder.append "@#{file}"
+          @b.append "@#{@b.format file}"
           self
         end
         
         def no_auto_response 
-          @builder.append "/noAutoResponse"
+          @b.append '/noAutoResponse'
           self
         end
         
         def target target
-          @builder.append_format(target, ';') { |v| "/target:#{v}" }
+          @b.append "/target:#{@b.format target, ';'}"
           self
         end
         
         def property property
-          @builder.append_format(property, ';', '=') { |v| "/property:#{v}" }
+          @b.append "/property:#{@b.format property, ';', '='}"
           self
         end
         
         def logger logger
-          @builder.append "/logger:#{logger}"
+          @b.append "/logger:#{@b.format logger}"
           self
         end
         
         def console_logger_parameters parameters
-          @builder.append "/consoleLoggerParameters:#{parameters}"
+          @b.append "/consoleLoggerParameters:#{@b.format parameters}"
           self
         end
         
         def verbosity level
-          @builder.append "/verbosity:#{level}"
+          @b.append "/verbosity:#{@b.format level}"
           self
         end
         
         def no_console_logger 
-          @builder.append "/noConsoleLogger"
+          @b.append '/noConsoleLogger'
           self
         end
         
         def validate schema
-          @builder.append "/validate:#{schema}"
+          @b.append "/validate:#{@b.format schema}"
           self
         end
         
         def to_s
-          @builder.to_s
+          @b.to_s
         end
         
       end
@@ -89,7 +89,7 @@ module FluentCommandBuilder
     
   end
   
-  def msbuild20
+  def msbuild_20
     MSBuild::V20::MSBuild.new
   end
   

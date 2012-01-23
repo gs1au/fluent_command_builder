@@ -5,163 +5,163 @@ module FluentCommandBuilder
     module V40
       class MSDeploy
         def initialize command=nil
-          @builder = CommandBuilder.new command
-          @builder.append 'MSDeploy'
+          @b = CommandBuilder.new command
+          @b.append 'MSDeploy'
           self
         end
         
         def allow_untrusted bool
-          @builder.append "-allowUntrusted:#{bool}"
+          @b.append "-allowUntrusted:#{@b.format bool}"
           self
         end
         
         def app_host_config_dir path
-          @builder.append "-appHostConfigDir:#{path}"
+          @b.append "-appHostConfigDir:#{@b.format path}"
           self
         end
         
         def declare_param param
-          @builder.append_format(param, ',', '=') { |v| "-declareParam:#{v}" }
+          @b.append "-declareParam:#{@b.format param, ',', '='}"
           self
         end
         
         def declare_param_file xml_file
-          @builder.append "-declareParamFile:#{xml_file}"
+          @b.append "-declareParamFile:#{@b.format xml_file}"
           self
         end
         
         def dest provider
-          @builder.append "-dest:#{provider}"
+          @b.append "-dest:#{@b.format provider}"
           self
         end
         
         def disable_link link_extension
-          @builder.append "-disableLink:#{link_extension}"
+          @b.append "-disableLink:#{@b.format link_extension}"
           self
         end
         
         def disable_rule rule
-          @builder.append_format(rule, ',') { |v| "-disableRule:#{v}" }
+          @b.append "-disableRule:#{@b.format rule, ','}"
           self
         end
         
         def disable_skip_directive skip_directive_name
-          @builder.append "-disableSkipDirective:#{skip_directive_name}"
+          @b.append "-disableSkipDirective:#{@b.format skip_directive_name}"
           self
         end
         
         def enable_link link_extension
-          @builder.append "-enableLink:#{link_extension}"
+          @b.append "-enableLink:#{@b.format link_extension}"
           self
         end
         
         def enable_rule rule
-          @builder.append_format(rule, ',') { |v| "-enableRule:#{v}" }
+          @b.append "-enableRule:#{@b.format rule, ','}"
           self
         end
         
         def enable_skip_directive skip_directive_name
-          @builder.append "-enableSkipDirective:#{skip_directive_name}"
+          @b.append "-enableSkipDirective:#{@b.format skip_directive_name}"
           self
         end
         
         def post_sync command
-          @builder.append "-postSync:#{command}"
+          @b.append "-postSync:#{@b.format command}"
           self
         end
         
         def pre_sync command
-          @builder.append "-preSync:#{command}"
+          @b.append "-preSync:#{@b.format command}"
           self
         end
         
         def remove_param param
-          @builder.append "-removeParam:#{param}"
+          @b.append "-removeParam:#{@b.format param}"
           self
         end
         
         def replace arg
-          @builder.append "-replace:#{arg}"
+          @b.append "-replace:#{@b.format arg}"
           self
         end
         
         def retry_attempts number
-          @builder.append "-retryAttempts:#{number}"
+          @b.append "-retryAttempts:#{@b.format number}"
           self
         end
         
         def retry_interval milliseconds
-          @builder.append "-retryInterval:#{milliseconds}"
+          @b.append "-retryInterval:#{@b.format milliseconds}"
           self
         end
         
         def set_param param
-          @builder.append_format(param, ',', '=') { |v| "-setParam:#{v}" }
+          @b.append "-setParam:#{@b.format param, ',', '='}"
           self
         end
         
         def set_param_file xml_file
-          @builder.append "-setParamFile:#{xml_file}"
+          @b.append "-setParamFile:#{@b.format xml_file}"
           self
         end
         
         def show_secure 
-          @builder.append "-showSecure"
+          @b.append '-showSecure'
           self
         end
         
         def skip arg
-          @builder.append "-skip:#{arg}"
+          @b.append "-skip:#{@b.format arg}"
           self
         end
         
         def source provider
-          @builder.append "-source:#{provider}"
+          @b.append "-source:#{@b.format provider}"
           self
         end
         
         def unicode 
-          @builder.append "-unicode"
+          @b.append '-unicode'
           self
         end
         
         def use_check_sum 
-          @builder.append "-useCheckSum"
+          @b.append '-useCheckSum'
           self
         end
         
         def verb verb_name
-          @builder.append "-verb:#{verb_name}"
+          @b.append "-verb:#{@b.format verb_name}"
           self
         end
         
         def verbose 
-          @builder.append "-verbose"
+          @b.append '-verbose'
           self
         end
         
         def web_server_dir path
-          @builder.append "-webServerDir:#{path}"
+          @b.append "-webServerDir:#{@b.format path}"
           self
         end
         
         def whatif 
-          @builder.append "-whatif"
+          @b.append '-whatif'
           self
         end
         
         def xml 
-          @builder.append "-xml"
+          @b.append '-xml'
           self
         end
         
         def xpath path
-          @builder.append "-xpath:#{path}"
+          @b.append "-xpath:#{@b.format path}"
           self
         end
         
         def to_s
-          @builder.to_s
+          @b.to_s
         end
         
       end
@@ -174,7 +174,7 @@ module FluentCommandBuilder
     
   end
   
-  def msdeploy40
+  def msdeploy_40
     MSDeploy::V40::MSDeploy.new
   end
   

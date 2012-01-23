@@ -20,3 +20,4 @@ require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/comma
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/rake_09.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/simian_23.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/tf_2010.rb')
+require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/tf_tee_2010.rb')

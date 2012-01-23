@@ -35,47 +35,17 @@ class TestCommandDefinitionLine < Test::Unit::TestCase
 
   def test_get_argument_name_when_option_specified
     line = CommandDefinitionLine.new '-p <physicalPath>'
-    assert_equal 'physicalPath', line.arg_name
+    assert_equal 'physicalPath', line.args[0].arg_name
   end
 
   def test_get_argument_name_when_no_option_specified
     line = CommandDefinitionLine.new '<projectFile>'
-    assert_equal 'projectFile', line.arg_name
+    assert_equal 'projectFile', line.args[0].arg_name
   end
 
   def test_arg_name_is_nil_when_none_specified
     line = CommandDefinitionLine.new '-c'
-    assert_nil line.arg_name
-  end
-
-  def test_get_key_value_separator
-    line = CommandDefinitionLine.new '/property:<property=;>'
-    assert_equal '=', line.key_value_separator
-  end
-
-  def test_key_value_separator_is_nil_when_only_delimiter_present
-    line = CommandDefinitionLine.new '/target:<target;>'
-    assert_nil line.key_value_separator
-  end
-
-  def test_key_value_separator_is_nil_when_none_specified
-    line = CommandDefinitionLine.new '/verbosity:<level>'
-    assert_nil line.key_value_separator
-  end
-
-  def test_get_delimiter
-    line = CommandDefinitionLine.new '/target:<target;>'
-    assert_equal ';', line.delimiter
-  end
-
-  def test_get_delimiter_when_key_value_separator_also_specified
-    line = CommandDefinitionLine.new '/property:<property=;>'
-    assert_equal ';', line.delimiter
-  end
-
-  def test_delimiter_is_nil_when_none_specified
-    line = CommandDefinitionLine.new '/verbosity:<level>'
-    assert_nil line.delimiter
+    assert_empty line.args
   end
 
 end
