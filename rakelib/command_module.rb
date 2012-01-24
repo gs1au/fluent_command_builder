@@ -1,7 +1,7 @@
 class CommandModule
 
-  def initialize root_command, version
-    @root_command = root_command
+  def initialize command, version
+    @command = command
     @version = version
   end
 
@@ -10,16 +10,16 @@ class CommandModule
     w.write_line %Q[require File.expand_path(File.dirname(__FILE__) + '/../command_builder')]
     w.write_line
     w.write_block 'module FluentCommandBuilder' do
-      w.write_block "module #{@root_command.class_name}" do
+      w.write_block "module #{@command.class_name}" do
         w.write_block "module #{version_module_name}" do
-          write_command @root_command, w
-          w.write_block "def #{@root_command.method_name}" do
-            w.write_line "#{@root_command.class_name}.new"
+          write_command @command, w
+          w.write_block "def #{@command.method_name}" do
+            w.write_line "#{@command.class_name}.new"
           end
         end
       end
       w.write_block "def #{version_method_name}" do
-        w.write_line "#{@root_command.class_name}::#{version_module_name}::#{@root_command.class_name}.new"
+        w.write_line "#{@command.class_name}::#{version_module_name}::#{@command.class_name}.new"
       end
     end
   end
@@ -29,7 +29,7 @@ class CommandModule
   end
 
   def version_method_name
-    "#{@root_command.method_name}_#{version}".downcase
+    "#{@command.method_name}_#{version}".downcase
   end
 
   private
@@ -39,8 +39,8 @@ class CommandModule
   end
 
   def write_command command, writer
-    command.write_command_class writer
-    command.sub_commands.each { |c| write_command c, writer }
+    command.write writer
+    command.child_nodes.each { |c| write_command c, writer }
   end
 
 end

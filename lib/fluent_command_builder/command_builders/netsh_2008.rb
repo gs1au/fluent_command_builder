@@ -10,7 +10,7 @@ module FluentCommandBuilder
           self
         end
         
-        def advfirewall
+        def advfirewall 
           Advfirewall.new self
         end
         
@@ -27,19 +27,19 @@ module FluentCommandBuilder
           self
         end
         
-        def add_rule
+        def add_rule 
           AddRule.new self
         end
         
-        def delete_rule
+        def delete_rule 
           DeleteRule.new self
         end
         
-        def set_rule
+        def set_rule 
           SetRule.new self
         end
         
-        def show_rule
+        def show_rule 
           ShowRule.new self
         end
         
@@ -222,10 +222,6 @@ module FluentCommandBuilder
           self
         end
         
-        def new
-          New.new self
-        end
-        
         def group group_name
           @b.append "group=#{@b.format group_name}"
           self
@@ -274,6 +270,10 @@ module FluentCommandBuilder
         def protocol protocol
           @b.append "protocol=#{@b.format protocol}"
           self
+        end
+        
+        def new 
+          New.new self
         end
         
         def to_s
@@ -392,10 +392,6 @@ module FluentCommandBuilder
           self
         end
         
-        def verbose
-          Verbose.new self
-        end
-        
         def name rule_name
           @b.append "name=#{@b.format rule_name}"
           self
@@ -411,15 +407,7 @@ module FluentCommandBuilder
           self
         end
         
-        def to_s
-          @b.to_s
-        end
-        
-      end
-      
-      class Verbose
-        def initialize command=nil
-          @b = CommandBuilder.new command
+        def verbose 
           @b.append 'verbose'
           self
         end

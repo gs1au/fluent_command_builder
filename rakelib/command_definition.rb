@@ -1,18 +1,16 @@
 require 'yaml'
-require_relative 'command'
-require_relative 'command_definition_line'
-require_relative 'option'
+require_relative 'node'
 
 class CommandDefinition
 
-  attr_reader :versions, :root_command
+  attr_reader :versions, :command
 
   def initialize stream
     yaml = get_yaml stream
     struct = YAML.load yaml
     @versions = struct[0].keys[0].split(',').map { |v| v.strip }
-    @root_command = Command.new struct[1].keys[0]
-    process_array struct[1].values[0], @root_command
+    @command = Node.new struct[1].keys[0]
+    process_array struct[1].values[0], @command
   end
 
   private
@@ -21,23 +19,17 @@ class CommandDefinition
     IO.readlines(stream).map { |l| l.rstrip.gsub(/^( *)(\S.+)$/, '\1- "\2":') }.join "\n"
   end
 
-  def process_array array, parent_command=nil
+  def process_array array, parent_node=nil
     array.each do |hash|
-      process_hash hash, parent_command
+      process_hash hash, parent_node
     end
   end
 
-  def process_hash hash, parent_command
-    hash.each_pair do |k, v|
-      line = CommandDefinitionLine.new k
-      if line.command_name.nil?
-        parent_command.options << Option.new(k)
-      else
-        sub_command = Command.new k
-        parent_command.sub_commands << sub_command
-        process_array v, sub_command unless v.nil?
-      end
+  def process_hash hash, parent_node
+    hash.each_pair do |node_text, child_nodes|
+      node = Node.new node_text
+      parent_node.child_nodes << node
+      process_array child_nodes, node unless child_nodes.nil?
     end
   end
-
 end

@@ -10,151 +10,151 @@ module FluentCommandBuilder
           self
         end
         
-        def add
+        def add 
           Add.new self
         end
         
-        def branch
+        def branch 
           Branch.new self
         end
         
-        def branches
+        def branches 
           Branches.new self
         end
         
-        def changeset
+        def changeset 
           Changeset.new self
         end
         
-        def checkin
+        def checkin 
           Checkin.new self
         end
         
-        def checkout
+        def checkout 
           Checkout.new self
         end
         
-        def delete
+        def delete 
           Delete.new self
         end
         
-        def destroy
+        def destroy 
           Destroy.new self
         end
         
-        def diff
+        def diff 
           Diff.new self
         end
         
-        def dir
+        def dir 
           Dir.new self
         end
         
-        def eula
+        def eula 
           Eula.new self
         end
         
-        def get
+        def get 
           Get.new self
         end
         
-        def getcs
+        def getcs 
           Getcs.new self
         end
         
-        def history
+        def history 
           History.new self
         end
         
-        def label
+        def label 
           Label.new self
         end
         
-        def labels
+        def labels 
           Labels.new self
         end
         
-        def lock
+        def lock 
           Lock.new self
         end
         
-        def merge
+        def merge 
           Merge.new self
         end
         
-        def merges
+        def merges 
           Merges.new self
         end
         
-        def print
+        def print 
           Print.new self
         end
         
-        def productkey
+        def product_key 
           ProductKey.new self
         end
         
-        def profile
+        def profile 
           Profile.new self
         end
         
-        def profiles
+        def profiles 
           Profiles.new self
         end
         
-        def properties
+        def properties 
           Properties.new self
         end
         
-        def reconcile
+        def reconcile 
           Reconcile.new self
         end
         
-        def rename
+        def rename 
           Rename.new self
         end
         
-        def resolve
+        def resolve 
           Resolve.new self
         end
         
-        def shelve
+        def shelve 
           Shelve.new self
         end
         
-        def shelvesets
+        def shelvesets 
           Shelvesets.new self
         end
         
-        def status
+        def status 
           Status.new self
         end
         
-        def undelete
+        def undelete 
           Undelete.new self
         end
         
-        def undo
+        def undo 
           Undo.new self
         end
         
-        def unlabel
+        def unlabel 
           Unlabel.new self
         end
         
-        def unshelve
+        def unshelve 
           Unshelve.new self
         end
         
-        def workfold
+        def workfold 
           Workfold.new self
         end
         
-        def workspace
+        def workspace 
           Workspace.new self
         end
         
-        def workspaces
+        def workspaces 
           Workspaces.new self
         end
         

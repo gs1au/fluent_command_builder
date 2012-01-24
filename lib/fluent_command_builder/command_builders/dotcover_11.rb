@@ -10,31 +10,31 @@ module FluentCommandBuilder
           self
         end
         
-        def cover
+        def cover 
           Cover.new self
         end
         
-        def merge
+        def merge 
           Merge.new self
         end
         
-        def report
+        def report 
           Report.new self
         end
         
-        def list
+        def list 
           List.new self
         end
         
-        def delete
+        def delete 
           Delete.new self
         end
         
-        def analyse
+        def analyse 
           Analyse.new self
         end
         
-        def zip
+        def zip 
           Zip.new self
         end
         
