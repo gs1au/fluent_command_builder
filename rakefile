@@ -16,6 +16,7 @@ task :generate_code => [:clobber, GENERATED_CODE_DIR] do
   code_generator = CodeGenerator.new COMMAND_DEFINITIONS_DIR, GENERATED_CODE_DIR
   code_generator.generate_code
   generate_fluent_command_builder_rb
+  require_relative 'lib/fluent_command_builder'
 end
 
 desc 'Run unit tests.'
