@@ -12,7 +12,7 @@ rake
     --quiet
     --rakefile <file>
     --rakelibdir <rakeLibDir>
-    --require <_module>
+    --require <file>
     --rules
     --silent
     --no-system

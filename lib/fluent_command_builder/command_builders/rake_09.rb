@@ -70,8 +70,8 @@ module FluentCommandBuilder
           self
         end
         
-        def require _module
-          @b.append "--require #{@b.format _module}"
+        def require file
+          @b.append "--require #{@b.format file}"
           self
         end
         
