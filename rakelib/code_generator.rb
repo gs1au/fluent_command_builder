@@ -1,6 +1,6 @@
-require_relative 'command_definition'
-require_relative 'command_module'
 require_relative 'code_writer'
+require_relative 'command_code_generator'
+require_relative 'command_definition'
 
 class CodeGenerator
 
@@ -19,12 +19,12 @@ class CodeGenerator
   def process_file source_file
     command_definition = CommandDefinition.new source_file
     command_definition.versions.each do |version|
-      command_module = CommandModule.new command_definition.command, version
-      dest_file_name = "#{command_module.version_method_name}.rb"
+      command_code_generator = CommandCodeGenerator.new command_definition.command, version
+      dest_file_name = "#{command_code_generator.version_method_name}.rb"
       dest_file = File.join @dest_dir, dest_file_name
       File.open dest_file, 'w' do |f|
         writer = CodeWriter.new f
-        command_module.write_command_module writer
+        command_code_generator.render writer
       end
     end
   end

@@ -59,7 +59,6 @@ tf
         -login:<credentials>
         <itemSpec>
     destroy
-        -TODO
     diff
         <itemSpec>
         <itemSpec2>

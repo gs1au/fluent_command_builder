@@ -63,7 +63,6 @@ tf
         /login:<credentials>
         <itemSpec>
     destroy
-        /TODO
     diff
         <itemSpec>
         <itemSpec2>
@@ -283,7 +282,7 @@ tf
         /shelveset:<shelvesetName>
         /noPrompt
         <itemSpec>
-        /version:versionSpec
+        /version:<versionSpec>
         /login:<credentials>
     workfold
         /login:<credentials>

@@ -43,7 +43,8 @@ module FluentCommandBuilder
         end
         
         def destroy 
-          Destroy.new self
+          @b.append 'destroy'
+          self
         end
         
         def diff 
@@ -525,24 +526,6 @@ module FluentCommandBuilder
         
         def item_spec item_spec
           @b.append "#{@b.format item_spec}"
-          self
-        end
-        
-        def to_s
-          @b.to_s
-        end
-        
-      end
-      
-      class Destroy
-        def initialize command=nil
-          @b = CommandBuilder.new command
-          @b.append 'destroy'
-          self
-        end
-        
-        def t_o_d_o 
-          @b.append '/TODO'
           self
         end
         
@@ -1833,8 +1816,8 @@ module FluentCommandBuilder
           self
         end
         
-        def version 
-          @b.append '/version:versionSpec'
+        def version version_spec
+          @b.append "/version:#{@b.format version_spec}"
           self
         end
         
