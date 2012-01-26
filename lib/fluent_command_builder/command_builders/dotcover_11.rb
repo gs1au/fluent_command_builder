@@ -4,298 +4,224 @@ module FluentCommandBuilder
   module DotCover
     module V11
       class DotCover
-        def initialize command=nil
-          @b = CommandBuilder.new command
-          @b.append 'dotCover'
-          self
+        def initialize builder
+          @builder = builder
+          @builder.append 'dotCover'
         end
-        
         def cover 
-          Cover.new self
+          Cover.new @builder
         end
-        
         def merge 
-          Merge.new self
+          Merge.new @builder
         end
-        
         def report 
-          Report.new self
+          Report.new @builder
         end
-        
         def list 
-          List.new self
+          List.new @builder
         end
-        
         def delete 
-          Delete.new self
+          Delete.new @builder
         end
-        
         def analyse 
-          Analyse.new self
+          Analyse.new @builder
         end
-        
         def zip 
-          Zip.new self
+          Zip.new @builder
         end
-        
-        def to_s
-          @b.to_s
+        def to_s 
+          @builder.to_s
         end
-        
       end
-      
       class Cover
-        def initialize command=nil
-          @b = CommandBuilder.new command
-          @b.append 'cover'
-          self
+        def initialize builder
+          @builder = builder
+          @builder.append 'cover'
         end
-        
         def analyse_target_arguments arg
-          @b.append "/AnalyseTargetArguments=#{@b.format arg}"
+          @builder.append "/AnalyseTargetArguments=#{@builder.format arg}"
           self
         end
-        
         def filters arg
-          @b.append "/Filters=#{@b.format arg}"
+          @builder.append "/Filters=#{@builder.format arg}"
           self
         end
-        
         def inherit_console arg
-          @b.append "/InheritConsole=#{@b.format arg}"
+          @builder.append "/InheritConsole=#{@builder.format arg}"
           self
         end
-        
         def log_file arg
-          @b.append "/LogFile=#{@b.format arg}"
+          @builder.append "/LogFile=#{@builder.format arg}"
           self
         end
-        
         def output arg
-          @b.append "/Output=#{@b.format arg}"
+          @builder.append "/Output=#{@builder.format arg}"
           self
         end
-        
         def target_arguments arg
-          @b.append "/TargetArguments=#{@b.format arg}"
+          @builder.append "/TargetArguments=#{@builder.format arg}"
           self
         end
-        
         def target_executable arg
-          @b.append "/TargetExecutable=#{@b.format arg}"
+          @builder.append "/TargetExecutable=#{@builder.format arg}"
           self
         end
-        
         def target_working_dir arg
-          @b.append "/TargetWorkingDir=#{@b.format arg}"
+          @builder.append "/TargetWorkingDir=#{@builder.format arg}"
           self
         end
-        
         def temp_dir arg
-          @b.append "/TempDir=#{@b.format arg}"
+          @builder.append "/TempDir=#{@builder.format arg}"
           self
         end
-        
-        def to_s
-          @b.to_s
+        def to_s 
+          @builder.to_s
         end
-        
       end
-      
       class Merge
-        def initialize command=nil
-          @b = CommandBuilder.new command
-          @b.append 'merge'
-          self
+        def initialize builder
+          @builder = builder
+          @builder.append 'merge'
         end
-        
         def output arg
-          @b.append "/Output=#{@b.format arg}"
+          @builder.append "/Output=#{@builder.format arg}"
           self
         end
-        
         def source arg
-          @b.append "/Source=#{@b.format arg}"
+          @builder.append "/Source=#{@builder.format arg}"
           self
         end
-        
         def temp_dir arg
-          @b.append "/TempDir=#{@b.format arg}"
+          @builder.append "/TempDir=#{@builder.format arg}"
           self
         end
-        
-        def to_s
-          @b.to_s
+        def to_s 
+          @builder.to_s
         end
-        
       end
-      
       class Report
-        def initialize command=nil
-          @b = CommandBuilder.new command
-          @b.append 'report'
-          self
+        def initialize builder
+          @builder = builder
+          @builder.append 'report'
         end
-        
         def output arg
-          @b.append "/Output=#{@b.format arg}"
+          @builder.append "/Output=#{@builder.format arg}"
           self
         end
-        
         def report_type arg
-          @b.append "/ReportType=#{@b.format arg}"
+          @builder.append "/ReportType=#{@builder.format arg}"
           self
         end
-        
         def source arg
-          @b.append "/Source=#{@b.format arg}"
+          @builder.append "/Source=#{@builder.format arg}"
           self
         end
-        
-        def to_s
-          @b.to_s
+        def to_s 
+          @builder.to_s
         end
-        
       end
-      
       class List
-        def initialize command=nil
-          @b = CommandBuilder.new command
-          @b.append 'list'
-          self
+        def initialize builder
+          @builder = builder
+          @builder.append 'list'
         end
-        
         def output arg
-          @b.append "/Output=#{@b.format arg}"
+          @builder.append "/Output=#{@builder.format arg}"
           self
         end
-        
         def source arg
-          @b.append "/Source=#{@b.format arg}"
+          @builder.append "/Source=#{@builder.format arg}"
           self
         end
-        
-        def to_s
-          @b.to_s
+        def to_s 
+          @builder.to_s
         end
-        
       end
-      
       class Delete
-        def initialize command=nil
-          @b = CommandBuilder.new command
-          @b.append 'delete'
-          self
+        def initialize builder
+          @builder = builder
+          @builder.append 'delete'
         end
-        
         def source arg
-          @b.append "/Source=#{@b.format arg}"
+          @builder.append "/Source=#{@builder.format arg}"
           self
         end
-        
-        def to_s
-          @b.to_s
+        def to_s 
+          @builder.to_s
         end
-        
       end
-      
       class Analyse
-        def initialize command=nil
-          @b = CommandBuilder.new command
-          @b.append 'analyse'
-          self
+        def initialize builder
+          @builder = builder
+          @builder.append 'analyse'
         end
-        
         def analyse_target_arguments arg
-          @b.append "/AnalyseTargetArguments=#{@b.format arg}"
+          @builder.append "/AnalyseTargetArguments=#{@builder.format arg}"
           self
         end
-        
         def filters arg
-          @b.append "/Filters=#{@b.format arg}"
+          @builder.append "/Filters=#{@builder.format arg}"
           self
         end
-        
         def inherit_console arg
-          @b.append "/InheritConsole=#{@b.format arg}"
+          @builder.append "/InheritConsole=#{@builder.format arg}"
           self
         end
-        
         def log_file arg
-          @b.append "/LogFile=#{@b.format arg}"
+          @builder.append "/LogFile=#{@builder.format arg}"
           self
         end
-        
         def output arg
-          @b.append "/Output=#{@b.format arg}"
+          @builder.append "/Output=#{@builder.format arg}"
           self
         end
-        
         def report_type arg
-          @b.append "/ReportType=#{@b.format arg}"
+          @builder.append "/ReportType=#{@builder.format arg}"
           self
         end
-        
         def target_arguments arg
-          @b.append "/TargetArguments=#{@b.format arg}"
+          @builder.append "/TargetArguments=#{@builder.format arg}"
           self
         end
-        
         def target_executable arg
-          @b.append "/TargetExecutable=#{@b.format arg}"
+          @builder.append "/TargetExecutable=#{@builder.format arg}"
           self
         end
-        
         def target_working_dir arg
-          @b.append "/TargetWorkingDir=#{@b.format arg}"
+          @builder.append "/TargetWorkingDir=#{@builder.format arg}"
           self
         end
-        
         def temp_dir arg
-          @b.append "/TempDir=#{@b.format arg}"
+          @builder.append "/TempDir=#{@builder.format arg}"
           self
         end
-        
-        def to_s
-          @b.to_s
+        def to_s 
+          @builder.to_s
         end
-        
       end
-      
       class Zip
-        def initialize command=nil
-          @b = CommandBuilder.new command
-          @b.append 'zip'
-          self
+        def initialize builder
+          @builder = builder
+          @builder.append 'zip'
         end
-        
         def output arg
-          @b.append "/Output=#{@b.format arg}"
+          @builder.append "/Output=#{@builder.format arg}"
           self
         end
-        
         def source arg
-          @b.append "/Source=#{@b.format arg}"
+          @builder.append "/Source=#{@builder.format arg}"
           self
         end
-        
-        def to_s
-          @b.to_s
+        def to_s 
+          @builder.to_s
         end
-        
       end
-      
-      def dotcover
-        DotCover.new
+      def dotcover 
+        DotCover.new CommandBuilder.new
       end
-      
     end
-    
   end
-  
-  def dotcover_11
-    DotCover::V11::DotCover.new
+  def dotcover_11 
+    DotCover::V11::dotcover
   end
-  
 end
-

@@ -4,134 +4,104 @@ module FluentCommandBuilder
   module NunitConsole
     module V25
       class NunitConsole
-        def initialize command=nil
-          @b = CommandBuilder.new command
-          @b.append 'nunit-console'
-          self
+        def initialize builder
+          @builder = builder
+          @builder.append 'nunit-console'
         end
-        
         def assembly assembly
-          @b.append "#{@b.format assembly}"
+          @builder.append "#{@builder.format assembly}"
           self
         end
-        
         def run test
-          @b.append "/run:#{@b.format test}"
+          @builder.append "/run:#{@builder.format test}"
           self
         end
-        
         def fixture fixture
-          @b.append "/fixture:#{@b.format fixture}"
+          @builder.append "/fixture:#{@builder.format fixture}"
           self
         end
-        
         def framework framework
-          @b.append "/framework:#{@b.format framework}"
+          @builder.append "/framework:#{@builder.format framework}"
           self
         end
-        
         def include category
-          @b.append "/include:#{@b.format category}"
+          @builder.append "/include:#{@builder.format category}"
           self
         end
-        
         def exclude category
-          @b.append "/exclude:#{@b.format category}"
+          @builder.append "/exclude:#{@builder.format category}"
           self
         end
-        
         def out file
-          @b.append "/out:#{@b.format file}"
+          @builder.append "/out:#{@builder.format file}"
           self
         end
-        
         def err file
-          @b.append "/err:#{@b.format file}"
+          @builder.append "/err:#{@builder.format file}"
           self
         end
-        
         def labels 
-          @b.append '/labels'
+          @builder.append '/labels'
           self
         end
-        
         def xml file
-          @b.append "/xml:#{@b.format file}"
+          @builder.append "/xml:#{@builder.format file}"
           self
         end
-        
         def config config
-          @b.append "/config:#{@b.format config}"
+          @builder.append "/config:#{@builder.format config}"
           self
         end
-        
         def process process
-          @b.append "/process:#{@b.format process}"
+          @builder.append "/process:#{@builder.format process}"
           self
         end
-        
         def domain domain
-          @b.append "/domain:#{@b.format domain}"
+          @builder.append "/domain:#{@builder.format domain}"
           self
         end
-        
         def timeout timeout
-          @b.append "/timeout:#{@b.format timeout}"
+          @builder.append "/timeout:#{@builder.format timeout}"
           self
         end
-        
         def trace level
-          @b.append "/trace:#{@b.format level}"
+          @builder.append "/trace:#{@builder.format level}"
           self
         end
-        
         def no_shadow 
-          @b.append '/noShadow'
+          @builder.append '/noShadow'
           self
         end
-        
         def no_thread 
-          @b.append '/noThread'
+          @builder.append '/noThread'
           self
         end
-        
         def wait 
-          @b.append '/wait'
+          @builder.append '/wait'
           self
         end
-        
         def xml_console 
-          @b.append '/xmlConsole'
+          @builder.append '/xmlConsole'
           self
         end
-        
         def no_logo 
-          @b.append '/noLogo'
+          @builder.append '/noLogo'
           self
         end
-        
         def help 
-          @b.append '/help'
+          @builder.append '/help'
           self
         end
-        
-        def to_s
-          @b.to_s
+        def to_s 
+          @builder.to_s
         end
-        
       end
-      
-      def nunit_console
-        NunitConsole.new
+      def nunit_console 
+        NunitConsole.new CommandBuilder.new
       end
-      
     end
-    
   end
-  
-  def nunit_console_25
-    NunitConsole::V25::NunitConsole.new
+  def nunit_console_25 
+    NunitConsole::V25::nunit_console
   end
-  
 end
-

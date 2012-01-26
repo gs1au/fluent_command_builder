@@ -4,179 +4,140 @@ module FluentCommandBuilder
   module MSDeploy
     module V40
       class MSDeploy
-        def initialize command=nil
-          @b = CommandBuilder.new command
-          @b.append 'MSDeploy'
-          self
+        def initialize builder
+          @builder = builder
+          @builder.append 'MSDeploy'
         end
-        
         def allow_untrusted bool
-          @b.append "-allowUntrusted:#{@b.format bool}"
+          @builder.append "-allowUntrusted:#{@builder.format bool}"
           self
         end
-        
         def app_host_config_dir path
-          @b.append "-appHostConfigDir:#{@b.format path}"
+          @builder.append "-appHostConfigDir:#{@builder.format path}"
           self
         end
-        
         def declare_param param
-          @b.append "-declareParam:#{@b.format param, ',', '='}"
+          @builder.append "-declareParam:#{@builder.format param, ',', '='}"
           self
         end
-        
         def declare_param_file xml_file
-          @b.append "-declareParamFile:#{@b.format xml_file}"
+          @builder.append "-declareParamFile:#{@builder.format xml_file}"
           self
         end
-        
         def dest provider
-          @b.append "-dest:#{@b.format provider}"
+          @builder.append "-dest:#{@builder.format provider}"
           self
         end
-        
         def disable_link link_extension
-          @b.append "-disableLink:#{@b.format link_extension}"
+          @builder.append "-disableLink:#{@builder.format link_extension}"
           self
         end
-        
         def disable_rule rule
-          @b.append "-disableRule:#{@b.format rule, ','}"
+          @builder.append "-disableRule:#{@builder.format rule, ','}"
           self
         end
-        
         def disable_skip_directive skip_directive_name
-          @b.append "-disableSkipDirective:#{@b.format skip_directive_name}"
+          @builder.append "-disableSkipDirective:#{@builder.format skip_directive_name}"
           self
         end
-        
         def enable_link link_extension
-          @b.append "-enableLink:#{@b.format link_extension}"
+          @builder.append "-enableLink:#{@builder.format link_extension}"
           self
         end
-        
         def enable_rule rule
-          @b.append "-enableRule:#{@b.format rule, ','}"
+          @builder.append "-enableRule:#{@builder.format rule, ','}"
           self
         end
-        
         def enable_skip_directive skip_directive_name
-          @b.append "-enableSkipDirective:#{@b.format skip_directive_name}"
+          @builder.append "-enableSkipDirective:#{@builder.format skip_directive_name}"
           self
         end
-        
         def post_sync command
-          @b.append "-postSync:#{@b.format command}"
+          @builder.append "-postSync:#{@builder.format command}"
           self
         end
-        
         def pre_sync command
-          @b.append "-preSync:#{@b.format command}"
+          @builder.append "-preSync:#{@builder.format command}"
           self
         end
-        
         def remove_param param
-          @b.append "-removeParam:#{@b.format param}"
+          @builder.append "-removeParam:#{@builder.format param}"
           self
         end
-        
         def replace arg
-          @b.append "-replace:#{@b.format arg}"
+          @builder.append "-replace:#{@builder.format arg}"
           self
         end
-        
         def retry_attempts number
-          @b.append "-retryAttempts:#{@b.format number}"
+          @builder.append "-retryAttempts:#{@builder.format number}"
           self
         end
-        
         def retry_interval milliseconds
-          @b.append "-retryInterval:#{@b.format milliseconds}"
+          @builder.append "-retryInterval:#{@builder.format milliseconds}"
           self
         end
-        
         def set_param param
-          @b.append "-setParam:#{@b.format param, ',', '='}"
+          @builder.append "-setParam:#{@builder.format param, ',', '='}"
           self
         end
-        
         def set_param_file xml_file
-          @b.append "-setParamFile:#{@b.format xml_file}"
+          @builder.append "-setParamFile:#{@builder.format xml_file}"
           self
         end
-        
         def show_secure 
-          @b.append '-showSecure'
+          @builder.append '-showSecure'
           self
         end
-        
         def skip arg
-          @b.append "-skip:#{@b.format arg}"
+          @builder.append "-skip:#{@builder.format arg}"
           self
         end
-        
         def source provider
-          @b.append "-source:#{@b.format provider}"
+          @builder.append "-source:#{@builder.format provider}"
           self
         end
-        
         def unicode 
-          @b.append '-unicode'
+          @builder.append '-unicode'
           self
         end
-        
         def use_check_sum 
-          @b.append '-useCheckSum'
+          @builder.append '-useCheckSum'
           self
         end
-        
         def verb verb_name
-          @b.append "-verb:#{@b.format verb_name}"
+          @builder.append "-verb:#{@builder.format verb_name}"
           self
         end
-        
         def verbose 
-          @b.append '-verbose'
+          @builder.append '-verbose'
           self
         end
-        
         def web_server_dir path
-          @b.append "-webServerDir:#{@b.format path}"
+          @builder.append "-webServerDir:#{@builder.format path}"
           self
         end
-        
         def whatif 
-          @b.append '-whatif'
+          @builder.append '-whatif'
           self
         end
-        
         def xml 
-          @b.append '-xml'
+          @builder.append '-xml'
           self
         end
-        
         def xpath path
-          @b.append "-xpath:#{@b.format path}"
+          @builder.append "-xpath:#{@builder.format path}"
           self
         end
-        
-        def to_s
-          @b.to_s
+        def to_s 
+          @builder.to_s
         end
-        
       end
-      
-      def msdeploy
-        MSDeploy.new
+      def msdeploy 
+        MSDeploy.new CommandBuilder.new
       end
-      
     end
-    
   end
-  
-  def msdeploy_40
-    MSDeploy::V40::MSDeploy.new
+  def msdeploy_40 
+    MSDeploy::V40::msdeploy
   end
-  
 end
-

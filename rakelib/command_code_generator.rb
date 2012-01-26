@@ -11,20 +11,19 @@ class CommandCodeGenerator
   end
 
   def render writer
-    w = writer
-    w.write_line %Q[require File.expand_path(File.dirname(__FILE__) + '/../command_builder')]
-    w.write_line
-    w.write_block 'module FluentCommandBuilder' do
-      w.write_block "module #{command_module_name}" do
-        w.write_block "module #{version_module_name}" do
-          write_command @command, w
-          w.write_block "def #{method_name}" do
-            w.write_line "#{class_name}.new"
+    writer.line %Q[require File.expand_path(File.dirname(__FILE__) + '/../command_builder')]
+    writer.line
+    writer.module 'FluentCommandBuilder' do
+      writer.module command_module_name do
+        writer.module version_module_name do
+          write_command @command, writer
+          writer.method method_name do
+            writer.initializer class_name, 'CommandBuilder.new'
           end
         end
       end
-      w.write_block "def #{version_method_name}" do
-        w.write_line "#{command_module_name}::#{version_module_name}::#{class_name}.new"
+      writer.method version_method_name do
+        writer.line "#{command_module_name}::#{version_module_name}::#{method_name}"
       end
     end
   end

@@ -1,5 +1,7 @@
 class CodeWriter
 
+  INDENT_SPACES = 2
+
   def initialize stream
     @stream = stream
     @indent = 0
@@ -18,17 +20,33 @@ class CodeWriter
     @indent -= 1
   end
 
-  def write_line line=''
-    @stream.puts line.rjust(line.length + @indent * 2, ' ')
+  def line line=''
+    @stream.puts line.rjust(line.length + @indent * INDENT_SPACES, ' ')
   end
 
-  def write_block line
-    write_line line
+  def block line
+    line line
     indent
     yield
     dedent
-    write_line 'end'
-    write_line
+    line 'end'
+    line
+  end
+
+  def method name, *args
+    block "def #{name} #{args.flatten.join ', '}" do
+      yield
+    end
+  end
+
+  def initializer class_name, *args
+    line "#{class_name}.new #{args.flatten.join ', '}"
+  end
+
+  def module module_name
+    block "module #{module_name}" do
+      yield
+    end
   end
 
 end

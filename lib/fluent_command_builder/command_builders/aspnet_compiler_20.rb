@@ -4,104 +4,80 @@ module FluentCommandBuilder
   module AspnetCompiler
     module V20
       class AspnetCompiler
-        def initialize command=nil
-          @b = CommandBuilder.new command
-          @b.append 'aspnet_compiler'
-          self
+        def initialize builder
+          @builder = builder
+          @builder.append 'aspnet_compiler'
         end
-        
         def target_dir target_dir
-          @b.append "#{@b.format target_dir}"
+          @builder.append "#{@builder.format target_dir}"
           self
         end
-        
         def m metabase_path
-          @b.append "-m #{@b.format metabase_path}"
+          @builder.append "-m #{@builder.format metabase_path}"
           self
         end
-        
         def v virtual_path
-          @b.append "-v #{@b.format virtual_path}"
+          @builder.append "-v #{@builder.format virtual_path}"
           self
         end
-        
         def p physical_path
-          @b.append "-p #{@b.format physical_path}"
+          @builder.append "-p #{@builder.format physical_path}"
           self
         end
-        
         def u 
-          @b.append '-u'
+          @builder.append '-u'
           self
         end
-        
         def f 
-          @b.append '-f'
+          @builder.append '-f'
           self
         end
-        
         def d 
-          @b.append '-d'
+          @builder.append '-d'
           self
         end
-        
         def fixed_names 
-          @b.append '-fixedNames'
+          @builder.append '-fixedNames'
           self
         end
-        
         def c 
-          @b.append '-c'
+          @builder.append '-c'
           self
         end
-        
         def error_stack 
-          @b.append '-errorStack'
+          @builder.append '-errorStack'
           self
         end
-        
         def no_logo 
-          @b.append '-noLogo'
+          @builder.append '-noLogo'
           self
         end
-        
         def key_file file
-          @b.append "-keyFile #{@b.format file}"
+          @builder.append "-keyFile #{@builder.format file}"
           self
         end
-        
         def key_container container
-          @b.append "-keyContainer #{@b.format container}"
+          @builder.append "-keyContainer #{@builder.format container}"
           self
         end
-        
         def aptca 
-          @b.append '-aptca'
+          @builder.append '-aptca'
           self
         end
-        
         def delay_sign 
-          @b.append '-delaySign'
+          @builder.append '-delaySign'
           self
         end
-        
-        def to_s
-          @b.to_s
+        def to_s 
+          @builder.to_s
         end
-        
       end
-      
-      def aspnet_compiler
-        AspnetCompiler.new
+      def aspnet_compiler 
+        AspnetCompiler.new CommandBuilder.new
       end
-      
     end
-    
   end
-  
-  def aspnet_compiler_20
-    AspnetCompiler::V20::AspnetCompiler.new
+  def aspnet_compiler_20 
+    AspnetCompiler::V20::aspnet_compiler
   end
-  
 end
-

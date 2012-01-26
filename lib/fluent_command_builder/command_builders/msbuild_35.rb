@@ -4,134 +4,104 @@ module FluentCommandBuilder
   module MSBuild
     module V35
       class MSBuild
-        def initialize command=nil
-          @b = CommandBuilder.new command
-          @b.append 'MSBuild'
-          self
+        def initialize builder
+          @builder = builder
+          @builder.append 'MSBuild'
         end
-        
         def project_file project_file
-          @b.append "#{@b.format project_file}"
+          @builder.append "#{@builder.format project_file}"
           self
         end
-        
         def help 
-          @b.append '/help'
+          @builder.append '/help'
           self
         end
-        
         def no_logo 
-          @b.append '/noLogo'
+          @builder.append '/noLogo'
           self
         end
-        
         def version 
-          @b.append '/version'
+          @builder.append '/version'
           self
         end
-        
         def file file
-          @b.append "@#{@b.format file}"
+          @builder.append "@#{@builder.format file}"
           self
         end
-        
         def no_auto_response 
-          @b.append '/noAutoResponse'
+          @builder.append '/noAutoResponse'
           self
         end
-        
         def target target
-          @b.append "/target:#{@b.format target, ';'}"
+          @builder.append "/target:#{@builder.format target, ';'}"
           self
         end
-        
         def property property
-          @b.append "/property:#{@b.format property, ';', '='}"
+          @builder.append "/property:#{@builder.format property, ';', '='}"
           self
         end
-        
         def logger logger
-          @b.append "/logger:#{@b.format logger}"
+          @builder.append "/logger:#{@builder.format logger}"
           self
         end
-        
         def distributed_logger logger
-          @b.append "/distributedLogger:#{@b.format logger}"
+          @builder.append "/distributedLogger:#{@builder.format logger}"
           self
         end
-        
         def console_logger_parameters parameters
-          @b.append "/consoleLoggerParameters:#{@b.format parameters}"
+          @builder.append "/consoleLoggerParameters:#{@builder.format parameters}"
           self
         end
-        
         def verbosity level
-          @b.append "/verbosity:#{@b.format level}"
+          @builder.append "/verbosity:#{@builder.format level}"
           self
         end
-        
         def no_console_logger 
-          @b.append '/noConsoleLogger'
+          @builder.append '/noConsoleLogger'
           self
         end
-        
         def validate schema
-          @b.append "/validate:#{@b.format schema}"
+          @builder.append "/validate:#{@builder.format schema}"
           self
         end
-        
         def max_cpu_count number
-          @b.append "/maxCpuCount:#{@b.format number}"
+          @builder.append "/maxCpuCount:#{@builder.format number}"
           self
         end
-        
         def ignore_project_extensions extensions
-          @b.append "/ignoreProjectExtensions:#{@b.format extensions, ';'}"
+          @builder.append "/ignoreProjectExtensions:#{@builder.format extensions, ';'}"
           self
         end
-        
         def file_logger 
-          @b.append '/fileLogger'
+          @builder.append '/fileLogger'
           self
         end
-        
         def distributed_file_logger 
-          @b.append '/distributedFileLogger'
+          @builder.append '/distributedFileLogger'
           self
         end
-        
         def file_logger_parameters parameters
-          @b.append "/fileLoggerParameters:#{@b.format parameters, ';', '='}"
+          @builder.append "/fileLoggerParameters:#{@builder.format parameters, ';', '='}"
           self
         end
-        
         def tools_version version
-          @b.append "/toolsVersion:#{@b.format version}"
+          @builder.append "/toolsVersion:#{@builder.format version}"
           self
         end
-        
         def node_reuse parameters
-          @b.append "/nodeReuse:#{@b.format parameters}"
+          @builder.append "/nodeReuse:#{@builder.format parameters}"
           self
         end
-        
-        def to_s
-          @b.to_s
+        def to_s 
+          @builder.to_s
         end
-        
       end
-      
-      def msbuild
-        MSBuild.new
+      def msbuild 
+        MSBuild.new CommandBuilder.new
       end
-      
     end
-    
   end
-  
-  def msbuild_35
-    MSBuild::V35::MSBuild.new
+  def msbuild_35 
+    MSBuild::V35::msbuild
   end
-  
 end
-
