@@ -78,6 +78,6 @@ module FluentCommandBuilder
     end
   end
   def aspnet_compiler_40 
-    AspnetCompiler::V40::aspnet_compiler
+    AspnetCompiler::V40::AspnetCompiler.new CommandBuilder.new
   end
 end

@@ -70,6 +70,6 @@ module FluentCommandBuilder
     end
   end
   def msbuild_30 
-    MSBuild::V30::msbuild
+    MSBuild::V30::MSBuild.new CommandBuilder.new
   end
 end

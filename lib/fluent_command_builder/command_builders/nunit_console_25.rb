@@ -102,6 +102,6 @@ module FluentCommandBuilder
     end
   end
   def nunit_console_25 
-    NunitConsole::V25::nunit_console
+    NunitConsole::V25::NunitConsole.new CommandBuilder.new
   end
 end

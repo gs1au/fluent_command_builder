@@ -138,6 +138,6 @@ module FluentCommandBuilder
     end
   end
   def msdeploy_40 
-    MSDeploy::V40::msdeploy
+    MSDeploy::V40::MSDeploy.new CommandBuilder.new
   end
 end

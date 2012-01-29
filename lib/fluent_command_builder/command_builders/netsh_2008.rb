@@ -330,6 +330,6 @@ module FluentCommandBuilder
     end
   end
   def netsh_2008 
-    Netsh::V2008::netsh
+    Netsh::V2008::Netsh.new CommandBuilder.new
   end
 end

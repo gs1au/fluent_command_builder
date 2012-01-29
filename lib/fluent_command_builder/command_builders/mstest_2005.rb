@@ -82,6 +82,6 @@ module FluentCommandBuilder
     end
   end
   def mstest_2005 
-    MSTest::V2005::mstest
+    MSTest::V2005::MSTest.new CommandBuilder.new
   end
 end

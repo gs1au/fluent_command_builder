@@ -110,6 +110,6 @@ module FluentCommandBuilder
     end
   end
   def simian_23 
-    Simian::V23::simian
+    Simian::V23::Simian.new CommandBuilder.new
   end
 end

@@ -222,6 +222,6 @@ module FluentCommandBuilder
     end
   end
   def dotcover_11 
-    DotCover::V11::dotcover
+    DotCover::V11::DotCover.new CommandBuilder.new
   end
 end

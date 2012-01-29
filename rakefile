@@ -1,32 +1,42 @@
 require 'rake/clean'
 require 'rake/testtask'
-require_relative 'rakelib/code_generator'
+require_relative 'rakelib/ruby_code_writer'
+require_relative 'rakelib/command_code_generator'
+require_relative 'rakelib/command_definition'
 
 COMMAND_DEFINITIONS_DIR = 'command_definitions'
-GENERATED_CODE_DIR = 'lib/fluent_command_builder/command_builders'
+LIB_DIR = 'lib'
+COMMAND_BUILDERS_DIR = File.join LIB_DIR, 'command_builders'
 
-CLOBBER.include GENERATED_CODE_DIR
+CLOBBER.include COMMAND_BUILDERS_DIR
+directory COMMAND_BUILDERS_DIR
 
-directory GENERATED_CODE_DIR
-
-task :default => [:generate_code, :test]
+task :default => [:test]
 
 desc 'Generate code.'
-task :generate_code => [:clobber, GENERATED_CODE_DIR] do
-  code_generator = CodeGenerator.new COMMAND_DEFINITIONS_DIR, GENERATED_CODE_DIR
-  code_generator.generate_code
+task :build => [:clobber, COMMAND_BUILDERS_DIR] do
+  command_definition_file_pattern = File.join COMMAND_DEFINITIONS_DIR, '*.txt'
+  Dir[command_definition_file_pattern].each { |f| generate_command_builder f }
   generate_fluent_command_builder_rb
-  require_relative 'lib/fluent_command_builder'
 end
 
 desc 'Run unit tests.'
-Rake::TestTask.new do |t|
-  t.test_files = FileList['test/test*.rb']
+Rake::TestTask.new :test => [:build] do |t|
+  t.test_files = FileList['test/*.rb']
   t.verbose = true
 end
 
+def generate_command_builder command_definition_file
+  command_definition = CommandDefinition.new command_definition_file
+  command_definition.versions.each do |version|
+    command_code_generator = CommandCodeGenerator.new command_definition.command, version
+    dest_file = File.join COMMAND_BUILDERS_DIR, "#{command_code_generator.version_method_name}.rb"
+    File.open(dest_file, 'w') { |f| command_code_generator.render RubyCodeWriter.new(f) }
+  end
+end
+
 def generate_fluent_command_builder_rb
-  Dir.chdir 'lib' do
+  Dir.chdir LIB_DIR do
     File.open 'fluent_command_builder.rb', 'w' do |f|
       Dir['fluent_command_builder/command_builders/*.rb'].each do |command_builder_file|
         f.puts %Q[require File.expand_path(File.dirname(__FILE__) + '/#{command_builder_file}')]
@@ -34,3 +44,6 @@ def generate_fluent_command_builder_rb
     end
   end
 end
+
+
+

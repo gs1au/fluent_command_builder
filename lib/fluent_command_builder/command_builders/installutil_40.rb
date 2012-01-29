@@ -50,6 +50,6 @@ module FluentCommandBuilder
     end
   end
   def installutil_40 
-    InstallUtil::V40::installutil
+    InstallUtil::V40::InstallUtil.new CommandBuilder.new
   end
 end

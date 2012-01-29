@@ -23,7 +23,7 @@ class CommandCodeGenerator
         end
       end
       writer.method version_method_name do
-        writer.line "#{command_module_name}::#{version_module_name}::#{method_name}"
+        writer.initializer  "#{command_module_name}::#{version_module_name}::#{class_name}", 'CommandBuilder.new'
       end
     end
   end

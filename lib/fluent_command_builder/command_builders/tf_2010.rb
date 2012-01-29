@@ -1570,6 +1570,6 @@ module FluentCommandBuilder
     end
   end
   def tf_2010 
-    Tf::V2010::tf
+    Tf::V2010::Tf.new CommandBuilder.new
   end
 end

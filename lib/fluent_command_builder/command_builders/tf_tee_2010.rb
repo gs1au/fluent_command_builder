@@ -1482,6 +1482,6 @@ module FluentCommandBuilder
     end
   end
   def tf_tee_2010 
-    Tf::TEE_2010::tf
+    Tf::TEE_2010::Tf.new CommandBuilder.new
   end
 end

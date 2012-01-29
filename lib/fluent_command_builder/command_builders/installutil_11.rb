@@ -42,6 +42,6 @@ module FluentCommandBuilder
     end
   end
   def installutil_11 
-    InstallUtil::V11::installutil
+    InstallUtil::V11::InstallUtil.new CommandBuilder.new
   end
 end

@@ -1,4 +1,4 @@
-class CodeWriter
+class RubyCodeWriter
 
   INDENT_SPACES = 2
 

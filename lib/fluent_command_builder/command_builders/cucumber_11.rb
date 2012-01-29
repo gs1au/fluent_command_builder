@@ -134,6 +134,6 @@ module FluentCommandBuilder
     end
   end
   def cucumber_11 
-    Cucumber::V11::cucumber
+    Cucumber::V11::Cucumber.new CommandBuilder.new
   end
 end

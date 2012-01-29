@@ -174,6 +174,6 @@ module FluentCommandBuilder
     end
   end
   def msbuild_40 
-    MSBuild::V40::msbuild
+    MSBuild::V40::MSBuild.new CommandBuilder.new
   end
 end

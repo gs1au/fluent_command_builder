@@ -110,6 +110,6 @@ module FluentCommandBuilder
     end
   end
   def rake_09 
-    Rake::V09::rake
+    Rake::V09::Rake.new CommandBuilder.new
   end
 end
