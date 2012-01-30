@@ -12,7 +12,7 @@ module FluentCommandBuilder
           @builder.append '--classic-namespace'
           self
         end
-        def describe pattern
+        def describe pattern=nil
           @builder.append "--describe #{@builder.format pattern}"
           self
         end
@@ -20,19 +20,19 @@ module FluentCommandBuilder
           @builder.append '--dry-run'
           self
         end
-        def execute code
+        def execute code=nil
           @builder.append "--execute #{@builder.format code}"
           self
         end
-        def execute_print code
+        def execute_print code=nil
           @builder.append "--execute-print #{@builder.format code}"
           self
         end
-        def execute_continue code
+        def execute_continue code=nil
           @builder.append "--execute-continue #{@builder.format code}"
           self
         end
-        def libdir lib_dir
+        def libdir lib_dir=nil
           @builder.append "--libdir #{@builder.format lib_dir}"
           self
         end
@@ -48,15 +48,15 @@ module FluentCommandBuilder
           @builder.append '--quiet'
           self
         end
-        def rakefile file
+        def rakefile file=nil
           @builder.append "--rakefile #{@builder.format file}"
           self
         end
-        def rakelibdir rake_lib_dir
+        def rakelibdir rake_lib_dir=nil
           @builder.append "--rakelibdir #{@builder.format rake_lib_dir}"
           self
         end
-        def require file
+        def require file=nil
           @builder.append "--require #{@builder.format file}"
           self
         end
@@ -72,7 +72,7 @@ module FluentCommandBuilder
           @builder.append '--no-system'
           self
         end
-        def tasks pattern
+        def tasks pattern=nil
           @builder.append "--tasks #{@builder.format pattern}"
           self
         end
@@ -88,7 +88,7 @@ module FluentCommandBuilder
           @builder.append '--version'
           self
         end
-        def where pattern
+        def where pattern=nil
           @builder.append "--where #{@builder.format pattern}"
           self
         end

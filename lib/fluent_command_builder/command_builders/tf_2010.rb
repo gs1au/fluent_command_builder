@@ -126,15 +126,15 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'add'
         end
-        def item_spec item_spec
+        def item_spec item_spec=nil
           @builder.append "#{@builder.format item_spec}"
           self
         end
-        def lock lock_type
+        def lock lock_type=nil
           @builder.append "/lock:#{@builder.format lock_type}"
           self
         end
-        def type file_type
+        def type file_type=nil
           @builder.append "/type:#{@builder.format file_type}"
           self
         end
@@ -146,7 +146,7 @@ module FluentCommandBuilder
           @builder.append '/recursive'
           self
         end
-        def login credentials
+        def login credentials=nil
           @builder.append "/login:#{@builder.format credentials}"
           self
         end
@@ -159,15 +159,15 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'branch'
         end
-        def old_item old_item
+        def old_item old_item=nil
           @builder.append "#{@builder.format old_item}"
           self
         end
-        def new_item new_item
+        def new_item new_item=nil
           @builder.append "#{@builder.format new_item}"
           self
         end
-        def version version_spec
+        def version version_spec=nil
           @builder.append "/version:#{@builder.format version_spec}"
           self
         end
@@ -175,7 +175,7 @@ module FluentCommandBuilder
           @builder.append '/noGet'
           self
         end
-        def lock lock_type
+        def lock lock_type=nil
           @builder.append "/lock:#{@builder.format lock_type}"
           self
         end
@@ -191,15 +191,15 @@ module FluentCommandBuilder
           @builder.append '/checkin'
           self
         end
-        def comment comment
+        def comment comment=nil
           @builder.append "/comment:#{@builder.format comment}"
           self
         end
-        def author author_name
+        def author author_name=nil
           @builder.append "/author:#{@builder.format author_name}"
           self
         end
-        def login credentials
+        def login credentials=nil
           @builder.append "/login:#{@builder.format credentials}"
           self
         end
@@ -212,19 +212,19 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'branches'
         end
-        def item_spec item_spec
+        def item_spec item_spec=nil
           @builder.append "#{@builder.format item_spec}"
           self
         end
-        def version version_spec
+        def version version_spec=nil
           @builder.append "/version:#{@builder.format version_spec}"
           self
         end
-        def collection team_project_collection_url
+        def collection team_project_collection_url=nil
           @builder.append "/collection:#{@builder.format team_project_collection_url}"
           self
         end
-        def login credentials
+        def login credentials=nil
           @builder.append "/login:#{@builder.format credentials}"
           self
         end
@@ -237,11 +237,11 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'changeset'
         end
-        def comment comment
+        def comment comment=nil
           @builder.append "/comment:#{@builder.format comment}"
           self
         end
-        def notes notes
+        def notes notes=nil
           @builder.append "/notes:#{@builder.format notes}"
           self
         end
@@ -249,11 +249,11 @@ module FluentCommandBuilder
           @builder.append '/noPrompt'
           self
         end
-        def collection team_project_collection_url
+        def collection team_project_collection_url=nil
           @builder.append "/collection:#{@builder.format team_project_collection_url}"
           self
         end
-        def changeset_number changeset_number
+        def changeset_number changeset_number=nil
           @builder.append "#{@builder.format changeset_number}"
           self
         end
@@ -261,7 +261,7 @@ module FluentCommandBuilder
           @builder.append '/latest'
           self
         end
-        def login credentials
+        def login credentials=nil
           @builder.append "/login:#{@builder.format credentials}"
           self
         end
@@ -274,11 +274,11 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'checkin'
         end
-        def author author_name
+        def author author_name=nil
           @builder.append "/author:#{@builder.format author_name}"
           self
         end
-        def comment comment
+        def comment comment=nil
           @builder.append "/comment:#{@builder.format comment}"
           self
         end
@@ -286,11 +286,11 @@ module FluentCommandBuilder
           @builder.append '/noPrompt'
           self
         end
-        def notes notes
+        def notes notes=nil
           @builder.append "/notes:#{@builder.format notes}"
           self
         end
-        def override reason
+        def override reason=nil
           @builder.append "/override:#{@builder.format reason}"
           self
         end
@@ -306,7 +306,7 @@ module FluentCommandBuilder
           @builder.append '/validate'
           self
         end
-        def item_spec item_spec
+        def item_spec item_spec=nil
           @builder.append "#{@builder.format item_spec}"
           self
         end
@@ -314,15 +314,15 @@ module FluentCommandBuilder
           @builder.append '/bypass'
           self
         end
-        def login credentials
+        def login credentials=nil
           @builder.append "/login:#{@builder.format credentials}"
           self
         end
-        def shelveset shelveset_name
+        def shelveset shelveset_name=nil
           @builder.append "/shelveset:#{@builder.format shelveset_name}"
           self
         end
-        def collection team_project_collection_url
+        def collection team_project_collection_url=nil
           @builder.append "/collection:#{@builder.format team_project_collection_url}"
           self
         end
@@ -339,7 +339,7 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'checkout'
         end
-        def lock lock_type
+        def lock lock_type=nil
           @builder.append "/lock:#{@builder.format lock_type}"
           self
         end
@@ -347,15 +347,15 @@ module FluentCommandBuilder
           @builder.append '/recursive'
           self
         end
-        def type encoding
+        def type encoding=nil
           @builder.append "/type:#{@builder.format encoding}"
           self
         end
-        def item_spec item_spec
+        def item_spec item_spec=nil
           @builder.append "#{@builder.format item_spec}"
           self
         end
-        def login credentials
+        def login credentials=nil
           @builder.append "/login:#{@builder.format credentials}"
           self
         end
@@ -368,15 +368,15 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'configure'
         end
-        def path_of_team_project path_of_team_project
+        def path_of_team_project path_of_team_project=nil
           @builder.append "#{@builder.format path_of_team_project}"
           self
         end
-        def collection team_project_collection_url
+        def collection team_project_collection_url=nil
           @builder.append "/collection:#{@builder.format team_project_collection_url}"
           self
         end
-        def login credentials
+        def login credentials=nil
           @builder.append "/login:#{@builder.format credentials}"
           self
         end
@@ -389,7 +389,7 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'delete'
         end
-        def lock lock_type
+        def lock lock_type=nil
           @builder.append "/lock:#{@builder.format lock_type}"
           self
         end
@@ -397,11 +397,11 @@ module FluentCommandBuilder
           @builder.append '/recursive'
           self
         end
-        def login credentials
+        def login credentials=nil
           @builder.append "/login:#{@builder.format credentials}"
           self
         end
-        def item_spec item_spec
+        def item_spec item_spec=nil
           @builder.append "#{@builder.format item_spec}"
           self
         end
@@ -414,23 +414,23 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'diff'
         end
-        def item_spec item_spec
+        def item_spec item_spec=nil
           @builder.append "#{@builder.format item_spec}"
           self
         end
-        def item_spec2 item_spec2
+        def item_spec2 item_spec2=nil
           @builder.append "#{@builder.format item_spec2}"
           self
         end
-        def version version_spec
+        def version version_spec=nil
           @builder.append "/version:#{@builder.format version_spec}"
           self
         end
-        def type file_type
+        def type file_type=nil
           @builder.append "/type:#{@builder.format file_type}"
           self
         end
-        def format format
+        def format format=nil
           @builder.append "/format:#{@builder.format format}"
           self
         end
@@ -458,15 +458,15 @@ module FluentCommandBuilder
           @builder.append '/noPrompt'
           self
         end
-        def login credentials
+        def login credentials=nil
           @builder.append "/login:#{@builder.format credentials}"
           self
         end
-        def shelveset shelveset_name
+        def shelveset shelveset_name=nil
           @builder.append "/shelveset:#{@builder.format shelveset_name}"
           self
         end
-        def shelveset_itemspec shelveset_itemspec
+        def shelveset_itemspec shelveset_itemspec=nil
           @builder.append "#{@builder.format shelveset_itemspec}"
           self
         end
@@ -483,11 +483,11 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'dir'
         end
-        def item_spec item_spec
+        def item_spec item_spec=nil
           @builder.append "#{@builder.format item_spec}"
           self
         end
-        def version version_spec
+        def version version_spec=nil
           @builder.append "/version:#{@builder.format version_spec}"
           self
         end
@@ -503,11 +503,11 @@ module FluentCommandBuilder
           @builder.append '/deleted'
           self
         end
-        def login credentials
+        def login credentials=nil
           @builder.append "/login:#{@builder.format credentials}"
           self
         end
-        def collection team_project_collection_url
+        def collection team_project_collection_url=nil
           @builder.append "/collection:#{@builder.format team_project_collection_url}"
           self
         end
@@ -520,11 +520,11 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'folderDiff'
         end
-        def source_path source_path
+        def source_path source_path=nil
           @builder.append "#{@builder.format source_path}"
           self
         end
-        def target_path target_path
+        def target_path target_path=nil
           @builder.append "#{@builder.format target_path}"
           self
         end
@@ -536,11 +536,11 @@ module FluentCommandBuilder
           @builder.append '/noPrompt'
           self
         end
-        def collection team_project_collection_url
+        def collection team_project_collection_url=nil
           @builder.append "/collection:#{@builder.format team_project_collection_url}"
           self
         end
-        def filter filter
+        def filter filter=nil
           @builder.append "/filter:#{@builder.format filter}"
           self
         end
@@ -548,11 +548,11 @@ module FluentCommandBuilder
           @builder.append '/filterLocalPathsOnly'
           self
         end
-        def login credentials
+        def login credentials=nil
           @builder.append "/login:#{@builder.format credentials}"
           self
         end
-        def view view
+        def view view=nil
           @builder.append "/view:#{@builder.format view}"
           self
         end
@@ -565,11 +565,11 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'get'
         end
-        def item_spec item_spec
+        def item_spec item_spec=nil
           @builder.append "#{@builder.format item_spec}"
           self
         end
-        def version version_spec
+        def version version_spec=nil
           @builder.append "/version:#{@builder.format version_spec}"
           self
         end
@@ -601,7 +601,7 @@ module FluentCommandBuilder
           @builder.append '/noPrompt'
           self
         end
-        def login credentials
+        def login credentials=nil
           @builder.append "/login:#{@builder.format credentials}"
           self
         end
@@ -614,15 +614,15 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'history'
         end
-        def item_spec item_spec
+        def item_spec item_spec=nil
           @builder.append "#{@builder.format item_spec}"
           self
         end
-        def version version_spec
+        def version version_spec=nil
           @builder.append "/version:#{@builder.format version_spec}"
           self
         end
-        def stop_after number
+        def stop_after number=nil
           @builder.append "/stopAfter:#{@builder.format number}"
           self
         end
@@ -630,11 +630,11 @@ module FluentCommandBuilder
           @builder.append '/recursive'
           self
         end
-        def user user_name
+        def user user_name=nil
           @builder.append "/user:#{@builder.format user_name}"
           self
         end
-        def format format
+        def format format=nil
           @builder.append "/format:#{@builder.format format}"
           self
         end
@@ -650,15 +650,15 @@ module FluentCommandBuilder
           @builder.append '/noPrompt'
           self
         end
-        def login credentials
+        def login credentials=nil
           @builder.append "/login:#{@builder.format credentials}"
           self
         end
-        def sort sort
+        def sort sort=nil
           @builder.append "/sort:#{@builder.format sort}"
           self
         end
-        def collection team_project_collection_url
+        def collection team_project_collection_url=nil
           @builder.append "/collection:#{@builder.format team_project_collection_url}"
           self
         end
@@ -671,27 +671,27 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'label'
         end
-        def label_name label_name
+        def label_name label_name=nil
           @builder.append "#{@builder.format label_name}"
           self
         end
-        def owner owner_name
+        def owner owner_name=nil
           @builder.append "/owner:#{@builder.format owner_name}"
           self
         end
-        def item_spec item_spec
+        def item_spec item_spec=nil
           @builder.append "#{@builder.format item_spec}"
           self
         end
-        def version version_spec
+        def version version_spec=nil
           @builder.append "/version:#{@builder.format version_spec}"
           self
         end
-        def comment comment
+        def comment comment=nil
           @builder.append "/comment:#{@builder.format comment}"
           self
         end
-        def child lock_type
+        def child lock_type=nil
           @builder.append "/child:#{@builder.format lock_type}"
           self
         end
@@ -699,11 +699,11 @@ module FluentCommandBuilder
           @builder.append '/recursive'
           self
         end
-        def login credentials
+        def login credentials=nil
           @builder.append "/login:#{@builder.format credentials}"
           self
         end
-        def collection team_project_collection_url
+        def collection team_project_collection_url=nil
           @builder.append "/collection:#{@builder.format team_project_collection_url}"
           self
         end
@@ -720,23 +720,23 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'labels'
         end
-        def owner owner_name
+        def owner owner_name=nil
           @builder.append "/owner:#{@builder.format owner_name}"
           self
         end
-        def format format
+        def format format=nil
           @builder.append "/format:#{@builder.format format}"
           self
         end
-        def collection team_project_collection_url
+        def collection team_project_collection_url=nil
           @builder.append "/collection:#{@builder.format team_project_collection_url}"
           self
         end
-        def label_name label_name
+        def label_name label_name=nil
           @builder.append "#{@builder.format label_name}"
           self
         end
-        def login credentials
+        def login credentials=nil
           @builder.append "/login:#{@builder.format credentials}"
           self
         end
@@ -749,7 +749,7 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'localVersions'
         end
-        def item_spec item_spec
+        def item_spec item_spec=nil
           @builder.append "#{@builder.format item_spec}"
           self
         end
@@ -757,15 +757,15 @@ module FluentCommandBuilder
           @builder.append '/recursive'
           self
         end
-        def format format
+        def format format=nil
           @builder.append "/format:#{@builder.format format}"
           self
         end
-        def workspace workspace_name
+        def workspace workspace_name=nil
           @builder.append "/workspace:#{@builder.format workspace_name}"
           self
         end
-        def collection team_project_collection_url
+        def collection team_project_collection_url=nil
           @builder.append "/collection:#{@builder.format team_project_collection_url}"
           self
         end
@@ -778,15 +778,15 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'lock'
         end
-        def item_spec item_spec
+        def item_spec item_spec=nil
           @builder.append "#{@builder.format item_spec}"
           self
         end
-        def lock lock_type
+        def lock lock_type=nil
           @builder.append "/lock:#{@builder.format lock_type}"
           self
         end
-        def workspace workspace_name
+        def workspace workspace_name=nil
           @builder.append "/workspace:#{@builder.format workspace_name}"
           self
         end
@@ -794,11 +794,11 @@ module FluentCommandBuilder
           @builder.append '/recursive'
           self
         end
-        def login credentials
+        def login credentials=nil
           @builder.append "/login:#{@builder.format credentials}"
           self
         end
-        def collection team_project_collection_url
+        def collection team_project_collection_url=nil
           @builder.append "/collection:#{@builder.format team_project_collection_url}"
           self
         end
@@ -827,11 +827,11 @@ module FluentCommandBuilder
           @builder.append '/discard'
           self
         end
-        def version version_spec
+        def version version_spec=nil
           @builder.append "/version:#{@builder.format version_spec}"
           self
         end
-        def lock lock_type
+        def lock lock_type=nil
           @builder.append "/lock:#{@builder.format lock_type}"
           self
         end
@@ -855,7 +855,7 @@ module FluentCommandBuilder
           @builder.append '/conservative'
           self
         end
-        def format format
+        def format format=nil
           @builder.append "/format:#{@builder.format format}"
           self
         end
@@ -863,15 +863,15 @@ module FluentCommandBuilder
           @builder.append '/noPrompt'
           self
         end
-        def login credentials
+        def login credentials=nil
           @builder.append "/login:#{@builder.format credentials}"
           self
         end
-        def source source
+        def source source=nil
           @builder.append "#{@builder.format source}"
           self
         end
-        def destination destination
+        def destination destination=nil
           @builder.append "#{@builder.format destination}"
           self
         end
@@ -884,11 +884,11 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'merges'
         end
-        def source source
+        def source source=nil
           @builder.append "#{@builder.format source}"
           self
         end
-        def destination destination
+        def destination destination=nil
           @builder.append "#{@builder.format destination}"
           self
         end
@@ -900,11 +900,11 @@ module FluentCommandBuilder
           @builder.append '/extended'
           self
         end
-        def format format
+        def format format=nil
           @builder.append "/format:#{@builder.format format}"
           self
         end
-        def login credentials
+        def login credentials=nil
           @builder.append "/login:#{@builder.format credentials}"
           self
         end
@@ -912,7 +912,7 @@ module FluentCommandBuilder
           @builder.append '/showAll'
           self
         end
-        def collection team_project_collection_url
+        def collection team_project_collection_url=nil
           @builder.append "/collection:#{@builder.format team_project_collection_url}"
           self
         end
@@ -925,31 +925,31 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'permissions'
         end
-        def allow permission
+        def allow permission=nil
           @builder.append "/allow:#{@builder.format permission}"
           self
         end
-        def deny permission
+        def deny permission=nil
           @builder.append "/deny:#{@builder.format permission}"
           self
         end
-        def remove permission
+        def remove permission=nil
           @builder.append "/remove:#{@builder.format permission}"
           self
         end
-        def inherit inherit
+        def inherit inherit=nil
           @builder.append "/inherit:#{@builder.format inherit}"
           self
         end
-        def user user_name
+        def user user_name=nil
           @builder.append "/user:#{@builder.format user_name}"
           self
         end
-        def group group_name
+        def group group_name=nil
           @builder.append "/group:#{@builder.format group_name}"
           self
         end
-        def collection team_project_collection_url
+        def collection team_project_collection_url=nil
           @builder.append "/collection:#{@builder.format team_project_collection_url}"
           self
         end
@@ -957,7 +957,7 @@ module FluentCommandBuilder
           @builder.append '/recursive'
           self
         end
-        def item_spec item_spec
+        def item_spec item_spec=nil
           @builder.append "#{@builder.format item_spec}"
           self
         end
@@ -965,7 +965,7 @@ module FluentCommandBuilder
           @builder.append '/global'
           self
         end
-        def login credentials
+        def login credentials=nil
           @builder.append "/login:#{@builder.format credentials}"
           self
         end
@@ -978,7 +978,7 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'properties'
         end
-        def collection team_project_collection_url
+        def collection team_project_collection_url=nil
           @builder.append "/collection:#{@builder.format team_project_collection_url}"
           self
         end
@@ -986,15 +986,15 @@ module FluentCommandBuilder
           @builder.append '/recursive'
           self
         end
-        def login credentials
+        def login credentials=nil
           @builder.append "/login:#{@builder.format credentials}"
           self
         end
-        def item_spec item_spec
+        def item_spec item_spec=nil
           @builder.append "#{@builder.format item_spec}"
           self
         end
-        def version version_spec
+        def version version_spec=nil
           @builder.append "/version:#{@builder.format version_spec}"
           self
         end
@@ -1011,19 +1011,19 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'rename'
         end
-        def lock lock_type
+        def lock lock_type=nil
           @builder.append "/lock:#{@builder.format lock_type}"
           self
         end
-        def login credentials
+        def login credentials=nil
           @builder.append "/login:#{@builder.format credentials}"
           self
         end
-        def old_item old_item
+        def old_item old_item=nil
           @builder.append "#{@builder.format old_item}"
           self
         end
-        def new_item new_item
+        def new_item new_item=nil
           @builder.append "#{@builder.format new_item}"
           self
         end
@@ -1036,11 +1036,11 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'resolve'
         end
-        def item_spec item_spec
+        def item_spec item_spec=nil
           @builder.append "#{@builder.format item_spec}"
           self
         end
-        def auto resolution
+        def auto resolution=nil
           @builder.append "/auto:#{@builder.format resolution}"
           self
         end
@@ -1048,11 +1048,11 @@ module FluentCommandBuilder
           @builder.append '/preview'
           self
         end
-        def override_type override_type
+        def override_type override_type=nil
           @builder.append "/overrideType:#{@builder.format override_type}"
           self
         end
-        def convert_to_type convert_type
+        def convert_to_type convert_type=nil
           @builder.append "/convertToType:#{@builder.format convert_type}"
           self
         end
@@ -1060,7 +1060,7 @@ module FluentCommandBuilder
           @builder.append '/recursive'
           self
         end
-        def new_name path
+        def new_name path=nil
           @builder.append "/newName:#{@builder.format path}"
           self
         end
@@ -1068,7 +1068,7 @@ module FluentCommandBuilder
           @builder.append '/noPrompt'
           self
         end
-        def login credentials
+        def login credentials=nil
           @builder.append "/login:#{@builder.format credentials}"
           self
         end
@@ -1081,11 +1081,11 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'rollback'
         end
-        def to_version version_spec
+        def to_version version_spec=nil
           @builder.append "/toVersion:#{@builder.format version_spec}"
           self
         end
-        def item_spec item_spec
+        def item_spec item_spec=nil
           @builder.append "#{@builder.format item_spec}"
           self
         end
@@ -1093,11 +1093,11 @@ module FluentCommandBuilder
           @builder.append '/recursive'
           self
         end
-        def lock lock_type
+        def lock lock_type=nil
           @builder.append "/lock:#{@builder.format lock_type}"
           self
         end
-        def version version_spec
+        def version version_spec=nil
           @builder.append "/version:#{@builder.format version_spec}"
           self
         end
@@ -1105,7 +1105,7 @@ module FluentCommandBuilder
           @builder.append '/keepMergeHistory'
           self
         end
-        def login credentials
+        def login credentials=nil
           @builder.append "/login:#{@builder.format credentials}"
           self
         end
@@ -1113,7 +1113,7 @@ module FluentCommandBuilder
           @builder.append '/noPrompt'
           self
         end
-        def changeset changeset
+        def changeset changeset=nil
           @builder.append "/changeset:#{@builder.format changeset}"
           self
         end
@@ -1130,11 +1130,11 @@ module FluentCommandBuilder
           @builder.append '/replace'
           self
         end
-        def comment comment
+        def comment comment=nil
           @builder.append "/comment:#{@builder.format comment}"
           self
         end
-        def shelveset_name shelveset_name
+        def shelveset_name shelveset_name=nil
           @builder.append "#{@builder.format shelveset_name}"
           self
         end
@@ -1146,7 +1146,7 @@ module FluentCommandBuilder
           @builder.append '/noPrompt'
           self
         end
-        def login credentials
+        def login credentials=nil
           @builder.append "/login:#{@builder.format credentials}"
           self
         end
@@ -1158,7 +1158,7 @@ module FluentCommandBuilder
           @builder.append '/recursive'
           self
         end
-        def item_spec item_spec
+        def item_spec item_spec=nil
           @builder.append "#{@builder.format item_spec}"
           self
         end
@@ -1166,7 +1166,7 @@ module FluentCommandBuilder
           @builder.append '/delete'
           self
         end
-        def collection team_project_collection_url
+        def collection team_project_collection_url=nil
           @builder.append "/collection:#{@builder.format team_project_collection_url}"
           self
         end
@@ -1179,23 +1179,23 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'shelvesets'
         end
-        def owner owner_name
+        def owner owner_name=nil
           @builder.append "/owner:#{@builder.format owner_name}"
           self
         end
-        def format format
+        def format format=nil
           @builder.append "/format:#{@builder.format format}"
           self
         end
-        def collection team_project_collection_url
+        def collection team_project_collection_url=nil
           @builder.append "/collection:#{@builder.format team_project_collection_url}"
           self
         end
-        def login credentials
+        def login credentials=nil
           @builder.append "/login:#{@builder.format credentials}"
           self
         end
-        def shelveset_name shelveset_name
+        def shelveset_name shelveset_name=nil
           @builder.append "#{@builder.format shelveset_name}"
           self
         end
@@ -1208,27 +1208,27 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'status'
         end
-        def item_spec item_spec
+        def item_spec item_spec=nil
           @builder.append "#{@builder.format item_spec}"
           self
         end
-        def collection team_project_collection_url
+        def collection team_project_collection_url=nil
           @builder.append "/collection:#{@builder.format team_project_collection_url}"
           self
         end
-        def login credentials
+        def login credentials=nil
           @builder.append "/login:#{@builder.format credentials}"
           self
         end
-        def workspace workspace_name
+        def workspace workspace_name=nil
           @builder.append "/workspace:#{@builder.format workspace_name}"
           self
         end
-        def shelveset shelveset_name
+        def shelveset shelveset_name=nil
           @builder.append "/shelveset:#{@builder.format shelveset_name}"
           self
         end
-        def format format
+        def format format=nil
           @builder.append "/format:#{@builder.format format}"
           self
         end
@@ -1236,7 +1236,7 @@ module FluentCommandBuilder
           @builder.append '/recursive'
           self
         end
-        def user user_name
+        def user user_name=nil
           @builder.append "/user:#{@builder.format user_name}"
           self
         end
@@ -1253,7 +1253,7 @@ module FluentCommandBuilder
           @builder.append '/noGet'
           self
         end
-        def lock lock_type
+        def lock lock_type=nil
           @builder.append "/lock:#{@builder.format lock_type}"
           self
         end
@@ -1261,11 +1261,11 @@ module FluentCommandBuilder
           @builder.append '/recursive'
           self
         end
-        def item_spec item_spec
+        def item_spec item_spec=nil
           @builder.append "#{@builder.format item_spec}"
           self
         end
-        def login credentials
+        def login credentials=nil
           @builder.append "/login:#{@builder.format credentials}"
           self
         end
@@ -1278,7 +1278,7 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'undo'
         end
-        def workspace workspace_name
+        def workspace workspace_name=nil
           @builder.append "/workspace:#{@builder.format workspace_name}"
           self
         end
@@ -1286,7 +1286,7 @@ module FluentCommandBuilder
           @builder.append '/recursive'
           self
         end
-        def item_spec item_spec
+        def item_spec item_spec=nil
           @builder.append "#{@builder.format item_spec}"
           self
         end
@@ -1294,11 +1294,11 @@ module FluentCommandBuilder
           @builder.append '/noPrompt'
           self
         end
-        def login credentials
+        def login credentials=nil
           @builder.append "/login:#{@builder.format credentials}"
           self
         end
-        def collection team_project_collection_url
+        def collection team_project_collection_url=nil
           @builder.append "/collection:#{@builder.format team_project_collection_url}"
           self
         end
@@ -1311,7 +1311,7 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'unlabel'
         end
-        def collection team_project_collection_url
+        def collection team_project_collection_url=nil
           @builder.append "/collection:#{@builder.format team_project_collection_url}"
           self
         end
@@ -1319,15 +1319,15 @@ module FluentCommandBuilder
           @builder.append '/recursive'
           self
         end
-        def login credentials
+        def login credentials=nil
           @builder.append "/login:#{@builder.format credentials}"
           self
         end
-        def label_name label_name
+        def label_name label_name=nil
           @builder.append "#{@builder.format label_name}"
           self
         end
-        def item_spec item_spec
+        def item_spec item_spec=nil
           @builder.append "#{@builder.format item_spec}"
           self
         end
@@ -1344,11 +1344,11 @@ module FluentCommandBuilder
           @builder.append '/move'
           self
         end
-        def shelveset_name shelveset_name
+        def shelveset_name shelveset_name=nil
           @builder.append "#{@builder.format shelveset_name}"
           self
         end
-        def item_spec item_spec
+        def item_spec item_spec=nil
           @builder.append "#{@builder.format item_spec}"
           self
         end
@@ -1360,7 +1360,7 @@ module FluentCommandBuilder
           @builder.append '/noPrompt'
           self
         end
-        def login credentials
+        def login credentials=nil
           @builder.append "/login:#{@builder.format credentials}"
           self
         end
@@ -1373,7 +1373,7 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'view'
         end
-        def collection team_project_collection_url
+        def collection team_project_collection_url=nil
           @builder.append "/collection:#{@builder.format team_project_collection_url}"
           self
         end
@@ -1385,11 +1385,11 @@ module FluentCommandBuilder
           @builder.append '/recursive'
           self
         end
-        def output local_file
+        def output local_file=nil
           @builder.append "/output:#{@builder.format local_file}"
           self
         end
-        def shelveset shelveset_name
+        def shelveset shelveset_name=nil
           @builder.append "/shelveset:#{@builder.format shelveset_name}"
           self
         end
@@ -1397,15 +1397,15 @@ module FluentCommandBuilder
           @builder.append '/noPrompt'
           self
         end
-        def item_spec item_spec
+        def item_spec item_spec=nil
           @builder.append "#{@builder.format item_spec}"
           self
         end
-        def version version_spec
+        def version version_spec=nil
           @builder.append "/version:#{@builder.format version_spec}"
           self
         end
-        def login credentials
+        def login credentials=nil
           @builder.append "/login:#{@builder.format credentials}"
           self
         end
@@ -1418,15 +1418,15 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'workfold'
         end
-        def login credentials
+        def login credentials=nil
           @builder.append "/login:#{@builder.format credentials}"
           self
         end
-        def workspace workspace_name
+        def workspace workspace_name=nil
           @builder.append "/workspace:#{@builder.format workspace_name}"
           self
         end
-        def collection team_project_collection_url
+        def collection team_project_collection_url=nil
           @builder.append "/collection:#{@builder.format team_project_collection_url}"
           self
         end
@@ -1434,11 +1434,11 @@ module FluentCommandBuilder
           @builder.append '/map'
           self
         end
-        def server_folder server_folder
+        def server_folder server_folder=nil
           @builder.append "#{@builder.format server_folder}"
           self
         end
-        def local_folder local_folder
+        def local_folder local_folder=nil
           @builder.append "#{@builder.format local_folder}"
           self
         end
@@ -1475,31 +1475,31 @@ module FluentCommandBuilder
           @builder.append '/noPrompt'
           self
         end
-        def template workspace_name
+        def template workspace_name=nil
           @builder.append "/template:#{@builder.format workspace_name}"
           self
         end
-        def computer computer_name
+        def computer computer_name=nil
           @builder.append "/computer:#{@builder.format computer_name}"
           self
         end
-        def comment comment
+        def comment comment=nil
           @builder.append "/comment:#{@builder.format comment}"
           self
         end
-        def collection team_project_collection_url
+        def collection team_project_collection_url=nil
           @builder.append "/collection:#{@builder.format team_project_collection_url}"
           self
         end
-        def permission permission
+        def permission permission=nil
           @builder.append "/permission:#{@builder.format permission}"
           self
         end
-        def workspace_name workspace_name
+        def workspace_name workspace_name=nil
           @builder.append "#{@builder.format workspace_name}"
           self
         end
-        def login credentials
+        def login credentials=nil
           @builder.append "/login:#{@builder.format credentials}"
           self
         end
@@ -1507,11 +1507,11 @@ module FluentCommandBuilder
           @builder.append '/delete'
           self
         end
-        def new_name workspace_name
+        def new_name workspace_name=nil
           @builder.append "/newName:#{@builder.format workspace_name}"
           self
         end
-        def new_owner owner_name
+        def new_owner owner_name=nil
           @builder.append "/newOwner:#{@builder.format owner_name}"
           self
         end
@@ -1524,39 +1524,39 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'workspaces'
         end
-        def owner owner_name
+        def owner owner_name=nil
           @builder.append "/owner:#{@builder.format owner_name}"
           self
         end
-        def computer computer_name
+        def computer computer_name=nil
           @builder.append "/computer:#{@builder.format computer_name}"
           self
         end
-        def collection team_project_collection_url
+        def collection team_project_collection_url=nil
           @builder.append "/collection:#{@builder.format team_project_collection_url}"
           self
         end
-        def format format
+        def format format=nil
           @builder.append "/format:#{@builder.format format}"
           self
         end
-        def update_user_name old_user_name
+        def update_user_name old_user_name=nil
           @builder.append "/updateUserName:#{@builder.format old_user_name}"
           self
         end
-        def update_computer_name old_computer_name
+        def update_computer_name old_computer_name=nil
           @builder.append "/updateComputerName:#{@builder.format old_computer_name}"
           self
         end
-        def workspace_name workspace_name
+        def workspace_name workspace_name=nil
           @builder.append "#{@builder.format workspace_name}"
           self
         end
-        def login credentials
+        def login credentials=nil
           @builder.append "/login:#{@builder.format credentials}"
           self
         end
-        def remove workspace_name
+        def remove workspace_name=nil
           @builder.append "/remove:#{@builder.format workspace_name}"
           self
         end

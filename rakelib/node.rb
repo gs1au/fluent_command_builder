@@ -30,6 +30,14 @@ class Node
     name.gsub(/\W/, ' ').strip
   end
 
+  def fragments
+    @node_text.gsub(/\]/, '|').gsub(/\[/, '|').split('|').compact
+  end
+
+  #def fragments
+  #  @node_text.gsub(/\]/, ']|').gsub(/\[/, '|[').split('|').compact
+  #end
+
   private
 
   def starts_with_arg?

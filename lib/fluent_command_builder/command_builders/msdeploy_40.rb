@@ -8,79 +8,79 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'MSDeploy'
         end
-        def allow_untrusted bool
+        def allow_untrusted bool=nil
           @builder.append "-allowUntrusted:#{@builder.format bool}"
           self
         end
-        def app_host_config_dir path
+        def app_host_config_dir path=nil
           @builder.append "-appHostConfigDir:#{@builder.format path}"
           self
         end
-        def declare_param param
+        def declare_param param=nil
           @builder.append "-declareParam:#{@builder.format param, ',', '='}"
           self
         end
-        def declare_param_file xml_file
+        def declare_param_file xml_file=nil
           @builder.append "-declareParamFile:#{@builder.format xml_file}"
           self
         end
-        def dest provider
+        def dest provider=nil
           @builder.append "-dest:#{@builder.format provider}"
           self
         end
-        def disable_link link_extension
+        def disable_link link_extension=nil
           @builder.append "-disableLink:#{@builder.format link_extension}"
           self
         end
-        def disable_rule rule
+        def disable_rule rule=nil
           @builder.append "-disableRule:#{@builder.format rule, ','}"
           self
         end
-        def disable_skip_directive skip_directive_name
+        def disable_skip_directive skip_directive_name=nil
           @builder.append "-disableSkipDirective:#{@builder.format skip_directive_name}"
           self
         end
-        def enable_link link_extension
+        def enable_link link_extension=nil
           @builder.append "-enableLink:#{@builder.format link_extension}"
           self
         end
-        def enable_rule rule
+        def enable_rule rule=nil
           @builder.append "-enableRule:#{@builder.format rule, ','}"
           self
         end
-        def enable_skip_directive skip_directive_name
+        def enable_skip_directive skip_directive_name=nil
           @builder.append "-enableSkipDirective:#{@builder.format skip_directive_name}"
           self
         end
-        def post_sync command
+        def post_sync command=nil
           @builder.append "-postSync:#{@builder.format command}"
           self
         end
-        def pre_sync command
+        def pre_sync command=nil
           @builder.append "-preSync:#{@builder.format command}"
           self
         end
-        def remove_param param
+        def remove_param param=nil
           @builder.append "-removeParam:#{@builder.format param}"
           self
         end
-        def replace arg
+        def replace arg=nil
           @builder.append "-replace:#{@builder.format arg}"
           self
         end
-        def retry_attempts number
+        def retry_attempts number=nil
           @builder.append "-retryAttempts:#{@builder.format number}"
           self
         end
-        def retry_interval milliseconds
+        def retry_interval milliseconds=nil
           @builder.append "-retryInterval:#{@builder.format milliseconds}"
           self
         end
-        def set_param param
+        def set_param param=nil
           @builder.append "-setParam:#{@builder.format param, ',', '='}"
           self
         end
-        def set_param_file xml_file
+        def set_param_file xml_file=nil
           @builder.append "-setParamFile:#{@builder.format xml_file}"
           self
         end
@@ -88,11 +88,11 @@ module FluentCommandBuilder
           @builder.append '-showSecure'
           self
         end
-        def skip arg
+        def skip arg=nil
           @builder.append "-skip:#{@builder.format arg}"
           self
         end
-        def source provider
+        def source provider=nil
           @builder.append "-source:#{@builder.format provider}"
           self
         end
@@ -104,7 +104,7 @@ module FluentCommandBuilder
           @builder.append '-useCheckSum'
           self
         end
-        def verb verb_name
+        def verb verb_name=nil
           @builder.append "-verb:#{@builder.format verb_name}"
           self
         end
@@ -112,7 +112,7 @@ module FluentCommandBuilder
           @builder.append '-verbose'
           self
         end
-        def web_server_dir path
+        def web_server_dir path=nil
           @builder.append "-webServerDir:#{@builder.format path}"
           self
         end
@@ -124,7 +124,7 @@ module FluentCommandBuilder
           @builder.append '-xml'
           self
         end
-        def xpath path
+        def xpath path=nil
           @builder.append "-xpath:#{@builder.format path}"
           self
         end

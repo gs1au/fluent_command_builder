@@ -8,19 +8,19 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'aspnet_compiler'
         end
-        def target_dir target_dir
+        def target_dir target_dir=nil
           @builder.append "#{@builder.format target_dir}"
           self
         end
-        def m metabase_path
+        def m metabase_path=nil
           @builder.append "-m #{@builder.format metabase_path}"
           self
         end
-        def v virtual_path
+        def v virtual_path=nil
           @builder.append "-v #{@builder.format virtual_path}"
           self
         end
-        def p physical_path
+        def p physical_path=nil
           @builder.append "-p #{@builder.format physical_path}"
           self
         end
@@ -52,11 +52,11 @@ module FluentCommandBuilder
           @builder.append '-noLogo'
           self
         end
-        def key_file file
+        def key_file file=nil
           @builder.append "-keyFile #{@builder.format file}"
           self
         end
-        def key_container container
+        def key_container container=nil
           @builder.append "-keyContainer #{@builder.format container}"
           self
         end

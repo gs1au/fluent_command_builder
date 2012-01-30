@@ -8,35 +8,35 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'nunit-console'
         end
-        def assembly assembly
+        def assembly assembly=nil
           @builder.append "#{@builder.format assembly}"
           self
         end
-        def run test
+        def run test=nil
           @builder.append "/run:#{@builder.format test}"
           self
         end
-        def fixture fixture
+        def fixture fixture=nil
           @builder.append "/fixture:#{@builder.format fixture}"
           self
         end
-        def framework framework
+        def framework framework=nil
           @builder.append "/framework:#{@builder.format framework}"
           self
         end
-        def include category
+        def include category=nil
           @builder.append "/include:#{@builder.format category}"
           self
         end
-        def exclude category
+        def exclude category=nil
           @builder.append "/exclude:#{@builder.format category}"
           self
         end
-        def out file
+        def out file=nil
           @builder.append "/out:#{@builder.format file}"
           self
         end
-        def err file
+        def err file=nil
           @builder.append "/err:#{@builder.format file}"
           self
         end
@@ -44,27 +44,27 @@ module FluentCommandBuilder
           @builder.append '/labels'
           self
         end
-        def xml file
+        def xml file=nil
           @builder.append "/xml:#{@builder.format file}"
           self
         end
-        def config config
+        def config config=nil
           @builder.append "/config:#{@builder.format config}"
           self
         end
-        def process process
+        def process process=nil
           @builder.append "/process:#{@builder.format process}"
           self
         end
-        def domain domain
+        def domain domain=nil
           @builder.append "/domain:#{@builder.format domain}"
           self
         end
-        def timeout timeout
+        def timeout timeout=nil
           @builder.append "/timeout:#{@builder.format timeout}"
           self
         end
-        def trace level
+        def trace level=nil
           @builder.append "/trace:#{@builder.format level}"
           self
         end

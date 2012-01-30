@@ -8,27 +8,27 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'MSTest'
         end
-        def test_container file_name
+        def test_container file_name=nil
           @builder.append "/testContainer:#{@builder.format file_name}"
           self
         end
-        def test_metadata file_name
+        def test_metadata file_name=nil
           @builder.append "/testMetadata:#{@builder.format file_name}"
           self
         end
-        def test_list list_list_path
+        def test_list list_list_path=nil
           @builder.append "/testList:#{@builder.format list_list_path}"
           self
         end
-        def test test_name
+        def test test_name=nil
           @builder.append "/test:#{@builder.format test_name}"
           self
         end
-        def run_config file_name
+        def run_config file_name=nil
           @builder.append "/runConfig:#{@builder.format file_name}"
           self
         end
-        def results_file file_name
+        def results_file file_name=nil
           @builder.append "/resultsFile:#{@builder.format file_name}"
           self
         end
@@ -36,7 +36,7 @@ module FluentCommandBuilder
           @builder.append '/unique'
           self
         end
-        def detail property_id
+        def detail property_id=nil
           @builder.append "/detail:#{@builder.format property_id}"
           self
         end
@@ -48,27 +48,27 @@ module FluentCommandBuilder
           @builder.append '/noLogo'
           self
         end
-        def publish server_name
+        def publish server_name=nil
           @builder.append "/publish:#{@builder.format server_name}"
           self
         end
-        def publish_results_file file_name
+        def publish_results_file file_name=nil
           @builder.append "/publishResultsFile:#{@builder.format file_name}"
           self
         end
-        def publish_build build_id
+        def publish_build build_id=nil
           @builder.append "/publishBuild:#{@builder.format build_id}"
           self
         end
-        def team_project team_project_name
+        def team_project team_project_name=nil
           @builder.append "/teamProject:#{@builder.format team_project_name}"
           self
         end
-        def platform platform
+        def platform platform=nil
           @builder.append "/platform:#{@builder.format platform}"
           self
         end
-        def flavor flavor
+        def flavor flavor=nil
           @builder.append "/flavor:#{@builder.format flavor}"
           self
         end

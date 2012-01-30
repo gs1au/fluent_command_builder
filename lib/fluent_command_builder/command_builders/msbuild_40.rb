@@ -8,7 +8,7 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'MSBuild'
         end
-        def project_file project_file
+        def project_file project_file=nil
           @builder.append "#{@builder.format project_file}"
           self
         end
@@ -24,7 +24,7 @@ module FluentCommandBuilder
           @builder.append '/version'
           self
         end
-        def file file
+        def file file=nil
           @builder.append "@#{@builder.format file}"
           self
         end
@@ -32,27 +32,27 @@ module FluentCommandBuilder
           @builder.append '/noAutoResponse'
           self
         end
-        def target target
+        def target target=nil
           @builder.append "/target:#{@builder.format target, ';'}"
           self
         end
-        def property property
+        def property property=nil
           @builder.append "/property:#{@builder.format property, ';', '='}"
           self
         end
-        def logger logger
+        def logger logger=nil
           @builder.append "/logger:#{@builder.format logger}"
           self
         end
-        def distributed_logger logger
+        def distributed_logger logger=nil
           @builder.append "/distributedLogger:#{@builder.format logger}"
           self
         end
-        def console_logger_parameters parameters
+        def console_logger_parameters parameters=nil
           @builder.append "/consoleLoggerParameters:#{@builder.format parameters}"
           self
         end
-        def verbosity level
+        def verbosity level=nil
           @builder.append "/verbosity:#{@builder.format level}"
           self
         end
@@ -60,15 +60,17 @@ module FluentCommandBuilder
           @builder.append '/noConsoleLogger'
           self
         end
-        def validate schema
-          @builder.append "/validate:#{@builder.format schema}"
+        def validate schema=nil
+          @builder.buffer '/validate'
+          @builder.buffer ":#{@builder.format schema}" unless schema.nil?
+          @builder.append_buffer
           self
         end
-        def max_cpu_count number
+        def max_cpu_count number=nil
           @builder.append "/maxCpuCount:#{@builder.format number}"
           self
         end
-        def ignore_project_extensions extensions
+        def ignore_project_extensions extensions=nil
           @builder.append "/ignoreProjectExtensions:#{@builder.format extensions, ';'}"
           self
         end
@@ -116,51 +118,51 @@ module FluentCommandBuilder
           @builder.append '/distributedFileLogger'
           self
         end
-        def file_logger_parameters parameters
+        def file_logger_parameters parameters=nil
           @builder.append "/fileLoggerParameters:#{@builder.format parameters, ';', '='}"
           self
         end
-        def file_logger_parameters1 parameters
+        def file_logger_parameters1 parameters=nil
           @builder.append "/fileLoggerParameters1:#{@builder.format parameters, ';', '='}"
           self
         end
-        def file_logger_parameters2 parameters
+        def file_logger_parameters2 parameters=nil
           @builder.append "/fileLoggerParameters2:#{@builder.format parameters, ';', '='}"
           self
         end
-        def file_logger_parameters3 parameters
+        def file_logger_parameters3 parameters=nil
           @builder.append "/fileLoggerParameters3:#{@builder.format parameters, ';', '='}"
           self
         end
-        def file_logger_parameters4 parameters
+        def file_logger_parameters4 parameters=nil
           @builder.append "/fileLoggerParameters4:#{@builder.format parameters, ';', '='}"
           self
         end
-        def file_logger_parameters5 parameters
+        def file_logger_parameters5 parameters=nil
           @builder.append "/fileLoggerParameters5:#{@builder.format parameters, ';', '='}"
           self
         end
-        def file_logger_parameters6 parameters
+        def file_logger_parameters6 parameters=nil
           @builder.append "/fileLoggerParameters6:#{@builder.format parameters, ';', '='}"
           self
         end
-        def file_logger_parameters7 parameters
+        def file_logger_parameters7 parameters=nil
           @builder.append "/fileLoggerParameters7:#{@builder.format parameters, ';', '='}"
           self
         end
-        def file_logger_parameters8 parameters
+        def file_logger_parameters8 parameters=nil
           @builder.append "/fileLoggerParameters8:#{@builder.format parameters, ';', '='}"
           self
         end
-        def file_logger_parameters9 parameters
+        def file_logger_parameters9 parameters=nil
           @builder.append "/fileLoggerParameters9:#{@builder.format parameters, ';', '='}"
           self
         end
-        def tools_version version
+        def tools_version version=nil
           @builder.append "/toolsVersion:#{@builder.format version}"
           self
         end
-        def node_reuse parameters
+        def node_reuse parameters=nil
           @builder.append "/nodeReuse:#{@builder.format parameters}"
           self
         end

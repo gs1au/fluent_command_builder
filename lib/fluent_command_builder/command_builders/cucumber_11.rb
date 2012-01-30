@@ -8,35 +8,35 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'cucumber'
         end
-        def require library
+        def require library=nil
           @builder.append "--require #{@builder.format library}"
           self
         end
-        def i18n lang
+        def i18n lang=nil
           @builder.append "--i18n #{@builder.format lang}"
           self
         end
-        def format format
+        def format format=nil
           @builder.append "--format #{@builder.format format}"
           self
         end
-        def out file
+        def out file=nil
           @builder.append "--out #{@builder.format file}"
           self
         end
-        def tags tag_expression
+        def tags tag_expression=nil
           @builder.append "--tags #{@builder.format tag_expression, ','}"
           self
         end
-        def name name
+        def name name=nil
           @builder.append "--name #{@builder.format name}"
           self
         end
-        def exclude pattern
+        def exclude pattern=nil
           @builder.append "--exclude #{@builder.format pattern}"
           self
         end
-        def profile profile
+        def profile profile=nil
           @builder.append "--profile #{@builder.format profile}"
           self
         end
@@ -56,7 +56,7 @@ module FluentCommandBuilder
           @builder.append '--dry-run'
           self
         end
-        def autoformat dir
+        def autoformat dir=nil
           @builder.append "--autoformat #{@builder.format dir}"
           self
         end
@@ -96,7 +96,7 @@ module FluentCommandBuilder
           @builder.append '--guess'
           self
         end
-        def lines lines
+        def lines lines=nil
           @builder.append "--lines #{@builder.format lines}"
           self
         end
@@ -108,11 +108,11 @@ module FluentCommandBuilder
           @builder.append '--drb'
           self
         end
-        def port port
+        def port port=nil
           @builder.append "--port #{@builder.format port}"
           self
         end
-        def dotcucumber dir
+        def dotcucumber dir=nil
           @builder.append "--dotcucumber #{@builder.format dir}"
           self
         end

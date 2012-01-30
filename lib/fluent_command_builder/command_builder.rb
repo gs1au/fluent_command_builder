@@ -3,6 +3,7 @@ module FluentCommandBuilder
 
     def initialize command=nil
       @command = command.to_s
+      @buffer = ''
     end
 
     def format value, delimiter=nil, key_value_separator=nil
@@ -20,6 +21,15 @@ module FluentCommandBuilder
 
     def append value
       @command << ' ' + value
+    end
+
+    def buffer value
+      @buffer << value
+    end
+
+    def append_buffer
+      append @buffer
+      @buffer = ''
     end
 
     def to_s

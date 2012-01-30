@@ -1,4 +1,5 @@
 require_relative 'ruby_naming_convention'
+require_relative 'node'
 
 class NodeCodeGenerator
 
@@ -42,17 +43,39 @@ class NodeCodeGenerator
   end
 
   def render_leaf_node_method_body node, writer
-    writer.line append_statement(node)
+    write_append_statements node, writer
   end
 
-  def append_statement node
-    append_arg = node.node_text.gsub /<.+?>/ do |m|
+
+  def write_append_statements node, writer
+    fragments = node.fragments
+
+    if fragments.length == 1
+      append_arg = get_append_arg fragments[0]
+      writer.line "@builder.append #{quote append_arg}"
+    else
+      fragments.each do |node_text|
+        append_arg = get_append_arg node_text
+        n = Node.new node_text
+        line = ''
+        line << "@builder.buffer #{quote append_arg}"
+        line << " unless #{@naming_convention.arg_name(n.arg_names[0])}.nil?" if n.arg_names.length > 0
+        writer.line line
+      end
+      writer.line '@builder.append_buffer'
+    end
+  end
+
+  def get_append_arg node_text
+    node_text.gsub(/<.+?>/) do |m|
       arg = CommandArgument.new m
       format_args = [@naming_convention.arg_name(arg.arg_name), [arg.delimiter, arg.key_value_separator].compact.map { |v| "'#{v}'" }].flatten
       "\#{@builder.format #{format_args.join ', '}}"
     end
-    append_arg = append_arg.include?('#{') ? %Q["#{append_arg}"] : "'#{append_arg}'"
-    "@builder.append #{append_arg}"
+  end
+
+  def quote value
+    value.include?('#{') ? %Q["#{value}"] : "'#{value}'"
   end
 
   def class_name node
@@ -63,8 +86,12 @@ class NodeCodeGenerator
     @naming_convention.method_name node.node_name
   end
 
+  #def method_args node
+  #  node.args.map { |a| @naming_convention.arg_name a.arg_name }
+  #end
+
   def method_args node
-    node.args.map { |a| @naming_convention.arg_name a.arg_name }
+    node.args.map { |a| "#{@naming_convention.arg_name a.arg_name}=nil" }
   end
 
 end

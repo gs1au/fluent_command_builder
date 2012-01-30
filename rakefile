@@ -6,7 +6,7 @@ require_relative 'rakelib/command_definition'
 
 COMMAND_DEFINITIONS_DIR = 'command_definitions'
 LIB_DIR = 'lib'
-COMMAND_BUILDERS_DIR = File.join LIB_DIR, 'command_builders'
+COMMAND_BUILDERS_DIR = File.join LIB_DIR, 'fluent_command_builder', 'command_builders'
 
 CLOBBER.include COMMAND_BUILDERS_DIR
 directory COMMAND_BUILDERS_DIR

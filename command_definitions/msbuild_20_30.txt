@@ -12,4 +12,4 @@ MSBuild
     /consoleLoggerParameters:<parameters>
     /verbosity:<level>
     /noConsoleLogger
-    /validate:<schema>
+    /validate[:<schema>]

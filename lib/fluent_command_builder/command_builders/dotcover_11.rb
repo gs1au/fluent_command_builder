@@ -38,39 +38,39 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'cover'
         end
-        def analyse_target_arguments arg
+        def analyse_target_arguments arg=nil
           @builder.append "/AnalyseTargetArguments=#{@builder.format arg}"
           self
         end
-        def filters arg
+        def filters arg=nil
           @builder.append "/Filters=#{@builder.format arg}"
           self
         end
-        def inherit_console arg
+        def inherit_console arg=nil
           @builder.append "/InheritConsole=#{@builder.format arg}"
           self
         end
-        def log_file arg
+        def log_file arg=nil
           @builder.append "/LogFile=#{@builder.format arg}"
           self
         end
-        def output arg
+        def output arg=nil
           @builder.append "/Output=#{@builder.format arg}"
           self
         end
-        def target_arguments arg
+        def target_arguments arg=nil
           @builder.append "/TargetArguments=#{@builder.format arg}"
           self
         end
-        def target_executable arg
+        def target_executable arg=nil
           @builder.append "/TargetExecutable=#{@builder.format arg}"
           self
         end
-        def target_working_dir arg
+        def target_working_dir arg=nil
           @builder.append "/TargetWorkingDir=#{@builder.format arg}"
           self
         end
-        def temp_dir arg
+        def temp_dir arg=nil
           @builder.append "/TempDir=#{@builder.format arg}"
           self
         end
@@ -83,15 +83,15 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'merge'
         end
-        def output arg
+        def output arg=nil
           @builder.append "/Output=#{@builder.format arg}"
           self
         end
-        def source arg
+        def source arg=nil
           @builder.append "/Source=#{@builder.format arg}"
           self
         end
-        def temp_dir arg
+        def temp_dir arg=nil
           @builder.append "/TempDir=#{@builder.format arg}"
           self
         end
@@ -104,15 +104,15 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'report'
         end
-        def output arg
+        def output arg=nil
           @builder.append "/Output=#{@builder.format arg}"
           self
         end
-        def report_type arg
+        def report_type arg=nil
           @builder.append "/ReportType=#{@builder.format arg}"
           self
         end
-        def source arg
+        def source arg=nil
           @builder.append "/Source=#{@builder.format arg}"
           self
         end
@@ -125,11 +125,11 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'list'
         end
-        def output arg
+        def output arg=nil
           @builder.append "/Output=#{@builder.format arg}"
           self
         end
-        def source arg
+        def source arg=nil
           @builder.append "/Source=#{@builder.format arg}"
           self
         end
@@ -142,7 +142,7 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'delete'
         end
-        def source arg
+        def source arg=nil
           @builder.append "/Source=#{@builder.format arg}"
           self
         end
@@ -155,43 +155,43 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'analyse'
         end
-        def analyse_target_arguments arg
+        def analyse_target_arguments arg=nil
           @builder.append "/AnalyseTargetArguments=#{@builder.format arg}"
           self
         end
-        def filters arg
+        def filters arg=nil
           @builder.append "/Filters=#{@builder.format arg}"
           self
         end
-        def inherit_console arg
+        def inherit_console arg=nil
           @builder.append "/InheritConsole=#{@builder.format arg}"
           self
         end
-        def log_file arg
+        def log_file arg=nil
           @builder.append "/LogFile=#{@builder.format arg}"
           self
         end
-        def output arg
+        def output arg=nil
           @builder.append "/Output=#{@builder.format arg}"
           self
         end
-        def report_type arg
+        def report_type arg=nil
           @builder.append "/ReportType=#{@builder.format arg}"
           self
         end
-        def target_arguments arg
+        def target_arguments arg=nil
           @builder.append "/TargetArguments=#{@builder.format arg}"
           self
         end
-        def target_executable arg
+        def target_executable arg=nil
           @builder.append "/TargetExecutable=#{@builder.format arg}"
           self
         end
-        def target_working_dir arg
+        def target_working_dir arg=nil
           @builder.append "/TargetWorkingDir=#{@builder.format arg}"
           self
         end
-        def temp_dir arg
+        def temp_dir arg=nil
           @builder.append "/TempDir=#{@builder.format arg}"
           self
         end
@@ -204,11 +204,11 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'zip'
         end
-        def output arg
+        def output arg=nil
           @builder.append "/Output=#{@builder.format arg}"
           self
         end
-        def source arg
+        def source arg=nil
           @builder.append "/Source=#{@builder.format arg}"
           self
         end

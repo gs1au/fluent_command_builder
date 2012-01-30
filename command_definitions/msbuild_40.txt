@@ -13,7 +13,7 @@ MSBuild
     /consoleLoggerParameters:<parameters>
     /verbosity:<level>
     /noConsoleLogger
-    /validate:<schema>
+    /validate[:<schema>]
     /maxCpuCount:<number>
     /ignoreProjectExtensions:<extensions;>
     /fileLogger
