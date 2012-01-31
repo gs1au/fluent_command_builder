@@ -9,7 +9,7 @@ class NodeCodeGenerator
 
   def render node, writer
     return if node.leaf?
-    writer.block "class #{class_name(node)}" do
+    writer.class class_name(node) do
       render_constructor node, writer
       node.child_nodes.each { |n| render_method n, writer }
       writer.method 'to_s' do

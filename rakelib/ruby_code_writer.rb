@@ -9,7 +9,6 @@ class RubyCodeWriter
 
   def indent
     @indent += 1
-
     if block_given?
       yield
       dedent
@@ -33,20 +32,20 @@ class RubyCodeWriter
     line
   end
 
+  def module module_name
+    block("module #{module_name}") { yield }
+  end
+
+  def class class_name
+    block("class #{class_name}") { yield }
+  end
+
   def method name, *args
-    block "def #{name} #{args.flatten.join ', '}" do
-      yield
-    end
+    block("def #{name} #{args.flatten.join ', '}") { yield }
   end
 
   def initializer class_name, *args
     line "#{class_name}.new #{args.flatten.join ', '}"
-  end
-
-  def module module_name
-    block "module #{module_name}" do
-      yield
-    end
   end
 
 end
