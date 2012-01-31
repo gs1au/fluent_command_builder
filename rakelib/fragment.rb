@@ -19,11 +19,11 @@ class Fragment
   end
 
   def arg_names
-    args.map { |a| a.arg_name }
+    @arg_names ||= args.map { |a| a.arg_name }
   end
 
   def has_args?
-    args.length > 0
+    @has_args ||= args.length > 0
   end
 
 end
