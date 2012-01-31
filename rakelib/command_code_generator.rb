@@ -49,7 +49,7 @@ class CommandCodeGenerator
   end
 
   def command_name
-    @command.node_text.gsub('-', '_').gsub(/\W/, '')
+    @command.fragments[0].fragment_text.gsub('-', '_').gsub(/\W/, '')
   end
 
   def version

@@ -1,8 +1,8 @@
-require_relative 'command_argument'
+require_relative 'fragment'
 
 class Node
 
-  attr_accessor :node_text, :child_nodes
+  attr_reader :child_nodes
 
   def initialize node_text
     @node_text = node_text
@@ -17,26 +17,13 @@ class Node
     @child_nodes.length == 0
   end
 
-  def args
-    @node_text.scan(/<.+?>/).flatten.map { |m| CommandArgument.new m }
-  end
-
-  def arg_names
-    args.map { |a| a.arg_name }
-  end
-
   def node_name
-    name = starts_with_arg? ? first_arg_name : words_preceding_args
-    name.gsub(/\W/, ' ').strip
+    @node_name ||= starts_with_arg? ? first_arg_name : words_preceding_args
   end
 
   def fragments
-    @node_text.gsub(/\]/, '|').gsub(/\[/, '|').split('|').compact
+    @fragments ||= @node_text.gsub(/\]/, ']|').gsub(/\[/, '|[').split('|').compact.map { |f| Fragment.new f }
   end
-
-  #def fragments
-  #  @node_text.gsub(/\]/, ']|').gsub(/\[/, '|[').split('|').compact
-  #end
 
   private
 
@@ -45,11 +32,11 @@ class Node
   end
 
   def first_arg_name
-    args[0].arg_name
+    @first_arg_name ||= fragments.map { |f| f.arg_names }.flatten[0]
   end
 
   def words_preceding_args
-    @node_text.gsub(/<.*/, '').gsub(/\W/, ' ').strip
+    @words_preceding_args ||= @node_text.gsub(/<.*/, '').gsub(/\W/, ' ').strip
   end
 
 end

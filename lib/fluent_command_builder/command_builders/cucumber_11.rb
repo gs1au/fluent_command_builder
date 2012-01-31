@@ -8,120 +8,120 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'cucumber'
         end
-        def require library=nil
-          @builder.append "--require #{@builder.format library}"
+        def require library
+          @builder.append " --require #{@builder.format library}"
           self
         end
-        def i18n lang=nil
-          @builder.append "--i18n #{@builder.format lang}"
+        def i18n lang
+          @builder.append " --i18n #{@builder.format lang}"
           self
         end
-        def format format=nil
-          @builder.append "--format #{@builder.format format}"
+        def format format
+          @builder.append " --format #{@builder.format format}"
           self
         end
-        def out file=nil
-          @builder.append "--out #{@builder.format file}"
+        def out file
+          @builder.append " --out #{@builder.format file}"
           self
         end
-        def tags tag_expression=nil
-          @builder.append "--tags #{@builder.format tag_expression, ','}"
+        def tags tag_expression
+          @builder.append " --tags #{@builder.format tag_expression, ','}"
           self
         end
-        def name name=nil
-          @builder.append "--name #{@builder.format name}"
+        def name name
+          @builder.append " --name #{@builder.format name}"
           self
         end
-        def exclude pattern=nil
-          @builder.append "--exclude #{@builder.format pattern}"
+        def exclude pattern
+          @builder.append " --exclude #{@builder.format pattern}"
           self
         end
-        def profile profile=nil
-          @builder.append "--profile #{@builder.format profile}"
+        def profile profile
+          @builder.append " --profile #{@builder.format profile}"
           self
         end
         def no_profile 
-          @builder.append '--no-profile'
+          @builder.append ' --no-profile'
           self
         end
         def color 
-          @builder.append '--color'
+          @builder.append ' --color'
           self
         end
         def no_color 
-          @builder.append '--no-color'
+          @builder.append ' --no-color'
           self
         end
         def dry_run 
-          @builder.append '--dry-run'
+          @builder.append ' --dry-run'
           self
         end
-        def autoformat dir=nil
-          @builder.append "--autoformat #{@builder.format dir}"
+        def autoformat dir
+          @builder.append " --autoformat #{@builder.format dir}"
           self
         end
         def no_multiline 
-          @builder.append '--no-multiline'
+          @builder.append ' --no-multiline'
           self
         end
         def no_source 
-          @builder.append '--no-source'
+          @builder.append ' --no-source'
           self
         end
         def no_snippets 
-          @builder.append '--no-snippets'
+          @builder.append ' --no-snippets'
           self
         end
         def quiet 
-          @builder.append '--quiet'
+          @builder.append ' --quiet'
           self
         end
         def backtrace 
-          @builder.append '--backtrace'
+          @builder.append ' --backtrace'
           self
         end
         def strict 
-          @builder.append '--strict'
+          @builder.append ' --strict'
           self
         end
         def wip 
-          @builder.append '--wip'
+          @builder.append ' --wip'
           self
         end
         def verbose 
-          @builder.append '--verbose'
+          @builder.append ' --verbose'
           self
         end
         def guess 
-          @builder.append '--guess'
+          @builder.append ' --guess'
           self
         end
-        def lines lines=nil
-          @builder.append "--lines #{@builder.format lines}"
+        def lines lines
+          @builder.append " --lines #{@builder.format lines}"
           self
         end
         def expand 
-          @builder.append '--expand'
+          @builder.append ' --expand'
           self
         end
         def drb 
-          @builder.append '--drb'
+          @builder.append ' --drb'
           self
         end
-        def port port=nil
-          @builder.append "--port #{@builder.format port}"
+        def port port
+          @builder.append " --port #{@builder.format port}"
           self
         end
-        def dotcucumber dir=nil
-          @builder.append "--dotcucumber #{@builder.format dir}"
+        def dotcucumber dir
+          @builder.append " --dotcucumber #{@builder.format dir}"
           self
         end
         def version 
-          @builder.append '--version'
+          @builder.append ' --version'
           self
         end
         def help 
-          @builder.append '--help'
+          @builder.append ' --help'
           self
         end
         def to_s 

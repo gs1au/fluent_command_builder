@@ -8,124 +8,124 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'MSDeploy'
         end
-        def allow_untrusted bool=nil
-          @builder.append "-allowUntrusted:#{@builder.format bool}"
+        def allow_untrusted bool
+          @builder.append " -allowUntrusted:#{@builder.format bool}"
           self
         end
-        def app_host_config_dir path=nil
-          @builder.append "-appHostConfigDir:#{@builder.format path}"
+        def app_host_config_dir path
+          @builder.append " -appHostConfigDir:#{@builder.format path}"
           self
         end
-        def declare_param param=nil
-          @builder.append "-declareParam:#{@builder.format param, ',', '='}"
+        def declare_param param
+          @builder.append " -declareParam:#{@builder.format param, ',', '='}"
           self
         end
-        def declare_param_file xml_file=nil
-          @builder.append "-declareParamFile:#{@builder.format xml_file}"
+        def declare_param_file xml_file
+          @builder.append " -declareParamFile:#{@builder.format xml_file}"
           self
         end
-        def dest provider=nil
-          @builder.append "-dest:#{@builder.format provider}"
+        def dest provider
+          @builder.append " -dest:#{@builder.format provider}"
           self
         end
-        def disable_link link_extension=nil
-          @builder.append "-disableLink:#{@builder.format link_extension}"
+        def disable_link link_extension
+          @builder.append " -disableLink:#{@builder.format link_extension}"
           self
         end
-        def disable_rule rule=nil
-          @builder.append "-disableRule:#{@builder.format rule, ','}"
+        def disable_rule rule
+          @builder.append " -disableRule:#{@builder.format rule, ','}"
           self
         end
-        def disable_skip_directive skip_directive_name=nil
-          @builder.append "-disableSkipDirective:#{@builder.format skip_directive_name}"
+        def disable_skip_directive skip_directive_name
+          @builder.append " -disableSkipDirective:#{@builder.format skip_directive_name}"
           self
         end
-        def enable_link link_extension=nil
-          @builder.append "-enableLink:#{@builder.format link_extension}"
+        def enable_link link_extension
+          @builder.append " -enableLink:#{@builder.format link_extension}"
           self
         end
-        def enable_rule rule=nil
-          @builder.append "-enableRule:#{@builder.format rule, ','}"
+        def enable_rule rule
+          @builder.append " -enableRule:#{@builder.format rule, ','}"
           self
         end
-        def enable_skip_directive skip_directive_name=nil
-          @builder.append "-enableSkipDirective:#{@builder.format skip_directive_name}"
+        def enable_skip_directive skip_directive_name
+          @builder.append " -enableSkipDirective:#{@builder.format skip_directive_name}"
           self
         end
-        def post_sync command=nil
-          @builder.append "-postSync:#{@builder.format command}"
+        def post_sync command
+          @builder.append " -postSync:#{@builder.format command}"
           self
         end
-        def pre_sync command=nil
-          @builder.append "-preSync:#{@builder.format command}"
+        def pre_sync command
+          @builder.append " -preSync:#{@builder.format command}"
           self
         end
-        def remove_param param=nil
-          @builder.append "-removeParam:#{@builder.format param}"
+        def remove_param param
+          @builder.append " -removeParam:#{@builder.format param}"
           self
         end
-        def replace arg=nil
-          @builder.append "-replace:#{@builder.format arg}"
+        def replace arg
+          @builder.append " -replace:#{@builder.format arg}"
           self
         end
-        def retry_attempts number=nil
-          @builder.append "-retryAttempts:#{@builder.format number}"
+        def retry_attempts number
+          @builder.append " -retryAttempts:#{@builder.format number}"
           self
         end
-        def retry_interval milliseconds=nil
-          @builder.append "-retryInterval:#{@builder.format milliseconds}"
+        def retry_interval milliseconds
+          @builder.append " -retryInterval:#{@builder.format milliseconds}"
           self
         end
-        def set_param param=nil
-          @builder.append "-setParam:#{@builder.format param, ',', '='}"
+        def set_param param
+          @builder.append " -setParam:#{@builder.format param, ',', '='}"
           self
         end
-        def set_param_file xml_file=nil
-          @builder.append "-setParamFile:#{@builder.format xml_file}"
+        def set_param_file xml_file
+          @builder.append " -setParamFile:#{@builder.format xml_file}"
           self
         end
         def show_secure 
-          @builder.append '-showSecure'
+          @builder.append ' -showSecure'
           self
         end
-        def skip arg=nil
-          @builder.append "-skip:#{@builder.format arg}"
+        def skip arg
+          @builder.append " -skip:#{@builder.format arg}"
           self
         end
-        def source provider=nil
-          @builder.append "-source:#{@builder.format provider}"
+        def source provider
+          @builder.append " -source:#{@builder.format provider}"
           self
         end
         def unicode 
-          @builder.append '-unicode'
+          @builder.append ' -unicode'
           self
         end
         def use_check_sum 
-          @builder.append '-useCheckSum'
+          @builder.append ' -useCheckSum'
           self
         end
-        def verb verb_name=nil
-          @builder.append "-verb:#{@builder.format verb_name}"
+        def verb verb_name
+          @builder.append " -verb:#{@builder.format verb_name}"
           self
         end
         def verbose 
-          @builder.append '-verbose'
+          @builder.append ' -verbose'
           self
         end
-        def web_server_dir path=nil
-          @builder.append "-webServerDir:#{@builder.format path}"
+        def web_server_dir path
+          @builder.append " -webServerDir:#{@builder.format path}"
           self
         end
         def whatif 
-          @builder.append '-whatif'
+          @builder.append ' -whatif'
           self
         end
         def xml 
-          @builder.append '-xml'
+          @builder.append ' -xml'
           self
         end
-        def xpath path=nil
-          @builder.append "-xpath:#{@builder.format path}"
+        def xpath path
+          @builder.append " -xpath:#{@builder.format path}"
           self
         end
         def to_s 

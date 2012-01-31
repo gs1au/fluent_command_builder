@@ -27,7 +27,7 @@ class CommandDefinition
 
   def process_hash hash, parent_node
     hash.each_pair do |node_text, child_nodes|
-      node = Node.new node_text
+      node = Node.new " #{node_text}"
       parent_node.child_nodes << node
       process_array child_nodes, node unless child_nodes.nil?
     end

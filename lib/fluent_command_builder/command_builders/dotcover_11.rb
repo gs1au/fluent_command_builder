@@ -36,42 +36,42 @@ module FluentCommandBuilder
       class Cover
         def initialize builder
           @builder = builder
-          @builder.append 'cover'
+          @builder.append ' cover'
         end
-        def analyse_target_arguments arg=nil
-          @builder.append "/AnalyseTargetArguments=#{@builder.format arg}"
+        def analyse_target_arguments arg
+          @builder.append " /AnalyseTargetArguments=#{@builder.format arg}"
           self
         end
-        def filters arg=nil
-          @builder.append "/Filters=#{@builder.format arg}"
+        def filters arg
+          @builder.append " /Filters=#{@builder.format arg}"
           self
         end
-        def inherit_console arg=nil
-          @builder.append "/InheritConsole=#{@builder.format arg}"
+        def inherit_console arg
+          @builder.append " /InheritConsole=#{@builder.format arg}"
           self
         end
-        def log_file arg=nil
-          @builder.append "/LogFile=#{@builder.format arg}"
+        def log_file arg
+          @builder.append " /LogFile=#{@builder.format arg}"
           self
         end
-        def output arg=nil
-          @builder.append "/Output=#{@builder.format arg}"
+        def output arg
+          @builder.append " /Output=#{@builder.format arg}"
           self
         end
-        def target_arguments arg=nil
-          @builder.append "/TargetArguments=#{@builder.format arg}"
+        def target_arguments arg
+          @builder.append " /TargetArguments=#{@builder.format arg}"
           self
         end
-        def target_executable arg=nil
-          @builder.append "/TargetExecutable=#{@builder.format arg}"
+        def target_executable arg
+          @builder.append " /TargetExecutable=#{@builder.format arg}"
           self
         end
-        def target_working_dir arg=nil
-          @builder.append "/TargetWorkingDir=#{@builder.format arg}"
+        def target_working_dir arg
+          @builder.append " /TargetWorkingDir=#{@builder.format arg}"
           self
         end
-        def temp_dir arg=nil
-          @builder.append "/TempDir=#{@builder.format arg}"
+        def temp_dir arg
+          @builder.append " /TempDir=#{@builder.format arg}"
           self
         end
         def to_s 
@@ -81,18 +81,18 @@ module FluentCommandBuilder
       class Merge
         def initialize builder
           @builder = builder
-          @builder.append 'merge'
+          @builder.append ' merge'
         end
-        def output arg=nil
-          @builder.append "/Output=#{@builder.format arg}"
+        def output arg
+          @builder.append " /Output=#{@builder.format arg}"
           self
         end
-        def source arg=nil
-          @builder.append "/Source=#{@builder.format arg}"
+        def source arg
+          @builder.append " /Source=#{@builder.format arg}"
           self
         end
-        def temp_dir arg=nil
-          @builder.append "/TempDir=#{@builder.format arg}"
+        def temp_dir arg
+          @builder.append " /TempDir=#{@builder.format arg}"
           self
         end
         def to_s 
@@ -102,18 +102,18 @@ module FluentCommandBuilder
       class Report
         def initialize builder
           @builder = builder
-          @builder.append 'report'
+          @builder.append ' report'
         end
-        def output arg=nil
-          @builder.append "/Output=#{@builder.format arg}"
+        def output arg
+          @builder.append " /Output=#{@builder.format arg}"
           self
         end
-        def report_type arg=nil
-          @builder.append "/ReportType=#{@builder.format arg}"
+        def report_type arg
+          @builder.append " /ReportType=#{@builder.format arg}"
           self
         end
-        def source arg=nil
-          @builder.append "/Source=#{@builder.format arg}"
+        def source arg
+          @builder.append " /Source=#{@builder.format arg}"
           self
         end
         def to_s 
@@ -123,14 +123,14 @@ module FluentCommandBuilder
       class List
         def initialize builder
           @builder = builder
-          @builder.append 'list'
+          @builder.append ' list'
         end
-        def output arg=nil
-          @builder.append "/Output=#{@builder.format arg}"
+        def output arg
+          @builder.append " /Output=#{@builder.format arg}"
           self
         end
-        def source arg=nil
-          @builder.append "/Source=#{@builder.format arg}"
+        def source arg
+          @builder.append " /Source=#{@builder.format arg}"
           self
         end
         def to_s 
@@ -140,10 +140,10 @@ module FluentCommandBuilder
       class Delete
         def initialize builder
           @builder = builder
-          @builder.append 'delete'
+          @builder.append ' delete'
         end
-        def source arg=nil
-          @builder.append "/Source=#{@builder.format arg}"
+        def source arg
+          @builder.append " /Source=#{@builder.format arg}"
           self
         end
         def to_s 
@@ -153,46 +153,46 @@ module FluentCommandBuilder
       class Analyse
         def initialize builder
           @builder = builder
-          @builder.append 'analyse'
+          @builder.append ' analyse'
         end
-        def analyse_target_arguments arg=nil
-          @builder.append "/AnalyseTargetArguments=#{@builder.format arg}"
+        def analyse_target_arguments arg
+          @builder.append " /AnalyseTargetArguments=#{@builder.format arg}"
           self
         end
-        def filters arg=nil
-          @builder.append "/Filters=#{@builder.format arg}"
+        def filters arg
+          @builder.append " /Filters=#{@builder.format arg}"
           self
         end
-        def inherit_console arg=nil
-          @builder.append "/InheritConsole=#{@builder.format arg}"
+        def inherit_console arg
+          @builder.append " /InheritConsole=#{@builder.format arg}"
           self
         end
-        def log_file arg=nil
-          @builder.append "/LogFile=#{@builder.format arg}"
+        def log_file arg
+          @builder.append " /LogFile=#{@builder.format arg}"
           self
         end
-        def output arg=nil
-          @builder.append "/Output=#{@builder.format arg}"
+        def output arg
+          @builder.append " /Output=#{@builder.format arg}"
           self
         end
-        def report_type arg=nil
-          @builder.append "/ReportType=#{@builder.format arg}"
+        def report_type arg
+          @builder.append " /ReportType=#{@builder.format arg}"
           self
         end
-        def target_arguments arg=nil
-          @builder.append "/TargetArguments=#{@builder.format arg}"
+        def target_arguments arg
+          @builder.append " /TargetArguments=#{@builder.format arg}"
           self
         end
-        def target_executable arg=nil
-          @builder.append "/TargetExecutable=#{@builder.format arg}"
+        def target_executable arg
+          @builder.append " /TargetExecutable=#{@builder.format arg}"
           self
         end
-        def target_working_dir arg=nil
-          @builder.append "/TargetWorkingDir=#{@builder.format arg}"
+        def target_working_dir arg
+          @builder.append " /TargetWorkingDir=#{@builder.format arg}"
           self
         end
-        def temp_dir arg=nil
-          @builder.append "/TempDir=#{@builder.format arg}"
+        def temp_dir arg
+          @builder.append " /TempDir=#{@builder.format arg}"
           self
         end
         def to_s 
@@ -202,14 +202,14 @@ module FluentCommandBuilder
       class Zip
         def initialize builder
           @builder = builder
-          @builder.append 'zip'
+          @builder.append ' zip'
         end
-        def output arg=nil
-          @builder.append "/Output=#{@builder.format arg}"
+        def output arg
+          @builder.append " /Output=#{@builder.format arg}"
           self
         end
-        def source arg=nil
-          @builder.append "/Source=#{@builder.format arg}"
+        def source arg
+          @builder.append " /Source=#{@builder.format arg}"
           self
         end
         def to_s 

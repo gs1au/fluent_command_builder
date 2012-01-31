@@ -8,64 +8,64 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'aspnet_compiler'
         end
-        def target_dir target_dir=nil
-          @builder.append "#{@builder.format target_dir}"
+        def target_dir target_dir
+          @builder.append " #{@builder.format target_dir}"
           self
         end
-        def m metabase_path=nil
-          @builder.append "-m #{@builder.format metabase_path}"
+        def m metabase_path
+          @builder.append " -m #{@builder.format metabase_path}"
           self
         end
-        def v virtual_path=nil
-          @builder.append "-v #{@builder.format virtual_path}"
+        def v virtual_path
+          @builder.append " -v #{@builder.format virtual_path}"
           self
         end
-        def p physical_path=nil
-          @builder.append "-p #{@builder.format physical_path}"
+        def p physical_path
+          @builder.append " -p #{@builder.format physical_path}"
           self
         end
         def u 
-          @builder.append '-u'
+          @builder.append ' -u'
           self
         end
         def f 
-          @builder.append '-f'
+          @builder.append ' -f'
           self
         end
         def d 
-          @builder.append '-d'
+          @builder.append ' -d'
           self
         end
         def fixed_names 
-          @builder.append '-fixedNames'
+          @builder.append ' -fixedNames'
           self
         end
         def c 
-          @builder.append '-c'
+          @builder.append ' -c'
           self
         end
         def error_stack 
-          @builder.append '-errorStack'
+          @builder.append ' -errorStack'
           self
         end
         def no_logo 
-          @builder.append '-noLogo'
+          @builder.append ' -noLogo'
           self
         end
-        def key_file file=nil
-          @builder.append "-keyFile #{@builder.format file}"
+        def key_file file
+          @builder.append " -keyFile #{@builder.format file}"
           self
         end
-        def key_container container=nil
-          @builder.append "-keyContainer #{@builder.format container}"
+        def key_container container
+          @builder.append " -keyContainer #{@builder.format container}"
           self
         end
         def aptca 
-          @builder.append '-aptca'
+          @builder.append ' -aptca'
           self
         end
         def delay_sign 
-          @builder.append '-delaySign'
+          @builder.append ' -delaySign'
           self
         end
         def to_s 

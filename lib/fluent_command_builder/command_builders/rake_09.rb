@@ -9,95 +9,95 @@ module FluentCommandBuilder
           @builder.append 'rake'
         end
         def classic_namespace 
-          @builder.append '--classic-namespace'
+          @builder.append ' --classic-namespace'
           self
         end
-        def describe pattern=nil
-          @builder.append "--describe #{@builder.format pattern}"
+        def describe pattern
+          @builder.append " --describe #{@builder.format pattern}"
           self
         end
         def dry_run 
-          @builder.append '--dry-run'
+          @builder.append ' --dry-run'
           self
         end
-        def execute code=nil
-          @builder.append "--execute #{@builder.format code}"
+        def execute code
+          @builder.append " --execute #{@builder.format code}"
           self
         end
-        def execute_print code=nil
-          @builder.append "--execute-print #{@builder.format code}"
+        def execute_print code
+          @builder.append " --execute-print #{@builder.format code}"
           self
         end
-        def execute_continue code=nil
-          @builder.append "--execute-continue #{@builder.format code}"
+        def execute_continue code
+          @builder.append " --execute-continue #{@builder.format code}"
           self
         end
-        def libdir lib_dir=nil
-          @builder.append "--libdir #{@builder.format lib_dir}"
+        def libdir lib_dir
+          @builder.append " --libdir #{@builder.format lib_dir}"
           self
         end
         def no_search 
-          @builder.append '--no-search'
+          @builder.append ' --no-search'
           self
         end
         def prereqs 
-          @builder.append '--prereqs'
+          @builder.append ' --prereqs'
           self
         end
         def quiet 
-          @builder.append '--quiet'
+          @builder.append ' --quiet'
           self
         end
-        def rakefile file=nil
-          @builder.append "--rakefile #{@builder.format file}"
+        def rakefile file
+          @builder.append " --rakefile #{@builder.format file}"
           self
         end
-        def rakelibdir rake_lib_dir=nil
-          @builder.append "--rakelibdir #{@builder.format rake_lib_dir}"
+        def rakelibdir rake_lib_dir
+          @builder.append " --rakelibdir #{@builder.format rake_lib_dir}"
           self
         end
-        def require file=nil
-          @builder.append "--require #{@builder.format file}"
+        def require file
+          @builder.append " --require #{@builder.format file}"
           self
         end
         def rules 
-          @builder.append '--rules'
+          @builder.append ' --rules'
           self
         end
         def silent 
-          @builder.append '--silent'
+          @builder.append ' --silent'
           self
         end
         def no_system 
-          @builder.append '--no-system'
+          @builder.append ' --no-system'
           self
         end
-        def tasks pattern=nil
-          @builder.append "--tasks #{@builder.format pattern}"
+        def tasks pattern
+          @builder.append " --tasks #{@builder.format pattern}"
           self
         end
         def trace 
-          @builder.append '--trace'
+          @builder.append ' --trace'
           self
         end
         def verbose 
-          @builder.append '--verbose'
+          @builder.append ' --verbose'
           self
         end
         def version 
-          @builder.append '--version'
+          @builder.append ' --version'
           self
         end
-        def where pattern=nil
-          @builder.append "--where #{@builder.format pattern}"
+        def where pattern
+          @builder.append " --where #{@builder.format pattern}"
           self
         end
         def no_deprecation_warnings 
-          @builder.append '--no-deprecation-warnings'
+          @builder.append ' --no-deprecation-warnings'
           self
         end
         def help 
-          @builder.append '--help'
+          @builder.append ' --help'
           self
         end
         def to_s 
