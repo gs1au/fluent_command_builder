@@ -16,7 +16,7 @@ require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/comma
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/mstest_2008.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/mstest_2010.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/netsh_2008.rb')
-require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/nunit_console_25.rb')
+require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/nunit_25.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/rake_09.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/simian_23.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/tf_2010.rb')

@@ -1,7 +1,7 @@
 9.2
-7za
-    a <archive> <files>
-        -i<wildcard>
+7za (SevenZip)
+    a <archive> <wildcard> (Add)
+        -i[<recurse_type>]<file_ref>
         -m<method_parameters>
         -p<password>
         -r

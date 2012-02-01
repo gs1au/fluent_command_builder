@@ -41,7 +41,7 @@ class CommandCodeGenerator
   end
 
   def method_name
-    command_name.downcase
+    command_name.gsub('-', '_').gsub(/\W/, '').downcase
   end
 
   def version_method_name
@@ -49,7 +49,12 @@ class CommandCodeGenerator
   end
 
   def command_name
-    @command.fragments[0].fragment_text.gsub('-', '_').gsub(/\W/, '')
+    @command.node_name
+  end
+
+  def command_alias
+    match = @command.fragments[0].fragment_text.match(/\((.+?)\)/)
+    match.nil? ? nil : match[1]
   end
 
   def version

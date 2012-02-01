@@ -1,9 +1,9 @@
 require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 
 module FluentCommandBuilder
-  module NunitConsole
+  module NUnit
     module V25
-      class NunitConsole
+      class NUnit
         def initialize builder
           @builder = builder
           @builder.append 'nunit-console'
@@ -96,12 +96,12 @@ module FluentCommandBuilder
           @builder.to_s
         end
       end
-      def nunit_console 
-        NunitConsole.new CommandBuilder.new
+      def nunit 
+        NUnit.new CommandBuilder.new
       end
     end
   end
-  def nunit_console_25 
-    NunitConsole::V25::NunitConsole.new CommandBuilder.new
+  def nunit_25 
+    NUnit::V25::NUnit.new CommandBuilder.new
   end
 end

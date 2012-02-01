@@ -18,11 +18,11 @@ class Node
   end
 
   def node_name
-    @node_name ||= starts_with_arg? ? first_arg_name : words_preceding_args
+    @node_name ||= node_alias || (starts_with_arg? ? first_arg_name : words_preceding_args)
   end
 
   def fragments
-    @fragments ||= @raw_text.gsub(']', ']|').gsub('[', '|[').split('|').compact.map { |f| Fragment.new f }
+    @fragments ||= @raw_text.gsub(/ \(.+?\)/, '').gsub(']', ']|').gsub('[', '|[').split('|').compact.map { |f| Fragment.new f }
   end
 
   private
@@ -37,6 +37,11 @@ class Node
 
   def words_preceding_args
     @words_preceding_args ||= @raw_text.gsub(/<.*/, '').gsub(/\W/, ' ').strip
+  end
+
+  def node_alias
+    match = @raw_text.match(/\((.+?)\)/)
+    match.nil? ? nil : match[1]
   end
 
 end
