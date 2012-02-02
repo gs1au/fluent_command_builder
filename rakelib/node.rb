@@ -25,6 +25,14 @@ class Node
     @fragments ||= @raw_text.gsub(/ \(.+?\)/, '').gsub(']', ']|').gsub('[', '|[').split('|').compact.map { |f| Fragment.new f }
   end
 
+  def required_args
+    fragments.map { |f| f.args.map { |a| a unless f.optional? } }.flatten.compact
+  end
+
+  def optional_args
+    fragments.map { |f| f.args.map { |a| a if f.optional? } }.flatten.compact
+  end
+
   private
 
   def starts_with_arg?

@@ -1,6 +1,5 @@
 2.5
-nunit-console (NUnit)
-    <assembly>
+nunit-console <assembly> (NUnit)
     /run:<test>
     /fixture:<fixture>
     /framework:<framework>

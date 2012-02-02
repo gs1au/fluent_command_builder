@@ -4,28 +4,28 @@ module FluentCommandBuilder
   module InstallUtil
     module V40
       class InstallUtil
-        def initialize builder
+        def initialize builder, assembly_name=nil
           @builder = builder
           @builder.append 'installUtil'
+          @builder.append " #{@builder.format assembly_name}" unless assembly_name.nil?
         end
-        def assembly_file_name assembly_file_name
-          @builder.append " #{@builder.format assembly_file_name}"
-          self
-        end
-        def help 
+        def help assembly_path=nil
           @builder.append ' /help'
+          @builder.append " #{@builder.format assembly_path}" unless assembly_path.nil?
           self
         end
-        def assembly_name assembly_strong_name
-          @builder.append " /assemblyName=#{@builder.format assembly_strong_name}"
+        def assembly_name assembly_name
+          @builder.append " /assemblyName=#{@builder.format assembly_name}"
           self
         end
-        def install_state_dir directory_name
-          @builder.append " /installStateDir=#{@builder.format directory_name}"
+        def install_state_dir directory_name=nil
+          @builder.append ' /installStateDir'
+          @builder.append "=#{@builder.format directory_name}" unless directory_name.nil?
           self
         end
-        def log_file file_name
-          @builder.append " /logFile=#{@builder.format file_name}"
+        def log_file file_name=nil
+          @builder.append ' /logFile'
+          @builder.append "=#{@builder.format file_name}" unless file_name.nil?
           self
         end
         def log_to_console bool
@@ -44,12 +44,12 @@ module FluentCommandBuilder
           @builder.to_s
         end
       end
-      def installutil 
-        InstallUtil.new CommandBuilder.new
+      def installutil assembly_name=nil
+        InstallUtil.new CommandBuilder.new, assembly_name
       end
     end
   end
-  def installutil_40 
-    InstallUtil::V40::InstallUtil.new CommandBuilder.new
+  def installutil_40 assembly_name=nil
+    InstallUtil::V40::InstallUtil.new CommandBuilder.new, assembly_name
   end
 end

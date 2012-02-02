@@ -4,20 +4,18 @@ module FluentCommandBuilder
   module InstallUtil
     module V11
       class InstallUtil
-        def initialize builder
+        def initialize builder, assembly_name
           @builder = builder
-          @builder.append 'installUtil'
+          @builder.append "installUtil #{@builder.format assembly_name}"
         end
-        def assembly_file_name assembly_file_name
-          @builder.append " #{@builder.format assembly_file_name}"
-          self
-        end
-        def help 
+        def help assembly_path=nil
           @builder.append ' /help'
+          @builder.append " #{@builder.format assembly_path}" unless assembly_path.nil?
           self
         end
-        def log_file file_name
-          @builder.append " /logFile=#{@builder.format file_name}"
+        def log_file file_name=nil
+          @builder.append ' /logFile'
+          @builder.append "=#{@builder.format file_name}" unless file_name.nil?
           self
         end
         def log_to_console bool
@@ -36,12 +34,12 @@ module FluentCommandBuilder
           @builder.to_s
         end
       end
-      def installutil 
-        InstallUtil.new CommandBuilder.new
+      def installutil assembly_name
+        InstallUtil.new CommandBuilder.new, assembly_name
       end
     end
   end
-  def installutil_11 
-    InstallUtil::V11::InstallUtil.new CommandBuilder.new
+  def installutil_11 assembly_name
+    InstallUtil::V11::InstallUtil.new CommandBuilder.new, assembly_name
   end
 end

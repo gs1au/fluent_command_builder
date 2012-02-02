@@ -4,13 +4,9 @@ module FluentCommandBuilder
   module NUnit
     module V25
       class NUnit
-        def initialize builder
+        def initialize builder, assembly
           @builder = builder
-          @builder.append 'nunit-console'
-        end
-        def assembly assembly
-          @builder.append " #{@builder.format assembly}"
-          self
+          @builder.append "nunit-console #{@builder.format assembly}"
         end
         def run test
           @builder.append " /run:#{@builder.format test}"
@@ -96,12 +92,12 @@ module FluentCommandBuilder
           @builder.to_s
         end
       end
-      def nunit 
-        NUnit.new CommandBuilder.new
+      def nunit assembly
+        NUnit.new CommandBuilder.new, assembly
       end
     end
   end
-  def nunit_25 
-    NUnit::V25::NUnit.new CommandBuilder.new
+  def nunit_25 assembly
+    NUnit::V25::NUnit.new CommandBuilder.new, assembly
   end
 end

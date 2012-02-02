@@ -1,0 +1,85 @@
+9.2
+7za (sevenZip)
+    a <archive> <fileRef> (add)
+        -i[<recurseType>]<fileRef> (includeFilenames)
+        -m<methodParameters> (setCompressionMethod)
+        -p<password> (setPassword)
+        -r[<modifier>] (recurseSubdirectories)
+        -sfx[<sfxModule>] (createSfxArchive)
+        -si[<fileName>] (readDataFromStdin)
+        -so (writeDataToStdout)
+        -ssw (compressFilesOpenForWriting)
+        -t<archiveType> (setTypeOfArchive)
+        -u<args> (updateOptions)
+        -v<size>[<unitOfMeasure>] (createVolumes)
+        -w[<dirPath>] (setWorkingDirectory)
+        -x[<recurseType>]<fileRef> (excludeFilenames)
+    b <number_of_iterations> (bench)
+        -mmt<n>
+        -md<n>
+        -mm=<method>
+    d <archive> <files> (delete)
+        -i
+        -m
+        -p
+        -r
+        -u
+        -w
+        -x
+    e <archive> <files> (extract)
+        -ai
+        -an
+        -ao
+        -ax
+        -i
+        -o
+        -p
+        -r
+        -so
+        -t
+        -x
+        -y
+    l <archive> (list)
+        -ai
+        -an
+        -ax
+        -i
+        -slt
+        -p
+        -r
+        -t
+        -x
+    t <archive> <files> (test)
+        -ai
+        -an
+        -ax
+        -i
+        -p
+        -r
+        -x
+    u <archive> <files> (update)
+        -i
+        -m
+        -p
+        -r
+        -sfx
+        -si
+        -so
+        -ssw
+        -t
+        -u
+        -w
+        -x
+    x <archive> <files> (extractWithFullPaths)
+        -ai
+        -an
+        -ao
+        -ax
+        -i
+        -o
+        -p
+        -r
+        -so
+        -t
+        -x
+        -y

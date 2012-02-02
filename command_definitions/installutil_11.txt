@@ -1,8 +1,7 @@
 1.1
-installUtil
-    <assemblyFileName>
-    /help
-    /logFile=<fileName>
+installUtil <assemblyName>
+    /help[ <assemblyPath>]
+    /logFile[=<fileName>]
     /logToConsole=<bool>
     /showCallStack
     /uninstall

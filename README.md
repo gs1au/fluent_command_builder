@@ -7,7 +7,7 @@ Each supported command is represented by a class that provides a fluent interfac
 ## Example
 
 ```ruby
-msbuild.project_file('sample.csproj').target(:rebuild).property({ :configuration => :release })
+msbuild('sample.csproj').target(:rebuild).property({ :configuration => :release })
 ```
 
 Produces:
@@ -35,8 +35,8 @@ require 'fluent_command_builder'
 include FluentCommandBuilder::MSBuild::V40
 include FluentCommandBuilder::NunitConsole::V25
 
-system msbuild.project_file('sample.csproj').target(:rebuild).property({ :configuration => :release }).to_s
-system nunit.assembly('sample.dll').include(:unit_tests).exclude(:integration_tests).to_s
+system msbuild('sample.csproj').target(:rebuild).property({ :configuration => :release }).to_s
+system nunit('sample.dll').include(:unit_tests).exclude(:integration_tests).to_s
 ```
 
 In this case, the msbuild method refers to MSBuild 4.0, and the nunit method refers to NUnit 2.5.
@@ -47,8 +47,8 @@ The second scenario involves calling a method for a specific version of each com
 require 'fluent_command_builder'
 include FluentCommandBuilder
 
-system msbuild_40.project_file('sample.csproj').target(:rebuild).property({ :configuration => :release }).to_s
-system nunit_25.assembly('sample.dll').include(:unit_tests).exclude(:integration_tests).to_s
+system msbuild_40('sample.csproj').target(:rebuild).property({ :configuration => :release }).to_s
+system nunit_25('sample.dll').include(:unit_tests).exclude(:integration_tests).to_s
 ```
 
 Notice how the version number forms part of the method itself.
@@ -66,6 +66,7 @@ Notice how the version number forms part of the method itself.
 - netsh 2008 (advfirewall only at present)
 - nunit 2.5
 - rake 0.9
+- sevenzip 9.2 (work in progress)
 - simian 2.3
 - tf 2010, TEE 2010
 

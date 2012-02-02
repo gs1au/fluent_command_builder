@@ -1,10 +1,9 @@
 4.0
-installUtil
-    <assemblyFileName>
-    /help
-    /assemblyName=<assemblyStrongName>
-    /installStateDir=<directoryName>
-    /logFile=<fileName>
+installUtil[ <assemblyName>]
+    /help[ <assemblyPath>]
+    /assemblyName=<assemblyName>
+    /installStateDir[=<directoryName>]
+    /logFile[=<fileName>]
     /logToConsole=<bool>
     /showCallStack
     /uninstall

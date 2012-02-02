@@ -11,22 +11,38 @@ class CommandCodeGenerator
   end
 
   def render writer
+    args1 = [['CommandBuilder.new'] + method_arg_values].flatten
+
     writer.line %Q[require File.expand_path(File.dirname(__FILE__) + '/../command_builder')]
     writer.line
     writer.module 'FluentCommandBuilder' do
       writer.module command_module_name do
         writer.module version_module_name do
           write_command @command, writer
-          writer.method method_name do
-            writer.initializer class_name, 'CommandBuilder.new'
+          writer.method method_name, method_args do
+            writer.initializer class_name, args1
           end
         end
       end
-      writer.method version_method_name do
-        writer.initializer  "#{command_module_name}::#{version_module_name}::#{class_name}", 'CommandBuilder.new'
+      writer.method version_method_name, method_args do
+        writer.initializer "#{command_module_name}::#{version_module_name}::#{class_name}", args1
       end
     end
   end
+
+  def method_args
+    @command.required_args.map { |a| @naming_convention.arg_name a.arg_name } +
+        @command.optional_args.map { |a| @naming_convention.arg_name(a.arg_name) + '=nil' }
+  end
+
+  def method_arg_values
+    @command.fragments.map { |f|
+      f.args.map { |a|
+        @naming_convention.arg_name a.arg_name
+      }
+    }.flatten
+  end
+
 
   def command_module_name
     @naming_convention.module_name command_name

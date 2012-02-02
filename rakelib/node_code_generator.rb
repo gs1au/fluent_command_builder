@@ -71,13 +71,8 @@ class NodeCodeGenerator
   end
 
   def method_args node
-    node.fragments.map { |f|
-      f.args.map { |a|
-        arg = @naming_convention.arg_name a.arg_name
-        arg << '=nil' if f.optional?
-        arg
-      }
-    }.flatten
+    node.required_args.map { |a| @naming_convention.arg_name a.arg_name } +
+        node.optional_args.map { |a| @naming_convention.arg_name(a.arg_name) + '=nil' }
   end
 
 end

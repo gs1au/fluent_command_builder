@@ -1,6 +1,5 @@
 3.5
-MSBuild
-    <projectFile>
+MSBuild[ <projectFile>]
     /help
     /noLogo
     /version

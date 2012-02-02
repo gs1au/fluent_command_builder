@@ -1,6 +1,5 @@
 4.0
-MSBuild
-    <projectFile>
+MSBuild[ <projectFile>]
     /help
     /noLogo
     /version
@@ -16,26 +15,8 @@ MSBuild
     /validate[:<schema>]
     /maxCpuCount:<number>
     /ignoreProjectExtensions:<extensions;>
-    /fileLogger
-    /fileLogger1
-    /fileLogger2
-    /fileLogger3
-    /fileLogger4
-    /fileLogger5
-    /fileLogger6
-    /fileLogger7
-    /fileLogger8
-    /fileLogger9
+    /fileLogger[<n>]
     /distributedFileLogger
-    /fileLoggerParameters:<parameters=;>
-    /fileLoggerParameters1:<parameters=;>
-    /fileLoggerParameters2:<parameters=;>
-    /fileLoggerParameters3:<parameters=;>
-    /fileLoggerParameters4:<parameters=;>
-    /fileLoggerParameters5:<parameters=;>
-    /fileLoggerParameters6:<parameters=;>
-    /fileLoggerParameters7:<parameters=;>
-    /fileLoggerParameters8:<parameters=;>
-    /fileLoggerParameters9:<parameters=;>
+    /fileLoggerParameters[<n>]:<parameters=;>
     /toolsVersion:<version>
     /nodeReuse:<parameters>

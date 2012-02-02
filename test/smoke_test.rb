@@ -4,6 +4,12 @@ include FluentCommandBuilder
 
 class SmokeTest < Test::Unit::TestCase
 
+  def test_command_argument
+    expected = 'MSBuild sample.proj'
+    actual = msbuild_40('sample.proj').to_s
+    assert_equal expected, actual
+  end
+
   def test_list_argument
     expected = 'MSBuild /target:clean;build'
     actual = msbuild_40.target(['clean', 'build']).to_s

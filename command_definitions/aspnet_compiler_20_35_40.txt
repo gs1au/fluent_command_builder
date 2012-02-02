@@ -1,14 +1,13 @@
 2.0, 3.5, 4.0
-aspnet_compiler
-    <targetDir>
-    -m <metabasePath>
-    -v <virtualPath>
-    -p <physicalPath>
-    -u
-    -f
-    -d
+aspnet_compiler[ <targetDir>]
+    -m <metabasePath> (metabasePath)
+    -v <virtualPath> (virtualPath)
+    -p <physicalPath> (physicalPath)
+    -u (allowSubsequentUpdates)
+    -f (forceOverwriteFiles)
+    -d (forceDebugOutput)
     -fixedNames
-    -c
+    -c (fullRebuild)
     -errorStack
     -noLogo
     -keyFile <file>

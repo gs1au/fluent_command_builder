@@ -4,13 +4,10 @@ module FluentCommandBuilder
   module MSBuild
     module V30
       class MSBuild
-        def initialize builder
+        def initialize builder, project_file=nil
           @builder = builder
           @builder.append 'MSBuild'
-        end
-        def project_file project_file
-          @builder.append " #{@builder.format project_file}"
-          self
+          @builder.append " #{@builder.format project_file}" unless project_file.nil?
         end
         def help 
           @builder.append ' /help'
@@ -65,12 +62,12 @@ module FluentCommandBuilder
           @builder.to_s
         end
       end
-      def msbuild 
-        MSBuild.new CommandBuilder.new
+      def msbuild project_file=nil
+        MSBuild.new CommandBuilder.new, project_file
       end
     end
   end
-  def msbuild_30 
-    MSBuild::V30::MSBuild.new CommandBuilder.new
+  def msbuild_30 project_file=nil
+    MSBuild::V30::MSBuild.new CommandBuilder.new, project_file
   end
 end
