@@ -6,7 +6,7 @@ module FluentCommandBuilder
       class NUnit
         def initialize builder, assembly
           @builder = builder
-          @builder.append "nunit-console #{@builder.format assembly}"
+          @builder.append "nunit-console #{@builder.format assembly, ' '}"
         end
         def run test
           @builder.append " /run:#{@builder.format test}"

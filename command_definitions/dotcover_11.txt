@@ -1,5 +1,5 @@
 1.1
-dotCover
+dotCover[ <configurationFile>]
     cover
         /AnalyseTargetArguments=<arg>
         /Filters=<arg>

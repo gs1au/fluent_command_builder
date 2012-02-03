@@ -4,9 +4,10 @@ module FluentCommandBuilder
   module DotCover
     module V11
       class DotCover
-        def initialize builder
+        def initialize builder, configuration_file=nil
           @builder = builder
           @builder.append 'dotCover'
+          @builder.append " #{@builder.format configuration_file}" unless configuration_file.nil?
         end
         def cover 
           Cover.new @builder
@@ -216,12 +217,12 @@ module FluentCommandBuilder
           @builder.to_s
         end
       end
-      def dotcover 
-        DotCover.new CommandBuilder.new
+      def dotcover configuration_file=nil
+        DotCover.new CommandBuilder.new, configuration_file
       end
     end
   end
-  def dotcover_11 
-    DotCover::V11::DotCover.new CommandBuilder.new
+  def dotcover_11 configuration_file=nil
+    DotCover::V11::DotCover.new CommandBuilder.new, configuration_file
   end
 end
