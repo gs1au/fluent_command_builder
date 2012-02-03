@@ -4,40 +4,40 @@ module FluentCommandBuilder
   module DotCover
     module V11
       class DotCover
-        def initialize builder, configuration_file=nil
+        def initialize builder
           @builder = builder
           @builder.append 'dotCover'
-          @builder.append " #{@builder.format configuration_file}" unless configuration_file.nil?
         end
-        def cover 
-          Cover.new @builder
+        def cover configuration_file=nil
+          Cover.new @builder, configuration_file
         end
-        def merge 
-          Merge.new @builder
+        def merge configuration_file=nil
+          Merge.new @builder, configuration_file
         end
-        def report 
-          Report.new @builder
+        def report configuration_file=nil
+          Report.new @builder, configuration_file
         end
-        def list 
-          List.new @builder
+        def list configuration_file=nil
+          List.new @builder, configuration_file
         end
-        def delete 
-          Delete.new @builder
+        def delete configuration_file=nil
+          Delete.new @builder, configuration_file
         end
-        def analyse 
-          Analyse.new @builder
+        def analyse configuration_file=nil
+          Analyse.new @builder, configuration_file
         end
-        def zip 
-          Zip.new @builder
+        def zip configuration_file=nil
+          Zip.new @builder, configuration_file
         end
         def to_s 
           @builder.to_s
         end
       end
       class Cover
-        def initialize builder
+        def initialize builder, configuration_file=nil
           @builder = builder
           @builder.append ' cover'
+          @builder.append " #{@builder.format configuration_file}" unless configuration_file.nil?
         end
         def analyse_target_arguments arg
           @builder.append " /AnalyseTargetArguments=#{@builder.format arg}"
@@ -80,9 +80,10 @@ module FluentCommandBuilder
         end
       end
       class Merge
-        def initialize builder
+        def initialize builder, configuration_file=nil
           @builder = builder
           @builder.append ' merge'
+          @builder.append " #{@builder.format configuration_file}" unless configuration_file.nil?
         end
         def output arg
           @builder.append " /Output=#{@builder.format arg}"
@@ -101,9 +102,10 @@ module FluentCommandBuilder
         end
       end
       class Report
-        def initialize builder
+        def initialize builder, configuration_file=nil
           @builder = builder
           @builder.append ' report'
+          @builder.append " #{@builder.format configuration_file}" unless configuration_file.nil?
         end
         def output arg
           @builder.append " /Output=#{@builder.format arg}"
@@ -122,9 +124,10 @@ module FluentCommandBuilder
         end
       end
       class List
-        def initialize builder
+        def initialize builder, configuration_file=nil
           @builder = builder
           @builder.append ' list'
+          @builder.append " #{@builder.format configuration_file}" unless configuration_file.nil?
         end
         def output arg
           @builder.append " /Output=#{@builder.format arg}"
@@ -139,9 +142,10 @@ module FluentCommandBuilder
         end
       end
       class Delete
-        def initialize builder
+        def initialize builder, configuration_file=nil
           @builder = builder
           @builder.append ' delete'
+          @builder.append " #{@builder.format configuration_file}" unless configuration_file.nil?
         end
         def source arg
           @builder.append " /Source=#{@builder.format arg}"
@@ -152,9 +156,10 @@ module FluentCommandBuilder
         end
       end
       class Analyse
-        def initialize builder
+        def initialize builder, configuration_file=nil
           @builder = builder
           @builder.append ' analyse'
+          @builder.append " #{@builder.format configuration_file}" unless configuration_file.nil?
         end
         def analyse_target_arguments arg
           @builder.append " /AnalyseTargetArguments=#{@builder.format arg}"
@@ -201,9 +206,10 @@ module FluentCommandBuilder
         end
       end
       class Zip
-        def initialize builder
+        def initialize builder, configuration_file=nil
           @builder = builder
           @builder.append ' zip'
+          @builder.append " #{@builder.format configuration_file}" unless configuration_file.nil?
         end
         def output arg
           @builder.append " /Output=#{@builder.format arg}"
@@ -217,12 +223,12 @@ module FluentCommandBuilder
           @builder.to_s
         end
       end
-      def dotcover configuration_file=nil
-        DotCover.new CommandBuilder.new, configuration_file
+      def dotcover 
+        DotCover.new CommandBuilder.new
       end
     end
   end
-  def dotcover_11 configuration_file=nil
-    DotCover::V11::DotCover.new CommandBuilder.new, configuration_file
+  def dotcover_11 
+    DotCover::V11::DotCover.new CommandBuilder.new
   end
 end

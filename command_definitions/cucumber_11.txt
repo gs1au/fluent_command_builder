@@ -1,5 +1,5 @@
 1.1
-cucumber
+cucumber[ <feature>]
     --require <library>
     --i18n <lang>
     --format <format>

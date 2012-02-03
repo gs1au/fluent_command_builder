@@ -1,6 +1,6 @@
 1.1
-dotCover[ <configurationFile>]
-    cover
+dotCover
+    cover[ <configurationFile>]
         /AnalyseTargetArguments=<arg>
         /Filters=<arg>
         /InheritConsole=<arg>
@@ -10,20 +10,20 @@ dotCover[ <configurationFile>]
         /TargetExecutable=<arg>
         /TargetWorkingDir=<arg>
         /TempDir=<arg>
-    merge
+    merge[ <configurationFile>]
         /Output=<arg>
         /Source=<arg>
         /TempDir=<arg>
-    report
+    report[ <configurationFile>]
         /Output=<arg>
         /ReportType=<arg>
         /Source=<arg>
-    list
+    list[ <configurationFile>]
         /Output=<arg>
         /Source=<arg>
-    delete
+    delete[ <configurationFile>]
         /Source=<arg>
-    analyse
+    analyse[ <configurationFile>]
         /AnalyseTargetArguments=<arg>
         /Filters=<arg>
         /InheritConsole=<arg>
@@ -34,6 +34,6 @@ dotCover[ <configurationFile>]
         /TargetExecutable=<arg>
         /TargetWorkingDir=<arg>
         /TempDir=<arg>
-    zip
+    zip[ <configurationFile>]
         /Output=<arg>
         /Source=<arg>

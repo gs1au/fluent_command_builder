@@ -4,9 +4,10 @@ module FluentCommandBuilder
   module Cucumber
     module V11
       class Cucumber
-        def initialize builder
+        def initialize builder, feature=nil
           @builder = builder
           @builder.append 'cucumber'
+          @builder.append " #{@builder.format feature}" unless feature.nil?
         end
         def require library
           @builder.append " --require #{@builder.format library}"
@@ -128,12 +129,12 @@ module FluentCommandBuilder
           @builder.to_s
         end
       end
-      def cucumber 
-        Cucumber.new CommandBuilder.new
+      def cucumber feature=nil
+        Cucumber.new CommandBuilder.new, feature
       end
     end
   end
-  def cucumber_11 
-    Cucumber::V11::Cucumber.new CommandBuilder.new
+  def cucumber_11 feature=nil
+    Cucumber::V11::Cucumber.new CommandBuilder.new, feature
   end
 end

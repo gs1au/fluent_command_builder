@@ -39,7 +39,7 @@ class NodeCodeGenerator
   end
 
   def render_branch_node_method_body node, writer
-    writer.initializer class_name(node), '@builder', method_args(node)
+    writer.initializer class_name(node), '@builder', args(node)
   end
 
   def render_leaf_node_method_body node, writer
@@ -73,6 +73,11 @@ class NodeCodeGenerator
   def method_args node
     node.required_args.map { |a| @naming_convention.arg_name a.arg_name } +
         node.optional_args.map { |a| @naming_convention.arg_name(a.arg_name) + '=nil' }
+  end
+
+  def args node
+    node.required_args.map { |a| @naming_convention.arg_name a.arg_name } +
+        node.optional_args.map { |a| @naming_convention.arg_name(a.arg_name) }
   end
 
 end
