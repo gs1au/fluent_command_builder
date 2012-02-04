@@ -1,5 +1,5 @@
 0.9
-rake
+rake[ <task >]
     --classic-namespace
     --describe <pattern>
     --dry-run

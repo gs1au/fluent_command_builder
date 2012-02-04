@@ -4,9 +4,10 @@ module FluentCommandBuilder
   module Rake
     module V09
       class Rake
-        def initialize builder
+        def initialize builder, task=nil
           @builder = builder
           @builder.append 'rake'
+          @builder.append " #{@builder.format task, ' '}" unless task.nil?
         end
         def classic_namespace 
           @builder.append ' --classic-namespace'
@@ -112,12 +113,12 @@ module FluentCommandBuilder
           end
         end
       end
-      def rake 
-        Rake.new CommandBuilder.new
+      def rake task=nil
+        Rake.new CommandBuilder.new, task
       end
     end
   end
-  def rake_09 
-    Rake::V09::Rake.new CommandBuilder.new
+  def rake_09 task=nil
+    Rake::V09::Rake.new CommandBuilder.new, task
   end
 end

@@ -1,19 +1,19 @@
 9.2
 7za (sevenZip)
     a <archive> <fileRef> (add)
-        -i[<recurseType>]<fileRef> (includeFilenames)
-        -m<methodParameters> (setCompressionMethod)
-        -p<password> (setPassword)
-        -r[<modifier>] (recurseSubdirectories)
-        -sfx[<sfxModule>] (createSfxArchive)
-        -si[<fileName>] (readDataFromStdin)
-        -so (writeDataToStdout)
-        -ssw (compressFilesOpenForWriting)
-        -t<archiveType> (setTypeOfArchive)
-        -u<args> (updateOptions)
-        -v<size>[<unitOfMeasure>] (createVolumes)
-        -w[<dirPath>] (setWorkingDirectory)
-        -x[<recurseType>]<fileRef> (excludeFilenames)
+        -i
+        -m
+        -p
+        -r
+        -sfx
+        -si
+        -so
+        -ssw
+        -t
+        -u
+        -v
+        -w
+        -x
     b <number_of_iterations> (bench)
         -mmt<n>
         -md<n>
@@ -70,7 +70,7 @@
         -u
         -w
         -x
-    x <archive> <files> (extractWithFullPaths)
+    x <archive>[ <files>] (extractWithFullPaths)
         -ai
         -an
         -ao
@@ -83,3 +83,19 @@
         -t
         -x
         -y
+
+options:
+    -i[<recurseType>]<fileRef> (include)
+    -m<methodParameters> (setCompressionMethod)
+    -p<password> (password)
+    -r[<modifier>] (recursive)
+    -sfx[<sfxModule>] (createSfxArchive)
+    -si[<fileName>] (readDataFromStdin)
+    -so (writeDataToStdout)
+    -ssw (compressFilesOpenForWriting)
+    -t<archiveType> (type)
+    -u<args> (updateOptions)
+    -v<size>[<unitOfMeasure>] (createVolumes)
+    -w[<dirPath>] (workingDir)
+    -x[<recurseType>]<fileRef> (exclude)
+    -o<dirPath> (output)

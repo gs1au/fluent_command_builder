@@ -57,7 +57,7 @@ Notice how the version number forms part of the method itself.
 
 ### Execution
 
-Fluent Command Builder offers two main usage scenarions for executing commands.
+Fluent Command Builder offers two main usage scenarios for executing commands.
 
 The first scenario involves calling the __execute__ method at the end of any command:
 
