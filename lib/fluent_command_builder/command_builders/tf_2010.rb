@@ -201,6 +201,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class Add
         def initialize builder, item_spec
@@ -230,6 +238,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       class Branch
@@ -277,6 +293,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class Branches
         def initialize builder, item_spec
@@ -298,6 +322,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       class Changeset
@@ -333,6 +365,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       class Checkin
@@ -393,6 +433,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class CheckinShelveset
         def initialize builder, shelveset_name, shelveset_owner=nil
@@ -428,6 +476,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class Checkout
         def initialize builder, item_spec=nil
@@ -455,6 +511,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class Configure
         def initialize builder, path_of_team_project=nil
@@ -473,6 +537,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       class Delete
@@ -495,6 +567,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       class Destroy
@@ -537,6 +617,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       class CompareWithCurrentWorkspaceVersion
@@ -588,6 +676,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class Compare
         def initialize builder, item_spec, item_spec2
@@ -633,6 +729,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       class CompareWithShelvesetVersion
@@ -685,6 +789,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class Dir
         def initialize builder, item_spec
@@ -718,6 +830,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       class FolderDiff
@@ -758,6 +878,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       class Get
@@ -805,6 +933,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       class History
@@ -860,6 +996,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class Label
         def initialize builder, label_name, item_spec, scope=nil
@@ -900,6 +1044,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class DeleteLabel
         def initialize builder, label_name, item_spec, scope=nil
@@ -919,6 +1071,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       class Labels
@@ -947,6 +1107,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class LocalVersions
         def initialize builder, item_spec
@@ -972,6 +1140,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       class Lock
@@ -1003,6 +1179,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       class Merge
@@ -1070,6 +1254,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class Merges
         def initialize builder, destination, source=nil
@@ -1105,6 +1297,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       class Permission
@@ -1156,6 +1356,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class Properties
         def initialize builder, item_spec
@@ -1187,6 +1395,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class ConfigureProxy
         def initialize builder, url
@@ -1204,6 +1420,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       class AddProxyRecord
@@ -1239,6 +1463,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class DeleteProxyRecord
         def initialize builder, url
@@ -1256,6 +1488,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       class ListProxyRecords
@@ -1275,6 +1515,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class Rename
         def initialize builder, old_item, new_item
@@ -1292,6 +1540,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       class Resolve
@@ -1336,6 +1592,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class RollbackToVersion
         def initialize builder, version_spec, item_spec
@@ -1369,6 +1633,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       class RollbackChangeset
@@ -1407,6 +1679,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class ReplaceShelveset
         def initialize builder, shelveset_name
@@ -1432,6 +1712,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       class Shelve
@@ -1471,6 +1759,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class DeleteShelveset
         def initialize builder, shelveset_name, shelveset_owner=nil
@@ -1489,6 +1785,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       class Shelvesets
@@ -1516,6 +1820,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       class Status
@@ -1557,6 +1869,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class Undelete
         def initialize builder, item_spec, deletion_id=nil
@@ -1583,6 +1903,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       class Undo
@@ -1615,6 +1943,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class Unlabel
         def initialize builder, label_name, item_spec
@@ -1636,6 +1972,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       class Unshelve
@@ -1667,6 +2011,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       class View
@@ -1711,6 +2063,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class ShowLocalFolderMapping
         def initialize builder, local_folder
@@ -1725,6 +2085,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class ShowWorkspaceMappings
         def initialize builder, workspace_name
@@ -1738,6 +2106,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       class ShowServerFolderMappings
@@ -1762,6 +2138,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class MapFolder
         def initialize builder, server_folder, local_folder
@@ -1784,6 +2168,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       class UnmapFolder
@@ -1812,6 +2204,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class CloakFolder
         def initialize builder, server_folder
@@ -1835,6 +2235,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class DecloakFolder
         def initialize builder, server_folder
@@ -1857,6 +2265,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       class CreateWorkspace
@@ -1898,6 +2314,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class DeleteWorkspace
         def initialize builder, workspace_name, workspace_owner=nil
@@ -1916,6 +2340,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       class ModifyWorkspace
@@ -1958,6 +2390,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class Workspaces
         def initialize builder, workspace_name=nil
@@ -1997,6 +2437,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class RemoveWorkspace
         def initialize builder, workspace_name
@@ -2009,6 +2457,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       def tf 

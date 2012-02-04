@@ -32,6 +32,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class Cover
         def initialize builder, configuration_file=nil
@@ -78,6 +86,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class Merge
         def initialize builder, configuration_file=nil
@@ -99,6 +115,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       class Report
@@ -122,6 +146,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class List
         def initialize builder, configuration_file=nil
@@ -140,6 +172,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class Delete
         def initialize builder, configuration_file=nil
@@ -153,6 +193,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       class Analyse
@@ -204,6 +252,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class Zip
         def initialize builder, configuration_file=nil
@@ -221,6 +277,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       def dotcover 

@@ -68,6 +68,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       def aspnet_compiler target_dir=nil
         AspnetCompiler.new CommandBuilder.new, target_dir

@@ -35,6 +35,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class Add
         def initialize builder, archive, file_ref
@@ -105,6 +113,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class Bench
         def initialize builder, number_of_iterations
@@ -125,6 +141,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       class Delete
@@ -162,6 +186,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       class Extract
@@ -220,6 +252,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class List
         def initialize builder, archive
@@ -265,6 +305,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class Test
         def initialize builder, archive, files
@@ -301,6 +349,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       class Update
@@ -359,6 +415,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class ExtractWithFullPaths
         def initialize builder, archive, files
@@ -415,6 +479,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       def sevenzip 

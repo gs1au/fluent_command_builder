@@ -14,6 +14,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class Advfirewall
         def initialize builder
@@ -34,6 +42,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       class AddRule
@@ -116,6 +132,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class DeleteRule
         def initialize builder
@@ -164,6 +188,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       class SetRule
@@ -216,6 +248,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       class New
@@ -298,6 +338,14 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
       end
       class ShowRule
         def initialize builder
@@ -322,6 +370,14 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
       end
       def netsh 
