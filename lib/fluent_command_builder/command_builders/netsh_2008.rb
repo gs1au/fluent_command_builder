@@ -11,6 +11,9 @@ module FluentCommandBuilder
         def advfirewall 
           Advfirewall.new @builder
         end
+        def http 
+          Http.new @builder
+        end
         def to_s 
           @builder.to_s
         end
@@ -48,17 +51,17 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append ' firewall'
         end
-        def add_rule 
-          AddRule.new @builder
+        def add_rule_name rule_name, direction, action
+          AddRuleName.new @builder, rule_name, direction, action
         end
-        def delete_rule 
-          DeleteRule.new @builder
+        def delete_rule_name rule_name
+          DeleteRuleName.new @builder, rule_name
         end
         def set_rule 
           SetRule.new @builder
         end
-        def show_rule 
-          ShowRule.new @builder
+        def show_rule_name rule_name
+          ShowRuleName.new @builder, rule_name
         end
         def to_s 
           @builder.to_s
@@ -72,22 +75,10 @@ module FluentCommandBuilder
           end
         end
       end
-      class AddRule
-        def initialize builder
+      class AddRuleName
+        def initialize builder, rule_name, direction, action
           @builder = builder
-          @builder.append ' add rule'
-        end
-        def name rule_name
-          @builder.append " name=#{@builder.format rule_name}"
-          self
-        end
-        def dir direction
-          @builder.append " dir=#{@builder.format direction}"
-          self
-        end
-        def action action
-          @builder.append " action=#{@builder.format action}"
-          self
+          @builder.append " add rule name=#{@builder.format rule_name} dir=#{@builder.format direction} action=#{@builder.format action}"
         end
         def program path
           @builder.append " program=#{@builder.format path}"
@@ -109,20 +100,20 @@ module FluentCommandBuilder
           @builder.append " profile=#{@builder.format profile}"
           self
         end
-        def localip addresses
-          @builder.append " localip=#{@builder.format addresses}"
+        def local_ip address
+          @builder.append " localIp=#{@builder.format address, ','}"
           self
         end
-        def remoteip addresses
-          @builder.append " remoteip=#{@builder.format addresses}"
+        def remote_ip address
+          @builder.append " remoteIp=#{@builder.format address, ','}"
           self
         end
-        def localport port
-          @builder.append " localport=#{@builder.format port}"
+        def local_port port
+          @builder.append " localPort=#{@builder.format port, ','}"
           self
         end
-        def remoteport port
-          @builder.append " remoteport=#{@builder.format port}"
+        def remote_port port
+          @builder.append " remotePort=#{@builder.format port, ','}"
           self
         end
         def protocol protocol
@@ -161,14 +152,10 @@ module FluentCommandBuilder
           end
         end
       end
-      class DeleteRule
-        def initialize builder
+      class DeleteRuleName
+        def initialize builder, rule_name
           @builder = builder
-          @builder.append ' delete rule'
-        end
-        def name rule_name
-          @builder.append " name=#{@builder.format rule_name}"
-          self
+          @builder.append " delete rule name=#{@builder.format rule_name}"
         end
         def dir direction
           @builder.append " dir=#{@builder.format direction}"
@@ -186,20 +173,20 @@ module FluentCommandBuilder
           @builder.append " service=#{@builder.format service_short_name}"
           self
         end
-        def localip addresses
-          @builder.append " localip=#{@builder.format addresses}"
+        def local_ip address
+          @builder.append " localIp=#{@builder.format address, ','}"
           self
         end
-        def remoteip addresses
-          @builder.append " remoteip=#{@builder.format addresses}"
+        def remote_ip address
+          @builder.append " remoteIp=#{@builder.format address, ','}"
           self
         end
-        def localport port
-          @builder.append " localport=#{@builder.format port}"
+        def local_port port
+          @builder.append " localPort=#{@builder.format port, ','}"
           self
         end
-        def remoteport port
-          @builder.append " remoteport=#{@builder.format port}"
+        def remote_port port
+          @builder.append " remotePort=#{@builder.format port, ','}"
           self
         end
         def protocol protocol
@@ -243,20 +230,20 @@ module FluentCommandBuilder
           @builder.append " service=#{@builder.format service_short_name}"
           self
         end
-        def localip addresses
-          @builder.append " localip=#{@builder.format addresses}"
+        def local_ip address
+          @builder.append " localIp=#{@builder.format address, ','}"
           self
         end
-        def remoteip addresses
-          @builder.append " remoteip=#{@builder.format addresses}"
+        def remote_ip address
+          @builder.append " remoteIp=#{@builder.format address, ','}"
           self
         end
-        def localport port
-          @builder.append " localport=#{@builder.format port}"
+        def local_port port
+          @builder.append " localPort=#{@builder.format port, ','}"
           self
         end
-        def remoteport port
-          @builder.append " remoteport=#{@builder.format port}"
+        def remote_port port
+          @builder.append " remotePort=#{@builder.format port, ','}"
           self
         end
         def protocol protocol
@@ -315,20 +302,20 @@ module FluentCommandBuilder
           @builder.append " profile=#{@builder.format profile}"
           self
         end
-        def localip addresses
-          @builder.append " localip=#{@builder.format addresses}"
+        def local_ip address
+          @builder.append " localIp=#{@builder.format address, ','}"
           self
         end
-        def remoteip addresses
-          @builder.append " remoteip=#{@builder.format addresses}"
+        def remote_ip address
+          @builder.append " remoteIp=#{@builder.format address, ','}"
           self
         end
-        def localport port
-          @builder.append " localport=#{@builder.format port}"
+        def local_port port
+          @builder.append " localPort=#{@builder.format port, ','}"
           self
         end
-        def remoteport port
-          @builder.append " remoteport=#{@builder.format port}"
+        def remote_port port
+          @builder.append " remotePort=#{@builder.format port, ','}"
           self
         end
         def protocol protocol
@@ -367,14 +354,10 @@ module FluentCommandBuilder
           end
         end
       end
-      class ShowRule
-        def initialize builder
+      class ShowRuleName
+        def initialize builder, rule_name
           @builder = builder
-          @builder.append ' show rule'
-        end
-        def name rule_name
-          @builder.append " name=#{@builder.format rule_name}"
-          self
+          @builder.append " show rule name=#{@builder.format rule_name}"
         end
         def profile profile
           @builder.append " profile=#{@builder.format profile}"
@@ -386,6 +369,63 @@ module FluentCommandBuilder
         end
         def verbose 
           @builder.append ' verbose'
+          self
+        end
+        def to_s 
+          @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
+      end
+      class Http
+        def initialize builder
+          @builder = builder
+          @builder.append ' http'
+        end
+        def add_urlacl_url url
+          AddUrlaclUrl.new @builder, url
+        end
+        def delete_urlacl_url url
+          @builder.append " delete urlacl url=#{@builder.format url}"
+          self
+        end
+        def to_s 
+          @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
+      end
+      class AddUrlaclUrl
+        def initialize builder, url
+          @builder = builder
+          @builder.append " add urlacl url=#{@builder.format url}"
+        end
+        def user user
+          @builder.append " user=#{@builder.format user}"
+          self
+        end
+        def listen listen
+          @builder.append " listen=#{@builder.format listen}"
+          self
+        end
+        def delegate delegate
+          @builder.append " delegate=#{@builder.format delegate}"
+          self
+        end
+        def sddl sddl
+          @builder.append " sddl=#{@builder.format sddl}"
           self
         end
         def to_s 

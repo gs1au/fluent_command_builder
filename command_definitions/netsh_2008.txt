@@ -2,35 +2,31 @@
 netsh
     advfirewall
         firewall
-            add rule
-                name=<ruleName>
-                dir=<direction>
-                action=<action>
+            add rule name=<ruleName> dir=<direction> action=<action>
                 program=<path>
                 service=<serviceShortName>
                 description=<ruleDescription>
                 enable=<enable>
                 profile=<profile>
-                localip=<addresses>
-                remoteip=<addresses>
-                localport=<port>
-                remoteport=<port>
+                localIp
+                remoteIp
+                localPort
+                remotePort
                 protocol=<protocol>
                 interfaceType=<type>
                 rmtcomputergrp=<sddlString>
                 rmtusgrp=<sddlString>
                 edge=<edge>
                 security=<security>
-            delete rule
-                name=<ruleName>
+            delete rule name=<ruleName>
                 dir=<direction>
                 profile=<profile>
                 program=<path>
                 service=<serviceShortName>
-                localip=<addresses>
-                remoteip=<addresses>
-                localport=<port>
-                remoteport=<port>
+                localIp
+                remoteIp
+                localPort
+                remotePort
                 protocol=<protocol>
             set rule
                 group=<groupName>
@@ -38,10 +34,10 @@ netsh
                 profile=<profile>
                 program=<path>
                 service=<serviceShortName>
-                localip=<addresses>
-                remoteip=<addresses>
-                localport=<port>
-                remoteport=<port>
+                localIp
+                remoteIp
+                localPort
+                remotePort
                 protocol=<protocol>
                 new
                     name=<ruleName>
@@ -52,18 +48,30 @@ netsh
                     description=<ruleDescription>
                     enable=<enable>
                     profile=<profile>
-                    localip=<addresses>
-                    remoteip=<addresses>
-                    localport=<port>
-                    remoteport=<port>
+                    localIp
+                    remoteIp
+                    localPort
+                    remotePort
                     protocol=<protocol>
                     interfaceType=<type>
                     rmtcomputergrp=<sddlString>
                     rmtusgrp=<sddlString>
                     edge=<edge>
                     security=<security>
-            show rule
-                name=<ruleName>
+            show rule name=<ruleName>
                 profile=<profile>
                 type=<type>
                 verbose
+    http
+        add urlacl url=<url>
+            user=<user>
+            listen=<listen>
+            delegate=<delegate>
+            sddl=<sddl>
+        delete urlacl url=<url>
+
+options:
+    localIp=<address,>
+    remoteIp=<address,>
+    localPort=<port,>
+    remotePort=<port,>
