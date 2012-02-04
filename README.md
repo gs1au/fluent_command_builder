@@ -110,7 +110,7 @@ This approach enables custom execution of a command which could be useful in the
 - tf 2010: http://msdn.microsoft.com/en-us/library/cc31bk2e%28v=vs.100%29.aspx
 - tf tee 2010: http://msdn.microsoft.com/en-us/library/gg413282.aspx
 
-Note: The MSDN command line references contain many inaccuracies/incosistencies which many have traslated into this library.
+Note: The MSDN command line references contain many inaccuracies/inconsistencies which many have traslated into this library.
 
 ## Project Notes
 
