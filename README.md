@@ -69,7 +69,7 @@ The __execute__ method uses __[sh]__ if it can require [Rake], otherwise __[syst
 
 #### The "to_s" method
 
-At any point along the chain, the __to_s__ method may can called to get the command string:
+At any point along the chain, the __to_s__ method may be called to get the command string:
 
 ```ruby
 command = msbuild('sample.csproj').target(:rebuild).property({ :configuration => :release }).to_s
@@ -107,8 +107,8 @@ This approach enables custom execution of a command which could be useful in the
 
 ### Team Foundation
 
-- tf 2010: [http://msdn.microsoft.com/en-us/library/cc31bk2e%28v=vs.100%29.aspx]
-- tf tee 2010: [http://msdn.microsoft.com/en-us/library/gg413282.aspx]
+- tf 2010: http://msdn.microsoft.com/en-us/library/cc31bk2e%28v=vs.100%29.aspx
+- tf tee 2010: http://msdn.microsoft.com/en-us/library/gg413282.aspx
 
 Note: The MSDN command line references contain many inaccuracies/incosistencies which many have traslated into this library.
 
