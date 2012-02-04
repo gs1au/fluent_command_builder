@@ -8,117 +8,185 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append 'tf'
         end
-        def add 
-          Add.new @builder
+        def add item_spec
+          Add.new @builder, item_spec
         end
-        def branch 
-          Branch.new @builder
+        def branch old_item, new_item
+          Branch.new @builder, old_item, new_item
         end
-        def branches 
-          Branches.new @builder
+        def branches item_spec
+          Branches.new @builder, item_spec
         end
-        def changeset 
-          Changeset.new @builder
+        def changeset changeset_number=nil
+          Changeset.new @builder, changeset_number
         end
-        def checkin 
-          Checkin.new @builder
+        def checkin item_spec=nil
+          Checkin.new @builder, item_spec
         end
-        def checkout 
-          Checkout.new @builder
+        def checkin_shelveset shelveset_name, shelveset_owner=nil
+          CheckinShelveset.new @builder, shelveset_name, shelveset_owner
         end
-        def delete 
-          Delete.new @builder
+        def checkout item_spec=nil
+          Checkout.new @builder, item_spec
         end
-        def destroy 
-          @builder.append ' destroy'
+        def delete item_spec
+          Delete.new @builder, item_spec
+        end
+        def destroy item_spec
+          Destroy.new @builder, item_spec
+        end
+        def compare_with_current_workspace_version item_spec
+          CompareWithCurrentWorkspaceVersion.new @builder, item_spec
+        end
+        def compare item_spec, item_spec2
+          Compare.new @builder, item_spec, item_spec2
+        end
+        def compare_with_shelveset_version shelveset_item_spec
+          CompareWithShelvesetVersion.new @builder, shelveset_item_spec
+        end
+        def configure_compare_tool 
+          @builder.append ' difference -configure'
           self
         end
-        def diff 
-          Diff.new @builder
-        end
-        def dir 
-          Dir.new @builder
+        def dir item_spec
+          Dir.new @builder, item_spec
         end
         def eula 
           Eula.new @builder
         end
-        def get 
-          Get.new @builder
+        def get item_spec=nil
+          Get.new @builder, item_spec
         end
         def getcs 
           Getcs.new @builder
         end
-        def history 
-          History.new @builder
+        def history item_spec
+          History.new @builder, item_spec
         end
-        def label 
-          Label.new @builder
+        def label label_name, item_spec, scope=nil
+          Label.new @builder, label_name, item_spec, scope
         end
-        def labels 
-          Labels.new @builder
+        def delete_label label_name, item_spec, scope=nil
+          DeleteLabel.new @builder, label_name, item_spec, scope
         end
-        def lock 
-          Lock.new @builder
+        def labels label_name=nil
+          Labels.new @builder, label_name
         end
-        def merge 
-          Merge.new @builder
+        def lock item_spec
+          Lock.new @builder, item_spec
         end
-        def merges 
-          Merges.new @builder
+        def merge source, destination
+          Merge.new @builder, source, destination
         end
-        def print 
-          Print.new @builder
+        def merges destination, source=nil
+          Merges.new @builder, destination, source
+        end
+        def print item_spec
+          Print.new @builder, item_spec
         end
         def product_key 
           ProductKey.new @builder
         end
-        def profile 
-          Profile.new @builder
+        def copy_profile existing_profile_name, new_profile_name
+          @builder.append " profile -copy #{@builder.format existing_profile_name} #{@builder.format new_profile_name}"
+          self
+        end
+        def delete_profile profile_name
+          @builder.append " profile -delete #{@builder.format profile_name}"
+          self
+        end
+        def edit_profile existing_profile_name
+          EditProfile.new @builder, existing_profile_name
+        end
+        def new_profile new_profile_name
+          NewProfile.new @builder, new_profile_name
         end
         def profiles 
           Profiles.new @builder
         end
-        def properties 
-          Properties.new @builder
+        def properties item_spec
+          Properties.new @builder, item_spec
         end
         def reconcile 
           Reconcile.new @builder
         end
-        def rename 
-          Rename.new @builder
+        def reconcile_build build_name, item_spec=nil
+          ReconcileBuild.new @builder, build_name, item_spec
         end
-        def resolve 
-          Resolve.new @builder
+        def reconcile_changeset changeset_name, item_spec=nil
+          ReconcileChangeset.new @builder, changeset_name, item_spec
         end
-        def shelve 
-          Shelve.new @builder
+        def reconcile_forget_build build_name, item_spec=nil
+          ReconcileForgetBuild.new @builder, build_name, item_spec
         end
-        def shelvesets 
-          Shelvesets.new @builder
+        def rename old_item, new_item
+          Rename.new @builder, old_item, new_item
         end
-        def status 
-          Status.new @builder
+        def resolve item_spec=nil
+          Resolve.new @builder, item_spec
         end
-        def undelete 
-          Undelete.new @builder
+        def replace_shelveset shelveset_name
+          ReplaceShelveset.new @builder, shelveset_name
         end
-        def undo 
-          Undo.new @builder
+        def shelve shelveset_name, item_spec
+          Shelve.new @builder, shelveset_name, item_spec
         end
-        def unlabel 
-          Unlabel.new @builder
+        def delete_shelveset shelveset_name, shelveset_owner=nil
+          DeleteShelveset.new @builder, shelveset_name, shelveset_owner
         end
-        def unshelve 
-          Unshelve.new @builder
+        def shelvesets shelveset_name=nil
+          Shelvesets.new @builder, shelveset_name
         end
-        def workfold 
-          Workfold.new @builder
+        def status item_spec
+          Status.new @builder, item_spec
         end
-        def workspace 
-          Workspace.new @builder
+        def undelete item_spec, deletion_id=nil
+          Undelete.new @builder, item_spec, deletion_id
         end
-        def workspaces 
-          Workspaces.new @builder
+        def undo item_spec
+          Undo.new @builder, item_spec
+        end
+        def unlabel label_name, item_spec
+          Unlabel.new @builder, label_name, item_spec
+        end
+        def unshelve shelveset_name=nil, username=nil, item_spec=nil
+          Unshelve.new @builder, shelveset_name, username, item_spec
+        end
+        def show_local_folder_mapping local_folder
+          ShowLocalFolderMapping.new @builder, local_folder
+        end
+        def show_workspace_mappings workspace_name
+          ShowWorkspaceMappings.new @builder, workspace_name
+        end
+        def show_server_folder_mappings server_folder
+          ShowServerFolderMappings.new @builder, server_folder
+        end
+        def map_folder server_folder, local_folder
+          MapFolder.new @builder, server_folder, local_folder
+        end
+        def unmap_folder 
+          UnmapFolder.new @builder
+        end
+        def cloak_folder server_folder
+          CloakFolder.new @builder, server_folder
+        end
+        def decloak_folder server_folder
+          DecloakFolder.new @builder, server_folder
+        end
+        def create_workspace workspace_name, workspace_owner=nil
+          CreateWorkspace.new @builder, workspace_name, workspace_owner
+        end
+        def delete_workspace workspace_name, workspace_owner=nil
+          DeleteWorkspace.new @builder, workspace_name, workspace_owner
+        end
+        def modify_workspace workspace_name=nil, workspace_owner=nil
+          ModifyWorkspace.new @builder, workspace_name, workspace_owner
+        end
+        def workspaces workspace_name=nil
+          Workspaces.new @builder, workspace_name
+        end
+        def remove_workspace workspace_name
+          RemoveWorkspace.new @builder, workspace_name
         end
         def to_s 
           @builder.to_s
@@ -133,13 +201,9 @@ module FluentCommandBuilder
         end
       end
       class Add
-        def initialize builder
+        def initialize builder, item_spec
           @builder = builder
-          @builder.append ' add'
-        end
-        def item_spec item_spec
-          @builder.append " #{@builder.format item_spec}"
-          self
+          @builder.append " add #{@builder.format item_spec, ' '}"
         end
         def lock lock_type
           @builder.append " -lock:#{@builder.format lock_type}"
@@ -157,8 +221,11 @@ module FluentCommandBuilder
           @builder.append ' -recursive'
           self
         end
-        def login credentials
-          @builder.append " -login:#{@builder.format credentials}"
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
           self
         end
         def to_s 
@@ -174,17 +241,9 @@ module FluentCommandBuilder
         end
       end
       class Branch
-        def initialize builder
+        def initialize builder, old_item, new_item
           @builder = builder
-          @builder.append ' branch'
-        end
-        def old_item old_item
-          @builder.append " #{@builder.format old_item}"
-          self
-        end
-        def new_item new_item
-          @builder.append " #{@builder.format new_item}"
-          self
+          @builder.append " branch #{@builder.format old_item} #{@builder.format new_item}"
         end
         def version version_spec
           @builder.append " -version:#{@builder.format version_spec}"
@@ -218,8 +277,11 @@ module FluentCommandBuilder
           @builder.append " -author:#{@builder.format author_name}"
           self
         end
-        def login credentials
-          @builder.append " -login:#{@builder.format credentials}"
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
           self
         end
         def to_s 
@@ -235,13 +297,9 @@ module FluentCommandBuilder
         end
       end
       class Branches
-        def initialize builder
+        def initialize builder, item_spec
           @builder = builder
-          @builder.append ' branches'
-        end
-        def item_spec item_spec
-          @builder.append " #{@builder.format item_spec}"
-          self
+          @builder.append " branches #{@builder.format item_spec}"
         end
         def version version_spec
           @builder.append " -version:#{@builder.format version_spec}"
@@ -251,8 +309,11 @@ module FluentCommandBuilder
           @builder.append " -collection:#{@builder.format team_project_collection_url}"
           self
         end
-        def login credentials
-          @builder.append " -login:#{@builder.format credentials}"
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
           self
         end
         def to_s 
@@ -268,16 +329,17 @@ module FluentCommandBuilder
         end
       end
       class Changeset
-        def initialize builder
+        def initialize builder, changeset_number=nil
           @builder = builder
           @builder.append ' changeset'
+          @builder.append " #{@builder.format changeset_number}" unless changeset_number.nil?
         end
         def comment comment
           @builder.append " -comment:#{@builder.format comment}"
           self
         end
         def notes notes
-          @builder.append " -notes:#{@builder.format notes}"
+          @builder.append " -notes:#{@builder.format notes, ';', '='}"
           self
         end
         def no_prompt 
@@ -288,16 +350,15 @@ module FluentCommandBuilder
           @builder.append " -collection:#{@builder.format team_project_collection_url}"
           self
         end
-        def changeset_number changeset_number
-          @builder.append " #{@builder.format changeset_number}"
-          self
-        end
         def latest 
           @builder.append ' -latest'
           self
         end
-        def login credentials
-          @builder.append " -login:#{@builder.format credentials}"
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
           self
         end
         def to_s 
@@ -313,9 +374,10 @@ module FluentCommandBuilder
         end
       end
       class Checkin
-        def initialize builder
+        def initialize builder, item_spec=nil
           @builder = builder
           @builder.append ' checkin'
+          @builder.append " #{@builder.format item_spec, ' '}" unless item_spec.nil?
         end
         def author author_name
           @builder.append " -author:#{@builder.format author_name}"
@@ -330,7 +392,7 @@ module FluentCommandBuilder
           self
         end
         def notes notes
-          @builder.append " -notes:#{@builder.format notes}"
+          @builder.append " -notes:#{@builder.format notes, ';', '='}"
           self
         end
         def override reason
@@ -349,20 +411,15 @@ module FluentCommandBuilder
           @builder.append ' -validate'
           self
         end
-        def item_spec item_spec
-          @builder.append " #{@builder.format item_spec}"
-          self
-        end
         def bypass 
           @builder.append ' -bypass'
           self
         end
-        def login credentials
-          @builder.append " -login:#{@builder.format credentials}"
-          self
-        end
-        def shelveset shelveset_name
-          @builder.append " -shelveset:#{@builder.format shelveset_name}"
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
           self
         end
         def collection team_project_collection_url
@@ -385,10 +442,56 @@ module FluentCommandBuilder
           end
         end
       end
+      class CheckinShelveset
+        def initialize builder, shelveset_name, shelveset_owner=nil
+          @builder = builder
+          @builder.append " checkin -shelveset:#{@builder.format shelveset_name}"
+          @builder.append ";#{@builder.format shelveset_owner}" unless shelveset_owner.nil?
+        end
+        def bypass 
+          @builder.append ' -bypass'
+          self
+        end
+        def no_prompt 
+          @builder.append ' -noPrompt'
+          self
+        end
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
+          self
+        end
+        def collection team_project_collection_url
+          @builder.append " -collection:#{@builder.format team_project_collection_url}"
+          self
+        end
+        def author author_name
+          @builder.append " -author:#{@builder.format author_name}"
+          self
+        end
+        def force 
+          @builder.append ' -force'
+          self
+        end
+        def to_s 
+          @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
+      end
       class Checkout
-        def initialize builder
+        def initialize builder, item_spec=nil
           @builder = builder
           @builder.append ' checkout'
+          @builder.append " #{@builder.format item_spec}" unless item_spec.nil?
         end
         def lock lock_type
           @builder.append " -lock:#{@builder.format lock_type}"
@@ -402,12 +505,11 @@ module FluentCommandBuilder
           @builder.append " -type:#{@builder.format encoding}"
           self
         end
-        def item_spec item_spec
-          @builder.append " #{@builder.format item_spec}"
-          self
-        end
-        def login credentials
-          @builder.append " -login:#{@builder.format credentials}"
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
           self
         end
         def to_s 
@@ -423,9 +525,9 @@ module FluentCommandBuilder
         end
       end
       class Delete
-        def initialize builder
+        def initialize builder, item_spec
           @builder = builder
-          @builder.append ' delete'
+          @builder.append " delete #{@builder.format item_spec, ' '}"
         end
         def lock lock_type
           @builder.append " -lock:#{@builder.format lock_type}"
@@ -435,12 +537,11 @@ module FluentCommandBuilder
           @builder.append ' -recursive'
           self
         end
-        def login credentials
-          @builder.append " -login:#{@builder.format credentials}"
-          self
-        end
-        def item_spec item_spec
-          @builder.append " #{@builder.format item_spec}"
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
           self
         end
         def to_s 
@@ -455,18 +556,62 @@ module FluentCommandBuilder
           end
         end
       end
-      class Diff
-        def initialize builder
+      class Destroy
+        def initialize builder, item_spec
           @builder = builder
-          @builder.append ' diff'
+          @builder.append " destroy #{@builder.format item_spec, ' '}"
         end
-        def item_spec item_spec
-          @builder.append " #{@builder.format item_spec}"
+        def keep_history 
+          @builder.append ' -keepHistory'
           self
         end
-        def item_spec2 item_spec2
-          @builder.append " #{@builder.format item_spec2}"
+        def stop_at version_spec
+          @builder.append " -stopAt:#{@builder.format version_spec}"
           self
+        end
+        def preview 
+          @builder.append ' -preview'
+          self
+        end
+        def start_cleanup 
+          @builder.append ' -startCleanup'
+          self
+        end
+        def no_prompt 
+          @builder.append ' -noPrompt'
+          self
+        end
+        def silent 
+          @builder.append ' -silent'
+          self
+        end
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
+          self
+        end
+        def collection team_project_collection_url
+          @builder.append " -collection:#{@builder.format team_project_collection_url}"
+          self
+        end
+        def to_s 
+          @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
+      end
+      class CompareWithCurrentWorkspaceVersion
+        def initialize builder, item_spec
+          @builder = builder
+          @builder.append " difference #{@builder.format item_spec}"
         end
         def version version_spec
           @builder.append " -version:#{@builder.format version_spec}"
@@ -504,20 +649,128 @@ module FluentCommandBuilder
           @builder.append ' -noPrompt'
           self
         end
-        def login credentials
-          @builder.append " -login:#{@builder.format credentials}"
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
           self
         end
-        def shelveset shelveset_name
+        def to_s 
+          @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
+      end
+      class Compare
+        def initialize builder, item_spec, item_spec2
+          @builder = builder
+          @builder.append " difference #{@builder.format item_spec} #{@builder.format item_spec2}"
+        end
+        def type file_type
+          @builder.append " -type:#{@builder.format file_type}"
+          self
+        end
+        def format format
+          @builder.append " -format:#{@builder.format format}"
+          self
+        end
+        def ignore_space 
+          @builder.append ' -ignoreSpace'
+          self
+        end
+        def ignore_eol 
+          @builder.append ' -ignoreEol'
+          self
+        end
+        def ignore_case 
+          @builder.append ' -ignoreCase'
+          self
+        end
+        def recursive 
+          @builder.append ' -recursive'
+          self
+        end
+        def options 
+          @builder.append ' -options'
+          self
+        end
+        def no_prompt 
+          @builder.append ' -noPrompt'
+          self
+        end
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
+          self
+        end
+        def to_s 
+          @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
+      end
+      class CompareWithShelvesetVersion
+        def initialize builder, shelveset_item_spec
+          @builder = builder
+          @builder.append " difference #{@builder.format shelveset_item_spec}"
+        end
+        def shelveset shelveset_name, shelveset_owner=nil
           @builder.append " -shelveset:#{@builder.format shelveset_name}"
+          @builder.append ";#{@builder.format shelveset_owner}" unless shelveset_owner.nil?
           self
         end
-        def shelveset_itemspec shelveset_itemspec
-          @builder.append " #{@builder.format shelveset_itemspec}"
+        def type file_type
+          @builder.append " -type:#{@builder.format file_type}"
           self
         end
-        def configure 
-          @builder.append ' -configure'
+        def format format
+          @builder.append " -format:#{@builder.format format}"
+          self
+        end
+        def ignore_space 
+          @builder.append ' -ignoreSpace'
+          self
+        end
+        def ignore_eol 
+          @builder.append ' -ignoreEol'
+          self
+        end
+        def ignore_case 
+          @builder.append ' -ignoreCase'
+          self
+        end
+        def recursive 
+          @builder.append ' -recursive'
+          self
+        end
+        def options 
+          @builder.append ' -options'
+          self
+        end
+        def no_prompt 
+          @builder.append ' -noPrompt'
+          self
+        end
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
           self
         end
         def to_s 
@@ -533,13 +786,9 @@ module FluentCommandBuilder
         end
       end
       class Dir
-        def initialize builder
+        def initialize builder, item_spec
           @builder = builder
-          @builder.append ' dir'
-        end
-        def item_spec item_spec
-          @builder.append " #{@builder.format item_spec}"
-          self
+          @builder.append " dir #{@builder.format item_spec, ' '}"
         end
         def version version_spec
           @builder.append " -version:#{@builder.format version_spec}"
@@ -557,8 +806,11 @@ module FluentCommandBuilder
           @builder.append ' -deleted'
           self
         end
-        def login credentials
-          @builder.append " -login:#{@builder.format credentials}"
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
           self
         end
         def collection team_project_collection_url
@@ -599,13 +851,10 @@ module FluentCommandBuilder
         end
       end
       class Get
-        def initialize builder
+        def initialize builder, item_spec=nil
           @builder = builder
           @builder.append ' get'
-        end
-        def item_spec item_spec
-          @builder.append " #{@builder.format item_spec}"
-          self
+          @builder.append " #{@builder.format item_spec, ' '}" unless item_spec.nil?
         end
         def version version_spec
           @builder.append " -version:#{@builder.format version_spec}"
@@ -639,8 +888,11 @@ module FluentCommandBuilder
           @builder.append ' -noPrompt'
           self
         end
-        def login credentials
-          @builder.append " -login:#{@builder.format credentials}"
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
           self
         end
         def to_s 
@@ -681,13 +933,9 @@ module FluentCommandBuilder
         end
       end
       class History
-        def initialize builder
+        def initialize builder, item_spec
           @builder = builder
-          @builder.append ' history'
-        end
-        def item_spec item_spec
-          @builder.append " #{@builder.format item_spec}"
-          self
+          @builder.append " history #{@builder.format item_spec}"
         end
         def version version_spec
           @builder.append " -version:#{@builder.format version_spec}"
@@ -721,8 +969,11 @@ module FluentCommandBuilder
           @builder.append ' -noPrompt'
           self
         end
-        def login credentials
-          @builder.append " -login:#{@builder.format credentials}"
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
           self
         end
         def sort sort
@@ -746,20 +997,14 @@ module FluentCommandBuilder
         end
       end
       class Label
-        def initialize builder
+        def initialize builder, label_name, item_spec, scope=nil
           @builder = builder
-          @builder.append ' label'
-        end
-        def label_name label_name
-          @builder.append " #{@builder.format label_name}"
-          self
+          @builder.append " label #{@builder.format label_name}"
+          @builder.append "@#{@builder.format scope}" unless scope.nil?
+          @builder.append " #{@builder.format item_spec, ' '}"
         end
         def owner owner_name
           @builder.append " -owner:#{@builder.format owner_name}"
-          self
-        end
-        def item_spec item_spec
-          @builder.append " #{@builder.format item_spec}"
           self
         end
         def version version_spec
@@ -778,16 +1023,45 @@ module FluentCommandBuilder
           @builder.append ' -recursive'
           self
         end
-        def login credentials
-          @builder.append " -login:#{@builder.format credentials}"
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
           self
         end
         def collection team_project_collection_url
           @builder.append " -collection:#{@builder.format team_project_collection_url}"
           self
         end
-        def delete 
-          @builder.append ' -delete'
+        def to_s 
+          @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
+      end
+      class DeleteLabel
+        def initialize builder, label_name, item_spec, scope=nil
+          @builder = builder
+          @builder.append " label -delete #{@builder.format label_name}"
+          @builder.append "@#{@builder.format scope}" unless scope.nil?
+          @builder.append " #{@builder.format item_spec, ' '}"
+        end
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
+          self
+        end
+        def collection team_project_collection_url
+          @builder.append " -collection:#{@builder.format team_project_collection_url}"
           self
         end
         def to_s 
@@ -803,9 +1077,10 @@ module FluentCommandBuilder
         end
       end
       class Labels
-        def initialize builder
+        def initialize builder, label_name=nil
           @builder = builder
           @builder.append ' labels'
+          @builder.append " #{@builder.format label_name}" unless label_name.nil?
         end
         def owner owner_name
           @builder.append " -owner:#{@builder.format owner_name}"
@@ -819,12 +1094,11 @@ module FluentCommandBuilder
           @builder.append " -collection:#{@builder.format team_project_collection_url}"
           self
         end
-        def label_name label_name
-          @builder.append " #{@builder.format label_name}"
-          self
-        end
-        def login credentials
-          @builder.append " -login:#{@builder.format credentials}"
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
           self
         end
         def to_s 
@@ -840,28 +1114,28 @@ module FluentCommandBuilder
         end
       end
       class Lock
-        def initialize builder
+        def initialize builder, item_spec
           @builder = builder
-          @builder.append ' lock'
-        end
-        def item_spec item_spec
-          @builder.append " #{@builder.format item_spec}"
-          self
+          @builder.append " lock #{@builder.format item_spec, ' '}"
         end
         def lock lock_type
           @builder.append " -lock:#{@builder.format lock_type}"
           self
         end
-        def workspace workspace_name
+        def workspace workspace_name, workspace_owner=nil
           @builder.append " -workspace:#{@builder.format workspace_name}"
+          @builder.append ";#{@builder.format workspace_owner}" unless workspace_owner.nil?
           self
         end
         def recursive 
           @builder.append ' -recursive'
           self
         end
-        def login credentials
-          @builder.append " -login:#{@builder.format credentials}"
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
           self
         end
         def collection team_project_collection_url
@@ -881,9 +1155,9 @@ module FluentCommandBuilder
         end
       end
       class Merge
-        def initialize builder
+        def initialize builder, source, destination
           @builder = builder
-          @builder.append ' merge'
+          @builder.append " merge #{@builder.format source} #{@builder.format destination}"
         end
         def recursive 
           @builder.append ' -recursive'
@@ -937,16 +1211,11 @@ module FluentCommandBuilder
           @builder.append ' -noPrompt'
           self
         end
-        def login credentials
-          @builder.append " -login:#{@builder.format credentials}"
-          self
-        end
-        def source source
-          @builder.append " #{@builder.format source}"
-          self
-        end
-        def destination destination
-          @builder.append " #{@builder.format destination}"
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
           self
         end
         def to_s 
@@ -962,17 +1231,11 @@ module FluentCommandBuilder
         end
       end
       class Merges
-        def initialize builder
+        def initialize builder, destination, source=nil
           @builder = builder
           @builder.append ' merges'
-        end
-        def source source
-          @builder.append " #{@builder.format source}"
-          self
-        end
-        def destination destination
+          @builder.append " #{@builder.format source}" unless source.nil?
           @builder.append " #{@builder.format destination}"
-          self
         end
         def recursive 
           @builder.append ' -recursive'
@@ -986,8 +1249,11 @@ module FluentCommandBuilder
           @builder.append " -format:#{@builder.format format}"
           self
         end
-        def login credentials
-          @builder.append " -login:#{@builder.format credentials}"
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
           self
         end
         def show_all 
@@ -1011,16 +1277,12 @@ module FluentCommandBuilder
         end
       end
       class Print
-        def initialize builder
+        def initialize builder, item_spec
           @builder = builder
-          @builder.append ' print'
+          @builder.append " print #{@builder.format item_spec, ' '}"
         end
         def version version_spec
           @builder.append " -version:#{@builder.format version_spec}"
-          self
-        end
-        def item_spec item_spec
-          @builder.append " #{@builder.format item_spec}"
           self
         end
         def to_s 
@@ -1060,26 +1322,39 @@ module FluentCommandBuilder
           end
         end
       end
-      class Profile
-        def initialize builder
+      class EditProfile
+        def initialize builder, existing_profile_name
           @builder = builder
-          @builder.append ' profile'
+          @builder.append " profile -edit #{@builder.format existing_profile_name}"
         end
-        def copy existing_profile_name, new_profile_name
-          @builder.append " -copy #{@builder.format existing_profile_name} #{@builder.format new_profile_name}"
+        def string property_name, value
+          @builder.append " -string:#{@builder.format property_name}=#{@builder.format value}"
           self
         end
-        def delete profile_name
-          @builder.append " -delete #{@builder.format profile_name}"
+        def boolean property_name, value
+          @builder.append " -boolean:#{@builder.format property_name}=#{@builder.format value}"
           self
         end
-        def edit existing_profile_name
-          @builder.append " -edit #{@builder.format existing_profile_name}"
+        def number property_name, value
+          @builder.append " -number:#{@builder.format property_name}=#{@builder.format value}"
           self
         end
-        def new new_profile_name
-          @builder.append " -new #{@builder.format new_profile_name}"
-          self
+        def to_s 
+          @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
+      end
+      class NewProfile
+        def initialize builder, new_profile_name
+          @builder = builder
+          @builder.append " profile -new #{@builder.format new_profile_name}"
         end
         def string property_name, value
           @builder.append " -string:#{@builder.format property_name}=#{@builder.format value}"
@@ -1127,9 +1402,9 @@ module FluentCommandBuilder
         end
       end
       class Properties
-        def initialize builder
+        def initialize builder, item_spec
           @builder = builder
-          @builder.append ' properties'
+          @builder.append " properties #{@builder.format item_spec, ' '}"
         end
         def collection team_project_collection_url
           @builder.append " -collection:#{@builder.format team_project_collection_url}"
@@ -1139,20 +1414,20 @@ module FluentCommandBuilder
           @builder.append ' -recursive'
           self
         end
-        def login credentials
-          @builder.append " -login:#{@builder.format credentials}"
-          self
-        end
-        def item_spec item_spec
-          @builder.append " #{@builder.format item_spec}"
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
           self
         end
         def version version_spec
           @builder.append " -version:#{@builder.format version_spec}"
           self
         end
-        def workspace 
-          @builder.append ' -workspace'
+        def workspace workspace_name, workspace_owner=nil
+          @builder.append " -workspace:#{@builder.format workspace_name}"
+          @builder.append ";#{@builder.format workspace_owner}" unless workspace_owner.nil?
           self
         end
         def to_s 
@@ -1176,24 +1451,102 @@ module FluentCommandBuilder
           @builder.append " -teamProject:#{@builder.format team_project_name}"
           self
         end
-        def build_name build_name
-          @builder.append " -buildName:#{@builder.format build_name}"
+        def workspace workspace_name, workspace_owner=nil
+          @builder.append " -workspace:#{@builder.format workspace_name}"
+          @builder.append ";#{@builder.format workspace_owner}" unless workspace_owner.nil?
+          self
+        end
+        def to_s 
+          @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
+      end
+      class ReconcileBuild
+        def initialize builder, build_name, item_spec=nil
+          @builder = builder
+          @builder.append " reconcile -buildName:#{@builder.format build_name}"
+          @builder.append " #{@builder.format item_spec, ' '}" unless item_spec.nil?
+        end
+        def team_project team_project_name
+          @builder.append " -teamProject:#{@builder.format team_project_name}"
+          self
+        end
+        def workspace workspace_name, workspace_owner=nil
+          @builder.append " -workspace:#{@builder.format workspace_name}"
+          @builder.append ";#{@builder.format workspace_owner}" unless workspace_owner.nil?
           self
         end
         def recursive 
           @builder.append ' -recursive'
           self
         end
-        def changeset changeset_name
-          @builder.append " -changeset:#{@builder.format changeset_name}"
+        def to_s 
+          @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
+      end
+      class ReconcileChangeset
+        def initialize builder, changeset_name, item_spec=nil
+          @builder = builder
+          @builder.append " reconcile -changeset:#{@builder.format changeset_name}"
+          @builder.append " #{@builder.format item_spec, ' '}" unless item_spec.nil?
+        end
+        def team_project team_project_name
+          @builder.append " -teamProject:#{@builder.format team_project_name}"
           self
         end
-        def forget_build build_name
-          @builder.append " -forgetBuild:#{@builder.format build_name}"
+        def workspace workspace_name, workspace_owner=nil
+          @builder.append " -workspace:#{@builder.format workspace_name}"
+          @builder.append ";#{@builder.format workspace_owner}" unless workspace_owner.nil?
           self
         end
-        def item_spec item_spec
-          @builder.append " #{@builder.format item_spec}"
+        def recursive 
+          @builder.append ' -recursive'
+          self
+        end
+        def to_s 
+          @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
+      end
+      class ReconcileForgetBuild
+        def initialize builder, build_name, item_spec=nil
+          @builder = builder
+          @builder.append " reconcile -forgetBuild:#{@builder.format build_name}"
+          @builder.append " #{@builder.format item_spec, ' '}" unless item_spec.nil?
+        end
+        def team_project team_project_name
+          @builder.append " -teamProject:#{@builder.format team_project_name}"
+          self
+        end
+        def workspace workspace_name, workspace_owner=nil
+          @builder.append " -workspace:#{@builder.format workspace_name}"
+          @builder.append ";#{@builder.format workspace_owner}" unless workspace_owner.nil?
+          self
+        end
+        def recursive 
+          @builder.append ' -recursive'
           self
         end
         def to_s 
@@ -1209,24 +1562,19 @@ module FluentCommandBuilder
         end
       end
       class Rename
-        def initialize builder
+        def initialize builder, old_item, new_item
           @builder = builder
-          @builder.append ' rename'
+          @builder.append " rename #{@builder.format old_item} #{@builder.format new_item}"
         end
         def lock lock_type
           @builder.append " -lock:#{@builder.format lock_type}"
           self
         end
-        def login credentials
-          @builder.append " -login:#{@builder.format credentials}"
-          self
-        end
-        def old_item old_item
-          @builder.append " #{@builder.format old_item}"
-          self
-        end
-        def new_item new_item
-          @builder.append " #{@builder.format new_item}"
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
           self
         end
         def to_s 
@@ -1242,13 +1590,10 @@ module FluentCommandBuilder
         end
       end
       class Resolve
-        def initialize builder
+        def initialize builder, item_spec=nil
           @builder = builder
           @builder.append ' resolve'
-        end
-        def item_spec item_spec
-          @builder.append " #{@builder.format item_spec}"
-          self
+          @builder.append " #{@builder.format item_spec, ' '}" unless item_spec.nil?
         end
         def auto resolution
           @builder.append " -auto:#{@builder.format resolution}"
@@ -1278,8 +1623,47 @@ module FluentCommandBuilder
           @builder.append ' -noPrompt'
           self
         end
-        def login credentials
-          @builder.append " -login:#{@builder.format credentials}"
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
+          self
+        end
+        def to_s 
+          @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
+      end
+      class ReplaceShelveset
+        def initialize builder, shelveset_name
+          @builder = builder
+          @builder.append " shelve -replace #{@builder.format shelveset_name}"
+        end
+        def comment comment
+          @builder.append " -comment:#{@builder.format comment}"
+          self
+        end
+        def validate 
+          @builder.append ' -validate'
+          self
+        end
+        def no_prompt 
+          @builder.append ' -noPrompt'
+          self
+        end
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
           self
         end
         def to_s 
@@ -1295,9 +1679,13 @@ module FluentCommandBuilder
         end
       end
       class Shelve
-        def initialize builder
+        def initialize builder, shelveset_name, item_spec
           @builder = builder
-          @builder.append ' shelve'
+          @builder.append " shelve #{@builder.format shelveset_name} #{@builder.format item_spec, ' '}"
+        end
+        def move 
+          @builder.append ' -move'
+          self
         end
         def replace 
           @builder.append ' -replace'
@@ -1307,8 +1695,8 @@ module FluentCommandBuilder
           @builder.append " -comment:#{@builder.format comment}"
           self
         end
-        def shelveset_name shelveset_name
-          @builder.append " #{@builder.format shelveset_name}"
+        def recursive 
+          @builder.append ' -recursive'
           self
         end
         def validate 
@@ -1319,24 +1707,36 @@ module FluentCommandBuilder
           @builder.append ' -noPrompt'
           self
         end
-        def login credentials
-          @builder.append " -login:#{@builder.format credentials}"
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
           self
         end
-        def move 
-          @builder.append ' -move'
-          self
+        def to_s 
+          @builder.to_s
         end
-        def recursive 
-          @builder.append ' -recursive'
-          self
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
         end
-        def item_spec item_spec
-          @builder.append " #{@builder.format item_spec}"
-          self
+      end
+      class DeleteShelveset
+        def initialize builder, shelveset_name, shelveset_owner=nil
+          @builder = builder
+          @builder.append " shelve -delete #{@builder.format shelveset_name}"
+          @builder.append ";#{@builder.format shelveset_owner}" unless shelveset_owner.nil?
         end
-        def delete 
-          @builder.append ' -delete'
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
           self
         end
         def collection team_project_collection_url
@@ -1356,9 +1756,10 @@ module FluentCommandBuilder
         end
       end
       class Shelvesets
-        def initialize builder
+        def initialize builder, shelveset_name=nil
           @builder = builder
           @builder.append ' shelvesets'
+          @builder.append " #{@builder.format shelveset_name}" unless shelveset_name.nil?
         end
         def owner owner_name
           @builder.append " -owner:#{@builder.format owner_name}"
@@ -1372,12 +1773,11 @@ module FluentCommandBuilder
           @builder.append " -collection:#{@builder.format team_project_collection_url}"
           self
         end
-        def login credentials
-          @builder.append " -login:#{@builder.format credentials}"
-          self
-        end
-        def shelveset_name shelveset_name
-          @builder.append " #{@builder.format shelveset_name}"
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
           self
         end
         def to_s 
@@ -1393,28 +1793,29 @@ module FluentCommandBuilder
         end
       end
       class Status
-        def initialize builder
+        def initialize builder, item_spec
           @builder = builder
-          @builder.append ' status'
-        end
-        def item_spec item_spec
-          @builder.append " #{@builder.format item_spec}"
-          self
+          @builder.append " status #{@builder.format item_spec}"
         end
         def collection team_project_collection_url
           @builder.append " -collection:#{@builder.format team_project_collection_url}"
           self
         end
-        def login credentials
-          @builder.append " -login:#{@builder.format credentials}"
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
           self
         end
-        def workspace workspace_name
+        def workspace workspace_name, workspace_owner=nil
           @builder.append " -workspace:#{@builder.format workspace_name}"
+          @builder.append ";#{@builder.format workspace_owner}" unless workspace_owner.nil?
           self
         end
-        def shelveset shelveset_name
+        def shelveset shelveset_name, shelveset_owner=nil
           @builder.append " -shelveset:#{@builder.format shelveset_name}"
+          @builder.append ";#{@builder.format shelveset_owner}" unless shelveset_owner.nil?
           self
         end
         def format format
@@ -1442,9 +1843,10 @@ module FluentCommandBuilder
         end
       end
       class Undelete
-        def initialize builder
+        def initialize builder, item_spec, deletion_id=nil
           @builder = builder
-          @builder.append ' undelete'
+          @builder.append " undelete #{@builder.format item_spec}"
+          @builder.append ";#{@builder.format deletion_id}" unless deletion_id.nil?
         end
         def no_get 
           @builder.append ' -noGet'
@@ -1458,12 +1860,11 @@ module FluentCommandBuilder
           @builder.append ' -recursive'
           self
         end
-        def item_spec item_spec
-          @builder.append " #{@builder.format item_spec}"
-          self
-        end
-        def login credentials
-          @builder.append " -login:#{@builder.format credentials}"
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
           self
         end
         def to_s 
@@ -1479,28 +1880,28 @@ module FluentCommandBuilder
         end
       end
       class Undo
-        def initialize builder
+        def initialize builder, item_spec
           @builder = builder
-          @builder.append ' undo'
+          @builder.append " undo #{@builder.format item_spec}"
         end
-        def workspace workspace_name
+        def workspace workspace_name, workspace_owner=nil
           @builder.append " -workspace:#{@builder.format workspace_name}"
+          @builder.append ";#{@builder.format workspace_owner}" unless workspace_owner.nil?
           self
         end
         def recursive 
           @builder.append ' -recursive'
           self
         end
-        def item_spec item_spec
-          @builder.append " #{@builder.format item_spec}"
-          self
-        end
         def no_prompt 
           @builder.append ' -noPrompt'
           self
         end
-        def login credentials
-          @builder.append " -login:#{@builder.format credentials}"
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
           self
         end
         def collection team_project_collection_url
@@ -1520,9 +1921,9 @@ module FluentCommandBuilder
         end
       end
       class Unlabel
-        def initialize builder
+        def initialize builder, label_name, item_spec
           @builder = builder
-          @builder.append ' unlabel'
+          @builder.append " unlabel #{@builder.format label_name} #{@builder.format item_spec, ' '}"
         end
         def collection team_project_collection_url
           @builder.append " -collection:#{@builder.format team_project_collection_url}"
@@ -1532,16 +1933,11 @@ module FluentCommandBuilder
           @builder.append ' -recursive'
           self
         end
-        def login credentials
-          @builder.append " -login:#{@builder.format credentials}"
-          self
-        end
-        def label_name label_name
-          @builder.append " #{@builder.format label_name}"
-          self
-        end
-        def item_spec item_spec
-          @builder.append " #{@builder.format item_spec}"
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
           self
         end
         def to_s 
@@ -1557,20 +1953,17 @@ module FluentCommandBuilder
         end
       end
       class Unshelve
-        def initialize builder
+        def initialize builder, shelveset_name=nil, username=nil, item_spec=nil
           @builder = builder
           @builder.append ' unshelve'
+          @builder.append " #{@builder.format shelveset_name}" unless shelveset_name.nil?
+          @builder.append ''
+          @builder.append ";#{@builder.format username}" unless username.nil?
+          @builder.append ''
+          @builder.append " #{@builder.format item_spec, ' '}" unless item_spec.nil?
         end
         def move 
           @builder.append ' -move'
-          self
-        end
-        def shelveset_name shelveset_name
-          @builder.append " #{@builder.format shelveset_name}"
-          self
-        end
-        def item_spec item_spec
-          @builder.append " #{@builder.format item_spec}"
           self
         end
         def recursive 
@@ -1581,8 +1974,11 @@ module FluentCommandBuilder
           @builder.append ' -noPrompt'
           self
         end
-        def login credentials
-          @builder.append " -login:#{@builder.format credentials}"
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
           self
         end
         def to_s 
@@ -1597,49 +1993,106 @@ module FluentCommandBuilder
           end
         end
       end
-      class Workfold
-        def initialize builder
+      class ShowLocalFolderMapping
+        def initialize builder, local_folder
           @builder = builder
-          @builder.append ' workfold'
+          @builder.append " workfold #{@builder.format local_folder}"
         end
-        def login credentials
-          @builder.append " -login:#{@builder.format credentials}"
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
           self
         end
-        def workspace workspace_name
+        def to_s 
+          @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
+      end
+      class ShowWorkspaceMappings
+        def initialize builder, workspace_name
+          @builder = builder
+          @builder.append " workfold -workspace:#{@builder.format workspace_name}"
+        end
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
+          self
+        end
+        def to_s 
+          @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
+      end
+      class ShowServerFolderMappings
+        def initialize builder, server_folder
+          @builder = builder
+          @builder.append " workfold #{@builder.format server_folder}"
+        end
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
+          self
+        end
+        def workspace workspace_name, workspace_owner=nil
           @builder.append " -workspace:#{@builder.format workspace_name}"
+          @builder.append ";#{@builder.format workspace_owner}" unless workspace_owner.nil?
           self
         end
         def collection team_project_collection_url
           @builder.append " -collection:#{@builder.format team_project_collection_url}"
           self
         end
-        def map 
-          @builder.append ' -map'
+        def to_s 
+          @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
+      end
+      class MapFolder
+        def initialize builder, server_folder, local_folder
+          @builder = builder
+          @builder.append " workfold -map #{@builder.format server_folder} #{@builder.format local_folder}"
+        end
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
           self
         end
-        def server_folder server_folder
-          @builder.append " #{@builder.format server_folder}"
+        def workspace workspace_name, workspace_owner=nil
+          @builder.append " -workspace:#{@builder.format workspace_name}"
+          @builder.append ";#{@builder.format workspace_owner}" unless workspace_owner.nil?
           self
         end
-        def local_folder local_folder
-          @builder.append " #{@builder.format local_folder}"
-          self
-        end
-        def unmap 
-          @builder.append ' -unmap'
-          self
-        end
-        def recursive 
-          @builder.append ' -recursive'
-          self
-        end
-        def cloak 
-          @builder.append ' -cloak'
-          self
-        end
-        def decloak 
-          @builder.append ' -decloak'
+        def collection team_project_collection_url
+          @builder.append " -collection:#{@builder.format team_project_collection_url}"
           self
         end
         def to_s 
@@ -1654,21 +2107,122 @@ module FluentCommandBuilder
           end
         end
       end
-      class Workspace
+      class UnmapFolder
         def initialize builder
           @builder = builder
-          @builder.append ' workspace'
+          @builder.append ' workfold -unmap'
         end
-        def new 
-          @builder.append ' -new'
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
           self
+        end
+        def workspace workspace_name, workspace_owner=nil
+          @builder.append " -workspace:#{@builder.format workspace_name}"
+          @builder.append ";#{@builder.format workspace_owner}" unless workspace_owner.nil?
+          self
+        end
+        def collection team_project_collection_url
+          @builder.append " -collection:#{@builder.format team_project_collection_url}"
+          self
+        end
+        def recursive 
+          @builder.append ' -recursive'
+          self
+        end
+        def to_s 
+          @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
+      end
+      class CloakFolder
+        def initialize builder, server_folder
+          @builder = builder
+          @builder.append " workfold -cloak #{@builder.format server_folder}"
+        end
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
+          self
+        end
+        def workspace workspace_name, workspace_owner=nil
+          @builder.append " -workspace:#{@builder.format workspace_name}"
+          @builder.append ";#{@builder.format workspace_owner}" unless workspace_owner.nil?
+          self
+        end
+        def collection team_project_collection_url
+          @builder.append " -collection:#{@builder.format team_project_collection_url}"
+          self
+        end
+        def to_s 
+          @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
+      end
+      class DecloakFolder
+        def initialize builder, server_folder
+          @builder = builder
+          @builder.append " workfold -decloak #{@builder.format server_folder}"
+        end
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
+          self
+        end
+        def workspace workspace_name, workspace_owner=nil
+          @builder.append " -workspace:#{@builder.format workspace_name}"
+          @builder.append ";#{@builder.format workspace_owner}" unless workspace_owner.nil?
+          self
+        end
+        def collection team_project_collection_url
+          @builder.append " -collection:#{@builder.format team_project_collection_url}"
+          self
+        end
+        def to_s 
+          @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
+      end
+      class CreateWorkspace
+        def initialize builder, workspace_name, workspace_owner=nil
+          @builder = builder
+          @builder.append " workspace -new #{@builder.format workspace_name}"
+          @builder.append ";#{@builder.format workspace_owner}" unless workspace_owner.nil?
         end
         def no_prompt 
           @builder.append ' -noPrompt'
           self
         end
-        def template workspace_name
+        def template workspace_name, workspace_owner=nil
           @builder.append " -template:#{@builder.format workspace_name}"
+          @builder.append ";#{@builder.format workspace_owner}" unless workspace_owner.nil?
           self
         end
         def computer computer_name
@@ -1687,16 +2241,83 @@ module FluentCommandBuilder
           @builder.append " -permission:#{@builder.format permission}"
           self
         end
-        def workspace_name workspace_name
-          @builder.append " #{@builder.format workspace_name}"
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
           self
         end
-        def login credentials
-          @builder.append " -login:#{@builder.format credentials}"
+        def to_s 
+          @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
+      end
+      class DeleteWorkspace
+        def initialize builder, workspace_name, workspace_owner=nil
+          @builder = builder
+          @builder.append " workspace -delete #{@builder.format workspace_name}"
+          @builder.append ";#{@builder.format workspace_owner}" unless workspace_owner.nil?
+        end
+        def collection team_project_collection_url
+          @builder.append " -collection:#{@builder.format team_project_collection_url}"
           self
         end
-        def delete 
-          @builder.append ' -delete'
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
+          self
+        end
+        def to_s 
+          @builder.to_s
+        end
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
+      end
+      class ModifyWorkspace
+        def initialize builder, workspace_name=nil, workspace_owner=nil
+          @builder = builder
+          @builder.append ' workspace '
+          @builder.append "#{@builder.format workspace_name}" unless workspace_name.nil?
+          @builder.append ''
+          @builder.append ";#{@builder.format workspace_owner}" unless workspace_owner.nil?
+        end
+        def computer computer_name
+          @builder.append " -computer:#{@builder.format computer_name}"
+          self
+        end
+        def comment comment
+          @builder.append " -comment:#{@builder.format comment}"
+          self
+        end
+        def collection team_project_collection_url
+          @builder.append " -collection:#{@builder.format team_project_collection_url}"
+          self
+        end
+        def permission permission
+          @builder.append " -permission:#{@builder.format permission}"
+          self
+        end
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
           self
         end
         def new_name workspace_name
@@ -1704,7 +2325,7 @@ module FluentCommandBuilder
           self
         end
         def new_owner owner_name
-          @builder.append " -newOwner:#{@builder.format owner_name}"
+          @builder.append " /newOwner:#{@builder.format owner_name}"
           self
         end
         def to_s 
@@ -1720,9 +2341,10 @@ module FluentCommandBuilder
         end
       end
       class Workspaces
-        def initialize builder
+        def initialize builder, workspace_name=nil
           @builder = builder
           @builder.append ' workspaces'
+          @builder.append " #{@builder.format workspace_name}" unless workspace_name.nil?
         end
         def owner owner_name
           @builder.append " -owner:#{@builder.format owner_name}"
@@ -1748,16 +2370,32 @@ module FluentCommandBuilder
           @builder.append " -updateComputerName:#{@builder.format old_computer_name}"
           self
         end
-        def workspace_name workspace_name
-          @builder.append " #{@builder.format workspace_name}"
+        def login username, domain=nil, password=nil
+          @builder.append " -login:#{@builder.format username}"
+          @builder.append "@#{@builder.format domain}" unless domain.nil?
+          @builder.append ''
+          @builder.append ",#{@builder.format password}" unless password.nil?
           self
         end
-        def login credentials
-          @builder.append " -login:#{@builder.format credentials}"
-          self
+        def to_s 
+          @builder.to_s
         end
-        def remove workspace_name
-          @builder.append " -remove:#{@builder.format workspace_name}"
+        def execute 
+          begin
+            require 'rake'
+            sh to_s
+          rescue LoadError
+            system to_s
+          end
+        end
+      end
+      class RemoveWorkspace
+        def initialize builder, workspace_name
+          @builder = builder
+          @builder.append " workspaces -remove:#{@builder.format workspace_name, ','}"
+        end
+        def collection team_project_collection_url
+          @builder.append " -collection:#{@builder.format team_project_collection_url}"
           self
         end
         def to_s 

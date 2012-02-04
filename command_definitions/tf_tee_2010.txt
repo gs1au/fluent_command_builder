@@ -1,93 +1,114 @@
 TEE 2010
 tf
-    add
-        <itemSpec>
-        -lock:<lockType>
+    add <itemSpec >
+        -lock
         -type:<fileType>
         -noPrompt
         -recursive
-        -login:<credentials>
-    branch
-        <oldItem>
-        <newItem>
-        -version:<versionSpec>
+        -login
+    branch <oldItem> <newItem>
+        -version
         -noGet
-        -lock:<lockType>
+        -lock
         -noPrompt
         -silent
         -checkin
-        -comment:<comment>
-        -author:<authorName>
-        -login:<credentials>
-    branches
-        <itemSpec>
-        -version:<versionSpec>
-        -collection:<teamProjectCollectionUrl>
-        -login:<credentials>
-    changeset
-        -comment:<comment>
-        -notes:<notes>
+        -comment
+        -author
+        -login
+    branches <itemSpec>
+        -version
+        -collection
+        -login
+    changeset[ <changesetNumber>]
+        -comment
+        -notes
         -noPrompt
-        -collection:<teamProjectCollectionUrl>
-        <changesetNumber>
+        -collection
         -latest
-        -login:<credentials>
-    checkin
-        -author:<authorName>
-        -comment:<comment>
+        -login
+    checkin[ <itemSpec >]
+        -author
+        -comment
         -noPrompt
-        -notes:<notes>
+        -notes
         -override:<reason>
         -recursive
         -saved
         -validate
-        <itemSpec>
         -bypass
-        -login:<credentials>
-        -shelveset:<shelvesetName>
-        -collection:<teamProjectCollectionUrl>
+        -login
+        -collection
         -force
-    checkout
-        -lock:<lockType>
+    checkin -shelveset:<shelvesetName>[;<shelvesetOwner>] (checkinShelveset)
+        -bypass
+        -noPrompt
+        -login
+        -collection
+        -author
+        -force
+    checkout[ <itemSpec>]
+        -lock
         -recursive
         -type:<encoding>
-        <itemSpec>
-        -login:<credentials>
-    delete
-        -lock:<lockType>
+        -login
+    delete <itemSpec >
+        -lock
         -recursive
-        -login:<credentials>
-        <itemSpec>
-    destroy
-    diff
-        <itemSpec>
-        <itemSpec2>
-        -version:<versionSpec>
+        -login
+    destroy <itemSpec >
+        -keepHistory
+        -stopAt:<versionSpec>
+        -preview
+        -startCleanup
+        -noPrompt
+        -silent
+        -login
+        -collection
+    difference <itemSpec> (compareWithCurrentWorkspaceVersion)
+        -version
         -type:<fileType>
-        -format:<format>
+        -format
         -ignoreSpace
         -ignoreEol
         -ignoreCase
         -recursive
         -options
         -noPrompt
-        -login:<credentials>
-        -shelveset:<shelvesetName>
-        <shelvesetItemspec>
-        -configure
-    dir
-        <itemSpec>
-        -version:<versionSpec>
+        -login
+    difference <itemSpec> <itemSpec2> (compare)
+        -type:<fileType>
+        -format
+        -ignoreSpace
+        -ignoreEol
+        -ignoreCase
+        -recursive
+        -options
+        -noPrompt
+        -login
+    difference <shelvesetItemSpec> (compareWithShelvesetVersion)
+        -shelveset
+        -type:<fileType>
+        -format
+        -ignoreSpace
+        -ignoreEol
+        -ignoreCase
+        -recursive
+        -options
+        -noPrompt
+        -login
+    difference -configure (configureCompareTool)
+    dir <itemSpec >
+        -version
         -recursive
         -folders
         -deleted
-        -login:<credentials>
-        -collection:<teamProjectCollectionUrl>
+        -login
+        -collection
     eula
         -accept
-    get
-        <itemSpec>
-        -version:<versionSpec>
+    get[ <itemSpec >]
+        -version
         -all
         -overwrite
         -force
@@ -95,110 +116,108 @@ tf
         -recursive
         -remap
         -noPrompt
-        -login:<credentials>
+        -login
     getcs
         -changeset:<changesetNumber>
         -latest
-    history
-        <itemSpec>
-        -version:<versionSpec>
+    history <itemSpec>
+        -version
         -stopAfter:<number>
         -recursive
         -user:<userName>
-        -format:<format>
+        -format
         -slotMode
         -itemMode
         -noPrompt
-        -login:<credentials>
+        -login
         -sort:<sort>
-        -collection:<teamProjectCollectionUrl>
-    label
-        <labelName>
+        -collection
+    label <labelName>[@<scope>] <itemSpec >
         -owner:<ownerName>
-        <itemSpec>
-        -version:<versionSpec>
-        -comment:<comment>
+        -version
+        -comment
         -child:<lockType>
         -recursive
-        -login:<credentials>
-        -collection:<teamProjectCollectionUrl>
-        -delete
-    labels
+        -login
+        -collection
+    label -delete <labelName>[@<scope>] <itemSpec > (deleteLabel)
+        -login
+        -collection
+    labels[ <labelName>]
         -owner:<ownerName>
-        -format:<format>
-        -collection:<teamProjectCollectionUrl>
-        <labelName>
-        -login:<credentials>
-    lock
-        <itemSpec>
-        -lock:<lockType>
+        -format
+        -collection
+        -login
+    lock <itemSpec >
+        -lock
         -workspace:<workspaceName>
         -recursive
-        -login:<credentials>
-        -collection:<teamProjectCollectionUrl>
-    merge
+        -login
+        -collection
+    merge <source> <destination>
         -recursive
         -force
         -candidate
         -discard
-        -version:<versionSpec>
-        -lock:<lockType>
+        -version
+        -lock
         -preview
         -baseless
         -noSummary
         -noImplicitBaseless
         -conservative
-        -format:<format>
+        -format
         -noPrompt
-        -login:<credentials>
-        <source>
-        <destination>
-    merges
-        <source>
-        <destination>
+        -login
+    merges[ <source>] <destination>
         -recursive
         -extended
-        -format:<format>
-        -login:<credentials>
+        -format
+        -login
         -showAll
-        -collection:<teamProjectCollectionUrl>
-    print
+        -collection
+    print <itemSpec >
         -version:<versionSpec>
-        <itemSpec>
     productKey
         -set:<myProductKey>
         -trial
-    profile
-        -copy <existingProfileName> <newProfileName>
-        -delete <profileName>
-        -edit <existingProfileName>
-        -new <newProfileName>
+    profile -copy <existingProfileName> <newProfileName> (copyProfile)
+    profile -delete <profileName> (deleteProfile)
+    profile -edit <existingProfileName> (editProfile)
+        -string:<propertyName>=<value>
+        -boolean:<propertyName>=<value>
+        -number:<propertyName>=<value>
+    profile -new <newProfileName> (newProfile)
         -string:<propertyName>=<value>
         -boolean:<propertyName>=<value>
         -number:<propertyName>=<value>
     profiles
         -format:<format>
-    properties
-        -collection:<teamProjectCollectionUrl>
+    properties <itemSpec >
+        -collection
         -recursive
-        -login:<credentials>
-        <itemSpec>
-        -version:<versionSpec>
+        -login
+        -version
         -workspace
     reconcile
         -teamProject:<teamProjectName>
-        -buildName:<buildName>
+        -workspace:<workspaceName>
+    reconcile -buildName:<buildName>[ <itemSpec >] (reconcileBuild)
+        -teamProject:<teamProjectName>
+        -workspace:<workspaceName>
         -recursive
-        -changeset:<changesetName>
-        -forgetBuild:<buildName>
-        <itemSpec>
-    rename
-        -lock:<lockType>
-        -login:<credentials>
-        <oldItem>
-        <newItem>
-    resolve
-        <itemSpec>
+    reconcile -changeset:<changesetName>[ <itemSpec >] (reconcileChangeset)
+        -teamProject:<teamProjectName>
+        -workspace:<workspaceName>
+        -recursive
+    reconcile -forgetBuild:<buildName>[ <itemSpec >] (reconcileForgetBuild)
+        -teamProject:<teamProjectName>
+        -workspace:<workspaceName>
+        -recursive
+    rename <oldItem> <newItem>
+        -lock
+        -login
+    resolve[ <itemSpec >]
         -auto:<resolution>
         -preview
         -overrideType:<overrideType>
@@ -206,91 +225,119 @@ tf
         -recursive
         -newName:<path>
         -noPrompt
-        -login:<credentials>
-    shelve
-        -replace
-        -comment:<comment>
-        <shelvesetName>
+        -login
+    shelve -replace <shelvesetName> (replaceShelveset)
+        -comment
         -validate
         -noPrompt
-        -login:<credentials>
+        -login
+    shelve <shelvesetName> <itemSpec >
         -move
+        -replace
+        -comment
         -recursive
-        <itemSpec>
-        -delete
-        -collection:<teamProjectCollectionUrl>
-    shelvesets
+        -validate
+        -noPrompt
+        -login
+    shelve -delete <shelvesetName>[;<shelvesetOwner>] (deleteShelveset)
+        -login
+        -collection
+    shelvesets[ <shelvesetName>]
         -owner:<ownerName>
-        -format:<format>
-        -collection:<teamProjectCollectionUrl>
-        -login:<credentials>
-        <shelvesetName>
-    status
-        <itemSpec>
-        -collection:<teamProjectCollectionUrl>
-        -login:<credentials>
-        -workspace:<workspaceName>
-        -shelveset:<shelvesetName>
-        -format:<format>
+        -format
+        -collection
+        -login
+    status <itemSpec>
+        -collection
+        -login
+        -workspace
+        -shelveset
+        -format
         -recursive
         -user:<userName>
-    undelete
+    undelete <itemSpec>[;<deletionId>]
         -noGet
-        -lock:<lockType>
+        -lock
         -recursive
-        <itemSpec>
-        -login:<credentials>
-    undo
-        -workspace:<workspaceName>
+        -login
+    undo <itemSpec>
+        -workspace
         -recursive
-        <itemSpec>
         -noPrompt
-        -login:<credentials>
-        -collection:<teamProjectCollectionUrl>
-    unlabel
-        -collection:<teamProjectCollectionUrl>
+        -login
+        -collection
+    unlabel <labelName> <itemSpec >
+        -collection
         -recursive
-        -login:<credentials>
-        <labelName>
-        <itemSpec>
-    unshelve
+        -login
+    unshelve[ <shelvesetName>][;<username>][ <itemSpec >]
         -move
-        <shelvesetName>
-        <itemSpec>
         -recursive
         -noPrompt
-        -login:<credentials>
-    workfold
-        -login:<credentials>
+        -login
+    workfold <localFolder> (showLocalFolderMapping)
+        -login
+    workfold -workspace:<workspaceName> (showWorkspaceMappings)
+        -login
+    workfold <serverFolder> (showServerFolderMappings)
+        -login
         -workspace:<workspaceName>
-        -collection:<teamProjectCollectionUrl>
-        -map
-        <serverFolder>
-        <localFolder>
-        -unmap
+        -collection
+    workfold -map <serverFolder> <localFolder> (mapFolder)
+        -login
+        -workspace:<workspaceName>
+        -collection
+    workfold -unmap (unmapFolder)
+        -login
+        -workspace:<workspaceName>
+        -collection
         -recursive
-        -cloak
-        -decloak
-    workspace
-        -new
+    workfold -cloak <serverFolder> (cloakFolder)
+        -login
+        -workspace:<workspaceName>
+        -collection
+    workfold -decloak <serverFolder> (decloakFolder)
+        -login
+        -workspace:<workspaceName>
+        -collection
+    workspace -new <workspaceName>[;<workspaceOwner>] (createWorkspace)
         -noPrompt
-        -template:<workspaceName>
+        -template:<workspaceName>[;<workspaceOwner>]
         -computer:<computerName>
-        -comment:<comment>
-        -collection:<teamProjectCollectionUrl>
+        -comment
+        -collection
         -permission:<permission>
-        <workspaceName>
-        -login:<credentials>
-        -delete
+        -login
+    workspace -delete <workspaceName>[;<workspaceOwner>] (deleteWorkspace)
+        -collection
+        -login
+    workspace [<workspaceName>][;<workspaceOwner>] (modifyWorkspace)
+        -computer:<computerName>
+        -comment
+        -collection
+        -permission:<permission>
+        -login
         -newName:<workspaceName>
-        -newOwner:<ownerName>
-    workspaces
+        /newOwner:<ownerName>
+    workspaces[ <workspaceName>]
         -owner:<ownerName>
         -computer:<computerName>
-        -collection:<teamProjectCollectionUrl>
-        -format:<format>
+        -collection
+        -format
         -updateUserName:<oldUserName>
         -updateComputerName:<oldComputerName>
-        <workspaceName>
-        -login:<credentials>
-        -remove:<workspaceName>
+        -login
+    workspaces -remove:<workspaceName,> (removeWorkspace)
+        -collection
+
+options:
+    -author:<authorName>
+    -comment:<comment>
+    -collection:<teamProjectCollectionUrl>
+    -format:<format>
+    -lock:<lockType>
+    -login:<username>[@<domain>][,<password>]
+    -notes:<notes=;>
+    -shelveset:<shelvesetName>[;<shelvesetOwner>]
+    -version:<versionSpec>
+    -workspace:<workspaceName>[;<workspaceOwner>]

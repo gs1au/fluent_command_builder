@@ -26,6 +26,8 @@ Extremely effective with [RubyMine](http://www.jetbrains.com/ruby/) intellisense
 
 ## Usage
 
+### Versioning
+
 Fluent Command Builder supports multiple versions of each command and offers two main usage scenarios.
 
 The first scenario involves including the modules for a specific version of each command:
@@ -35,8 +37,8 @@ require 'fluent_command_builder'
 include FluentCommandBuilder::MSBuild::V40
 include FluentCommandBuilder::NunitConsole::V25
 
-system msbuild('sample.csproj').target(:rebuild).property({ :configuration => :release }).to_s
-system nunit('sample.dll').include(:unit_tests).exclude(:integration_tests).to_s
+msbuild('sample.csproj').target(:rebuild).property({ :configuration => :release }).execute
+nunit('sample.dll').include(:unit_tests).exclude(:integration_tests).execute
 ```
 
 In this case, the msbuild method refers to MSBuild 4.0, and the nunit method refers to NUnit 2.5.
@@ -47,12 +49,29 @@ The second scenario involves calling a method for a specific version of each com
 require 'fluent_command_builder'
 include FluentCommandBuilder
 
-system msbuild_40('sample.csproj').target(:rebuild).property({ :configuration => :release }).to_s
-system nunit_25('sample.dll').include(:unit_tests).exclude(:integration_tests).to_s
+msbuild_40('sample.csproj').target(:rebuild).property({ :configuration => :release }).execute
+nunit_25('sample.dll').include(:unit_tests).exclude(:integration_tests).execute
 ```
 
 Notice how the version number forms part of the method itself.
 
+### Execution
+
+Fluent Command Builder offers two main usage scenarions for executing commands.
+
+The first scenario involves calling the __execute__ method at the end of any command:
+
+```ruby
+msbuild('sample.csproj').target(:rebuild).property({ :configuration => :release }).execute
+```
+
+If __Rake__ is installed, Rake's __sh__ method will be used to execute the command, otherwise __system__ will be used.
+
+The second scenario involves getting the command as a string using the __to_s__ method and executing it by another means:
+
+```ruby
+exec msbuild('sample.csproj').target(:rebuild).property({ :configuration => :release }).to_s
+```
 
 ## Supported Commands
 
@@ -68,7 +87,18 @@ Notice how the version number forms part of the method itself.
 - rake 0.9
 - sevenzip 9.2 (work in progress)
 - simian 2.3
-- tf 2010, TEE 2010
+- tf 2010, tee 2010
+
+## References
+
+### Team Foundation
+
+- tf 2010: http://msdn.microsoft.com/en-us/library/cc31bk2e%28v=vs.100%29.aspx
+- tf tee 2010: http://msdn.microsoft.com/en-us/library/gg413282.aspx
+
+Note: The MSDN command line references contain many inaccuracies/incosistencies which many have traslated into this library.
+
+## Project Notes
 
 Please note that this project is not constrained to the Microsoft platform.
 
