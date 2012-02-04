@@ -3,63 +3,63 @@ netsh
     advfirewall
         firewall
             add rule name=<ruleName> dir=<direction> action=<action> (addRule)
-                program=<path>
-                service=<serviceShortName>
-                description=<ruleDescription>
-                enable=<enable>
-                profile=<profile>
+                program
+                service
+                description
+                enable
+                profile
                 localIp
                 remoteIp
                 localPort
                 remotePort
-                protocol=<protocol>
-                interfaceType=<type>
-                rmtcomputergrp=<sddlString>
-                rmtusgrp=<sddlString>
-                edge=<edge>
-                security=<security>
+                protocol
+                interfaceType
+                rmtcomputergrp
+                rmtusgrp
+                edge
+                security
             delete rule name=<ruleName> (deleteRule)
-                dir=<direction>
-                profile=<profile>
-                program=<path>
-                service=<serviceShortName>
+                dir
+                profile
+                program
+                service
                 localIp
                 remoteIp
                 localPort
                 remotePort
-                protocol=<protocol>
+                protocol
             set rule
                 group=<groupName>
-                dir=<direction>
-                profile=<profile>
-                program=<path>
-                service=<serviceShortName>
+                dir
+                profile
+                program
+                service
                 localIp
                 remoteIp
                 localPort
                 remotePort
-                protocol=<protocol>
+                protocol
                 new
                     name=<ruleName>
-                    dir=<direction>
-                    program=<path>
-                    service=<serviceShortName>
-                    action=<action>
-                    description=<ruleDescription>
-                    enable=<enable>
-                    profile=<profile>
+                    dir
+                    program
+                    service
+                    action
+                    description
+                    enable
+                    profile
                     localIp
                     remoteIp
                     localPort
                     remotePort
-                    protocol=<protocol>
-                    interfaceType=<type>
-                    rmtcomputergrp=<sddlString>
-                    rmtusgrp=<sddlString>
-                    edge=<edge>
-                    security=<security>
+                    protocol
+                    interfaceType
+                    rmtcomputergrp
+                    rmtusgrp
+                    edge
+                    security
             show rule name=<ruleName> (showRule)
-                profile=<profile>
+                profile
                 type=<type>
                 verbose
     http
@@ -71,7 +71,20 @@ netsh
         delete urlacl url=<url> (deleteUrlAcl)
 
 options:
+    action=<action>
+    description=<ruleDescription>
+    dir=<direction>
+    edge=<edge>
+    enable=<enable>
+    interfaceType=<type>
     localIp=<address,>
-    remoteIp=<address,>
     localPort=<port,>
+    profile=<profile>
+    program=<path>
+    protocol=<protocol>
+    remoteIp=<address,>
     remotePort=<port,>
+    rmtcomputergrp=<sddlString> (remoteComputerGroup)
+    rmtusgrp=<sddlString> (remoteUserGroup)
+    security=<security>
+    service=<serviceShortName>

@@ -124,11 +124,11 @@ module FluentCommandBuilder
           @builder.append " interfaceType=#{@builder.format type}"
           self
         end
-        def rmtcomputergrp sddl_string
+        def remote_computer_group sddl_string
           @builder.append " rmtcomputergrp=#{@builder.format sddl_string}"
           self
         end
-        def rmtusgrp sddl_string
+        def remote_user_group sddl_string
           @builder.append " rmtusgrp=#{@builder.format sddl_string}"
           self
         end
@@ -326,11 +326,11 @@ module FluentCommandBuilder
           @builder.append " interfaceType=#{@builder.format type}"
           self
         end
-        def rmtcomputergrp sddl_string
+        def remote_computer_group sddl_string
           @builder.append " rmtcomputergrp=#{@builder.format sddl_string}"
           self
         end
-        def rmtusgrp sddl_string
+        def remote_user_group sddl_string
           @builder.append " rmtusgrp=#{@builder.format sddl_string}"
           self
         end
