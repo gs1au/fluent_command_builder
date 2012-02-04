@@ -26,7 +26,7 @@ Extremely effective with [RubyMine](http://www.jetbrains.com/ruby/) intellisense
 
 ## Usage
 
-### Versioning
+### Versions
 
 Fluent Command Builder supports multiple versions of each command and offers two main usage scenarios.
 
@@ -57,21 +57,35 @@ Notice how the version number forms part of the method itself.
 
 ### Execution
 
-Fluent Command Builder offers two main usage scenarios for executing commands.
+#### The "execute" method
 
-The first scenario involves calling the __execute__ method at the end of any command:
+At any point along the chain, the __execute__ method may be called to execute the command:
 
 ```ruby
 msbuild('sample.csproj').target(:rebuild).property({ :configuration => :release }).execute
 ```
 
-If __Rake__ is installed, Rake's __sh__ method will be used to execute the command, otherwise __system__ will be used.
+The __execute__ method uses __[sh]__ if it can require [Rake], otherwise __[system]__.
 
-The second scenario involves getting the command as a string using the __to_s__ method and executing it by another means:
+#### The "to_s" method
+
+At any point along the chain, the __to_s__ method may can called to get the command string:
 
 ```ruby
-exec msbuild('sample.csproj').target(:rebuild).property({ :configuration => :release }).to_s
+command = msbuild('sample.csproj').target(:rebuild).property({ :configuration => :release }).to_s
 ```
+
+This approach enables custom execution of a command which could be useful in the following scenarios:
+
+- Executing the command by a means other than __[sh]__ or __[system]__
+- Remote execution, e.g. SSH
+- Deferred execution
+- Concatenation with another command
+- Generated scripts such as a batch script
+
+[sh]: http://rake.rubyforge.org/classes/FileUtils.html#M000018
+[Rake]: http://rake.rubyforge.org/
+[system]: http://www.ruby-doc.org/core-1.9.3/Kernel.html#method-i-system
 
 ## Supported Commands
 
@@ -93,8 +107,8 @@ exec msbuild('sample.csproj').target(:rebuild).property({ :configuration => :rel
 
 ### Team Foundation
 
-- tf 2010: http://msdn.microsoft.com/en-us/library/cc31bk2e%28v=vs.100%29.aspx
-- tf tee 2010: http://msdn.microsoft.com/en-us/library/gg413282.aspx
+- tf 2010: [http://msdn.microsoft.com/en-us/library/cc31bk2e%28v=vs.100%29.aspx]
+- tf tee 2010: [http://msdn.microsoft.com/en-us/library/gg413282.aspx]
 
 Note: The MSDN command line references contain many inaccuracies/incosistencies which many have traslated into this library.
 
