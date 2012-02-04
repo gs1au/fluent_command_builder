@@ -51,17 +51,17 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append ' firewall'
         end
-        def add_rule_name rule_name, direction, action
-          AddRuleName.new @builder, rule_name, direction, action
+        def add_rule rule_name, direction, action
+          AddRule.new @builder, rule_name, direction, action
         end
-        def delete_rule_name rule_name
-          DeleteRuleName.new @builder, rule_name
+        def delete_rule rule_name
+          DeleteRule.new @builder, rule_name
         end
         def set_rule 
           SetRule.new @builder
         end
-        def show_rule_name rule_name
-          ShowRuleName.new @builder, rule_name
+        def show_rule rule_name
+          ShowRule.new @builder, rule_name
         end
         def to_s 
           @builder.to_s
@@ -75,7 +75,7 @@ module FluentCommandBuilder
           end
         end
       end
-      class AddRuleName
+      class AddRule
         def initialize builder, rule_name, direction, action
           @builder = builder
           @builder.append " add rule name=#{@builder.format rule_name} dir=#{@builder.format direction} action=#{@builder.format action}"
@@ -152,7 +152,7 @@ module FluentCommandBuilder
           end
         end
       end
-      class DeleteRuleName
+      class DeleteRule
         def initialize builder, rule_name
           @builder = builder
           @builder.append " delete rule name=#{@builder.format rule_name}"
@@ -354,7 +354,7 @@ module FluentCommandBuilder
           end
         end
       end
-      class ShowRuleName
+      class ShowRule
         def initialize builder, rule_name
           @builder = builder
           @builder.append " show rule name=#{@builder.format rule_name}"
@@ -388,10 +388,10 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append ' http'
         end
-        def add_urlacl_url url
-          AddUrlaclUrl.new @builder, url
+        def add_url_acl url
+          AddUrlAcl.new @builder, url
         end
-        def delete_urlacl_url url
+        def delete_url_acl url
           @builder.append " delete urlacl url=#{@builder.format url}"
           self
         end
@@ -407,7 +407,7 @@ module FluentCommandBuilder
           end
         end
       end
-      class AddUrlaclUrl
+      class AddUrlAcl
         def initialize builder, url
           @builder = builder
           @builder.append " add urlacl url=#{@builder.format url}"

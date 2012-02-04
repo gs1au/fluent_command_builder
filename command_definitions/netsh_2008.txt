@@ -2,7 +2,7 @@
 netsh
     advfirewall
         firewall
-            add rule name=<ruleName> dir=<direction> action=<action>
+            add rule name=<ruleName> dir=<direction> action=<action> (addRule)
                 program=<path>
                 service=<serviceShortName>
                 description=<ruleDescription>
@@ -18,7 +18,7 @@ netsh
                 rmtusgrp=<sddlString>
                 edge=<edge>
                 security=<security>
-            delete rule name=<ruleName>
+            delete rule name=<ruleName> (deleteRule)
                 dir=<direction>
                 profile=<profile>
                 program=<path>
@@ -58,17 +58,17 @@ netsh
                     rmtusgrp=<sddlString>
                     edge=<edge>
                     security=<security>
-            show rule name=<ruleName>
+            show rule name=<ruleName> (showRule)
                 profile=<profile>
                 type=<type>
                 verbose
     http
-        add urlacl url=<url>
+        add urlacl url=<url> (addUrlAcl)
             user=<user>
             listen=<listen>
             delegate=<delegate>
             sddl=<sddl>
-        delete urlacl url=<url>
+        delete urlacl url=<url> (deleteUrlAcl)
 
 options:
     localIp=<address,>
