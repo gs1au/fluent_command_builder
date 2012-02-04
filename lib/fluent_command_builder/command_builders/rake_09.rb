@@ -21,7 +21,7 @@ module FluentCommandBuilder
           @builder.append ' --dry-run'
           self
         end
-        def execute code
+        def execute_code code
           @builder.append " --execute #{@builder.format code}"
           self
         end
