@@ -1,9 +1,10 @@
+require File.expand_path(File.dirname(__FILE__) + '/../command_base')
 require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 
 module FluentCommandBuilder
   module Rake
     module V09
-      class Rake
+      class Rake < CommandBase
         def initialize builder, task=nil
           @builder = builder
           @builder.append 'rake'
@@ -103,14 +104,6 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
-        end
-        def execute 
-          begin
-            require 'rake'
-            sh to_s
-          rescue LoadError
-            system to_s
-          end
         end
       end
       def rake task=nil

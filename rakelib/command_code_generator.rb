@@ -12,7 +12,7 @@ class CommandCodeGenerator
 
   def render writer
     args1 = [['CommandBuilder.new'] + method_arg_values].flatten
-
+    writer.line %Q[require File.expand_path(File.dirname(__FILE__) + '/../command_base')]
     writer.line %Q[require File.expand_path(File.dirname(__FILE__) + '/../command_builder')]
     writer.line
     writer.module 'FluentCommandBuilder' do

@@ -9,23 +9,11 @@ class NodeCodeGenerator
 
   def render node, writer
     return if node.leaf?
-    writer.class class_name(node) do
+    writer.class "#{class_name(node)} < CommandBase" do
       render_constructor node, writer
       node.child_nodes.each { |n| render_method n, writer }
       writer.method 'to_s' do
         writer.line '@builder.to_s'
-      end
-      writer.method 'execute' do
-        writer.line 'begin'
-        writer.indent
-        writer.line 'require \'rake\''
-        writer.line 'sh to_s'
-        writer.dedent
-        writer.line 'rescue LoadError'
-        writer.indent
-        writer.line 'system to_s'
-        writer.dedent
-        writer.line 'end'
       end
     end
   end

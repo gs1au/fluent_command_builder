@@ -1,9 +1,10 @@
+require File.expand_path(File.dirname(__FILE__) + '/../command_base')
 require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 
 module FluentCommandBuilder
   module AspnetCompiler
     module V40
-      class AspnetCompiler
+      class AspnetCompiler < CommandBase
         def initialize builder, target_dir=nil
           @builder = builder
           @builder.append 'aspnet_compiler'
@@ -67,14 +68,6 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
-        end
-        def execute 
-          begin
-            require 'rake'
-            sh to_s
-          rescue LoadError
-            system to_s
-          end
         end
       end
       def aspnet_compiler target_dir=nil

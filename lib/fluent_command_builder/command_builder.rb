@@ -1,3 +1,5 @@
+require File.expand_path(File.dirname(__FILE__) + '/command_base')
+
 module FluentCommandBuilder
   class CommandBuilder
 
@@ -9,6 +11,10 @@ module FluentCommandBuilder
 
       if value.kind_of? Array and delimiter.nil?
         return array_to_s(value.map { |v| quote_if_includes_space v }, ' ')
+      end
+
+      if value.kind_of? CommandBase
+        return value.to_s
       end
 
       value_as_array = case

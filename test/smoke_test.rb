@@ -34,4 +34,10 @@ class SmokeTest < Test::Unit::TestCase
     assert_equal expected, actual
   end
 
+  def test_nested_command
+    expected = 'bundle exec rake test'
+    actual = bundle_11.exec(rake_09('test')).to_s
+    assert_equal expected, actual
+  end
+
 end

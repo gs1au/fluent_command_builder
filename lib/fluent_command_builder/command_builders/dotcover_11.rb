@@ -1,9 +1,10 @@
+require File.expand_path(File.dirname(__FILE__) + '/../command_base')
 require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 
 module FluentCommandBuilder
   module DotCover
     module V11
-      class DotCover
+      class DotCover < CommandBase
         def initialize builder
           @builder = builder
           @builder.append 'dotCover'
@@ -32,16 +33,8 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
-        def execute 
-          begin
-            require 'rake'
-            sh to_s
-          rescue LoadError
-            system to_s
-          end
-        end
       end
-      class Cover
+      class Cover < CommandBase
         def initialize builder, configuration_file=nil
           @builder = builder
           @builder.append ' cover'
@@ -86,16 +79,8 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
-        def execute 
-          begin
-            require 'rake'
-            sh to_s
-          rescue LoadError
-            system to_s
-          end
-        end
       end
-      class Merge
+      class Merge < CommandBase
         def initialize builder, configuration_file=nil
           @builder = builder
           @builder.append ' merge'
@@ -116,16 +101,8 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
-        def execute 
-          begin
-            require 'rake'
-            sh to_s
-          rescue LoadError
-            system to_s
-          end
-        end
       end
-      class Report
+      class Report < CommandBase
         def initialize builder, configuration_file=nil
           @builder = builder
           @builder.append ' report'
@@ -146,16 +123,8 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
-        def execute 
-          begin
-            require 'rake'
-            sh to_s
-          rescue LoadError
-            system to_s
-          end
-        end
       end
-      class List
+      class List < CommandBase
         def initialize builder, configuration_file=nil
           @builder = builder
           @builder.append ' list'
@@ -172,16 +141,8 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
-        def execute 
-          begin
-            require 'rake'
-            sh to_s
-          rescue LoadError
-            system to_s
-          end
-        end
       end
-      class Delete
+      class Delete < CommandBase
         def initialize builder, configuration_file=nil
           @builder = builder
           @builder.append ' delete'
@@ -194,16 +155,8 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
-        def execute 
-          begin
-            require 'rake'
-            sh to_s
-          rescue LoadError
-            system to_s
-          end
-        end
       end
-      class Analyse
+      class Analyse < CommandBase
         def initialize builder, configuration_file=nil
           @builder = builder
           @builder.append ' analyse'
@@ -252,16 +205,8 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
-        def execute 
-          begin
-            require 'rake'
-            sh to_s
-          rescue LoadError
-            system to_s
-          end
-        end
       end
-      class Zip
+      class Zip < CommandBase
         def initialize builder, configuration_file=nil
           @builder = builder
           @builder.append ' zip'
@@ -277,14 +222,6 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
-        end
-        def execute 
-          begin
-            require 'rake'
-            sh to_s
-          rescue LoadError
-            system to_s
-          end
         end
       end
       def dotcover 

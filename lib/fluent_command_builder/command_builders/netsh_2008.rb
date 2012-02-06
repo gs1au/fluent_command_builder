@@ -1,9 +1,10 @@
+require File.expand_path(File.dirname(__FILE__) + '/../command_base')
 require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 
 module FluentCommandBuilder
   module Netsh
     module V2008
-      class Netsh
+      class Netsh < CommandBase
         def initialize builder
           @builder = builder
           @builder.append 'netsh'
@@ -17,16 +18,8 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
-        def execute 
-          begin
-            require 'rake'
-            sh to_s
-          rescue LoadError
-            system to_s
-          end
-        end
       end
-      class Advfirewall
+      class Advfirewall < CommandBase
         def initialize builder
           @builder = builder
           @builder.append ' advfirewall'
@@ -37,16 +30,8 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
-        def execute 
-          begin
-            require 'rake'
-            sh to_s
-          rescue LoadError
-            system to_s
-          end
-        end
       end
-      class Firewall
+      class Firewall < CommandBase
         def initialize builder
           @builder = builder
           @builder.append ' firewall'
@@ -66,16 +51,8 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
-        def execute 
-          begin
-            require 'rake'
-            sh to_s
-          rescue LoadError
-            system to_s
-          end
-        end
       end
-      class AddRule
+      class AddRule < CommandBase
         def initialize builder, rule_name, direction, action
           @builder = builder
           @builder.append " add rule name=#{@builder.format rule_name} dir=#{@builder.format direction} action=#{@builder.format action}"
@@ -143,16 +120,8 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
-        def execute 
-          begin
-            require 'rake'
-            sh to_s
-          rescue LoadError
-            system to_s
-          end
-        end
       end
-      class DeleteRule
+      class DeleteRule < CommandBase
         def initialize builder, rule_name
           @builder = builder
           @builder.append " delete rule name=#{@builder.format rule_name}"
@@ -196,16 +165,8 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
-        def execute 
-          begin
-            require 'rake'
-            sh to_s
-          rescue LoadError
-            system to_s
-          end
-        end
       end
-      class SetRule
+      class SetRule < CommandBase
         def initialize builder
           @builder = builder
           @builder.append ' set rule'
@@ -256,16 +217,8 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
-        def execute 
-          begin
-            require 'rake'
-            sh to_s
-          rescue LoadError
-            system to_s
-          end
-        end
       end
-      class New
+      class New < CommandBase
         def initialize builder
           @builder = builder
           @builder.append ' new'
@@ -345,16 +298,8 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
-        def execute 
-          begin
-            require 'rake'
-            sh to_s
-          rescue LoadError
-            system to_s
-          end
-        end
       end
-      class ShowRule
+      class ShowRule < CommandBase
         def initialize builder, rule_name
           @builder = builder
           @builder.append " show rule name=#{@builder.format rule_name}"
@@ -374,16 +319,8 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
-        def execute 
-          begin
-            require 'rake'
-            sh to_s
-          rescue LoadError
-            system to_s
-          end
-        end
       end
-      class Http
+      class Http < CommandBase
         def initialize builder
           @builder = builder
           @builder.append ' http'
@@ -398,16 +335,8 @@ module FluentCommandBuilder
         def to_s 
           @builder.to_s
         end
-        def execute 
-          begin
-            require 'rake'
-            sh to_s
-          rescue LoadError
-            system to_s
-          end
-        end
       end
-      class AddUrlAcl
+      class AddUrlAcl < CommandBase
         def initialize builder, url
           @builder = builder
           @builder.append " add urlacl url=#{@builder.format url}"
@@ -430,14 +359,6 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
-        end
-        def execute 
-          begin
-            require 'rake'
-            sh to_s
-          rescue LoadError
-            system to_s
-          end
         end
       end
       def netsh 

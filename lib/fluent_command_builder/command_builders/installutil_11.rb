@@ -1,9 +1,10 @@
+require File.expand_path(File.dirname(__FILE__) + '/../command_base')
 require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 
 module FluentCommandBuilder
   module InstallUtil
     module V11
-      class InstallUtil
+      class InstallUtil < CommandBase
         def initialize builder, assembly_name
           @builder = builder
           @builder.append "installUtil #{@builder.format assembly_name}"
@@ -32,14 +33,6 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
-        end
-        def execute 
-          begin
-            require 'rake'
-            sh to_s
-          rescue LoadError
-            system to_s
-          end
         end
       end
       def installutil assembly_name

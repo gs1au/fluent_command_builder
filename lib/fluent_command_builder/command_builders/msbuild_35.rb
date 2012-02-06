@@ -1,9 +1,10 @@
+require File.expand_path(File.dirname(__FILE__) + '/../command_base')
 require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 
 module FluentCommandBuilder
   module MSBuild
     module V35
-      class MSBuild
+      class MSBuild < CommandBase
         def initialize builder, project_file=nil
           @builder = builder
           @builder.append 'MSBuild'
@@ -92,14 +93,6 @@ module FluentCommandBuilder
         end
         def to_s 
           @builder.to_s
-        end
-        def execute 
-          begin
-            require 'rake'
-            sh to_s
-          rescue LoadError
-            system to_s
-          end
         end
       end
       def msbuild project_file=nil

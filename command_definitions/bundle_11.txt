@@ -1,0 +1,50 @@
+1.1
+bundle
+    cache
+        --no-prune
+    check
+        --gemfile=<file>
+        --path=<path>
+    clean
+        --force
+    config <name>[ <value>]
+    console[ <group>]
+    exec <command>
+    gem <gem>
+        --bin
+    init
+        --gemspec=<file>
+    install
+        --binstubs=<path>
+        --clean
+        --deployment
+        --frozen
+        --full-index
+        --gemfile=<file>
+        --local
+        --no-cache
+        --no-prune
+        --path=<path>
+        --quiet
+        --shebang=<string>
+        --standalone=<array>
+        --system
+        --without=<group>
+    open <gem>
+    outdated[ <gem>]
+        --local
+        --pre
+        --source
+    package
+        --no-prune
+    show[ <gem>]
+        --paths
+    update[ <gem>]
+        --local
+        --source=<source>
+    version
+    viz
+        --file=<file>
+        --format=<format>
+        --requirements
+        --version
