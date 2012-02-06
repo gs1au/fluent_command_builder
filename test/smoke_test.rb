@@ -28,4 +28,10 @@ class SmokeTest < Test::Unit::TestCase
     assert_equal expected, actual
   end
 
+  def test_argument_specified_multiple_times
+    expected = 'MSBuild "project 1.proj" "project 2.proj"'
+    actual = msbuild_40(['project 1.proj', 'project 2.proj']).to_s
+    assert_equal expected, actual
+  end
+
 end

@@ -213,7 +213,7 @@ module FluentCommandBuilder
       class Add
         def initialize builder, item_spec
           @builder = builder
-          @builder.append " add #{@builder.format item_spec, ' '}"
+          @builder.append " add #{@builder.format item_spec}"
         end
         def lock lock_type
           @builder.append " /lock:#{@builder.format lock_type}"
@@ -379,7 +379,7 @@ module FluentCommandBuilder
         def initialize builder, item_spec=nil
           @builder = builder
           @builder.append ' checkin'
-          @builder.append " #{@builder.format item_spec, ' '}" unless item_spec.nil?
+          @builder.append " #{@builder.format item_spec}" unless item_spec.nil?
         end
         def author author_name
           @builder.append " /author:#{@builder.format author_name}"
@@ -489,7 +489,7 @@ module FluentCommandBuilder
         def initialize builder, item_spec=nil
           @builder = builder
           @builder.append ' checkout'
-          @builder.append " #{@builder.format item_spec, ' '}" unless item_spec.nil?
+          @builder.append " #{@builder.format item_spec}" unless item_spec.nil?
         end
         def lock lock_type
           @builder.append " /lock:#{@builder.format lock_type}"
@@ -550,7 +550,7 @@ module FluentCommandBuilder
       class Delete
         def initialize builder, item_spec
           @builder = builder
-          @builder.append " delete #{@builder.format item_spec, ' '}"
+          @builder.append " delete #{@builder.format item_spec}"
         end
         def lock lock_type
           @builder.append " /lock:#{@builder.format lock_type}"
@@ -580,7 +580,7 @@ module FluentCommandBuilder
       class Destroy
         def initialize builder, item_spec
           @builder = builder
-          @builder.append " destroy #{@builder.format item_spec, ' '}"
+          @builder.append " destroy #{@builder.format item_spec}"
         end
         def keep_history 
           @builder.append ' /keepHistory'
@@ -801,7 +801,7 @@ module FluentCommandBuilder
       class Dir
         def initialize builder, item_spec
           @builder = builder
-          @builder.append " dir #{@builder.format item_spec, ' '}"
+          @builder.append " dir #{@builder.format item_spec}"
         end
         def version version_spec
           @builder.append " /version:#{@builder.format version_spec}"
@@ -892,7 +892,7 @@ module FluentCommandBuilder
         def initialize builder, item_spec=nil
           @builder = builder
           @builder.append ' get'
-          @builder.append " #{@builder.format item_spec, ' '}" unless item_spec.nil?
+          @builder.append " #{@builder.format item_spec}" unless item_spec.nil?
         end
         def version version_spec
           @builder.append " /version:#{@builder.format version_spec}"
@@ -1010,7 +1010,7 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append " label #{@builder.format label_name}"
           @builder.append "@#{@builder.format scope}" unless scope.nil?
-          @builder.append " #{@builder.format item_spec, ' '}"
+          @builder.append " #{@builder.format item_spec}"
         end
         def owner owner_name
           @builder.append " /owner:#{@builder.format owner_name}"
@@ -1058,7 +1058,7 @@ module FluentCommandBuilder
           @builder = builder
           @builder.append " label /delete #{@builder.format label_name}"
           @builder.append "@#{@builder.format scope}" unless scope.nil?
-          @builder.append " #{@builder.format item_spec, ' '}"
+          @builder.append " #{@builder.format item_spec}"
         end
         def login username, password=nil
           @builder.append " /login:#{@builder.format username}"
@@ -1119,7 +1119,7 @@ module FluentCommandBuilder
       class LocalVersions
         def initialize builder, item_spec
           @builder = builder
-          @builder.append " localVersions #{@builder.format item_spec, ' '}"
+          @builder.append " localVersions #{@builder.format item_spec}"
         end
         def recursive 
           @builder.append ' /recursive'
@@ -1153,7 +1153,7 @@ module FluentCommandBuilder
       class Lock
         def initialize builder, item_spec
           @builder = builder
-          @builder.append " lock #{@builder.format item_spec, ' '}"
+          @builder.append " lock #{@builder.format item_spec}"
         end
         def lock lock_type
           @builder.append " /lock:#{@builder.format lock_type}"
@@ -1310,7 +1310,7 @@ module FluentCommandBuilder
       class Permission
         def initialize builder, item_spec
           @builder = builder
-          @builder.append " permission #{@builder.format item_spec, ' '}"
+          @builder.append " permission #{@builder.format item_spec}"
         end
         def allow permission
           @builder.append " /allow:#{@builder.format permission, ','}"
@@ -1368,7 +1368,7 @@ module FluentCommandBuilder
       class Properties
         def initialize builder, item_spec
           @builder = builder
-          @builder.append " properties #{@builder.format item_spec, ' '}"
+          @builder.append " properties #{@builder.format item_spec}"
         end
         def collection team_project_collection_url
           @builder.append " /collection:#{@builder.format team_project_collection_url}"
@@ -1554,7 +1554,7 @@ module FluentCommandBuilder
         def initialize builder, item_spec=nil
           @builder = builder
           @builder.append ' resolve'
-          @builder.append " #{@builder.format item_spec, ' '}" unless item_spec.nil?
+          @builder.append " #{@builder.format item_spec}" unless item_spec.nil?
         end
         def auto resolution
           @builder.append " /auto:#{@builder.format resolution}"
@@ -1604,7 +1604,7 @@ module FluentCommandBuilder
       class RollbackToVersion
         def initialize builder, version_spec, item_spec
           @builder = builder
-          @builder.append " rollback /toVersion:#{@builder.format version_spec} #{@builder.format item_spec, ' '}"
+          @builder.append " rollback /toVersion:#{@builder.format version_spec} #{@builder.format item_spec}"
         end
         def recursive 
           @builder.append ' /recursive'
@@ -1649,7 +1649,7 @@ module FluentCommandBuilder
           @builder.append " rollback /changeset:#{@builder.format changeset_from}"
           @builder.append "~#{@builder.format changeset_to}" unless changeset_to.nil?
           @builder.append ''
-          @builder.append " #{@builder.format item_spec, ' '}" unless item_spec.nil?
+          @builder.append " #{@builder.format item_spec}" unless item_spec.nil?
         end
         def recursive 
           @builder.append ' /recursive'
@@ -1725,7 +1725,7 @@ module FluentCommandBuilder
       class Shelve
         def initialize builder, shelveset_name, item_spec
           @builder = builder
-          @builder.append " shelve #{@builder.format shelveset_name} #{@builder.format item_spec, ' '}"
+          @builder.append " shelve #{@builder.format shelveset_name} #{@builder.format item_spec}"
         end
         def move 
           @builder.append ' /move'
@@ -1833,7 +1833,7 @@ module FluentCommandBuilder
       class Status
         def initialize builder, item_spec
           @builder = builder
-          @builder.append " status #{@builder.format item_spec, ' '}"
+          @builder.append " status #{@builder.format item_spec}"
         end
         def collection team_project_collection_url
           @builder.append " /collection:#{@builder.format team_project_collection_url}"
@@ -1916,7 +1916,7 @@ module FluentCommandBuilder
       class Undo
         def initialize builder, item_spec
           @builder = builder
-          @builder.append " undo #{@builder.format item_spec, ' '}"
+          @builder.append " undo #{@builder.format item_spec}"
         end
         def workspace workspace_name, workspace_owner=nil
           @builder.append " /workspace:#{@builder.format workspace_name}"
@@ -1955,7 +1955,7 @@ module FluentCommandBuilder
       class Unlabel
         def initialize builder, label_name, item_spec
           @builder = builder
-          @builder.append " unlabel #{@builder.format label_name} #{@builder.format item_spec, ' '}"
+          @builder.append " unlabel #{@builder.format label_name} #{@builder.format item_spec}"
         end
         def collection team_project_collection_url
           @builder.append " /collection:#{@builder.format team_project_collection_url}"
@@ -1990,7 +1990,7 @@ module FluentCommandBuilder
           @builder.append ''
           @builder.append ";#{@builder.format username}" unless username.nil?
           @builder.append ''
-          @builder.append " #{@builder.format item_spec, ' '}" unless item_spec.nil?
+          @builder.append " #{@builder.format item_spec}" unless item_spec.nil?
         end
         def move 
           @builder.append ' /move'
@@ -2024,7 +2024,7 @@ module FluentCommandBuilder
       class View
         def initialize builder, item_spec
           @builder = builder
-          @builder.append " view #{@builder.format item_spec, ' '}"
+          @builder.append " view #{@builder.format item_spec}"
         end
         def collection team_project_collection_url
           @builder.append " /collection:#{@builder.format team_project_collection_url}"

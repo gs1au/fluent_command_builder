@@ -1,6 +1,6 @@
 TEE 2010
 tf
-    add <itemSpec >
+    add <itemSpec>
         -lock
         -type:<fileType>
         -noPrompt
@@ -27,7 +27,7 @@ tf
         -collection
         -latest
         -login
-    checkin[ <itemSpec >]
+    checkin[ <itemSpec>]
         -author
         -comment
         -noPrompt
@@ -52,11 +52,11 @@ tf
         -recursive
         -type:<encoding>
         -login
-    delete <itemSpec >
+    delete <itemSpec>
         -lock
         -recursive
         -login
-    destroy <itemSpec >
+    destroy <itemSpec>
         -keepHistory
         -stopAt:<versionSpec>
         -preview
@@ -98,7 +98,7 @@ tf
         -noPrompt
         -login
     difference -configure (configureCompareTool)
-    dir <itemSpec >
+    dir <itemSpec>
         -version
         -recursive
         -folders
@@ -107,7 +107,7 @@ tf
         -collection
     eula
         -accept
-    get[ <itemSpec >]
+    get[ <itemSpec>]
         -version
         -all
         -overwrite
@@ -132,7 +132,7 @@ tf
         -login
         -sort:<sort>
         -collection
-    label <labelName>[@<scope>] <itemSpec >
+    label <labelName>[@<scope>] <itemSpec>
         -owner:<ownerName>
         -version
         -comment
@@ -140,7 +140,7 @@ tf
         -recursive
         -login
         -collection
-    label -delete <labelName>[@<scope>] <itemSpec > (deleteLabel)
+    label -delete <labelName>[@<scope>] <itemSpec> (deleteLabel)
         -login
         -collection
     labels[ <labelName>]
@@ -148,7 +148,7 @@ tf
         -format
         -collection
         -login
-    lock <itemSpec >
+    lock <itemSpec>
         -lock
         -workspace:<workspaceName>
         -recursive
@@ -176,7 +176,7 @@ tf
         -login
         -showAll
         -collection
-    print <itemSpec >
+    print <itemSpec>
         -version:<versionSpec>
     productKey
         -set:<myProductKey>
@@ -193,7 +193,7 @@ tf
         -number:<propertyName>=<value>
     profiles
         -format:<format>
-    properties <itemSpec >
+    properties <itemSpec>
         -collection
         -recursive
         -login
@@ -202,22 +202,22 @@ tf
     reconcile
         -teamProject:<teamProjectName>
         -workspace:<workspaceName>
-    reconcile -buildName:<buildName>[ <itemSpec >] (reconcileBuild)
+    reconcile -buildName:<buildName>[ <itemSpec>] (reconcileBuild)
         -teamProject:<teamProjectName>
         -workspace:<workspaceName>
         -recursive
-    reconcile -changeset:<changesetName>[ <itemSpec >] (reconcileChangeset)
+    reconcile -changeset:<changesetName>[ <itemSpec>] (reconcileChangeset)
         -teamProject:<teamProjectName>
         -workspace:<workspaceName>
         -recursive
-    reconcile -forgetBuild:<buildName>[ <itemSpec >] (reconcileForgetBuild)
+    reconcile -forgetBuild:<buildName>[ <itemSpec>] (reconcileForgetBuild)
         -teamProject:<teamProjectName>
         -workspace:<workspaceName>
         -recursive
     rename <oldItem> <newItem>
         -lock
         -login
-    resolve[ <itemSpec >]
+    resolve[ <itemSpec>]
         -auto:<resolution>
         -preview
         -overrideType:<overrideType>
@@ -231,7 +231,7 @@ tf
         -validate
         -noPrompt
         -login
-    shelve <shelvesetName> <itemSpec >
+    shelve <shelvesetName> <itemSpec>
         -move
         -replace
         -comment
@@ -266,11 +266,11 @@ tf
         -noPrompt
         -login
         -collection
-    unlabel <labelName> <itemSpec >
+    unlabel <labelName> <itemSpec>
         -collection
         -recursive
         -login
-    unshelve[ <shelvesetName>][;<username>][ <itemSpec >]
+    unshelve[ <shelvesetName>][;<username>][ <itemSpec>]
         -move
         -recursive
         -noPrompt

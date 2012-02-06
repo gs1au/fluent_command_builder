@@ -1,6 +1,6 @@
 2010
 tf
-    add <itemSpec >
+    add <itemSpec>
         /lock
         /type:<fileType>
         /noPrompt
@@ -27,7 +27,7 @@ tf
         /collection
         /latest
         /login
-    checkin[ <itemSpec >]
+    checkin[ <itemSpec>]
         /author
         /comment
         /noPrompt
@@ -47,7 +47,7 @@ tf
         /collection
         /author
         /force
-    checkout[ <itemSpec >]
+    checkout[ <itemSpec>]
         /lock
         /recursive
         /type:<encoding>
@@ -55,11 +55,11 @@ tf
     configure[ <pathOfTeamProject>]
         /collection
         /login
-    delete <itemSpec >
+    delete <itemSpec>
         /lock
         /recursive
         /login
-    destroy <itemSpec >
+    destroy <itemSpec>
         /keepHistory
         /stopAt:<versionSpec>
         /preview
@@ -101,7 +101,7 @@ tf
         /noPrompt
         /login
     difference /configure (configureCompareTool)
-    dir <itemSpec >
+    dir <itemSpec>
         /version
         /recursive
         /folders
@@ -116,7 +116,7 @@ tf
         /filterLocalPathsOnly
         /login
         /view:<view,>
-    get[ <itemSpec >]
+    get[ <itemSpec>]
         /version:<versionSpec>
         /all
         /overwrite
@@ -139,7 +139,7 @@ tf
         /login
         /sort:<sort>
         /collection
-    label <labelName>[@<scope>] <itemSpec >
+    label <labelName>[@<scope>] <itemSpec>
         /owner:<ownerName>
         /version
         /comment
@@ -147,7 +147,7 @@ tf
         /recursive
         /login
         /collection
-    label /delete <labelName>[@<scope>] <itemSpec > (deleteLabel)
+    label /delete <labelName>[@<scope>] <itemSpec> (deleteLabel)
         /login
         /collection
     labels[ <labelName>]
@@ -155,12 +155,12 @@ tf
         /format
         /collection
         /login
-    localVersions <itemSpec >
+    localVersions <itemSpec>
         /recursive
         /format
         /workspace
         /collection
-    lock <itemSpec >
+    lock <itemSpec>
         /lock
         /workspace:<workspaceName>
         /recursive
@@ -189,7 +189,7 @@ tf
         /showAll
         /collection
     msdn[ <commandName>]
-    permission <itemSpec >
+    permission <itemSpec>
         /allow:<permission,>
         /deny:<permission,>
         /remove:<permission,>
@@ -200,7 +200,7 @@ tf
         /recursive
         /global
         /login
-    properties <itemSpec >
+    properties <itemSpec>
         /collection
         /recursive
         /login
@@ -227,7 +227,7 @@ tf
     rename <oldItem> <newItem>
         /lock
         /login
-    resolve[ <itemSpec >]
+    resolve[ <itemSpec>]
         /auto:<resolution>
         /preview
         /overrideType:<overrideType>
@@ -236,14 +236,14 @@ tf
         /newName:<path>
         /noPrompt
         /login
-    rollback /toVersion:<versionSpec> <itemSpec > (rollbackToVersion)
+    rollback /toVersion:<versionSpec> <itemSpec> (rollbackToVersion)
         /recursive
         /lock
         /version
         /keepMergeHistory
         /login
         /noPrompt
-    rollback /changeset:<changesetFrom>[~<changesetTo>][ <itemSpec >] (rollbackChangeset)
+    rollback /changeset:<changesetFrom>[~<changesetTo>][ <itemSpec>] (rollbackChangeset)
         /recursive
         /lock
         /version
@@ -255,7 +255,7 @@ tf
         /validate
         /noPrompt
         /login
-    shelve <shelvesetName> <itemSpec >
+    shelve <shelvesetName> <itemSpec>
         /move
         /replace
         /comment
@@ -271,7 +271,7 @@ tf
         /format
         /collection
         /login
-    status <itemSpec >
+    status <itemSpec>
         /collection
         /login
         /workspace
@@ -284,22 +284,22 @@ tf
         /lock
         /recursive
         /login
-    undo <itemSpec >
+    undo <itemSpec>
         /workspace
         /recursive
         /noPrompt
         /login
         /collection
-    unlabel <labelName> <itemSpec >
+    unlabel <labelName> <itemSpec>
         /collection
         /recursive
         /login
-    unshelve[ <shelvesetName>][;<username>][ <itemSpec >]
+    unshelve[ <shelvesetName>][;<username>][ <itemSpec>]
         /move
         /recursive
         /noPrompt
         /login
-    view <itemSpec >
+    view <itemSpec>
         /collection
         /console
         /recursive

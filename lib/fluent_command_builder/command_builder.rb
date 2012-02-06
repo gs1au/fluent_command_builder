@@ -6,6 +6,11 @@ module FluentCommandBuilder
     end
 
     def format value, delimiter=nil, key_value_separator=nil
+
+      if value.kind_of? Array and delimiter.nil?
+        return array_to_s(value.map { |v| quote_if_includes_space v }, ' ')
+      end
+
       value_as_array = case
                          when value.kind_of?(Hash)
                            hash_to_array value, key_value_separator
