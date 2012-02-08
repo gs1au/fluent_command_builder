@@ -4,11 +4,11 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 module FluentCommandBuilder
   module NUnit
     module V25
-      COMMAND_NAME = 'nunit'
+      COMMAND_NAME = 'nunit-console'
       class NUnit < CommandBase
         def initialize builder, assembly
           super builder
-          @builder.append "-console #{@builder.format assembly}"
+          @builder.append " #{@builder.format assembly}"
         end
         def run test
           @builder.append " /run:#{@builder.format test}"
