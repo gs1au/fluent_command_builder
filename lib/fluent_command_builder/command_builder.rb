@@ -3,6 +3,8 @@ require File.expand_path(File.dirname(__FILE__) + '/command_base')
 module FluentCommandBuilder
   class CommandBuilder
 
+    attr_reader :command_name
+
     def initialize command_name, command=nil
       @command_name = command_name
       @command = command.to_s
