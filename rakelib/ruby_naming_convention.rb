@@ -19,7 +19,7 @@ class RubyNamingConvention
   private
 
   def words text
-    text.gsub(/[\W_]/, ' ').gsub(/[A-Z*]/, ' \0').split(' ').map { |s| s.capitalize }
+    text.to_s.gsub(/[\W_]/, ' ').gsub(/[A-Z*]/, ' \0').split(' ').map { |s| s.capitalize }
   end
 
 end

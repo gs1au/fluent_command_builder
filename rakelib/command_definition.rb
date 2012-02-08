@@ -1,4 +1,5 @@
 require 'yaml'
+require_relative 'command'
 require_relative 'node'
 
 class CommandDefinition
@@ -12,7 +13,7 @@ class CommandDefinition
     yaml = get_yaml raw_text
     struct = YAML.load yaml
     @versions = struct[0].keys[0].split(',').map { |v| v.strip }
-    @command = Node.new struct[1].keys[0]
+    @command = Command.new struct[1].keys[0]
     process_array struct[1].values[0], @command
   end
 

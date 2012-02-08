@@ -3,7 +3,7 @@ rake[ <task>]
     --classic-namespace
     --describe <pattern>
     --dry-run
-    --execute <code> (executeCode)
+    --execute <code>
     --execute-print <code>
     --execute-continue <code>
     --libdir <libDir>

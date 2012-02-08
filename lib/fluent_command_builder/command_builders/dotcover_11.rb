@@ -4,10 +4,10 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 module FluentCommandBuilder
   module DotCover
     module V11
+      COMMAND_NAME = 'dotCover'
       class DotCover < CommandBase
         def initialize builder
-          @builder = builder
-          @builder.append 'dotCover'
+          super builder
         end
         def cover configuration_file=nil
           Cover.new @builder, configuration_file
@@ -30,206 +30,218 @@ module FluentCommandBuilder
         def zip configuration_file=nil
           Zip.new @builder, configuration_file
         end
-        def to_s 
-          @builder.to_s
-        end
       end
       class Cover < CommandBase
         def initialize builder, configuration_file=nil
-          @builder = builder
+          super builder
           @builder.append ' cover'
           @builder.append " #{@builder.format configuration_file}" unless configuration_file.nil?
         end
         def analyse_target_arguments bool
           @builder.append " /analyseTargetArguments=#{@builder.format bool}"
+          yield @builder if block_given?
           self
         end
         def filters filters
           @builder.append " /filters=#{@builder.format filters, ';'}"
+          yield @builder if block_given?
           self
         end
         def inherit_console bool
           @builder.append " /inheritConsole=#{@builder.format bool}"
+          yield @builder if block_given?
           self
         end
         def log_file log_file
           @builder.append " /logFile=#{@builder.format log_file}"
+          yield @builder if block_given?
           self
         end
         def output snapshot_path
           @builder.append " /output=#{@builder.format snapshot_path}"
+          yield @builder if block_given?
           self
         end
         def target_arguments target_arguments
           @builder.append " /targetArguments=#{@builder.format target_arguments}"
+          yield @builder if block_given?
           self
         end
         def target_executable target_executable
           @builder.append " /targetExecutable=#{@builder.format target_executable}"
+          yield @builder if block_given?
           self
         end
         def target_working_dir target_working_dir
           @builder.append " /targetWorkingDir=#{@builder.format target_working_dir}"
+          yield @builder if block_given?
           self
         end
         def temp_dir temp_dir
           @builder.append " /tempDir=#{@builder.format temp_dir}"
+          yield @builder if block_given?
           self
-        end
-        def to_s 
-          @builder.to_s
         end
       end
       class Merge < CommandBase
         def initialize builder, configuration_file=nil
-          @builder = builder
+          super builder
           @builder.append ' merge'
           @builder.append " #{@builder.format configuration_file}" unless configuration_file.nil?
         end
         def output snapshot_path
           @builder.append " /output=#{@builder.format snapshot_path}"
+          yield @builder if block_given?
           self
         end
         def source source
           @builder.append " /source=#{@builder.format source}"
+          yield @builder if block_given?
           self
         end
         def temp_dir temp_dir
           @builder.append " /tempDir=#{@builder.format temp_dir}"
+          yield @builder if block_given?
           self
-        end
-        def to_s 
-          @builder.to_s
         end
       end
       class Report < CommandBase
         def initialize builder, configuration_file=nil
-          @builder = builder
+          super builder
           @builder.append ' report'
           @builder.append " #{@builder.format configuration_file}" unless configuration_file.nil?
         end
         def output snapshot_path
           @builder.append " /output=#{@builder.format snapshot_path}"
+          yield @builder if block_given?
           self
         end
         def report_type report_type
           @builder.append " /reportType=#{@builder.format report_type}"
+          yield @builder if block_given?
           self
         end
         def source source
           @builder.append " /source=#{@builder.format source}"
+          yield @builder if block_given?
           self
-        end
-        def to_s 
-          @builder.to_s
         end
       end
       class List < CommandBase
         def initialize builder, configuration_file=nil
-          @builder = builder
+          super builder
           @builder.append ' list'
           @builder.append " #{@builder.format configuration_file}" unless configuration_file.nil?
         end
         def output snapshot_path
           @builder.append " /output=#{@builder.format snapshot_path}"
+          yield @builder if block_given?
           self
         end
         def source source
           @builder.append " /source=#{@builder.format source}"
+          yield @builder if block_given?
           self
-        end
-        def to_s 
-          @builder.to_s
         end
       end
       class Delete < CommandBase
         def initialize builder, configuration_file=nil
-          @builder = builder
+          super builder
           @builder.append ' delete'
           @builder.append " #{@builder.format configuration_file}" unless configuration_file.nil?
         end
         def source source
           @builder.append " /source=#{@builder.format source}"
+          yield @builder if block_given?
           self
-        end
-        def to_s 
-          @builder.to_s
         end
       end
       class Analyse < CommandBase
         def initialize builder, configuration_file=nil
-          @builder = builder
+          super builder
           @builder.append ' analyse'
           @builder.append " #{@builder.format configuration_file}" unless configuration_file.nil?
         end
         def analyse_target_arguments bool
           @builder.append " /analyseTargetArguments=#{@builder.format bool}"
+          yield @builder if block_given?
           self
         end
         def filters filters
           @builder.append " /filters=#{@builder.format filters, ';'}"
+          yield @builder if block_given?
           self
         end
         def inherit_console bool
           @builder.append " /inheritConsole=#{@builder.format bool}"
+          yield @builder if block_given?
           self
         end
         def log_file log_file
           @builder.append " /logFile=#{@builder.format log_file}"
+          yield @builder if block_given?
           self
         end
         def output snapshot_path
           @builder.append " /output=#{@builder.format snapshot_path}"
+          yield @builder if block_given?
           self
         end
         def report_type report_type
           @builder.append " /reportType=#{@builder.format report_type}"
+          yield @builder if block_given?
           self
         end
         def target_arguments target_arguments
           @builder.append " /targetArguments=#{@builder.format target_arguments}"
+          yield @builder if block_given?
           self
         end
         def target_executable target_executable
           @builder.append " /targetExecutable=#{@builder.format target_executable}"
+          yield @builder if block_given?
           self
         end
         def target_working_dir target_working_dir
           @builder.append " /targetWorkingDir=#{@builder.format target_working_dir}"
+          yield @builder if block_given?
           self
         end
         def temp_dir temp_dir
           @builder.append " /tempDir=#{@builder.format temp_dir}"
+          yield @builder if block_given?
           self
-        end
-        def to_s 
-          @builder.to_s
         end
       end
       class Zip < CommandBase
         def initialize builder, configuration_file=nil
-          @builder = builder
+          super builder
           @builder.append ' zip'
           @builder.append " #{@builder.format configuration_file}" unless configuration_file.nil?
         end
         def output snapshot_path
           @builder.append " /output=#{@builder.format snapshot_path}"
+          yield @builder if block_given?
           self
         end
         def source source
           @builder.append " /source=#{@builder.format source}"
+          yield @builder if block_given?
           self
-        end
-        def to_s 
-          @builder.to_s
         end
       end
       def dotcover 
-        DotCover.new CommandBuilder.new
+        builder = CommandBuilder.new COMMAND_NAME
+        command = DotCover.new builder
+        yield builder if block_given?
+        command
       end
     end
   end
   def dotcover_11 
-    DotCover::V11::DotCover.new CommandBuilder.new
+    builder = CommandBuilder.new DotCover::V11::COMMAND_NAME
+    command = DotCover::V11::DotCover.new builder
+    yield builder if block_given?
+    command
   end
 end

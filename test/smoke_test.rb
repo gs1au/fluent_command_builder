@@ -12,7 +12,7 @@ class SmokeTest < Test::Unit::TestCase
 
   def test_list_argument
     expected = 'MSBuild /target:clean;build'
-    actual = msbuild_40.target(['clean', 'build']).to_s
+    actual = msbuild_40.target([:clean, :build]).to_s
     assert_equal expected, actual
   end
 
@@ -39,5 +39,18 @@ class SmokeTest < Test::Unit::TestCase
     actual = bundle_11.exec(rake_09('test')).to_s
     assert_equal expected, actual
   end
+
+  def test_yield_command_builder_on_module_method
+    builder = nil
+    msbuild_40('sample.proj') { |b| builder = b }
+    assert_kind_of CommandBuilder, builder
+  end
+
+  def test_yield_command_builder_on_class_method
+    builder = nil
+    msbuild_40('sample.proj').target(:build) { |b| builder = b }
+    assert_kind_of CommandBuilder, builder
+  end
+
 
 end

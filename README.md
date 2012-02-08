@@ -37,8 +37,8 @@ require 'fluent_command_builder'
 include FluentCommandBuilder::MSBuild::V40
 include FluentCommandBuilder::NunitConsole::V25
 
-msbuild('sample.csproj').target(:rebuild).property({ :configuration => :release }).execute
-nunit('sample.dll').include(:unit_tests).exclude(:integration_tests).execute
+msbuild('sample.csproj').target(:rebuild).property({ :configuration => :release }).execute!
+nunit('sample.dll').include(:unit_tests).exclude(:integration_tests).execute!
 ```
 
 In this case, the msbuild method refers to MSBuild 4.0, and the nunit method refers to NUnit 2.5.
@@ -49,23 +49,23 @@ The second scenario involves calling a method for a specific version of each com
 require 'fluent_command_builder'
 include FluentCommandBuilder
 
-msbuild_40('sample.csproj').target(:rebuild).property({ :configuration => :release }).execute
-nunit_25('sample.dll').include(:unit_tests).exclude(:integration_tests).execute
+msbuild_40('sample.csproj').target(:rebuild).property({ :configuration => :release }).execute!
+nunit_25('sample.dll').include(:unit_tests).exclude(:integration_tests).execute!
 ```
 
 Notice how the version number forms part of the method itself.
 
 ### Execution
 
-#### The "execute" method
+#### The "execute!" method
 
-At any point along the chain, the __execute__ method may be called to execute the command:
+At any point along the chain, the __execute!__ method may be called to execute the command:
 
 ```ruby
-msbuild('sample.csproj').target(:rebuild).property({ :configuration => :release }).execute
+msbuild('sample.csproj').target(:rebuild).property({ :configuration => :release }).execute!
 ```
 
-The __execute__ method uses __[sh]__ if it can require [Rake], otherwise __[system]__.
+The __execute!__ method uses __[sh]__ if it can require [Rake], otherwise __[system]__.
 
 #### The "to_s" method
 

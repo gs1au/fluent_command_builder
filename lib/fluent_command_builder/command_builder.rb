@@ -3,7 +3,8 @@ require File.expand_path(File.dirname(__FILE__) + '/command_base')
 module FluentCommandBuilder
   class CommandBuilder
 
-    def initialize command=nil
+    def initialize command_name, command=nil
+      @command_name = command_name
       @command = command.to_s
     end
 
@@ -34,6 +35,10 @@ module FluentCommandBuilder
     end
 
     def to_s
+      "#{@command_name} #{@command.strip}".strip
+    end
+
+    def args
       @command.strip
     end
 

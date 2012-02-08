@@ -2,6 +2,7 @@ require_relative 'fragment'
 
 class Node
 
+  attr_accessor :fragments
   attr_reader :child_nodes
 
   def initialize raw_text
@@ -33,7 +34,7 @@ class Node
     fragments.map { |f| f.args.map { |a| a if f.optional? } }.flatten.compact
   end
 
-  private
+  protected
 
   def starts_with_arg?
     @starts_with_arg ||= words_preceding_args.empty?

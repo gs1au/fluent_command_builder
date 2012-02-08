@@ -1,5 +1,10 @@
 class CommandBase
-  def execute
+
+  def initialize builder
+    @builder = builder
+  end
+
+  def execute!
     begin
       require 'rake'
       sh to_s
@@ -7,4 +12,9 @@ class CommandBase
       Kernel.system to_s
     end
   end
+
+  def to_s
+    @builder.to_s
+  end
+
 end

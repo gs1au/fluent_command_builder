@@ -12,9 +12,6 @@ class NodeCodeGenerator
     writer.class "#{class_name(node)} < CommandBase" do
       render_constructor node, writer
       node.child_nodes.each { |n| render_method n, writer }
-      writer.method 'to_s' do
-        writer.line '@builder.to_s'
-      end
     end
   end
 
@@ -22,7 +19,7 @@ class NodeCodeGenerator
 
   def render_constructor node, writer
     writer.method 'initialize', 'builder', method_args(node) do
-      writer.line '@builder = builder'
+      writer.line 'super builder'
       render_leaf_node_method_body node, writer
     end
   end
@@ -33,6 +30,7 @@ class NodeCodeGenerator
         render_branch_node_method_body node, writer
       else
         render_leaf_node_method_body node, writer
+        writer.line 'yield @builder if block_given?'
         writer.line 'self'
       end
     end
@@ -47,6 +45,7 @@ class NodeCodeGenerator
   end
 
   def write_append_statement fragment, writer
+    return if fragment.fragment_text.empty?
     unless_condition = fragment.arg_names.map { |a| "#{@naming_convention.arg_name a}.nil?" }.join ' or '
     statement = "@builder.append #{append_arg fragment}"
     statement << " unless #{unless_condition}" if fragment.optional? and fragment.has_args?

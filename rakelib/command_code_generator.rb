@@ -11,21 +11,28 @@ class CommandCodeGenerator
   end
 
   def render writer
-    args1 = [['CommandBuilder.new'] + method_arg_values].flatten
+    args1 = [['builder'] + method_arg_values].flatten
     writer.line %Q[require File.expand_path(File.dirname(__FILE__) + '/../command_base')]
     writer.line %Q[require File.expand_path(File.dirname(__FILE__) + '/../command_builder')]
     writer.line
     writer.module 'FluentCommandBuilder' do
       writer.module command_module_name do
         writer.module version_module_name do
+          writer.line "COMMAND_NAME = '#{@command.command_name}'"
           write_command @command, writer
           writer.method method_name, method_args do
-            writer.initializer class_name, args1
+            writer.line "builder = CommandBuilder.new COMMAND_NAME"
+            writer.line "command = #{class_name}.new #{args1.join ', '}"
+            writer.line 'yield builder if block_given?'
+            writer.line 'command'
           end
         end
       end
       writer.method version_method_name, method_args do
-        writer.initializer "#{command_module_name}::#{version_module_name}::#{class_name}", args1
+        writer.line "builder = CommandBuilder.new #{command_module_name}::#{version_module_name}::COMMAND_NAME"
+        writer.line "command = #{command_module_name}::#{version_module_name}::#{class_name}.new #{args1.join ', '}"
+        writer.line 'yield builder if block_given?'
+        writer.line 'command'
       end
     end
   end
@@ -66,6 +73,7 @@ class CommandCodeGenerator
 
   def command_name
     @command.node_name
+    #@command.command_name
   end
 
   def command_alias
