@@ -3,11 +3,12 @@ require File.expand_path(File.dirname(__FILE__) + '/command_base')
 module FluentCommandBuilder
   class CommandBuilder
 
-    attr_reader :command_name
+    attr_accessor :command_name, :path
 
-    def initialize command_name, command=nil
+    def initialize command_name, path=nil
       @command_name = command_name
-      @command = command.to_s
+      @path = path
+      @args = ''
     end
 
     def format value, delimiter=nil, key_value_separator=nil
@@ -33,18 +34,28 @@ module FluentCommandBuilder
     end
 
     def append value
-      @command << value
+      @args << value.to_s
+    end
+
+    def append_arg arg
+      append " #{arg.to_s}"
     end
 
     def to_s
-      "#{@command_name} #{@command.strip}".strip
+      "#{executable} #{args}".strip
     end
 
     def args
-      @command.strip
+      @args.strip
     end
 
     private
+
+    def executable
+      executable = @path ? File.join(@path, @command_name) : @command_name
+      executable.gsub! '/', '\\' if executable.include? '\\'
+      executable
+    end
 
     def hash_to_array hash, key_value_separator
       hash.map { |k, v| k.to_s + key_value_separator + v.to_s }

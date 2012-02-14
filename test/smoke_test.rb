@@ -52,5 +52,10 @@ class SmokeTest < Test::Unit::TestCase
     assert_kind_of CommandBuilder, builder
   end
 
+  def test_full_command_path
+    expected = 'C:\\tools\\MSBuild sample.proj'
+    actual = msbuild_40('sample.proj') { |b| b.path = 'C:\\tools' }.to_s
+    assert_equal expected, actual
+  end
 
 end
