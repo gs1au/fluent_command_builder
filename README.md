@@ -7,12 +7,12 @@ Each supported command is represented by a class that provides a fluent interfac
 ## Example
 
 ```ruby
-msbuild('sample.csproj').target(:rebuild).property({ :configuration => :release })
+msbuild('sample.csproj').target([:clean, :build]).property({ :configuration => :release })
 ```
 
 Produces:
 
-    MSBuild sample.csproj /target:rebuild /property:configuration=release
+    MSBuild sample.csproj /target:clean;build /property:configuration=release
 
 ## Intellisense
 
@@ -86,6 +86,64 @@ This approach enables custom execution of a command which could be useful in the
 [sh]: http://rake.rubyforge.org/classes/FileUtils.html#M000018
 [Rake]: http://rake.rubyforge.org/
 [system]: http://www.ruby-doc.org/core-1.9.3/Kernel.html#method-i-system
+
+### Argument Formatting
+
+#### Lists
+
+An array can be passed to an argument that allows multiple values.
+Fluent Command Builder will format the list using the appropriate delimiter:
+
+```ruby
+msbuild('sample.csproj').target([:clean, :build])
+```
+
+Produces:
+
+    MSBuild sample.csproj /target:clean;build
+
+Notice how target is an array and has been formatted as a semicolon delimited list.
+
+#### Key-value Pairs
+
+A hash can be passed to an argument that expects key-value pairs.
+Fluent Command Builder will format the key-value pairs using the appropriate delimiters:
+
+```ruby
+msbuild('sample.csproj').property({ :configuration => :release })
+```
+
+Produces:
+
+    MSBuild sample.csproj /property:configuration=release
+
+Notice how property is a hash and has been formatted using the equals sign.
+
+#### Arguments containing spaces
+
+Fluent Command Builder will surround any argument containing a space with double quotes automatically:
+
+```ruby
+msbuild('sample 1.csproj')
+```
+
+Produces:
+
+    MSBuild "sample 1.csproj"
+
+Notice the space in the project name and how the output has surrounded the project name with double quotes.
+
+#### Nested Commands
+
+Fluent Command Builder also supports nesting of commands:
+
+```ruby
+bundle.exec(cucumber('sample.feature'))
+```
+
+Produces:
+
+    bundle exec cucumber sample.feature
 
 ## Supported Commands
 
