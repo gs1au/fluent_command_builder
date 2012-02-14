@@ -6,9 +6,8 @@ module FluentCommandBuilder
     module V40
       COMMAND_NAME = 'installUtil'
       class InstallUtil < CommandBase
-        def initialize builder, assembly_name=nil
+        def initialize builder
           super builder
-          @builder.append " #{@builder.format assembly_name}" unless assembly_name.nil?
         end
         def help assembly_path=nil
           @builder.append ' /help'
@@ -16,7 +15,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def assembly_name assembly_name
+        def assembly_strong_name assembly_name
           @builder.append " /assemblyName=#{@builder.format assembly_name}"
           yield @builder if block_given?
           self
@@ -48,18 +47,23 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
+        def assembly_file_name assembly_file_name
+          @builder.append " #{@builder.format assembly_file_name}"
+          yield @builder if block_given?
+          self
+        end
       end
-      def installutil assembly_name=nil
+      def installutil 
         builder = CommandBuilder.new COMMAND_NAME
-        command = InstallUtil.new builder, assembly_name
+        command = InstallUtil.new builder
         yield builder if block_given?
         command
       end
     end
   end
-  def installutil_40 assembly_name=nil
+  def installutil_40 
     builder = CommandBuilder.new InstallUtil::V40::COMMAND_NAME
-    command = InstallUtil::V40::InstallUtil.new builder, assembly_name
+    command = InstallUtil::V40::InstallUtil.new builder
     yield builder if block_given?
     command
   end
