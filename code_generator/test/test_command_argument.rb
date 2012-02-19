@@ -1,5 +1,7 @@
 require 'test/unit'
-require_relative '../rakelib/command_argument'
+require_relative 'test_helper'
+require_relative '../command_argument'
+include CodeGenerator
 
 class TestCommandDefinitionLine < Test::Unit::TestCase
 

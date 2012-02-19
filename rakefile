@@ -2,9 +2,10 @@ require 'rake/clean'
 require 'rake/testtask'
 require 'bundler'
 Bundler::GemHelper.install_tasks
-require_relative 'rakelib/ruby_code_writer'
-require_relative 'rakelib/command_code_generator'
-require_relative 'rakelib/command_definition'
+require_relative 'code_generator/ruby_code_writer'
+require_relative 'code_generator/command_code_generator'
+require_relative 'code_generator/command_definition'
+include CodeGenerator
 
 COMMAND_DEFINITIONS_DIR = 'command_definitions'
 LIB_DIR = 'lib'
@@ -13,18 +14,24 @@ COMMAND_BUILDERS_DIR = File.join LIB_DIR, 'fluent_command_builder', 'command_bui
 CLOBBER.include COMMAND_BUILDERS_DIR
 directory COMMAND_BUILDERS_DIR
 
-task :default => [:test]
+task :default => [:test_gem]
 
-desc 'Generate code.'
-task :build => [:clobber, COMMAND_BUILDERS_DIR] do
+desc 'Test gem.'
+Rake::TestTask.new :test_gem => [:build] do |t|
+  t.test_files = FileList['test/*.rb']
+  t.verbose = true
+end
+
+desc 'Build.'
+task :build => [:test_code_generator, :clobber, COMMAND_BUILDERS_DIR] do
   command_definition_file_pattern = File.join COMMAND_DEFINITIONS_DIR, '*.txt'
   Dir[command_definition_file_pattern].each { |f| generate_command_builder f }
   generate_fluent_command_builder_rb
 end
 
-desc 'Run unit tests.'
-Rake::TestTask.new :test => [:build] do |t|
-  t.test_files = FileList['test/*.rb']
+desc 'Test code generator.'
+Rake::TestTask.new :test_code_generator do |t|
+  t.test_files = FileList['code_generator/test/*.rb']
   t.verbose = true
 end
 
