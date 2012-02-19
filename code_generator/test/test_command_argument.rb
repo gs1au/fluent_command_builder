@@ -5,37 +5,32 @@ include CodeGenerator
 
 class TestCommandDefinitionLine < Test::Unit::TestCase
 
-  def test_get_argument_name_when_option_specified
-    arg = CommandArgument.new '<physicalPath>'
-    assert_equal 'physicalPath', arg.arg_name
+  def test_should_return_arg_name_with_angle_brackets_removed
+    arg = CommandArgument.new '<value>'
+    assert_equal 'value', arg.arg_name
   end
 
-  def test_get_key_value_separator
-    arg = CommandArgument.new '<property=;>'
+  def test_should_return_key_value_separator_when_specified_together_with_delimiter
+    arg = CommandArgument.new '<value=;>'
     assert_equal '=', arg.key_value_separator
   end
 
-  def test_key_value_separator_is_nil_when_only_delimiter_present
+  def test_should_return_nil_when_key_value_separator_not_specified
     arg = CommandArgument.new '<target;>'
     assert_nil arg.key_value_separator
   end
 
-  def test_key_value_separator_is_nil_when_none_specified
-    arg = CommandArgument.new '<level>'
-    assert_nil arg.key_value_separator
-  end
-
-  def test_get_delimiter
+  def test_should_return_delimiter_when_specified
     arg = CommandArgument.new '<target;>'
     assert_equal ';', arg.delimiter
   end
 
-  def test_get_delimiter_when_key_value_separator_also_specified
+  def test_should_return_delimiter_when_key_value_separator_also_specified
     arg = CommandArgument.new '<property=;>'
     assert_equal ';', arg.delimiter
   end
 
-  def test_delimiter_is_nil_when_none_specified
+  def test_should_return_nil_when_delimiter_not_specified
     arg = CommandArgument.new '<level>'
     assert_nil arg.delimiter
   end
