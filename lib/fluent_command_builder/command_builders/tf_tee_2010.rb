@@ -218,9 +218,8 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -271,9 +270,8 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -294,9 +292,8 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -333,9 +330,8 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -392,9 +388,8 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -426,9 +421,8 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -470,9 +464,8 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -493,9 +486,8 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -536,9 +528,8 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -599,9 +590,8 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -652,9 +642,8 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -711,9 +700,8 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -744,9 +732,8 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -814,9 +801,8 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -883,9 +869,8 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -933,9 +918,8 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -953,9 +937,8 @@ module FluentCommandBuilder
           @builder.append "@#{@builder.format scope}" unless scope.nil?
           @builder.append " #{@builder.format item_spec}"
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -987,9 +970,8 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -1016,9 +998,8 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -1099,9 +1080,8 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -1129,9 +1109,8 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -1242,9 +1221,8 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -1357,9 +1335,8 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -1406,9 +1383,8 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -1434,9 +1410,8 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -1477,9 +1452,8 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -1491,9 +1465,8 @@ module FluentCommandBuilder
           @builder.append " shelve -delete #{@builder.format shelveset_name}"
           @builder.append ";#{@builder.format shelveset_owner}" unless shelveset_owner.nil?
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -1525,9 +1498,8 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -1543,9 +1515,8 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -1599,9 +1570,8 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -1628,9 +1598,8 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -1656,9 +1625,8 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -1687,9 +1655,8 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -1700,9 +1667,8 @@ module FluentCommandBuilder
           super builder
           @builder.append " workfold #{@builder.format local_folder}"
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -1713,9 +1679,8 @@ module FluentCommandBuilder
           super builder
           @builder.append " workfold -workspace:#{@builder.format workspace_name}"
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -1726,9 +1691,8 @@ module FluentCommandBuilder
           super builder
           @builder.append " workfold #{@builder.format server_folder}"
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -1750,9 +1714,8 @@ module FluentCommandBuilder
           super builder
           @builder.append " workfold -map #{@builder.format server_folder} #{@builder.format local_folder}"
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -1774,9 +1737,8 @@ module FluentCommandBuilder
           super builder
           @builder.append ' workfold -unmap'
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -1803,9 +1765,8 @@ module FluentCommandBuilder
           super builder
           @builder.append " workfold -cloak #{@builder.format server_folder}"
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -1827,9 +1788,8 @@ module FluentCommandBuilder
           super builder
           @builder.append " workfold -decloak #{@builder.format server_folder}"
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -1883,9 +1843,8 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -1902,9 +1861,8 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -1937,9 +1895,8 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self
@@ -1991,9 +1948,8 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def login username, domain=nil, password=nil
+        def login username, password=nil
           @builder.append " -login:#{@builder.format username}"
-          @builder.append "@#{@builder.format domain}" unless domain.nil?
           @builder.append ",#{@builder.format password}" unless password.nil?
           yield @builder if block_given?
           self

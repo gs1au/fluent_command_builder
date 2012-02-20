@@ -336,7 +336,7 @@ options:
     -collection:<teamProjectCollectionUrl>
     -format:<format>
     -lock:<lockType>
-    -login:<username>[@<domain>][,<password>]
+    -login:<username>[,<password>]
     -notes:<notes=;>
     -shelveset:<shelvesetName>[;<shelvesetOwner>]
     -version:<versionSpec>
