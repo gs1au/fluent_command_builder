@@ -25,37 +25,37 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def allow_subsequent_updates 
+        def allow_subsequent_updates
           @builder.append ' -u'
           yield @builder if block_given?
           self
         end
-        def force_overwrite_files 
+        def force_overwrite_files
           @builder.append ' -f'
           yield @builder if block_given?
           self
         end
-        def force_debug_output 
+        def force_debug_output
           @builder.append ' -d'
           yield @builder if block_given?
           self
         end
-        def fixed_names 
+        def fixed_names
           @builder.append ' -fixedNames'
           yield @builder if block_given?
           self
         end
-        def full_rebuild 
+        def full_rebuild
           @builder.append ' -c'
           yield @builder if block_given?
           self
         end
-        def error_stack 
+        def error_stack
           @builder.append ' -errorStack'
           yield @builder if block_given?
           self
         end
-        def no_logo 
+        def no_logo
           @builder.append ' -noLogo'
           yield @builder if block_given?
           self
@@ -70,12 +70,12 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def aptca 
+        def aptca
           @builder.append ' -aptca'
           yield @builder if block_given?
           self
         end
-        def delay_sign 
+        def delay_sign
           @builder.append ' -delaySign'
           yield @builder if block_given?
           self

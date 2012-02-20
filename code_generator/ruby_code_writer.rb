@@ -42,7 +42,7 @@ module CodeGenerator
     end
 
     def method method_name, *args
-      block("def #{method_name} #{args.flatten.join ', '}") { yield }
+      block("def #{method_name} #{args.flatten.join ', '}".strip) { yield }
     end
 
   end

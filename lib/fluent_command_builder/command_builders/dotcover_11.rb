@@ -230,7 +230,7 @@ module FluentCommandBuilder
           self
         end
       end
-      def dotcover 
+      def dotcover
         builder = CommandBuilder.new COMMAND_NAME
         command = DotCover.new builder
         yield builder if block_given?
@@ -238,7 +238,7 @@ module FluentCommandBuilder
       end
     end
   end
-  def dotcover_11 
+  def dotcover_11
     builder = CommandBuilder.new DotCover::V11::COMMAND_NAME
     command = DotCover::V11::DotCover.new builder
     yield builder if block_given?

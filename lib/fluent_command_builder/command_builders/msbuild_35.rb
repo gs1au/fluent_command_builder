@@ -10,17 +10,17 @@ module FluentCommandBuilder
           super builder
           @builder.append " #{@builder.format project_file}" unless project_file.nil?
         end
-        def help 
+        def help
           @builder.append ' /help'
           yield @builder if block_given?
           self
         end
-        def no_logo 
+        def no_logo
           @builder.append ' /noLogo'
           yield @builder if block_given?
           self
         end
-        def version 
+        def version
           @builder.append ' /version'
           yield @builder if block_given?
           self
@@ -30,7 +30,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def no_auto_response 
+        def no_auto_response
           @builder.append ' /noAutoResponse'
           yield @builder if block_given?
           self
@@ -65,7 +65,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def no_console_logger 
+        def no_console_logger
           @builder.append ' /noConsoleLogger'
           yield @builder if block_given?
           self
@@ -86,12 +86,12 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def file_logger 
+        def file_logger
           @builder.append ' /fileLogger'
           yield @builder if block_given?
           self
         end
-        def distributed_file_logger 
+        def distributed_file_logger
           @builder.append ' /distributedFileLogger'
           yield @builder if block_given?
           self

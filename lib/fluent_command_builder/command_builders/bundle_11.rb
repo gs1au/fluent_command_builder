@@ -9,13 +9,13 @@ module FluentCommandBuilder
         def initialize builder
           super builder
         end
-        def cache 
+        def cache
           Cache.new @builder
         end
-        def check 
+        def check
           Check.new @builder
         end
-        def clean 
+        def clean
           Clean.new @builder
         end
         def config name, value=nil
@@ -38,10 +38,10 @@ module FluentCommandBuilder
         def gem gem
           Gem.new @builder, gem
         end
-        def init 
+        def init
           Init.new @builder
         end
-        def install 
+        def install
           Install.new @builder
         end
         def open gem
@@ -52,7 +52,7 @@ module FluentCommandBuilder
         def outdated gem=nil
           Outdated.new @builder, gem
         end
-        def package 
+        def package
           Package.new @builder
         end
         def show gem=nil
@@ -61,12 +61,12 @@ module FluentCommandBuilder
         def update gem=nil
           Update.new @builder, gem
         end
-        def version 
+        def version
           @builder.append ' version'
           yield @builder if block_given?
           self
         end
-        def viz 
+        def viz
           Viz.new @builder
         end
       end
@@ -75,7 +75,7 @@ module FluentCommandBuilder
           super builder
           @builder.append ' cache'
         end
-        def no_prune 
+        def no_prune
           @builder.append ' --no-prune'
           yield @builder if block_given?
           self
@@ -102,7 +102,7 @@ module FluentCommandBuilder
           super builder
           @builder.append ' clean'
         end
-        def force 
+        def force
           @builder.append ' --force'
           yield @builder if block_given?
           self
@@ -113,7 +113,7 @@ module FluentCommandBuilder
           super builder
           @builder.append " gem #{@builder.format gem}"
         end
-        def bin 
+        def bin
           @builder.append ' --bin'
           yield @builder if block_given?
           self
@@ -140,22 +140,22 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def clean 
+        def clean
           @builder.append ' --clean'
           yield @builder if block_given?
           self
         end
-        def deployment 
+        def deployment
           @builder.append ' --deployment'
           yield @builder if block_given?
           self
         end
-        def frozen 
+        def frozen
           @builder.append ' --frozen'
           yield @builder if block_given?
           self
         end
-        def full_index 
+        def full_index
           @builder.append ' --full-index'
           yield @builder if block_given?
           self
@@ -165,17 +165,17 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def local 
+        def local
           @builder.append ' --local'
           yield @builder if block_given?
           self
         end
-        def no_cache 
+        def no_cache
           @builder.append ' --no-cache'
           yield @builder if block_given?
           self
         end
-        def no_prune 
+        def no_prune
           @builder.append ' --no-prune'
           yield @builder if block_given?
           self
@@ -185,7 +185,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def quiet 
+        def quiet
           @builder.append ' --quiet'
           yield @builder if block_given?
           self
@@ -200,7 +200,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def system 
+        def system
           @builder.append ' --system'
           yield @builder if block_given?
           self
@@ -217,17 +217,17 @@ module FluentCommandBuilder
           @builder.append ' outdated'
           @builder.append " #{@builder.format gem}" unless gem.nil?
         end
-        def local 
+        def local
           @builder.append ' --local'
           yield @builder if block_given?
           self
         end
-        def pre 
+        def pre
           @builder.append ' --pre'
           yield @builder if block_given?
           self
         end
-        def source 
+        def source
           @builder.append ' --source'
           yield @builder if block_given?
           self
@@ -238,7 +238,7 @@ module FluentCommandBuilder
           super builder
           @builder.append ' package'
         end
-        def no_prune 
+        def no_prune
           @builder.append ' --no-prune'
           yield @builder if block_given?
           self
@@ -250,7 +250,7 @@ module FluentCommandBuilder
           @builder.append ' show'
           @builder.append " #{@builder.format gem}" unless gem.nil?
         end
-        def paths 
+        def paths
           @builder.append ' --paths'
           yield @builder if block_given?
           self
@@ -262,7 +262,7 @@ module FluentCommandBuilder
           @builder.append ' update'
           @builder.append " #{@builder.format gem}" unless gem.nil?
         end
-        def local 
+        def local
           @builder.append ' --local'
           yield @builder if block_given?
           self
@@ -288,18 +288,18 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def requirements 
+        def requirements
           @builder.append ' --requirements'
           yield @builder if block_given?
           self
         end
-        def version 
+        def version
           @builder.append ' --version'
           yield @builder if block_given?
           self
         end
       end
-      def bundle 
+      def bundle
         builder = CommandBuilder.new COMMAND_NAME
         command = Bundle.new builder
         yield builder if block_given?
@@ -307,7 +307,7 @@ module FluentCommandBuilder
       end
     end
   end
-  def bundle_11 
+  def bundle_11
     builder = CommandBuilder.new Bundle::V11::COMMAND_NAME
     command = Bundle::V11::Bundle.new builder
     yield builder if block_given?

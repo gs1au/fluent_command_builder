@@ -45,7 +45,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def labels 
+        def labels
           @builder.append ' /labels'
           yield @builder if block_given?
           self
@@ -80,32 +80,32 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def no_shadow 
+        def no_shadow
           @builder.append ' /noShadow'
           yield @builder if block_given?
           self
         end
-        def no_thread 
+        def no_thread
           @builder.append ' /noThread'
           yield @builder if block_given?
           self
         end
-        def wait 
+        def wait
           @builder.append ' /wait'
           yield @builder if block_given?
           self
         end
-        def xml_console 
+        def xml_console
           @builder.append ' /xmlConsole'
           yield @builder if block_given?
           self
         end
-        def no_logo 
+        def no_logo
           @builder.append ' /noLogo'
           yield @builder if block_given?
           self
         end
-        def help 
+        def help
           @builder.append ' /help'
           yield @builder if block_given?
           self

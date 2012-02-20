@@ -48,7 +48,7 @@ module FluentCommandBuilder
         def compare_with_shelveset_version shelveset_item_spec
           CompareWithShelvesetVersion.new @builder, shelveset_item_spec
         end
-        def configure_compare_tool 
+        def configure_compare_tool
           @builder.append ' difference /configure'
           yield @builder if block_given?
           self
@@ -116,12 +116,12 @@ module FluentCommandBuilder
         def list_proxy_records url
           ListProxyRecords.new @builder, url
         end
-        def enable_proxy 
+        def enable_proxy
           @builder.append ' proxy /enabled:true'
           yield @builder if block_given?
           self
         end
-        def disable_proxy 
+        def disable_proxy
           @builder.append ' proxy /enabled:false'
           yield @builder if block_given?
           self
@@ -180,7 +180,7 @@ module FluentCommandBuilder
         def map_folder server_folder, local_folder
           MapFolder.new @builder, server_folder, local_folder
         end
-        def unmap_folder 
+        def unmap_folder
           UnmapFolder.new @builder
         end
         def cloak_folder server_folder
@@ -220,12 +220,12 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def no_prompt 
+        def no_prompt
           @builder.append ' /noPrompt'
           yield @builder if block_given?
           self
         end
-        def recursive 
+        def recursive
           @builder.append ' /recursive'
           yield @builder if block_given?
           self
@@ -247,7 +247,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def no_get 
+        def no_get
           @builder.append ' /noGet'
           yield @builder if block_given?
           self
@@ -257,17 +257,17 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def no_prompt 
+        def no_prompt
           @builder.append ' /noPrompt'
           yield @builder if block_given?
           self
         end
-        def silent 
+        def silent
           @builder.append ' /silent'
           yield @builder if block_given?
           self
         end
-        def checkin 
+        def checkin
           @builder.append ' /checkin'
           yield @builder if block_given?
           self
@@ -327,7 +327,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def no_prompt 
+        def no_prompt
           @builder.append ' /noPrompt'
           yield @builder if block_given?
           self
@@ -337,7 +337,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def latest 
+        def latest
           @builder.append ' /latest'
           yield @builder if block_given?
           self
@@ -365,7 +365,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def no_prompt 
+        def no_prompt
           @builder.append ' /noPrompt'
           yield @builder if block_given?
           self
@@ -380,22 +380,22 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def recursive 
+        def recursive
           @builder.append ' /recursive'
           yield @builder if block_given?
           self
         end
-        def saved 
+        def saved
           @builder.append ' /saved'
           yield @builder if block_given?
           self
         end
-        def validate 
+        def validate
           @builder.append ' /validate'
           yield @builder if block_given?
           self
         end
-        def bypass 
+        def bypass
           @builder.append ' /bypass'
           yield @builder if block_given?
           self
@@ -411,7 +411,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def force 
+        def force
           @builder.append ' /force'
           yield @builder if block_given?
           self
@@ -423,12 +423,12 @@ module FluentCommandBuilder
           @builder.append " checkin /shelveset:#{@builder.format shelveset_name}"
           @builder.append ";#{@builder.format shelveset_owner}" unless shelveset_owner.nil?
         end
-        def bypass 
+        def bypass
           @builder.append ' /bypass'
           yield @builder if block_given?
           self
         end
-        def no_prompt 
+        def no_prompt
           @builder.append ' /noPrompt'
           yield @builder if block_given?
           self
@@ -449,7 +449,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def force 
+        def force
           @builder.append ' /force'
           yield @builder if block_given?
           self
@@ -466,7 +466,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def recursive 
+        def recursive
           @builder.append ' /recursive'
           yield @builder if block_given?
           self
@@ -511,7 +511,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def recursive 
+        def recursive
           @builder.append ' /recursive'
           yield @builder if block_given?
           self
@@ -528,7 +528,7 @@ module FluentCommandBuilder
           super builder
           @builder.append " destroy #{@builder.format item_spec}"
         end
-        def keep_history 
+        def keep_history
           @builder.append ' /keepHistory'
           yield @builder if block_given?
           self
@@ -538,22 +538,22 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def preview 
+        def preview
           @builder.append ' /preview'
           yield @builder if block_given?
           self
         end
-        def start_cleanup 
+        def start_cleanup
           @builder.append ' /startCleanup'
           yield @builder if block_given?
           self
         end
-        def no_prompt 
+        def no_prompt
           @builder.append ' /noPrompt'
           yield @builder if block_given?
           self
         end
-        def silent 
+        def silent
           @builder.append ' /silent'
           yield @builder if block_given?
           self
@@ -590,32 +590,32 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def ignore_space 
+        def ignore_space
           @builder.append ' /ignoreSpace'
           yield @builder if block_given?
           self
         end
-        def ignore_eol 
+        def ignore_eol
           @builder.append ' /ignoreEol'
           yield @builder if block_given?
           self
         end
-        def ignore_case 
+        def ignore_case
           @builder.append ' /ignoreCase'
           yield @builder if block_given?
           self
         end
-        def recursive 
+        def recursive
           @builder.append ' /recursive'
           yield @builder if block_given?
           self
         end
-        def options 
+        def options
           @builder.append ' /options'
           yield @builder if block_given?
           self
         end
-        def no_prompt 
+        def no_prompt
           @builder.append ' /noPrompt'
           yield @builder if block_given?
           self
@@ -642,32 +642,32 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def ignore_space 
+        def ignore_space
           @builder.append ' /ignoreSpace'
           yield @builder if block_given?
           self
         end
-        def ignore_eol 
+        def ignore_eol
           @builder.append ' /ignoreEol'
           yield @builder if block_given?
           self
         end
-        def ignore_case 
+        def ignore_case
           @builder.append ' /ignoreCase'
           yield @builder if block_given?
           self
         end
-        def recursive 
+        def recursive
           @builder.append ' /recursive'
           yield @builder if block_given?
           self
         end
-        def options 
+        def options
           @builder.append ' /options'
           yield @builder if block_given?
           self
         end
-        def no_prompt 
+        def no_prompt
           @builder.append ' /noPrompt'
           yield @builder if block_given?
           self
@@ -700,32 +700,32 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def ignore_space 
+        def ignore_space
           @builder.append ' /ignoreSpace'
           yield @builder if block_given?
           self
         end
-        def ignore_eol 
+        def ignore_eol
           @builder.append ' /ignoreEol'
           yield @builder if block_given?
           self
         end
-        def ignore_case 
+        def ignore_case
           @builder.append ' /ignoreCase'
           yield @builder if block_given?
           self
         end
-        def recursive 
+        def recursive
           @builder.append ' /recursive'
           yield @builder if block_given?
           self
         end
-        def options 
+        def options
           @builder.append ' /options'
           yield @builder if block_given?
           self
         end
-        def no_prompt 
+        def no_prompt
           @builder.append ' /noPrompt'
           yield @builder if block_given?
           self
@@ -747,17 +747,17 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def recursive 
+        def recursive
           @builder.append ' /recursive'
           yield @builder if block_given?
           self
         end
-        def folders 
+        def folders
           @builder.append ' /folders'
           yield @builder if block_given?
           self
         end
-        def deleted 
+        def deleted
           @builder.append ' /deleted'
           yield @builder if block_given?
           self
@@ -781,12 +781,12 @@ module FluentCommandBuilder
           @builder.append " #{@builder.format source_path}" unless source_path.nil?
           @builder.append " #{@builder.format target_path}"
         end
-        def recursive 
+        def recursive
           @builder.append ' /recursive'
           yield @builder if block_given?
           self
         end
-        def no_prompt 
+        def no_prompt
           @builder.append ' /noPrompt'
           yield @builder if block_given?
           self
@@ -801,7 +801,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def filter_local_paths_only 
+        def filter_local_paths_only
           @builder.append ' /filterLocalPathsOnly'
           yield @builder if block_given?
           self
@@ -829,37 +829,37 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def all 
+        def all
           @builder.append ' /all'
           yield @builder if block_given?
           self
         end
-        def overwrite 
+        def overwrite
           @builder.append ' /overwrite'
           yield @builder if block_given?
           self
         end
-        def force 
+        def force
           @builder.append ' /force'
           yield @builder if block_given?
           self
         end
-        def preview 
+        def preview
           @builder.append ' /preview'
           yield @builder if block_given?
           self
         end
-        def recursive 
+        def recursive
           @builder.append ' /recursive'
           yield @builder if block_given?
           self
         end
-        def remap 
+        def remap
           @builder.append ' /remap'
           yield @builder if block_given?
           self
         end
-        def no_prompt 
+        def no_prompt
           @builder.append ' /noPrompt'
           yield @builder if block_given?
           self
@@ -886,7 +886,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def recursive 
+        def recursive
           @builder.append ' /recursive'
           yield @builder if block_given?
           self
@@ -901,17 +901,17 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def slot_mode 
+        def slot_mode
           @builder.append ' /slotMode'
           yield @builder if block_given?
           self
         end
-        def item_mode 
+        def item_mode
           @builder.append ' /itemMode'
           yield @builder if block_given?
           self
         end
-        def no_prompt 
+        def no_prompt
           @builder.append ' /noPrompt'
           yield @builder if block_given?
           self
@@ -960,7 +960,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def recursive 
+        def recursive
           @builder.append ' /recursive'
           yield @builder if block_given?
           self
@@ -1029,7 +1029,7 @@ module FluentCommandBuilder
           super builder
           @builder.append " localVersions #{@builder.format item_spec}"
         end
-        def recursive 
+        def recursive
           @builder.append ' /recursive'
           yield @builder if block_given?
           self
@@ -1067,7 +1067,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def recursive 
+        def recursive
           @builder.append ' /recursive'
           yield @builder if block_given?
           self
@@ -1089,22 +1089,22 @@ module FluentCommandBuilder
           super builder
           @builder.append " merge #{@builder.format source} #{@builder.format destination}"
         end
-        def recursive 
+        def recursive
           @builder.append ' /recursive'
           yield @builder if block_given?
           self
         end
-        def force 
+        def force
           @builder.append ' /force'
           yield @builder if block_given?
           self
         end
-        def candidate 
+        def candidate
           @builder.append ' /candidate'
           yield @builder if block_given?
           self
         end
-        def discard 
+        def discard
           @builder.append ' /discard'
           yield @builder if block_given?
           self
@@ -1119,27 +1119,27 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def preview 
+        def preview
           @builder.append ' /preview'
           yield @builder if block_given?
           self
         end
-        def baseless 
+        def baseless
           @builder.append ' /baseless'
           yield @builder if block_given?
           self
         end
-        def no_summary 
+        def no_summary
           @builder.append ' /noSummary'
           yield @builder if block_given?
           self
         end
-        def no_implicit_baseless 
+        def no_implicit_baseless
           @builder.append ' /noImplicitBaseless'
           yield @builder if block_given?
           self
         end
-        def conservative 
+        def conservative
           @builder.append ' /conservative'
           yield @builder if block_given?
           self
@@ -1149,7 +1149,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def no_prompt 
+        def no_prompt
           @builder.append ' /noPrompt'
           yield @builder if block_given?
           self
@@ -1168,12 +1168,12 @@ module FluentCommandBuilder
           @builder.append " #{@builder.format source}" unless source.nil?
           @builder.append " #{@builder.format destination}"
         end
-        def recursive 
+        def recursive
           @builder.append ' /recursive'
           yield @builder if block_given?
           self
         end
-        def extended 
+        def extended
           @builder.append ' /extended'
           yield @builder if block_given?
           self
@@ -1189,7 +1189,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def show_all 
+        def show_all
           @builder.append ' /showAll'
           yield @builder if block_given?
           self
@@ -1240,12 +1240,12 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def recursive 
+        def recursive
           @builder.append ' /recursive'
           yield @builder if block_given?
           self
         end
-        def global 
+        def global
           @builder.append ' /global'
           yield @builder if block_given?
           self
@@ -1267,7 +1267,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def recursive 
+        def recursive
           @builder.append ' /recursive'
           yield @builder if block_given?
           self
@@ -1406,7 +1406,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def preview 
+        def preview
           @builder.append ' /preview'
           yield @builder if block_given?
           self
@@ -1421,7 +1421,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def recursive 
+        def recursive
           @builder.append ' /recursive'
           yield @builder if block_given?
           self
@@ -1431,7 +1431,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def no_prompt 
+        def no_prompt
           @builder.append ' /noPrompt'
           yield @builder if block_given?
           self
@@ -1448,7 +1448,7 @@ module FluentCommandBuilder
           super builder
           @builder.append " rollback /toVersion:#{@builder.format version_spec} #{@builder.format item_spec}"
         end
-        def recursive 
+        def recursive
           @builder.append ' /recursive'
           yield @builder if block_given?
           self
@@ -1463,7 +1463,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def keep_merge_history 
+        def keep_merge_history
           @builder.append ' /keepMergeHistory'
           yield @builder if block_given?
           self
@@ -1474,7 +1474,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def no_prompt 
+        def no_prompt
           @builder.append ' /noPrompt'
           yield @builder if block_given?
           self
@@ -1487,7 +1487,7 @@ module FluentCommandBuilder
           @builder.append "~#{@builder.format changeset_to}" unless changeset_to.nil?
           @builder.append " #{@builder.format item_spec}" unless item_spec.nil?
         end
-        def recursive 
+        def recursive
           @builder.append ' /recursive'
           yield @builder if block_given?
           self
@@ -1502,7 +1502,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def keep_merge_history 
+        def keep_merge_history
           @builder.append ' /keepMergeHistory'
           yield @builder if block_given?
           self
@@ -1513,7 +1513,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def no_prompt 
+        def no_prompt
           @builder.append ' /noPrompt'
           yield @builder if block_given?
           self
@@ -1529,12 +1529,12 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def validate 
+        def validate
           @builder.append ' /validate'
           yield @builder if block_given?
           self
         end
-        def no_prompt 
+        def no_prompt
           @builder.append ' /noPrompt'
           yield @builder if block_given?
           self
@@ -1551,12 +1551,12 @@ module FluentCommandBuilder
           super builder
           @builder.append " shelve #{@builder.format shelveset_name} #{@builder.format item_spec}"
         end
-        def move 
+        def move
           @builder.append ' /move'
           yield @builder if block_given?
           self
         end
-        def replace 
+        def replace
           @builder.append ' /replace'
           yield @builder if block_given?
           self
@@ -1566,17 +1566,17 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def recursive 
+        def recursive
           @builder.append ' /recursive'
           yield @builder if block_given?
           self
         end
-        def validate 
+        def validate
           @builder.append ' /validate'
           yield @builder if block_given?
           self
         end
-        def no_prompt 
+        def no_prompt
           @builder.append ' /noPrompt'
           yield @builder if block_given?
           self
@@ -1667,7 +1667,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def recursive 
+        def recursive
           @builder.append ' /recursive'
           yield @builder if block_given?
           self
@@ -1684,7 +1684,7 @@ module FluentCommandBuilder
           @builder.append " undelete #{@builder.format item_spec}"
           @builder.append ";#{@builder.format deletion_id}" unless deletion_id.nil?
         end
-        def no_get 
+        def no_get
           @builder.append ' /noGet'
           yield @builder if block_given?
           self
@@ -1694,7 +1694,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def recursive 
+        def recursive
           @builder.append ' /recursive'
           yield @builder if block_given?
           self
@@ -1717,12 +1717,12 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def recursive 
+        def recursive
           @builder.append ' /recursive'
           yield @builder if block_given?
           self
         end
-        def no_prompt 
+        def no_prompt
           @builder.append ' /noPrompt'
           yield @builder if block_given?
           self
@@ -1749,7 +1749,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def recursive 
+        def recursive
           @builder.append ' /recursive'
           yield @builder if block_given?
           self
@@ -1769,17 +1769,17 @@ module FluentCommandBuilder
           @builder.append ";#{@builder.format username}" unless username.nil?
           @builder.append " #{@builder.format item_spec}" unless item_spec.nil?
         end
-        def move 
+        def move
           @builder.append ' /move'
           yield @builder if block_given?
           self
         end
-        def recursive 
+        def recursive
           @builder.append ' /recursive'
           yield @builder if block_given?
           self
         end
-        def no_prompt 
+        def no_prompt
           @builder.append ' /noPrompt'
           yield @builder if block_given?
           self
@@ -1801,12 +1801,12 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def console 
+        def console
           @builder.append ' /console'
           yield @builder if block_given?
           self
         end
-        def recursive 
+        def recursive
           @builder.append ' /recursive'
           yield @builder if block_given?
           self
@@ -1822,7 +1822,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def no_prompt 
+        def no_prompt
           @builder.append ' /noPrompt'
           yield @builder if block_given?
           self
@@ -1931,7 +1931,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def recursive 
+        def recursive
           @builder.append ' /recursive'
           yield @builder if block_given?
           self
@@ -1989,7 +1989,7 @@ module FluentCommandBuilder
           @builder.append " workspace /new #{@builder.format workspace_name}"
           @builder.append ";#{@builder.format workspace_owner}" unless workspace_owner.nil?
         end
-        def no_prompt 
+        def no_prompt
           @builder.append ' /noPrompt'
           yield @builder if block_given?
           self
@@ -2143,7 +2143,7 @@ module FluentCommandBuilder
           self
         end
       end
-      def tf 
+      def tf
         builder = CommandBuilder.new COMMAND_NAME
         command = Tf.new builder
         yield builder if block_given?
@@ -2151,7 +2151,7 @@ module FluentCommandBuilder
       end
     end
   end
-  def tf_2010 
+  def tf_2010
     builder = CommandBuilder.new Tf::V2010::COMMAND_NAME
     command = Tf::V2010::Tf.new builder
     yield builder if block_given?

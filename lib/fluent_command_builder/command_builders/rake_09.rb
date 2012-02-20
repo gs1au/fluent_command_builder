@@ -10,7 +10,7 @@ module FluentCommandBuilder
           super builder
           @builder.append " #{@builder.format task}" unless task.nil?
         end
-        def classic_namespace 
+        def classic_namespace
           @builder.append ' --classic-namespace'
           yield @builder if block_given?
           self
@@ -20,7 +20,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def dry_run 
+        def dry_run
           @builder.append ' --dry-run'
           yield @builder if block_given?
           self
@@ -45,17 +45,17 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def no_search 
+        def no_search
           @builder.append ' --no-search'
           yield @builder if block_given?
           self
         end
-        def prereqs 
+        def prereqs
           @builder.append ' --prereqs'
           yield @builder if block_given?
           self
         end
-        def quiet 
+        def quiet
           @builder.append ' --quiet'
           yield @builder if block_given?
           self
@@ -75,17 +75,17 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def rules 
+        def rules
           @builder.append ' --rules'
           yield @builder if block_given?
           self
         end
-        def silent 
+        def silent
           @builder.append ' --silent'
           yield @builder if block_given?
           self
         end
-        def no_system 
+        def no_system
           @builder.append ' --no-system'
           yield @builder if block_given?
           self
@@ -95,17 +95,17 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def trace 
+        def trace
           @builder.append ' --trace'
           yield @builder if block_given?
           self
         end
-        def verbose 
+        def verbose
           @builder.append ' --verbose'
           yield @builder if block_given?
           self
         end
-        def version 
+        def version
           @builder.append ' --version'
           yield @builder if block_given?
           self
@@ -115,12 +115,12 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def no_deprecation_warnings 
+        def no_deprecation_warnings
           @builder.append ' --no-deprecation-warnings'
           yield @builder if block_given?
           self
         end
-        def help 
+        def help
           @builder.append ' --help'
           yield @builder if block_given?
           self

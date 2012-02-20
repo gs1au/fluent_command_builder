@@ -104,7 +104,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def show_secure 
+        def show_secure
           @builder.append ' -showSecure'
           yield @builder if block_given?
           self
@@ -119,12 +119,12 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def unicode 
+        def unicode
           @builder.append ' -unicode'
           yield @builder if block_given?
           self
         end
-        def use_check_sum 
+        def use_check_sum
           @builder.append ' -useCheckSum'
           yield @builder if block_given?
           self
@@ -134,7 +134,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def verbose 
+        def verbose
           @builder.append ' -verbose'
           yield @builder if block_given?
           self
@@ -144,12 +144,12 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def whatif 
+        def whatif
           @builder.append ' -whatif'
           yield @builder if block_given?
           self
         end
-        def xml 
+        def xml
           @builder.append ' -xml'
           yield @builder if block_given?
           self
@@ -160,7 +160,7 @@ module FluentCommandBuilder
           self
         end
       end
-      def msdeploy 
+      def msdeploy
         builder = CommandBuilder.new COMMAND_NAME
         command = MSDeploy.new builder
         yield builder if block_given?
@@ -168,7 +168,7 @@ module FluentCommandBuilder
       end
     end
   end
-  def msdeploy_40 
+  def msdeploy_40
     builder = CommandBuilder.new MSDeploy::V40::COMMAND_NAME
     command = MSDeploy::V40::MSDeploy.new builder
     yield builder if block_given?

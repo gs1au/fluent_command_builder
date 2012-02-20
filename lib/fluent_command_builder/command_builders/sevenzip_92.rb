@@ -74,12 +74,12 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def write_data_to_stdout 
+        def write_data_to_stdout
           @builder.append ' -so'
           yield @builder if block_given?
           self
         end
-        def compress_files_open_for_writing 
+        def compress_files_open_for_writing
           @builder.append ' -ssw'
           yield @builder if block_given?
           self
@@ -187,22 +187,22 @@ module FluentCommandBuilder
           super builder
           @builder.append " e #{@builder.format archive} #{@builder.format files}"
         end
-        def ai 
+        def ai
           @builder.append ' -ai'
           yield @builder if block_given?
           self
         end
-        def an 
+        def an
           @builder.append ' -an'
           yield @builder if block_given?
           self
         end
-        def ao 
+        def ao
           @builder.append ' -ao'
           yield @builder if block_given?
           self
         end
-        def ax 
+        def ax
           @builder.append ' -ax'
           yield @builder if block_given?
           self
@@ -230,7 +230,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def write_data_to_stdout 
+        def write_data_to_stdout
           @builder.append ' -so'
           yield @builder if block_given?
           self
@@ -247,7 +247,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def y 
+        def y
           @builder.append ' -y'
           yield @builder if block_given?
           self
@@ -258,17 +258,17 @@ module FluentCommandBuilder
           super builder
           @builder.append " l #{@builder.format archive}"
         end
-        def ai 
+        def ai
           @builder.append ' -ai'
           yield @builder if block_given?
           self
         end
-        def an 
+        def an
           @builder.append ' -an'
           yield @builder if block_given?
           self
         end
-        def ax 
+        def ax
           @builder.append ' -ax'
           yield @builder if block_given?
           self
@@ -280,7 +280,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def slt 
+        def slt
           @builder.append ' -slt'
           yield @builder if block_given?
           self
@@ -314,17 +314,17 @@ module FluentCommandBuilder
           super builder
           @builder.append " t #{@builder.format archive} #{@builder.format files}"
         end
-        def ai 
+        def ai
           @builder.append ' -ai'
           yield @builder if block_given?
           self
         end
-        def an 
+        def an
           @builder.append ' -an'
           yield @builder if block_given?
           self
         end
-        def ax 
+        def ax
           @builder.append ' -ax'
           yield @builder if block_given?
           self
@@ -395,12 +395,12 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def write_data_to_stdout 
+        def write_data_to_stdout
           @builder.append ' -so'
           yield @builder if block_given?
           self
         end
-        def compress_files_open_for_writing 
+        def compress_files_open_for_writing
           @builder.append ' -ssw'
           yield @builder if block_given?
           self
@@ -435,22 +435,22 @@ module FluentCommandBuilder
           @builder.append " x #{@builder.format archive}"
           @builder.append " #{@builder.format files}" unless files.nil?
         end
-        def ai 
+        def ai
           @builder.append ' -ai'
           yield @builder if block_given?
           self
         end
-        def an 
+        def an
           @builder.append ' -an'
           yield @builder if block_given?
           self
         end
-        def ao 
+        def ao
           @builder.append ' -ao'
           yield @builder if block_given?
           self
         end
-        def ax 
+        def ax
           @builder.append ' -ax'
           yield @builder if block_given?
           self
@@ -478,7 +478,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def write_data_to_stdout 
+        def write_data_to_stdout
           @builder.append ' -so'
           yield @builder if block_given?
           self
@@ -495,13 +495,13 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def y 
+        def y
           @builder.append ' -y'
           yield @builder if block_given?
           self
         end
       end
-      def sevenzip 
+      def sevenzip
         builder = CommandBuilder.new COMMAND_NAME
         command = SevenZip.new builder
         yield builder if block_given?
@@ -509,7 +509,7 @@ module FluentCommandBuilder
       end
     end
   end
-  def sevenzip_92 
+  def sevenzip_92
     builder = CommandBuilder.new SevenZip::V92::COMMAND_NAME
     command = SevenZip::V92::SevenZip.new builder
     yield builder if block_given?

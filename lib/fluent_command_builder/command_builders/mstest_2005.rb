@@ -39,7 +39,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def unique 
+        def unique
           @builder.append ' /unique'
           yield @builder if block_given?
           self
@@ -49,12 +49,12 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def help 
+        def help
           @builder.append ' /help'
           yield @builder if block_given?
           self
         end
-        def no_logo 
+        def no_logo
           @builder.append ' /noLogo'
           yield @builder if block_given?
           self
@@ -90,7 +90,7 @@ module FluentCommandBuilder
           self
         end
       end
-      def mstest 
+      def mstest
         builder = CommandBuilder.new COMMAND_NAME
         command = MSTest.new builder
         yield builder if block_given?
@@ -98,7 +98,7 @@ module FluentCommandBuilder
       end
     end
   end
-  def mstest_2005 
+  def mstest_2005
     builder = CommandBuilder.new MSTest::V2005::COMMAND_NAME
     command = MSTest::V2005::MSTest.new builder
     yield builder if block_given?

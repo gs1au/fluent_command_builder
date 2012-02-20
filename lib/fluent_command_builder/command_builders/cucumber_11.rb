@@ -50,22 +50,22 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def no_profile 
+        def no_profile
           @builder.append ' --no-profile'
           yield @builder if block_given?
           self
         end
-        def color 
+        def color
           @builder.append ' --color'
           yield @builder if block_given?
           self
         end
-        def no_color 
+        def no_color
           @builder.append ' --no-color'
           yield @builder if block_given?
           self
         end
-        def dry_run 
+        def dry_run
           @builder.append ' --dry-run'
           yield @builder if block_given?
           self
@@ -75,47 +75,47 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def no_multiline 
+        def no_multiline
           @builder.append ' --no-multiline'
           yield @builder if block_given?
           self
         end
-        def no_source 
+        def no_source
           @builder.append ' --no-source'
           yield @builder if block_given?
           self
         end
-        def no_snippets 
+        def no_snippets
           @builder.append ' --no-snippets'
           yield @builder if block_given?
           self
         end
-        def quiet 
+        def quiet
           @builder.append ' --quiet'
           yield @builder if block_given?
           self
         end
-        def backtrace 
+        def backtrace
           @builder.append ' --backtrace'
           yield @builder if block_given?
           self
         end
-        def strict 
+        def strict
           @builder.append ' --strict'
           yield @builder if block_given?
           self
         end
-        def wip 
+        def wip
           @builder.append ' --wip'
           yield @builder if block_given?
           self
         end
-        def verbose 
+        def verbose
           @builder.append ' --verbose'
           yield @builder if block_given?
           self
         end
-        def guess 
+        def guess
           @builder.append ' --guess'
           yield @builder if block_given?
           self
@@ -125,12 +125,12 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def expand 
+        def expand
           @builder.append ' --expand'
           yield @builder if block_given?
           self
         end
-        def drb 
+        def drb
           @builder.append ' --drb'
           yield @builder if block_given?
           self
@@ -145,12 +145,12 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def version 
+        def version
           @builder.append ' --version'
           yield @builder if block_given?
           self
         end
-        def help 
+        def help
           @builder.append ' --help'
           yield @builder if block_given?
           self

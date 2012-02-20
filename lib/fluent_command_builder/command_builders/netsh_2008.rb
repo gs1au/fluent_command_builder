@@ -9,10 +9,10 @@ module FluentCommandBuilder
         def initialize builder
           super builder
         end
-        def advfirewall 
+        def advfirewall
           Advfirewall.new @builder
         end
-        def http 
+        def http
           Http.new @builder
         end
       end
@@ -21,7 +21,7 @@ module FluentCommandBuilder
           super builder
           @builder.append ' advfirewall'
         end
-        def firewall 
+        def firewall
           Firewall.new @builder
         end
       end
@@ -36,7 +36,7 @@ module FluentCommandBuilder
         def delete_rule rule_name
           DeleteRule.new @builder, rule_name
         end
-        def set_rule 
+        def set_rule
           SetRule.new @builder
         end
         def show_rule rule_name
@@ -230,7 +230,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def new 
+        def new
           New.new @builder
         end
       end
@@ -345,7 +345,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def verbose 
+        def verbose
           @builder.append ' verbose'
           yield @builder if block_given?
           self
@@ -391,7 +391,7 @@ module FluentCommandBuilder
           self
         end
       end
-      def netsh 
+      def netsh
         builder = CommandBuilder.new COMMAND_NAME
         command = Netsh.new builder
         yield builder if block_given?
@@ -399,7 +399,7 @@ module FluentCommandBuilder
       end
     end
   end
-  def netsh_2008 
+  def netsh_2008
     builder = CommandBuilder.new Netsh::V2008::COMMAND_NAME
     command = Netsh::V2008::Netsh.new builder
     yield builder if block_given?

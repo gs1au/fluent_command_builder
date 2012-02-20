@@ -31,12 +31,12 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def show_call_stack 
+        def show_call_stack
           @builder.append ' /showCallStack'
           yield @builder if block_given?
           self
         end
-        def uninstall 
+        def uninstall
           @builder.append ' /uninstall'
           yield @builder if block_given?
           self
@@ -47,7 +47,7 @@ module FluentCommandBuilder
           self
         end
       end
-      def installutil 
+      def installutil
         builder = CommandBuilder.new COMMAND_NAME
         command = InstallUtil.new builder
         yield builder if block_given?
@@ -55,7 +55,7 @@ module FluentCommandBuilder
       end
     end
   end
-  def installutil_20 
+  def installutil_20
     builder = CommandBuilder.new InstallUtil::V20::COMMAND_NAME
     command = InstallUtil::V20::InstallUtil.new builder
     yield builder if block_given?

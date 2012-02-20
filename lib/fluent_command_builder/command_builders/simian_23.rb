@@ -125,7 +125,7 @@ module FluentCommandBuilder
           self
         end
       end
-      def simian 
+      def simian
         builder = CommandBuilder.new COMMAND_NAME
         command = Simian.new builder
         yield builder if block_given?
@@ -133,7 +133,7 @@ module FluentCommandBuilder
       end
     end
   end
-  def simian_23 
+  def simian_23
     builder = CommandBuilder.new Simian::V23::COMMAND_NAME
     command = Simian::V23::Simian.new builder
     yield builder if block_given?
