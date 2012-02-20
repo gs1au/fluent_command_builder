@@ -38,7 +38,8 @@ module CodeGenerator
     end
 
     def render_branch_node_method_body node, writer
-      writer.initializer class_name(node), '@builder', args(node)
+      args = ['@builder'] | args(node)
+      writer.line "#{class_name(node)}.new #{args.join ', '}"
     end
 
     def render_leaf_node_method_body node, writer

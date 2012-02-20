@@ -41,12 +41,8 @@ module CodeGenerator
       block("class #{class_name}") { yield }
     end
 
-    def method name, *args
-      block("def #{name} #{args.flatten.join ', '}") { yield }
-    end
-
-    def initializer class_name, *args
-      line "#{class_name}.new #{args.flatten.join ', '}"
+    def method method_name, *args
+      block("def #{method_name} #{args.flatten.join ', '}") { yield }
     end
 
   end
