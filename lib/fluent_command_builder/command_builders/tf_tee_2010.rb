@@ -394,11 +394,6 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def collection team_project_collection_url
-          @builder.append " -collection:#{@builder.format team_project_collection_url}"
-          yield @builder if block_given?
-          self
-        end
         def force
           @builder.append ' -force'
           yield @builder if block_given?

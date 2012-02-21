@@ -38,7 +38,6 @@ tf
         /validate
         /bypass
         /login
-        /collection
         /force
     checkin /shelveset:<shelvesetName>[;<shelvesetOwner>] (checkinShelveset)
         /bypass
