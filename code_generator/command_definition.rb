@@ -5,41 +5,36 @@ require_relative 'node'
 module CodeGenerator
   class CommandDefinition
 
-    attr_reader :versions, :command
+    VERSION_LINE_INDEX = 0
+    COMMAND_LINE_INDEX = 1
 
-    def initialize file
-      puts file
-      raw_text = File.read file
-      raw_text = expand_options raw_text
-      yaml = get_yaml raw_text
-      struct = YAML.load yaml
-      @versions = struct[0].keys[0].split(',').map { |v| v.strip }
-      @command = Command.new struct[1].keys[0]
-      process_array struct[1].values[0], @command
+    def initialize yaml
+      @array = YAML.load yaml
+    end
+
+    def versions
+      @versions ||= load_versions
+    end
+
+    def command
+      @command ||= load_command
     end
 
     private
 
-    def expand_options raw_text
-      options_index = raw_text =~ /^options:$/
-      return raw_text unless options_index
-
-      options = raw_text[options_index, raw_text.length - 1].lines.to_a
-      options.delete_at 0
-      options.map! { |o| o.strip }
-
-      raw_text = raw_text[0, options_index]
-      raw_text.lines.map { |line|
-        option_matches = options.select { |o| o if o.start_with? line.strip }
-        option_matches.empty? ? line : (line[/^ +/].to_s + option_matches[0])
-      }.join "\n"
+    def load_versions
+      @array[VERSION_LINE_INDEX].keys[0].split(',').map { |version| version.strip }
     end
 
-    def get_yaml text
-      text.lines.map { |l| l.rstrip.gsub(/^( *)(\S.+)$/, '\1- "\2":') }.join "\n"
+    def load_command
+      hash = @array[COMMAND_LINE_INDEX]
+      command = Command.new hash.keys[0]
+      process_array hash.values[0], command
+      command
     end
 
     def process_array array, parent_node=nil
+      array ||= []
       array.each do |hash|
         process_hash hash, parent_node
       end
@@ -47,9 +42,9 @@ module CodeGenerator
 
     def process_hash hash, parent_node
       hash.each_pair do |node_text, child_nodes|
-        node = Node.new " #{node_text}"
+        node = Node.new " #{node_text}" # todo: remove need for leading space
         parent_node.child_nodes << node
-        process_array child_nodes, node unless child_nodes.nil?
+        process_array child_nodes, node
       end
     end
 

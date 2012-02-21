@@ -74,7 +74,6 @@ module CodeGenerator
 
     def command_name
       @command.node_name
-      #@command.command_name
     end
 
     def command_alias
