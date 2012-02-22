@@ -1,5 +1,6 @@
 require 'yaml'
 require_relative 'command'
+require_relative 'command_definition_preprocessor'
 require_relative 'node'
 
 module CodeGenerator
@@ -18,6 +19,16 @@ module CodeGenerator
 
     def command
       @command ||= load_command
+    end
+
+    def self.load_file path
+      load_stream File.open(path)
+    end
+
+    def self.load_stream stream
+      preprocessor = CommandDefinitionPreprocessor.new stream
+      preprocessor.expand_options
+      CommandDefinition.new preprocessor.yaml
     end
 
     private

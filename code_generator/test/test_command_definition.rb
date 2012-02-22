@@ -2,15 +2,13 @@ require 'stringio'
 require 'test/unit'
 require_relative 'test_helper'
 require_relative '../command_definition'
-require_relative '../command_definition_preprocessor'
 include CodeGenerator
 
-class TestCommandDefinitionLine < Test::Unit::TestCase
+class TestCommandDefinition < Test::Unit::TestCase
 
   def test_should_return_versions
     stream = StringIO.new '1.0, 1.1, 2.0'
-    preprocessor = CommandDefinitionPreprocessor.new stream
-    command_definition = CommandDefinition.new preprocessor.yaml
+    command_definition = CommandDefinition.load_stream stream
     assert_equal '1.0', command_definition.versions[0]
     assert_equal '1.1', command_definition.versions[1]
     assert_equal '2.0', command_definition.versions[2]
@@ -18,24 +16,21 @@ class TestCommandDefinitionLine < Test::Unit::TestCase
 
   def test_should_return_single_line_command
     stream = StringIO.new "1.0\ncommand"
-    preprocessor = CommandDefinitionPreprocessor.new stream
-    command_definition = CommandDefinition.new preprocessor.yaml
+    command_definition = CommandDefinition.load_stream stream
     assert_not_nil command_definition.command
     assert_equal 'command', command_definition.command.command_name
   end
 
   def test_should_return_command_with_node
     stream = StringIO.new "1.0\ncommand\n  -option"
-    preprocessor = CommandDefinitionPreprocessor.new stream
-    command_definition = CommandDefinition.new preprocessor.yaml
+    command_definition = CommandDefinition.load_stream stream
     assert_equal 1, command_definition.command.child_nodes.length
     assert_equal 'option', command_definition.command.child_nodes[0].node_name
   end
 
   def test_should_return_command_with_nested_nodes
     stream = StringIO.new "1.0\ncommand\n  subcommand\n    -option"
-    preprocessor = CommandDefinitionPreprocessor.new stream
-    command_definition = CommandDefinition.new preprocessor.yaml
+    command_definition = CommandDefinition.load_stream stream
     assert_not_nil command_definition.command
     assert_equal 1, command_definition.command.child_nodes[0].child_nodes.length
     assert_equal 'option', command_definition.command.child_nodes[0].child_nodes[0].node_name
