@@ -1,44 +1,26 @@
 require 'yaml'
 require_relative 'command'
-require_relative 'command_definition_preprocessor'
+require_relative 'command_definition_text'
 require_relative 'node'
 
 module CodeGenerator
   class CommandDefinition
 
-    VERSION_LINE_INDEX = 0
-    COMMAND_LINE_INDEX = 1
+    attr_reader :versions
 
-    def initialize yaml
+    def initialize versions, yaml
+      @versions = versions
       @array = YAML.load yaml
-    end
-
-    def versions
-      @versions ||= load_versions
     end
 
     def command
       @command ||= load_command
     end
 
-    def self.load_file path
-      load_stream File.open(path)
-    end
-
-    def self.load_stream stream
-      preprocessor = CommandDefinitionPreprocessor.new stream
-      preprocessor.expand_options
-      CommandDefinition.new preprocessor.yaml
-    end
-
     private
 
-    def load_versions
-      @array[VERSION_LINE_INDEX].keys[0].split(',').map { |version| version.strip }
-    end
-
     def load_command
-      hash = @array[COMMAND_LINE_INDEX]
+      hash = @array[0]
       command = Command.new hash.keys[0]
       process_array hash.values[0], command
       command

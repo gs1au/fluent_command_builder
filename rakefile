@@ -4,7 +4,8 @@ require 'bundler'
 Bundler::GemHelper.install_tasks
 require_relative 'code_generator/ruby_code_writer'
 require_relative 'code_generator/command_code_generator'
-require_relative 'code_generator/command_definition'
+require_relative 'code_generator/command_definition_parser'
+
 include CodeGenerator
 
 COMMAND_DEFINITIONS_DIR = 'command_definitions'
@@ -37,7 +38,8 @@ end
 
 def generate_command_builder command_definition_file
   puts "Processing: #{File.basename command_definition_file}"
-  command_definition = CommandDefinition.load_file command_definition_file
+  parser = CommandDefinitionParser.new
+  command_definition = parser.parse File.new(command_definition_file)
   command_definition.versions.each do |version|
     command_code_generator = CommandCodeGenerator.new command_definition.command, version
     dest_file = File.join COMMAND_BUILDERS_DIR, "#{command_code_generator.version_method_name}.rb"
