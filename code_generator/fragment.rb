@@ -3,20 +3,24 @@ require_relative 'command_argument'
 module CodeGenerator
   class Fragment
 
-    def initialize raw_text
-      @raw_text = raw_text
+    def initialize(fragment_def)
+      @fragment_def = fragment_def
     end
 
     def fragment_text
-      @fragment_text ||= optional? ? @raw_text[1, @raw_text.length - 2] : @raw_text
+      @fragment_text ||= optional? ? @fragment_def[1, @fragment_def.length - 2] : @fragment_def
+    end
+
+    def required?
+      !optional?
     end
 
     def optional?
-      @optional ||= @raw_text.start_with?('[') and @raw_text.end_with?(']')
+      @optional ||= @fragment_def.start_with?('[') && @fragment_def.end_with?(']')
     end
 
     def args
-      @args ||= fragment_text.scan(/<.+?>/).flatten.map { |m| CommandArgument.new m }
+      @args ||= fragment_text.scan(/<.+?>/).flatten.map { |m| CommandArgument.new m, required? }
     end
 
     def arg_names
@@ -24,7 +28,7 @@ module CodeGenerator
     end
 
     def has_args?
-      @has_args ||= args.length > 0
+      @has_args ||= !args.empty?
     end
 
   end

@@ -3,20 +3,20 @@ require_relative 'fragment'
 module CodeGenerator
   class Node
 
-    attr_accessor :fragments
-    attr_reader :child_nodes
+    def initialize(node_def)
+      @node_def = node_def
+    end
 
-    def initialize raw_text
-      @raw_text = raw_text
-      @child_nodes = []
+    def child_nodes
+      @child_nodes ||= []
     end
 
     def branch?
-      !@child_nodes.empty?
+      !child_nodes.empty?
     end
 
     def leaf?
-      @child_nodes.empty?
+      child_nodes.empty?
     end
 
     def node_name
@@ -24,35 +24,37 @@ module CodeGenerator
     end
 
     def fragments
-      @fragments ||= @raw_text.gsub(/ \(.+?\)/, '').gsub(']', ']|').gsub('[', '|[').split('|').compact.map { |f| Fragment.new f }
+      @fragments ||= @node_def.gsub(/ \(.+?\)/, '').gsub(']', ']|').gsub('[', '|[').split('|').compact.map { |f| Fragment.new f }
     end
 
     def required_args
-      fragments.map { |f| f.args.map { |a| a unless f.optional? } }.flatten.compact
+      args { |a| a.required? }
     end
 
     def optional_args
-      fragments.map { |f| f.args.map { |a| a if f.optional? } }.flatten.compact
+      args { |a| a.optional? }
     end
 
     protected
 
     def starts_with_arg?
-      @starts_with_arg ||= words_preceding_args.empty?
+      words_preceding_args.empty?
     end
 
     def first_arg_name
-      match = @raw_text.match /<(.+?)>/
-      match.nil? ? nil : match[1]
+      @node_def[/<(.+?)>/, 1]
     end
 
     def words_preceding_args
-      @words_preceding_args ||= @raw_text.gsub(/<.*/, '').gsub(/\W/, ' ').strip
+      @node_def.gsub(/<.*/, '').gsub(/\W/, ' ').strip
     end
 
     def node_alias
-      match = @raw_text.match(/\((.+?)\)/)
-      match.nil? ? nil : match[1]
+      @node_def[/\((.+?)\)/, 1]
+    end
+
+    def args
+      fragments.map { |f| f.args.map { |a| a if yield a } }.flatten.compact
     end
 
   end

@@ -1,27 +1,29 @@
 module CodeGenerator
   class CommandArgument
 
-    def initialize raw_text
-      @raw_text = raw_text
+    def initialize(arg_text, required=true)
+      @arg_text = arg_text
+      @required = required
     end
 
     def arg_name
-      @arg_name ||= match /<(\w+)/
+      @arg_name ||= @arg_text[/<(\w+)/, 1]
     end
 
     def key_value_separator
-      @key_value_separator ||= match /(\W)\W>/
+      @key_value_separator ||= @arg_text[/(\W)\W>/, 1]
     end
 
     def delimiter
-      @delimiter ||= match /(\W)>/
+      @delimiter ||= @arg_text[/(\W)>/, 1]
     end
 
-    private
+    def required?
+      @required
+    end
 
-    def match pattern
-      match = @raw_text.match(pattern) || []
-      match[1]
+    def optional?
+      !required?
     end
 
   end
