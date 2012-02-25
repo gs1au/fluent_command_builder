@@ -3,7 +3,7 @@ require_relative 'command'
 module CodeGenerator
   class CommandDefinition
 
-    def initialize stream
+    def initialize(stream)
       text = stream.read
       @lines = text.split NEW_LINE
     end

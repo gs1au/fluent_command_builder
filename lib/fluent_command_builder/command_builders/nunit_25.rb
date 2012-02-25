@@ -6,41 +6,41 @@ module FluentCommandBuilder
     module V25
       COMMAND_NAME = 'nunit-console'
       class NUnit < CommandBase
-        def initialize builder, assembly
+        def initialize(builder, assembly)
           super builder
           @builder.append " #{@builder.format assembly}"
         end
-        def run test
+        def run(test)
           @builder.append " /run:#{@builder.format test}"
           yield @builder if block_given?
           self
         end
-        def fixture fixture
+        def fixture(fixture)
           @builder.append " /fixture:#{@builder.format fixture}"
           yield @builder if block_given?
           self
         end
-        def framework framework
+        def framework(framework)
           @builder.append " /framework:#{@builder.format framework}"
           yield @builder if block_given?
           self
         end
-        def include category
+        def include(category)
           @builder.append " /include:#{@builder.format category}"
           yield @builder if block_given?
           self
         end
-        def exclude category
+        def exclude(category)
           @builder.append " /exclude:#{@builder.format category}"
           yield @builder if block_given?
           self
         end
-        def out file
+        def out(file)
           @builder.append " /out:#{@builder.format file}"
           yield @builder if block_given?
           self
         end
-        def err file
+        def err(file)
           @builder.append " /err:#{@builder.format file}"
           yield @builder if block_given?
           self
@@ -50,32 +50,32 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def xml file
+        def xml(file)
           @builder.append " /xml:#{@builder.format file}"
           yield @builder if block_given?
           self
         end
-        def config config
+        def config(config)
           @builder.append " /config:#{@builder.format config}"
           yield @builder if block_given?
           self
         end
-        def process process
+        def process(process)
           @builder.append " /process:#{@builder.format process}"
           yield @builder if block_given?
           self
         end
-        def domain domain
+        def domain(domain)
           @builder.append " /domain:#{@builder.format domain}"
           yield @builder if block_given?
           self
         end
-        def timeout timeout
+        def timeout(timeout)
           @builder.append " /timeout:#{@builder.format timeout}"
           yield @builder if block_given?
           self
         end
-        def trace level
+        def trace(level)
           @builder.append " /trace:#{@builder.format level}"
           yield @builder if block_given?
           self
@@ -111,7 +111,7 @@ module FluentCommandBuilder
           self
         end
       end
-      def nunit assembly
+      def nunit(assembly)
         builder = CommandBuilder.new COMMAND_NAME
         command = NUnit.new builder, assembly
         yield builder if block_given?
@@ -119,7 +119,7 @@ module FluentCommandBuilder
       end
     end
   end
-  def nunit_25 assembly
+  def nunit_25(assembly)
     builder = CommandBuilder.new NUnit::V25::COMMAND_NAME
     command = NUnit::V25::NUnit.new builder, assembly
     yield builder if block_given?

@@ -6,120 +6,120 @@ module FluentCommandBuilder
     module V23
       COMMAND_NAME = 'simian'
       class Simian < CommandBase
-        def initialize builder
+        def initialize(builder)
           super builder
         end
-        def formatter formatter
+        def formatter(formatter)
           @builder.append " -formatter=#{@builder.format formatter}"
           yield @builder if block_given?
           self
         end
-        def threshold threshold
+        def threshold(threshold)
           @builder.append " -threshold=#{@builder.format threshold}"
           yield @builder if block_given?
           self
         end
-        def language language
+        def language(language)
           @builder.append " -language=#{@builder.format language}"
           yield @builder if block_given?
           self
         end
-        def default_language language
+        def default_language(language)
           @builder.append " -defaultLanguage=#{@builder.format language}"
           yield @builder if block_given?
           self
         end
-        def fail_on_duplication bool
+        def fail_on_duplication(bool)
           @builder.append " -failOnDuplication=#{@builder.format bool}"
           yield @builder if block_given?
           self
         end
-        def report_duplicate_text bool
+        def report_duplicate_text(bool)
           @builder.append " -reportDuplicateText=#{@builder.format bool}"
           yield @builder if block_given?
           self
         end
-        def ignore_blocks markers
+        def ignore_blocks(markers)
           @builder.append " -ignoreBlocks=#{@builder.format markers}"
           yield @builder if block_given?
           self
         end
-        def ignore_curly_braces bool
+        def ignore_curly_braces(bool)
           @builder.append " -ignoreCurlyBraces=#{@builder.format bool}"
           yield @builder if block_given?
           self
         end
-        def ignore_identifiers bool
+        def ignore_identifiers(bool)
           @builder.append " -ignoreIdentifiers=#{@builder.format bool}"
           yield @builder if block_given?
           self
         end
-        def ignore_identifier_case bool
+        def ignore_identifier_case(bool)
           @builder.append " -ignoreIdentifierCase=#{@builder.format bool}"
           yield @builder if block_given?
           self
         end
-        def ignore_regions bool
+        def ignore_regions(bool)
           @builder.append " -ignoreRegions=#{@builder.format bool}"
           yield @builder if block_given?
           self
         end
-        def ignore_strings bool
+        def ignore_strings(bool)
           @builder.append " -ignoreStrings=#{@builder.format bool}"
           yield @builder if block_given?
           self
         end
-        def ignore_string_case bool
+        def ignore_string_case(bool)
           @builder.append " -ignoreStringCase=#{@builder.format bool}"
           yield @builder if block_given?
           self
         end
-        def ignore_numbers bool
+        def ignore_numbers(bool)
           @builder.append " -ignoreNumbers=#{@builder.format bool}"
           yield @builder if block_given?
           self
         end
-        def ignore_characters bool
+        def ignore_characters(bool)
           @builder.append " -ignoreCharacters=#{@builder.format bool}"
           yield @builder if block_given?
           self
         end
-        def ignore_character_case bool
+        def ignore_character_case(bool)
           @builder.append " -ignoreCharacterCase=#{@builder.format bool}"
           yield @builder if block_given?
           self
         end
-        def ignore_literals bool
+        def ignore_literals(bool)
           @builder.append " -ignoreLiterals=#{@builder.format bool}"
           yield @builder if block_given?
           self
         end
-        def ignore_subtype_names bool
+        def ignore_subtype_names(bool)
           @builder.append " -ignoreSubtypeNames=#{@builder.format bool}"
           yield @builder if block_given?
           self
         end
-        def ignore_modifiers bool
+        def ignore_modifiers(bool)
           @builder.append " -ignoreModifiers=#{@builder.format bool}"
           yield @builder if block_given?
           self
         end
-        def ignore_variable_names bool
+        def ignore_variable_names(bool)
           @builder.append " -ignoreVariableNames=#{@builder.format bool}"
           yield @builder if block_given?
           self
         end
-        def balance_parentheses bool
+        def balance_parentheses(bool)
           @builder.append " -balanceParentheses=#{@builder.format bool}"
           yield @builder if block_given?
           self
         end
-        def balance_curly_braces bool
+        def balance_curly_braces(bool)
           @builder.append " -balanceCurlyBraces=#{@builder.format bool}"
           yield @builder if block_given?
           self
         end
-        def balance_square_brackets bool
+        def balance_square_brackets(bool)
           @builder.append " -balanceSquareBrackets=#{@builder.format bool}"
           yield @builder if block_given?
           self

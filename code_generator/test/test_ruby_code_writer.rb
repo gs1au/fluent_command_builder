@@ -10,9 +10,9 @@ class TestRubyCodeWriter < Test::Unit::TestCase
     stream = StringIO.new
     code_writer = RubyCodeWriter.new stream
     code_writer.indent
-    code_writer.line 'puts 123'
+    code_writer.write_line 'puts 123'
     code_writer.indent
-    code_writer.line 'puts 456'
+    code_writer.write_line 'puts 456'
     lines = stream.string.lines.to_a
     assert_equal "  puts 123\n", lines[0]
     assert_equal "    puts 456\n", lines[1]
@@ -21,8 +21,8 @@ class TestRubyCodeWriter < Test::Unit::TestCase
   def test_should_indent_block_then_dedent
     stream = StringIO.new
     code_writer = RubyCodeWriter.new stream
-    code_writer.indent { code_writer.line 'puts 123' }
-    code_writer.line 'puts 456'
+    code_writer.indent { code_writer.write_line 'puts 123' }
+    code_writer.write_line 'puts 456'
     lines = stream.string.lines.to_a
     assert_equal "  puts 123\n", lines[0]
     assert_equal "puts 456\n", lines[1]
@@ -32,9 +32,9 @@ class TestRubyCodeWriter < Test::Unit::TestCase
     stream = StringIO.new
     code_writer = RubyCodeWriter.new stream
     code_writer.indent
-    code_writer.line 'puts 123'
+    code_writer.write_line 'puts 123'
     code_writer.dedent
-    code_writer.line 'puts 456'
+    code_writer.write_line 'puts 456'
     lines = stream.string.lines.to_a
     assert_equal "  puts 123\n", lines[0]
     assert_equal "puts 456\n", lines[1]
@@ -43,7 +43,7 @@ class TestRubyCodeWriter < Test::Unit::TestCase
   def test_should_write_blank_line
     stream = StringIO.new
     code_writer = RubyCodeWriter.new stream
-    code_writer.line
+    code_writer.write_line
     lines = stream.string.lines.to_a
     assert_equal "\n", lines[0]
   end
@@ -52,7 +52,7 @@ class TestRubyCodeWriter < Test::Unit::TestCase
     stream = StringIO.new
     code_writer = RubyCodeWriter.new stream
     code_writer.indent
-    code_writer.line 'puts 123'
+    code_writer.write_line 'puts 123'
     lines = stream.string.lines.to_a
     assert_equal "  puts 123\n", lines[0]
   end
@@ -60,7 +60,7 @@ class TestRubyCodeWriter < Test::Unit::TestCase
   def test_should_write_block
     stream = StringIO.new
     code_writer = RubyCodeWriter.new stream
-    code_writer.block('def favourite_number') { code_writer.line '123' }
+    code_writer.write_block('def favourite_number') { code_writer.write_line '123' }
     lines = stream.string.lines.to_a
     assert_equal "def favourite_number\n", lines[0]
     assert_equal "  123\n", lines[1]
@@ -70,7 +70,7 @@ class TestRubyCodeWriter < Test::Unit::TestCase
   def test_should_write_module
     stream = StringIO.new
     code_writer = RubyCodeWriter.new stream
-    code_writer.module('ModuleName') { code_writer.line '# todo: write code' }
+    code_writer.write_module('ModuleName') { code_writer.write_line '# todo: write code' }
     lines = stream.string.lines.to_a
     assert_equal "module ModuleName\n", lines[0]
     assert_equal "  # todo: write code\n", lines[1]
@@ -80,7 +80,7 @@ class TestRubyCodeWriter < Test::Unit::TestCase
   def test_should_write_class
     stream = StringIO.new
     code_writer = RubyCodeWriter.new stream
-    code_writer.class('ClassName') { code_writer.line '# todo: write code' }
+    code_writer.write_class('ClassName') { code_writer.write_line '# todo: write code' }
     lines = stream.string.lines.to_a
     assert_equal "class ClassName\n", lines[0]
     assert_equal "  # todo: write code\n", lines[1]
@@ -90,7 +90,7 @@ class TestRubyCodeWriter < Test::Unit::TestCase
   def test_should_write_method_without_args
     stream = StringIO.new
     code_writer = RubyCodeWriter.new stream
-    code_writer.method('method_name') { code_writer.line '# todo: write code' }
+    code_writer.write_method('method_name') { code_writer.write_line '# todo: write code' }
     lines = stream.string.lines.to_a
     assert_equal "def method_name\n", lines[0]
     assert_equal "  # todo: write code\n", lines[1]
@@ -100,9 +100,9 @@ class TestRubyCodeWriter < Test::Unit::TestCase
   def test_should_write_method_with_args
     stream = StringIO.new
     code_writer = RubyCodeWriter.new stream
-    code_writer.method('method_name', 'arg1', 'arg2') { code_writer.line '# todo: write code' }
+    code_writer.write_method('method_name', 'arg1', 'arg2') { code_writer.write_line '# todo: write code' }
     lines = stream.string.lines.to_a
-    assert_equal "def method_name arg1, arg2\n", lines[0]
+    assert_equal "def method_name(arg1, arg2)\n", lines[0]
     assert_equal "  # todo: write code\n", lines[1]
     assert_equal "end\n", lines[2]
   end

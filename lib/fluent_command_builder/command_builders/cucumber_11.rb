@@ -6,46 +6,46 @@ module FluentCommandBuilder
     module V11
       COMMAND_NAME = 'cucumber'
       class Cucumber < CommandBase
-        def initialize builder, feature=nil
+        def initialize(builder, feature=nil)
           super builder
           @builder.append " #{@builder.format feature}" unless feature.nil?
         end
-        def require library
+        def require(library)
           @builder.append " --require #{@builder.format library}"
           yield @builder if block_given?
           self
         end
-        def i18n lang
+        def i18n(lang)
           @builder.append " --i18n #{@builder.format lang}"
           yield @builder if block_given?
           self
         end
-        def format format
+        def format(format)
           @builder.append " --format #{@builder.format format}"
           yield @builder if block_given?
           self
         end
-        def out file
+        def out(file)
           @builder.append " --out #{@builder.format file}"
           yield @builder if block_given?
           self
         end
-        def tags tag_expression
+        def tags(tag_expression)
           @builder.append " --tags #{@builder.format tag_expression, ','}"
           yield @builder if block_given?
           self
         end
-        def name name
+        def name(name)
           @builder.append " --name #{@builder.format name}"
           yield @builder if block_given?
           self
         end
-        def exclude pattern
+        def exclude(pattern)
           @builder.append " --exclude #{@builder.format pattern}"
           yield @builder if block_given?
           self
         end
-        def profile profile
+        def profile(profile)
           @builder.append " --profile #{@builder.format profile}"
           yield @builder if block_given?
           self
@@ -70,7 +70,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def autoformat dir
+        def autoformat(dir)
           @builder.append " --autoformat #{@builder.format dir}"
           yield @builder if block_given?
           self
@@ -120,7 +120,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def lines lines
+        def lines(lines)
           @builder.append " --lines #{@builder.format lines}"
           yield @builder if block_given?
           self
@@ -135,12 +135,12 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def port port
+        def port(port)
           @builder.append " --port #{@builder.format port}"
           yield @builder if block_given?
           self
         end
-        def dotcucumber dir
+        def dotcucumber(dir)
           @builder.append " --dotcucumber #{@builder.format dir}"
           yield @builder if block_given?
           self
@@ -156,7 +156,7 @@ module FluentCommandBuilder
           self
         end
       end
-      def cucumber feature=nil
+      def cucumber(feature=nil)
         builder = CommandBuilder.new COMMAND_NAME
         command = Cucumber.new builder, feature
         yield builder if block_given?
@@ -164,7 +164,7 @@ module FluentCommandBuilder
       end
     end
   end
-  def cucumber_11 feature=nil
+  def cucumber_11(feature=nil)
     builder = CommandBuilder.new Cucumber::V11::COMMAND_NAME
     command = Cucumber::V11::Cucumber.new builder, feature
     yield builder if block_given?

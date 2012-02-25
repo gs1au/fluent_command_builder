@@ -6,22 +6,22 @@ module FluentCommandBuilder
     module V11
       COMMAND_NAME = 'installUtil'
       class InstallUtil < CommandBase
-        def initialize builder
+        def initialize(builder)
           super builder
         end
-        def help assembly_path=nil
+        def help(assembly_path=nil)
           @builder.append ' /help'
           @builder.append " #{@builder.format assembly_path}" unless assembly_path.nil?
           yield @builder if block_given?
           self
         end
-        def log_file file_name=nil
+        def log_file(file_name=nil)
           @builder.append ' /logFile'
           @builder.append "=#{@builder.format file_name}" unless file_name.nil?
           yield @builder if block_given?
           self
         end
-        def log_to_console bool
+        def log_to_console(bool)
           @builder.append " /logToConsole=#{@builder.format bool}"
           yield @builder if block_given?
           self
@@ -36,7 +36,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def assembly_file_name assembly_file_name
+        def assembly_file_name(assembly_file_name)
           @builder.append " #{@builder.format assembly_file_name}"
           yield @builder if block_given?
           self

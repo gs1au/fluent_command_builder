@@ -6,7 +6,7 @@ module FluentCommandBuilder
     module V09
       COMMAND_NAME = 'rake'
       class Rake < CommandBase
-        def initialize builder, task=nil
+        def initialize(builder, task=nil)
           super builder
           @builder.append " #{@builder.format task}" unless task.nil?
         end
@@ -15,7 +15,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def describe pattern
+        def describe(pattern)
           @builder.append " --describe #{@builder.format pattern}"
           yield @builder if block_given?
           self
@@ -25,22 +25,22 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def execute code
+        def execute(code)
           @builder.append " --execute #{@builder.format code}"
           yield @builder if block_given?
           self
         end
-        def execute_print code
+        def execute_print(code)
           @builder.append " --execute-print #{@builder.format code}"
           yield @builder if block_given?
           self
         end
-        def execute_continue code
+        def execute_continue(code)
           @builder.append " --execute-continue #{@builder.format code}"
           yield @builder if block_given?
           self
         end
-        def libdir lib_dir
+        def libdir(lib_dir)
           @builder.append " --libdir #{@builder.format lib_dir}"
           yield @builder if block_given?
           self
@@ -60,17 +60,17 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def rakefile file
+        def rakefile(file)
           @builder.append " --rakefile #{@builder.format file}"
           yield @builder if block_given?
           self
         end
-        def rakelibdir rake_lib_dir
+        def rakelibdir(rake_lib_dir)
           @builder.append " --rakelibdir #{@builder.format rake_lib_dir}"
           yield @builder if block_given?
           self
         end
-        def require file
+        def require(file)
           @builder.append " --require #{@builder.format file}"
           yield @builder if block_given?
           self
@@ -90,7 +90,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def tasks pattern
+        def tasks(pattern)
           @builder.append " --tasks #{@builder.format pattern}"
           yield @builder if block_given?
           self
@@ -110,7 +110,7 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def where pattern
+        def where(pattern)
           @builder.append " --where #{@builder.format pattern}"
           yield @builder if block_given?
           self
@@ -126,7 +126,7 @@ module FluentCommandBuilder
           self
         end
       end
-      def rake task=nil
+      def rake(task=nil)
         builder = CommandBuilder.new COMMAND_NAME
         command = Rake.new builder, task
         yield builder if block_given?
@@ -134,7 +134,7 @@ module FluentCommandBuilder
       end
     end
   end
-  def rake_09 task=nil
+  def rake_09(task=nil)
     builder = CommandBuilder.new Rake::V09::COMMAND_NAME
     command = Rake::V09::Rake.new builder, task
     yield builder if block_given?

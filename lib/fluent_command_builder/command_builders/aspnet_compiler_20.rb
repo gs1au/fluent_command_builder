@@ -6,21 +6,21 @@ module FluentCommandBuilder
     module V20
       COMMAND_NAME = 'aspnet_compiler'
       class AspnetCompiler < CommandBase
-        def initialize builder, target_dir=nil
+        def initialize(builder, target_dir=nil)
           super builder
           @builder.append " #{@builder.format target_dir}" unless target_dir.nil?
         end
-        def metabase_path metabase_path
+        def metabase_path(metabase_path)
           @builder.append " -m #{@builder.format metabase_path}"
           yield @builder if block_given?
           self
         end
-        def virtual_path virtual_path
+        def virtual_path(virtual_path)
           @builder.append " -v #{@builder.format virtual_path}"
           yield @builder if block_given?
           self
         end
-        def physical_path physical_path
+        def physical_path(physical_path)
           @builder.append " -p #{@builder.format physical_path}"
           yield @builder if block_given?
           self
@@ -60,12 +60,12 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def key_file file
+        def key_file(file)
           @builder.append " -keyFile #{@builder.format file}"
           yield @builder if block_given?
           self
         end
-        def key_container container
+        def key_container(container)
           @builder.append " -keyContainer #{@builder.format container}"
           yield @builder if block_given?
           self
@@ -81,7 +81,7 @@ module FluentCommandBuilder
           self
         end
       end
-      def aspnet_compiler target_dir=nil
+      def aspnet_compiler(target_dir=nil)
         builder = CommandBuilder.new COMMAND_NAME
         command = AspnetCompiler.new builder, target_dir
         yield builder if block_given?
@@ -89,7 +89,7 @@ module FluentCommandBuilder
       end
     end
   end
-  def aspnet_compiler_20 target_dir=nil
+  def aspnet_compiler_20(target_dir=nil)
     builder = CommandBuilder.new AspnetCompiler::V20::COMMAND_NAME
     command = AspnetCompiler::V20::AspnetCompiler.new builder, target_dir
     yield builder if block_given?
