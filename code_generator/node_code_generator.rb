@@ -1,12 +1,8 @@
-require_relative 'ruby_naming_convention'
+require_relative 'code_generator'
 require_relative 'node'
 
 module CodeGenerator
   class NodeCodeGenerator
-
-    def initialize
-      @naming_convention = RubyNamingConvention.new
-    end
 
     def render(node, writer)
       return if node.leaf?
@@ -48,7 +44,7 @@ module CodeGenerator
 
     def write_append_statement(fragment, writer)
       return if fragment.fragment_text.empty?
-      unless_condition = fragment.arg_names.map { |a| "#{@naming_convention.arg_name a}.nil?" }.join ' or '
+      unless_condition = fragment.arg_names.map { |a| "#{a.snakecase}.nil?" }.join ' or '
       statement = "@builder.append #{append_arg fragment}"
       statement << " unless #{unless_condition}" if fragment.optional? and fragment.has_args?
       writer.write_line statement
@@ -57,28 +53,28 @@ module CodeGenerator
     def append_arg(fragment)
       value = fragment.fragment_text.gsub(/<.+?>/) do |m|
         arg = CommandArgument.new m
-        format_args = [@naming_convention.arg_name(arg.arg_name), [arg.delimiter, arg.key_value_separator].compact.map { |v| "'#{v}'" }].flatten
+        format_args = [arg.arg_name.snakecase, [arg.delimiter, arg.key_value_separator].compact.map { |v| "'#{v}'" }].flatten
         "\#{@builder.format #{format_args.join ', '}}"
       end
       value.include?('#{') ? %Q["#{value}"] : "'#{value}'"
     end
 
     def class_name(node)
-      @naming_convention.class_name node.node_name
+      node.node_name.camelcase
     end
 
     def method_name(node)
-      @naming_convention.method_name node.node_name
+      node.node_name.snakecase
     end
 
     def method_args(node)
-      node.required_args.map { |a| @naming_convention.arg_name a.arg_name } +
-          node.optional_args.map { |a| @naming_convention.arg_name(a.arg_name) + '=nil' }
+      node.required_args.map { |a| a.arg_name.snakecase } +
+          node.optional_args.map { |a| a.arg_name.snakecase + '=nil' }
     end
 
     def args(node)
-      node.required_args.map { |a| @naming_convention.arg_name a.arg_name } +
-          node.optional_args.map { |a| @naming_convention.arg_name(a.arg_name) }
+      node.required_args.map { |a| a.arg_name.snakecase } +
+          node.optional_args.map { |a| a.arg_name.snakecase }
     end
 
   end

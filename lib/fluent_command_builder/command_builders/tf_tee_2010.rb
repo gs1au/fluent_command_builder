@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 
 module FluentCommandBuilder
   module Tf
-    module TEE_2010
+    module TEE2010
       COMMAND_NAME = 'tf'
       class Tf < CommandBase
         def initialize(builder)
@@ -1970,8 +1970,8 @@ module FluentCommandBuilder
     end
   end
   def tf_tee_2010
-    builder = CommandBuilder.new Tf::TEE_2010::COMMAND_NAME
-    command = Tf::TEE_2010::Tf.new builder
+    builder = CommandBuilder.new Tf::TEE2010::COMMAND_NAME
+    command = Tf::TEE2010::Tf.new builder
     yield builder if block_given?
     command
   end

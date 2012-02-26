@@ -17,7 +17,7 @@ module CodeGenerator
       w.write_line
       w.write_module 'FluentCommandBuilder' do
         w.write_module @code_names.module_name do
-          w.write_module @code_names.module_name_with_version do
+          w.write_module @code_names.version_module_name do
             w.write_line "COMMAND_NAME = '#{@command.command_name}'"
             write_command @command, w
             w.write_method @code_names.factory_method_name, @code_names.factory_method_args do
@@ -28,9 +28,9 @@ module CodeGenerator
             end
           end
         end
-        w.write_method @code_names.factory_method_name_with_version, @code_names.factory_method_args do
-          w.write_line "builder = CommandBuilder.new #{@code_names.fully_qualified_module_name_with_version}::COMMAND_NAME"
-          w.write_line "command = #{@code_names.fully_qualified_class_name}.new #{@code_names.initializer_values.join ', '}"
+        w.write_method @code_names.version_factory_method_name, @code_names.factory_method_args do
+          w.write_line "builder = CommandBuilder.new #{@code_names.module_name}::#{@code_names.version_module_name}::COMMAND_NAME"
+          w.write_line "command = #{@code_names.module_name}::#{@code_names.version_module_name}::#{@code_names.class_name}.new #{@code_names.initializer_values.join ', '}"
           w.write_line 'yield builder if block_given?'
           w.write_line 'command'
         end
