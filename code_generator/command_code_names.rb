@@ -3,8 +3,6 @@ require_relative 'code_generator'
 module CodeGenerator
   class CommandCodeNames
 
-    ROOT_MODULE_NAME = 'FluentCommandBuilder'
-
     def initialize(command, version)
       @command = command
       @version = version
@@ -20,11 +18,11 @@ module CodeGenerator
     end
 
     def factory_method_name
-      @command.node_name.gsub('-', '_').gsub(/\W/, '').downcase
+      @command.node_name.downcase.snakecase
     end
 
     def version_factory_method_name
-      "#{factory_method_name}_#{version}".downcase
+      "#{factory_method_name}_#{version.downcase.snakecase}"
     end
 
     def factory_method_args
@@ -46,7 +44,7 @@ module CodeGenerator
     private
 
     def version
-      @version.gsub(/[\.]/, '').gsub(' ', '_')
+      @version.to_s.gsub(/[\.]/, '')
     end
 
     def command_args

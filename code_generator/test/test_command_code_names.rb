@@ -6,144 +6,69 @@ include CodeGenerator
 
 class TestCommandCodeNames < Test::Unit::TestCase
 
-  # module_name
-
-  def test_module_name_where_executable_is_lowercase
-    assert_equal 'Command', command_code_names('command').module_name
+  def test_module_name
+    assert_module_name 'Command', 'command', 'COMMAND'
+    assert_module_name 'CommandTool', 'command_tool', 'command-tool', 'commandTool', 'CommandTool'
+    assert_module_name 'CMDTool', 'CMDTool'
+    assert_module_name 'CMD123', 'CMD123'
   end
 
-  def test_module_name_where_executable_is_snakecase
-    assert_equal 'CommandTool', command_code_names('command_tool').module_name
+  def test_version_module_name
+    assert_version_module_name 'V1', '1'
+    assert_version_module_name 'V10', '1.0'
+    assert_version_module_name 'Beta', 'beta', 'BETA'
+    assert_version_module_name 'AlphaBeta', 'alpha beta', 'alpha_beta', 'alpha-beta', 'alphaBeta', 'AlphaBeta'
+    assert_version_module_name 'BETA1', 'BETA1'
+    assert_version_module_name 'ALPHABeta', 'ALPHABeta'
   end
 
-  def test_module_name_where_executable_is_lowercase_and_contains_dash
-    assert_equal 'CommandTool', command_code_names('command-tool').module_name
+  def test_factory_method_name
+    assert_factory_method_name 'command', 'command', 'COMMAND'
+    assert_factory_method_name 'command_tool', 'command_tool', 'command-tool'
+    assert_factory_method_name 'commandtool', 'commandTool', 'CommandTool'
+    assert_factory_method_name 'cmdtool', 'CMDTool'
+    assert_factory_method_name 'cmd123', 'CMD123'
   end
 
-  def test_module_name_where_executable_is_lowercase_and_contains_space
-    assert_equal 'Command', command_code_names('command tool').module_name
-    # note: executable with space is not yet supported
-  end
-
-  def test_module_name_where_executable_is_camelcase_and_starts_with_lowercase
-    assert_equal 'CommandTool', command_code_names('commandTool').module_name
-  end
-
-  def test_module_name_where_executable_is_camelcase_and_starts_with_uppercase
-    assert_equal 'CommandTool', command_code_names('CommandTool').module_name
-  end
-
-  def test_module_name_where_executable_is_uppercase
-    assert_equal 'Command', command_code_names('COMMAND').module_name
-  end
-
-  def test_module_name_where_executable_contains_uppercase_letters_and_digits
-    assert_equal 'CMD123', command_code_names('CMD123').module_name
-    # note: uppercase letters preserved
-  end
-
-  def test_module_name_where_executable_contains_consecutive_uppercase_letters
-    assert_equal 'CMDTool', command_code_names('CMDTool').module_name
-    # note: consecutive uppercase letters preserved
-  end
-
-  # version_module_name
-
-  def test_version_module_name_where_version_starts_with_digit
-    assert_equal 'V1', command_code_names('command', '1').version_module_name
-  end
-
-  def test_version_module_name_where_version_starts_with_digit_and_contains_dot
-    assert_equal 'V10', command_code_names('command', '1.0').version_module_name
-    # note: dot removed
-  end
-
-  def test_version_module_name_where_version_is_lowercase
-    assert_equal 'Beta', command_code_names('command', 'beta').version_module_name
-  end
-
-  def test_version_module_name_where_version_is_snakecase
-    assert_equal 'AlphaBeta', command_code_names('command', 'alpha_beta').version_module_name
-  end
-
-  def test_version_module_name_where_version_is_lowercase_and_contains_dash
-    assert_equal 'AlphaBeta', command_code_names('command', 'alpha-beta').version_module_name
-  end
-
-  def test_version_module_name_where_version_is_lowercase_and_contains_space
-    assert_equal 'AlphaBeta', command_code_names('command', 'alpha beta').version_module_name
-  end
-
-  def test_version_module_name_where_version_is_camelcase_and_starts_with_lowercase
-    assert_equal 'AlphaBeta', command_code_names('command', 'alphaBeta').version_module_name
-  end
-
-  def test_version_module_name_where_version_is_camelcase_and_starts_with_uppercase
-    assert_equal 'AlphaBeta', command_code_names('command', 'AlphaBeta').version_module_name
-  end
-
-  def test_version_module_name_where_version_is_uppercase
-    assert_equal 'Beta', command_code_names('command', 'BETA').version_module_name
-  end
-
-  def test_version_module_name_where_executable_contains_uppercase_letters_and_digits
-    assert_equal 'BETA1', command_code_names('BETA1').module_name
-    # note: uppercase letters preserved
-  end
-
-  def test_version_module_name_where_version_contains_consecutive_uppercase_letters
-    assert_equal 'ALPHABeta', command_code_names('command', 'ALPHABeta').version_module_name
-    # note: consecutive uppercase letters preserved
-  end
-
-  # factory_method_name
-
-  def test_factory_method_name_where_executable_is_lowercase
-    assert_equal 'command', command_code_names('command').factory_method_name
-  end
-
-  def test_factory_method_name_where_executable_is_snakecase
-    assert_equal 'command_tool', command_code_names('command_tool').factory_method_name
-  end
-
-  def test_factory_method_name_where_executable_is_lowercase_and_contains_dash
-    assert_equal 'command_tool', command_code_names('command-tool').factory_method_name
-  end
-
-  def test_factory_method_name_where_executable_is_lowercase_and_contains_space
-    assert_equal 'command', command_code_names('command tool').factory_method_name
-    # note: executable with space is not yet supported
-  end
-
-  def test_factory_method_name_where_executable_is_camelcase_and_starts_with_lowercase
-    assert_equal 'commandtool', command_code_names('commandTool').factory_method_name
-    # note: no underscore
-  end
-
-  def test_factory_method_name_where_executable_is_camelcase_and_starts_with_uppercase
-    assert_equal 'commandtool', command_code_names('CommandTool').factory_method_name
-    # note: no underscore
-  end
-
-  def test_factory_method_name_where_executable_is_uppercase
-    assert_equal 'command', command_code_names('COMMAND').factory_method_name
-  end
-
-  def test_factory_method_name_where_executable_contains_uppercase_letters_and_digits
-    assert_equal 'command123', command_code_names('COMMAND123').factory_method_name
-    # note: no underscore
-  end
-
-  def test_factory_method_name_where_executable_contains_consecutive_uppercase_letters
-    assert_equal 'cmdtool', command_code_names('CMDTool').factory_method_name
-    # note: no underscore
+  def test_version_factory_method_name
+    assert_equal 'command_1', command_code_names('command', '1').version_factory_method_name
+    assert_version_factory_method_name_starts_with 'command', 'command', 'COMMAND'
+    assert_version_factory_method_name_starts_with 'command_tool', 'command_tool', 'command-tool'
+    assert_version_factory_method_name_starts_with 'commandtool', 'commandTool', 'CommandTool'
+    assert_version_factory_method_name_starts_with 'cmdtool', 'CMDTool'
+    assert_version_factory_method_name_starts_with 'cmd123', 'CMD123'
+    assert_version_factory_method_name_ends_with '1', '1'
+    assert_version_factory_method_name_ends_with '10', '1.0'
+    assert_version_factory_method_name_ends_with 'beta', 'beta', 'BETA'
+    assert_version_factory_method_name_ends_with 'alpha_beta', 'alpha beta', 'alpha_beta', 'alpha-beta'
+    assert_version_factory_method_name_ends_with 'alphabeta', 'alphaBeta', 'AlphaBeta', 'ALPHABeta'
+    assert_version_factory_method_name_ends_with 'beta1', 'BETA1'
   end
 
   private
 
-  def command_code_names(command_def, version='0')
-    command = Command.new command_def
-    CommandCodeNames.new command, version
+  def assert_module_name(expected_module_name, *command_def)
+    command_def.each { |c| assert_equal expected_module_name, command_code_names(c, '0').module_name }
+  end
+
+  def assert_version_module_name(expected_module_name, *version)
+    version.each { |v| assert_equal expected_module_name, command_code_names('command', v).version_module_name }
+  end
+
+  def assert_factory_method_name(expected_method_name, *command_def)
+    command_def.each { |c| assert_equal expected_method_name, command_code_names(c, '0').factory_method_name }
+  end
+
+  def assert_version_factory_method_name_starts_with(expected_method_name, *command_def)
+    command_def.each { |c| assert_equal true, command_code_names(c, '0').version_factory_method_name.start_with?(expected_method_name) }
+  end
+
+  def assert_version_factory_method_name_ends_with(expected_method_name, *version)
+    version.each { |v| assert_equal true, command_code_names('command', v).version_factory_method_name.end_with?(expected_method_name) }
+  end
+
+  def command_code_names(command_def, version)
+    CommandCodeNames.new Command.new(command_def), version
   end
 
 end
