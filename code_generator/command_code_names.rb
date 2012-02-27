@@ -5,7 +5,7 @@ module CodeGenerator
 
     def initialize(command, version)
       @command = command
-      @version = version
+      @version = version.to_s
     end
 
     def module_name
@@ -44,7 +44,7 @@ module CodeGenerator
     private
 
     def version
-      @version.to_s.gsub(/[\.]/, '')
+      @version.gsub '.', ''
     end
 
     def command_args
