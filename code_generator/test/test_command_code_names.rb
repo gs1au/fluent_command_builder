@@ -45,6 +45,13 @@ class TestCommandCodeNames < Test::Unit::TestCase
     assert_version_factory_method_name_ends_with 'beta1', 'BETA1'
   end
 
+  def test_class_name
+    assert_module_name 'Command', 'command', 'COMMAND'
+    assert_module_name 'CommandTool', 'command_tool', 'command-tool', 'commandTool', 'CommandTool'
+    assert_module_name 'CMDTool', 'CMDTool'
+    assert_module_name 'CMD123', 'CMD123'
+  end
+
   private
 
   def assert_module_name(expected_module_name, *command_def)
@@ -65,6 +72,10 @@ class TestCommandCodeNames < Test::Unit::TestCase
 
   def assert_version_factory_method_name_ends_with(expected_method_name, *version)
     version.each { |v| assert_equal true, command_code_names('command', v).version_factory_method_name.end_with?(expected_method_name) }
+  end
+
+  def assert_class_name(expected_class_name, *command_def)
+    command_def.each { |c| assert_equal expected_class_name, command_code_names(c, '0').class_name }
   end
 
   def command_code_names(command_def, version)
