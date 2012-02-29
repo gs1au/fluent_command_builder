@@ -50,20 +50,25 @@ class TestNode < Test::Unit::TestCase
 
   def test_should_return_no_required_or_optional_args_when_fragment_contains_no_args
     node = CodeGenerator::Node.new '/option'
-    assert_empty node.required_args
-    assert_empty node.optional_args
+    assert_empty node.args
   end
 
   def test_should_return_one_required_arg_when_fragment_contains_one_arg
     node = CodeGenerator::Node.new '/option:<optionValue>'
-    assert_empty node.optional_args
-    assert_equal 1, node.required_args.length
+    assert_equal 1, node.args.length
+    assert_equal true, node.args[0].required?
   end
 
   def test_should_return_one_optional_arg_when_fragment_contains_one_optional_arg
     node = CodeGenerator::Node.new '/option[:<optionValue>]'
-    assert_empty node.required_args
-    assert_equal 1, node.optional_args.length
+    assert_equal 1, node.args.length
+    assert_equal true, node.args[0].optional?
+  end
+
+  def test_required_arg_should_come_before_optional_arg
+    node = CodeGenerator::Node.new '/option[<n>]:<optionValue>'
+    assert_equal 'optionValue', node.args[0].arg_name
+    assert_equal 'n', node.args[1].arg_name
   end
 
 end

@@ -26,7 +26,7 @@ module CodeGenerator
     end
 
     def factory_method_args
-      command_args.map do |arg|
+      @command.args.map do |arg|
         arg_name = arg.arg_name.snakecase
         arg_name << '=nil' if arg.optional?
         arg_name
@@ -34,7 +34,7 @@ module CodeGenerator
     end
 
     def initializer_values
-      %w(builder) + command_args.map { |arg| arg.arg_name.snakecase }
+      %w(builder) + @command.args.map { |arg| arg.arg_name.snakecase }
     end
 
     def class_name
@@ -45,10 +45,6 @@ module CodeGenerator
 
     def version
       @version.gsub '.', ''
-    end
-
-    def command_args
-      @command.required_args + @command.optional_args
     end
 
   end

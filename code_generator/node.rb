@@ -27,15 +27,19 @@ module CodeGenerator
       @fragments ||= @node_def.gsub(/ \(.+?\)/, '').gsub(']', ']|').gsub('[', '|[').split('|').compact.map { |f| Fragment.new f }
     end
 
-    def required_args
-      args { |a| a.required? }
-    end
-
-    def optional_args
-      args { |a| a.optional? }
+    def args
+      required_args + optional_args
     end
 
     protected
+
+    def required_args
+      select_args { |a| a.required? }
+    end
+
+    def optional_args
+      select_args { |a| a.optional? }
+    end
 
     def starts_with_arg?
       words_preceding_args.empty?
@@ -53,7 +57,7 @@ module CodeGenerator
       @node_def[/\((.+?)\)/, 1]
     end
 
-    def args
+    def select_args
       fragments.map { |f| f.args.map { |a| a if yield a } }.flatten.compact
     end
 

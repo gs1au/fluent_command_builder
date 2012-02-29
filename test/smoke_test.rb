@@ -58,4 +58,8 @@ class SmokeTest < Test::Unit::TestCase
     assert_equal expected, actual
   end
 
+  def test_subcommands
+    dotcover_11.analyse.target_executable('nunit')
+  end
+
 end
