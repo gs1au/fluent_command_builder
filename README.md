@@ -7,7 +7,7 @@ Each supported command is represented by a class that provides a fluent interfac
 ## Example
 
 ```ruby
-msbuild('sample.csproj').target([:clean, :build]).property({ :configuration => :release })
+msbuild('sample.csproj').target(['clean', 'build']).property({ 'configuration': 'release' })
 ```
 
 Produces:
@@ -37,8 +37,8 @@ require 'fluent_command_builder'
 include FluentCommandBuilder::MSBuild::V40
 include FluentCommandBuilder::NunitConsole::V25
 
-msbuild('sample.csproj').target(:rebuild).property({ :configuration => :release }).execute!
-nunit('sample.dll').include(:unit_tests).exclude(:integration_tests).execute!
+msbuild('sample.csproj').target('rebuild').property({ 'configuration': 'release' }).execute!
+nunit('sample.dll').include('unit_tests').exclude('integration_tests').execute!
 ```
 
 In this case, the msbuild method refers to MSBuild 4.0, and the nunit method refers to NUnit 2.5.
@@ -49,8 +49,8 @@ The second scenario involves calling a method for a specific version of each com
 require 'fluent_command_builder'
 include FluentCommandBuilder
 
-msbuild_40('sample.csproj').target(:rebuild).property({ :configuration => :release }).execute!
-nunit_25('sample.dll').include(:unit_tests).exclude(:integration_tests).execute!
+msbuild_40('sample.csproj').target('rebuild').property({ 'configuration': 'release' }).execute!
+nunit_25('sample.dll').include('unit_tests').exclude('integration_tests').execute!
 ```
 
 Notice how the version number forms part of the method itself.
@@ -62,7 +62,7 @@ Notice how the version number forms part of the method itself.
 At any point along the chain, the __execute!__ method may be called to execute the command:
 
 ```ruby
-msbuild('sample.csproj').target(:rebuild).property({ :configuration => :release }).execute!
+msbuild('sample.csproj').target('rebuild').property({ 'configuration': 'release' }).execute!
 ```
 
 The __execute!__ method uses __[sh]__ if it can require [Rake], otherwise __[system]__.
@@ -72,7 +72,7 @@ The __execute!__ method uses __[sh]__ if it can require [Rake], otherwise __[sys
 At any point along the chain, the __to_s__ method may be called to get the command string:
 
 ```ruby
-command = msbuild('sample.csproj').target(:rebuild).property({ :configuration => :release }).to_s
+command = msbuild('sample.csproj').target('rebuild').property({ 'configuration': 'release' }).to_s
 ```
 
 This approach enables custom execution of a command which could be useful in the following scenarios:
@@ -95,7 +95,7 @@ An array can be passed to an argument that allows multiple values.
 Fluent Command Builder will format the list using the appropriate delimiter:
 
 ```ruby
-msbuild('sample.csproj').target([:clean, :build])
+msbuild('sample.csproj').target(['clean', 'build'])
 ```
 
 Produces:
@@ -110,7 +110,7 @@ A hash can be passed to an argument that expects key-value pairs.
 Fluent Command Builder will format the key-value pairs using the appropriate delimiters:
 
 ```ruby
-msbuild('sample.csproj').property({ :configuration => :release })
+msbuild('sample.csproj').property({ 'configuration': 'release' })
 ```
 
 Produces:
@@ -149,13 +149,13 @@ Produces:
 
 - aspnet_compiler 2.0, 3.5, 4.0
 - cucumber 1.1
-- dotcover 1.1
+- dotcover 1.0, 1.1, 1.2
 - installutil 1.1, 2.0, 3.5, 4.0
 - msbuild 2.0, 3.0, 3.5, 4.0
 - msdeploy 4.0
 - mstest 2005, 2008, 2010
 - netsh 2008 (advfirewall only at present)
-- nunit 2.5
+- nunit 2.5, 2.6
 - rake 0.9
 - sevenzip 9.2 (work in progress)
 - simian 2.3
@@ -168,7 +168,7 @@ Produces:
 - tf 2010: http://msdn.microsoft.com/en-us/library/cc31bk2e%28v=vs.100%29.aspx
 - tf tee 2010: http://msdn.microsoft.com/en-us/library/gg413282.aspx
 
-Note: The MSDN command line references contain many inaccuracies/inconsistencies which many have traslated into this library.
+Note: The MSDN command line references contain many inaccuracies/inconsistencies which many have translated into this library.
 
 ## Project Notes
 
