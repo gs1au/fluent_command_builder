@@ -1,0 +1,15 @@
+JetBrains dotCover Console Runner v1.0.120.2. Copyright (c) 2009-2012 JetBrains s.r.o. All rights reserved.
+
+merge: Merge several coverage snapshots.
+usage: dotCover merge <configuration file>
+configuration file format:
+
+  <MergeParams>
+    <Source> <!-- Required. At least one child element expected. -->
+      <string><!-- Coverage results descriptor 1 file name --></string>
+      <string><!-- Coverage results descriptor 2 file name --></string>
+      <string><!-- Coverage results descriptor N file name --></string>
+    </Source>
+    <TempDir><!-- Optional. Directory to store resulting snapshot in. --></TempDir>
+    <Output><!-- Required. Merged coverage results descriptor file name. --></Output>
+  </MergeParams>

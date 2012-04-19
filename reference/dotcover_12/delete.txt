@@ -1,0 +1,21 @@
+JetBrains dotCover Console Runner v1.2.384.4. Copyright (c) 2009-2012 JetBrains s.r.o. All rights reserved.
+
+delete: Delete all files related to the specified snapshots.
+usage: dotCover delete [parameters]
+
+Valid parameters:
+  /Source=ARG      : (Required) List of snapshot files separated with semicolon (;)
+
+Global parameters:
+  /LogFile=ARG     : (Optional) Enables logging and specifies log file name
+
+It is possible to specify part of the parameters or all of them in the configuration file.
+usage: dotCover <configuration file name> [parameters]
+Configuration file format:
+
+  <DeleteParams>
+    <!-- At least one source required. -->
+    <Source><!-- Source file 1 --></Source>
+    <Source><!-- Source file 2 --></Source>
+    <Source><!-- Source file N --></Source>
+  </DeleteParams>

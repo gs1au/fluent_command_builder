@@ -1,0 +1,30 @@
+JetBrains dotCover Console Runner v1.0.120.2. Copyright (c) 2009-2012 JetBrains s.r.o. All rights reserved.
+
+analyse: All-in-one task. Performs coverage analysis, merges snapshots, generates report and removes snapshots.
+usage: dotCover analyse <configuration file>
+configuration file format:
+
+  <AnalyseParams>
+    <Executable><!-- Required. Full file name of the program to analyse. --></Executable>
+    <Arguments><!-- Optional. Program arguments. --></Arguments>
+    <WorkingDir><!-- Optional. Program working directory. --></WorkingDir>
+    <TempDir><!-- Optional. Directory to store snapshots in. Set to system temp by default. --></TempDir>
+    <Output><!-- Required. XML report file name. --></Output>
+    
+    <!-- Optional. Coverage filters. It's possible to use asterisks as wildcard symbols.
+    <Filters>
+      <IncludeFilters>
+        <FilterEntry>
+          <ModuleMask> Module mask. </ModuleMask>
+          <ClassMask> Class mask. </ClassMask>
+          <FunctionMask> Function mask. </FunctionMask>
+        </FilterEntry>
+      </IncludeFilters>
+      <ExcludeFilters>
+        <FilterEntry>...</FilterEntry>
+        <FilterEntry>...</FilterEntry>
+        <FilterEntry>...</FilterEntry>
+      </ExcludeFilters>
+    </Filters>
+    -->
+  </AnalyseParams>

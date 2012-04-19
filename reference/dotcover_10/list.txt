@@ -1,0 +1,14 @@
+JetBrains dotCover Console Runner v1.0.120.2. Copyright (c) 2009-2012 JetBrains s.r.o. All rights reserved.
+
+list: Obtain list of all snapshot files from coverage result descriptors.
+usage: dotCover list <configuration file>
+configuration file format:
+
+  <ListParams>
+    <Source><!-- Required. At least one child element expected. -->
+      <string><!-- Coverage results descriptor 1 file name --></string>
+      <string><!-- Coverage results descriptor 2 file name --></string>
+      <string><!-- Coverage results descriptor N file name --></string>
+    </Source>
+    <Output><!-- Required. Resulting file name. Stores plain list of all snapshot files. --></Output>
+  </ListParams>

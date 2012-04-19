@@ -1,28 +1,5 @@
-1.1
+1.1, 1.2
 dotCover
-    cover[ <configurationFile>]
-        /analyseTargetArguments
-        /filters
-        /inheritConsole
-        /logFile
-        /output
-        /targetArguments
-        /targetExecutable
-        /targetWorkingDir
-        /tempDir
-    merge[ <configurationFile>]
-        /output
-        /source
-        /tempDir
-    report[ <configurationFile>]
-        /output
-        /reportType
-        /source
-    list[ <configurationFile>]
-        /output
-        /source
-    delete[ <configurationFile>]
-        /source
     analyse[ <configurationFile>]
         /analyseTargetArguments
         /filters
@@ -34,7 +11,38 @@ dotCover
         /targetExecutable
         /targetWorkingDir
         /tempDir
+    cover[ <configurationFile>]
+        /analyseTargetArguments
+        /filters
+        /inheritConsole
+        /logFile
+        /output
+        /targetArguments
+        /targetExecutable
+        /targetWorkingDir
+        /tempDir
+    delete[ <configurationFile>]
+        /logFile
+        /source
+    help[ <command>][ <fileName>]
+    list[ <configurationFile>]
+        /logFile
+        /output
+        /source
+    merge[ <configurationFile>]
+        /logFile
+        /output
+        /source
+        /tempDir
+    report[ <configurationFile>]
+        /logFile
+        /output
+        /reportType
+        /source
+    version[ <outputFileName>]
+        /logFile
     zip[ <configurationFile>]
+        /logFile
         /output
         /source
 

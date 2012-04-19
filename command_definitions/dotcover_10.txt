@@ -1,0 +1,9 @@
+1.0
+dotCover
+    analyse[ <configurationFile>]
+    cover[ <configurationFile>]
+    delete[ <configurationFile>]
+    help[ <command>][ <fileName>]
+    list[ <configurationFile>]
+    merge[ <configurationFile>]
+    report[ <configurationFile>]

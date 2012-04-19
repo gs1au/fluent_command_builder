@@ -1,0 +1,51 @@
+JetBrains dotCover Console Runner v1.2.384.4. Copyright (c) 2009-2012 JetBrains s.r.o. All rights reserved.
+
+analyse: All-in-one task. Performs coverage analysis, generates report and removes snapshots.
+usage: dotCover analyse [parameters]
+
+Valid parameters:
+  /TargetExecutable=ARG        : (Required) File name of the program to analyse
+  /TargetArguments=ARG         : (Optional) Program arguments
+  /TargetWorkingDir=ARG        : (Optional) Program working directory
+  /TempDir=ARG                 : (Optional) Directory for the auxiliary files. Set to system temp by default
+  /ReportType=ARG              : (Optional) [HTML|JSON|XML|NDependXML]. A type of the report. XML by default
+  /Output=ARG                  : (Required) Resulting report file name
+  /InheritConsole=ARG          : (Optional) [True|False] Lets the application being analysed to inherit dotCover console. True by default
+                                 Please note that windows of analysed GUI application will not be hidden if console is inherited
+  /AnalyseTargetArguments=ARG  : (Optional) [True|False] Specifies whether dotCover should analyse target arguments string 
+                                 and convert relative paths to absolute there. True by default
+  /Filters=ARG                 : (Optional) Specify coverage filters using following syntax: +:module=*;class=*;function=*;
+                                 Use -:myassembly to exclude an assembly from code coverage. Asterisk wildcard (*) is supported here
+Global parameters:
+  /LogFile=ARG                 : (Optional) Enables logging and specifies log file name
+
+It is possible to specify part of the parameters or all of them in the configuration file.
+usage: dotCover <configuration file name> [parameters]
+Configuration file format:
+
+  <AnalyseParams>
+    <TargetExecutable><!-- File name of the program to analyse. --></TargetExecutable>
+    <TargetArguments><!-- Program arguments. --></TargetArguments>
+    <TargetWorkingDir><!-- Program working directory. --></TargetWorkingDir>
+    <TempDir><!-- Directory for the auxiliary files. Set to system temp by default. --></TempDir>
+    <Output><!-- Resulting report file name. --></Output>
+    <ReportType><!-- [HTML|JSON|XML|NDependXML]. A type of the report. XML by default. --></ReportType>
+    <InheritConsole><!-- [True|False] Lets the application being analysed to inherit dotCover console. True by default. --> </InheritConsole>
+    
+    <!-- Coverage filters. It's possible to use asterisks as wildcard symbols.
+    <Filters>
+      <IncludeFilters>
+        <FilterEntry>
+          <ModuleMask> Module mask. </ModuleMask>
+          <ClassMask> Class mask. </ClassMask>
+          <FunctionMask> Function mask. </FunctionMask>
+        </FilterEntry>
+      </IncludeFilters>
+      <ExcludeFilters>
+        <FilterEntry>...</FilterEntry>
+        <FilterEntry>...</FilterEntry>
+        <FilterEntry>...</FilterEntry>
+      </ExcludeFilters>
+    </Filters>
+    -->
+  </AnalyseParams>

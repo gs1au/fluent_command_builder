@@ -1,0 +1,14 @@
+JetBrains dotCover Console Runner v1.0.120.2. Copyright (c) 2009-2012 JetBrains s.r.o. All rights reserved.
+
+Usage: dotCover <command> <configuration file>
+Type 'dotCover help <command>' for help on a specific command and configuration xml format
+Type 'dotCover help <command> <file name>' to write configuration xml example to the specified file
+
+Available commands:
+	help (h)	Show console runner help.
+	cover (c)	Perform coverage analysis of the specified application.
+	merge (m)	Merge several coverage snapshots.
+	report (r)	Create XML report by the specified snapshot.
+	list (l)	Obtain list of all snapshot files from coverage result descriptors.
+	delete (d)	Delete all snapshot files specified in coverage result descriptors.
+	analyse (a)	All-in-one task. Performs coverage analysis, merges snapshots, generates report and removes snapshots.

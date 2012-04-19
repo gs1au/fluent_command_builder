@@ -1,0 +1,16 @@
+JetBrains dotCover Console Runner v1.2.384.4. Copyright (c) 2009-2012 JetBrains s.r.o. All rights reserved.
+
+Usage: dotCover <command> [parameters]
+Type 'dotCover help <command>' for help on a specific command
+
+Available commands:
+	help (h)	Show console runner help.
+	cover (c)	Perform coverage analysis of the specified application.
+	merge (m)	Merge several coverage snapshots.
+	report (r)	Create a report by the specified snapshot.
+	list (l)	Obtain list of all files related to the specified snapshots.
+	delete (d)	Delete all files related to the specified snapshots.
+	analyse (a)	All-in-one task. Performs coverage analysis, generates report and removes snapshots.
+	zip (z) 	Compress coverage snapshot.
+	version (v)	Get dotCover version info.
+

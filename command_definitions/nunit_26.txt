@@ -1,27 +1,35 @@
-2.5
+2.6
 nunit-console <inputFiles> (NUnit)
     /fixture:<fixture>
     /load:<fixture>
     /run:<test>
+    /runList:<file>
     /config:<config>
+    /result:<file>
     /xml:<file>
     /xmlConsole
+    /noResult
+    /noXml
     /output:<file>
     /out:<file>
     /err:<file>
+    /work:<directory>
     /labels
     /trace:<level>
     /include:<category>
     /exclude:<category>
+    /framework:<framework>
     /process:<process>
     /domain:<domain>
-    /framework:<framework>
+    /apartment:<apartment>
     /noShadow
     /noThread
     /timeout:<timeout>
     /wait
     /noLogo
     /noDots
+    /stopOnError
+    /cleanup
     /help
 
 

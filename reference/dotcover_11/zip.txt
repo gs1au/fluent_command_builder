@@ -1,0 +1,20 @@
+JetBrains dotCover Console Runner v1.1.313.14. Copyright (c) 2009-2012 JetBrains s.r.o. All rights reserved.
+
+zip: Compress coverage snapshot.
+usage: dotCover zip [parameters]
+
+Valid parameters:
+  /Source=ARG    : (Required) Coverage snapshot file name
+  /Output=ARG    : (Required) Zipped snapshot file name
+
+Global parameters:
+  /LogFile=ARG   : (Optional) Enables logging and specifies log file name
+
+It is possible to specify part of the parameters or all of them in the configuration file.
+usage: dotCover <configuration file name> [parameters]
+Configuration file format:
+
+  <ZipParams>
+    <Source><!-- Coverage snapshot file name. --></Source>
+    <Output><!-- Zipped snapshot file name. --></Output>
+  </ZipParams>

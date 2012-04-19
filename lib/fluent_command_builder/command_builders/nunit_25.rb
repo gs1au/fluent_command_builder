@@ -6,32 +6,42 @@ module FluentCommandBuilder
     module V25
       COMMAND_NAME = 'nunit-console'
       class NUnit < CommandBase
-        def initialize(builder, assembly)
+        def initialize(builder, input_files)
           super builder
-          @builder.append " #{@builder.format assembly}"
-        end
-        def run(test)
-          @builder.append " /run:#{@builder.format test}"
-          yield @builder if block_given?
-          self
+          @builder.append " #{@builder.format input_files}"
         end
         def fixture(fixture)
           @builder.append " /fixture:#{@builder.format fixture}"
           yield @builder if block_given?
           self
         end
-        def framework(framework)
-          @builder.append " /framework:#{@builder.format framework}"
+        def load(fixture)
+          @builder.append " /load:#{@builder.format fixture}"
           yield @builder if block_given?
           self
         end
-        def include(category)
-          @builder.append " /include:#{@builder.format category}"
+        def run(test)
+          @builder.append " /run:#{@builder.format test}"
           yield @builder if block_given?
           self
         end
-        def exclude(category)
-          @builder.append " /exclude:#{@builder.format category}"
+        def config(config)
+          @builder.append " /config:#{@builder.format config}"
+          yield @builder if block_given?
+          self
+        end
+        def xml(file)
+          @builder.append " /xml:#{@builder.format file}"
+          yield @builder if block_given?
+          self
+        end
+        def xml_console
+          @builder.append ' /xmlConsole'
+          yield @builder if block_given?
+          self
+        end
+        def output(file)
+          @builder.append " /output:#{@builder.format file}"
           yield @builder if block_given?
           self
         end
@@ -50,13 +60,18 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def xml(file)
-          @builder.append " /xml:#{@builder.format file}"
+        def trace(level)
+          @builder.append " /trace:#{@builder.format level}"
           yield @builder if block_given?
           self
         end
-        def config(config)
-          @builder.append " /config:#{@builder.format config}"
+        def include(category)
+          @builder.append " /include:#{@builder.format category}"
+          yield @builder if block_given?
+          self
+        end
+        def exclude(category)
+          @builder.append " /exclude:#{@builder.format category}"
           yield @builder if block_given?
           self
         end
@@ -70,13 +85,8 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def timeout(timeout)
-          @builder.append " /timeout:#{@builder.format timeout}"
-          yield @builder if block_given?
-          self
-        end
-        def trace(level)
-          @builder.append " /trace:#{@builder.format level}"
+        def framework(framework)
+          @builder.append " /framework:#{@builder.format framework}"
           yield @builder if block_given?
           self
         end
@@ -90,18 +100,23 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
+        def timeout(timeout)
+          @builder.append " /timeout:#{@builder.format timeout}"
+          yield @builder if block_given?
+          self
+        end
         def wait
           @builder.append ' /wait'
           yield @builder if block_given?
           self
         end
-        def xml_console
-          @builder.append ' /xmlConsole'
+        def no_logo
+          @builder.append ' /noLogo'
           yield @builder if block_given?
           self
         end
-        def no_logo
-          @builder.append ' /noLogo'
+        def no_dots
+          @builder.append ' /noDots'
           yield @builder if block_given?
           self
         end
@@ -111,17 +126,17 @@ module FluentCommandBuilder
           self
         end
       end
-      def nunit(assembly)
+      def nunit(input_files)
         builder = CommandBuilder.new COMMAND_NAME
-        command = NUnit.new builder, assembly
+        command = NUnit.new builder, input_files
         yield builder if block_given?
         command
       end
     end
   end
-  def nunit_25(assembly)
+  def nunit_25(input_files)
     builder = CommandBuilder.new NUnit::V25::COMMAND_NAME
-    command = NUnit::V25::NUnit.new builder, assembly
+    command = NUnit::V25::NUnit.new builder, input_files
     yield builder if block_given?
     command
   end
