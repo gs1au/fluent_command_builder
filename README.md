@@ -7,7 +7,7 @@ Each supported command is represented by a class that provides a fluent interfac
 ## Example
 
 ```ruby
-msbuild('sample.csproj').target(['clean', 'build']).property({ 'configuration': 'release' })
+msbuild('sample.csproj').target(['clean', 'build']).property({'configuration'=>'release'})
 ```
 
 Produces:
@@ -37,7 +37,7 @@ require 'fluent_command_builder'
 include FluentCommandBuilder::MSBuild::V40
 include FluentCommandBuilder::NunitConsole::V25
 
-msbuild('sample.csproj').target('rebuild').property({ 'configuration': 'release' }).execute!
+msbuild('sample.csproj').target('rebuild').property({'configuration'=>'release'}).execute!
 nunit('sample.dll').include('unit_tests').exclude('integration_tests').execute!
 ```
 
@@ -49,7 +49,7 @@ The second scenario involves calling a method for a specific version of each com
 require 'fluent_command_builder'
 include FluentCommandBuilder
 
-msbuild_40('sample.csproj').target('rebuild').property({ 'configuration': 'release' }).execute!
+msbuild_40('sample.csproj').target('rebuild').property({'configuration'=>'release'}).execute!
 nunit_25('sample.dll').include('unit_tests').exclude('integration_tests').execute!
 ```
 
@@ -62,7 +62,7 @@ Notice how the version number forms part of the method itself.
 At any point along the chain, the __execute!__ method may be called to execute the command:
 
 ```ruby
-msbuild('sample.csproj').target('rebuild').property({ 'configuration': 'release' }).execute!
+msbuild('sample.csproj').target('rebuild').property({'configuration'=>'release'}).execute!
 ```
 
 The __execute!__ method uses __[sh]__ if it can require [Rake], otherwise __[system]__.
@@ -72,7 +72,7 @@ The __execute!__ method uses __[sh]__ if it can require [Rake], otherwise __[sys
 At any point along the chain, the __to_s__ method may be called to get the command string:
 
 ```ruby
-command = msbuild('sample.csproj').target('rebuild').property({ 'configuration': 'release' }).to_s
+command = msbuild('sample.csproj').target('rebuild').property({'configuration'=>'release'}).to_s
 ```
 
 This approach enables custom execution of a command which could be useful in the following scenarios:
@@ -110,7 +110,7 @@ A hash can be passed to an argument that expects key-value pairs.
 Fluent Command Builder will format the key-value pairs using the appropriate delimiters:
 
 ```ruby
-msbuild('sample.csproj').property({ 'configuration': 'release' })
+msbuild('sample.csproj').property({'configuration'=>'release'})
 ```
 
 Produces:
