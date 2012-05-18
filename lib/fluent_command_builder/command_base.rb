@@ -1,16 +1,14 @@
+require 'rake'
+include Rake::DSL
+
 class CommandBase
 
-  def initialize builder
+  def initialize(builder)
     @builder = builder
   end
 
   def execute!
-    begin
-      require 'rake'
-      sh to_s
-    rescue LoadError
-      Kernel.system to_s
-    end
+    sh to_s
   end
 
   def to_s

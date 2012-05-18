@@ -35,7 +35,7 @@ The first scenario involves including the modules for a specific version of each
 ```ruby
 require 'fluent_command_builder'
 include FluentCommandBuilder::MSBuild::V40
-include FluentCommandBuilder::NunitConsole::V25
+include FluentCommandBuilder::Nunit::V25
 
 msbuild('sample.csproj').target('rebuild').property({ 'configuration': 'release' }).execute!
 nunit('sample.dll').include('unit_tests').exclude('integration_tests').execute!
@@ -65,8 +65,6 @@ At any point along the chain, the __execute!__ method may be called to execute t
 msbuild('sample.csproj').target('rebuild').property({ 'configuration': 'release' }).execute!
 ```
 
-The __execute!__ method uses __[sh]__ if it can require [Rake], otherwise __[system]__.
-
 #### The "to_s" method
 
 At any point along the chain, the __to_s__ method may be called to get the command string:
@@ -77,15 +75,11 @@ command = msbuild('sample.csproj').target('rebuild').property({ 'configuration':
 
 This approach enables custom execution of a command which could be useful in the following scenarios:
 
-- Executing the command by a means other than __[sh]__ or __[system]__
+- Executing the command by a means
 - Remote execution, e.g. SSH
 - Deferred execution
 - Concatenation with another command
 - Generated scripts such as a batch script
-
-[sh]: http://rake.rubyforge.org/classes/FileUtils.html#M000018
-[Rake]: http://rake.rubyforge.org/
-[system]: http://www.ruby-doc.org/core-1.9.3/Kernel.html#method-i-system
 
 ### Argument Formatting
 
@@ -160,15 +154,6 @@ Produces:
 - sevenzip 9.2 (work in progress)
 - simian 2.3
 - tf 2010, tee 2010
-
-## References
-
-### Team Foundation
-
-- tf 2010: http://msdn.microsoft.com/en-us/library/cc31bk2e%28v=vs.100%29.aspx
-- tf tee 2010: http://msdn.microsoft.com/en-us/library/gg413282.aspx
-
-Note: The MSDN command line references contain many inaccuracies/inconsistencies which many have translated into this library.
 
 ## Project Notes
 
