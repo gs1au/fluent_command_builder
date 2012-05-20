@@ -7,12 +7,12 @@ Each supported command is represented by a class that provides a fluent interfac
 ## Example
 
 ```ruby
-msbuild('sample.csproj').target(['clean', 'build']).property({'configuration'=>'release'})
+msbuild('sample.proj').target(['clean', 'build']).property({'configuration'=>'release'})
 ```
 
 Produces:
 
-    MSBuild sample.csproj /target:clean;build /property:configuration=release
+    MSBuild sample.proj /target:clean;build /property:configuration=release
 
 ## Intellisense
 
@@ -37,7 +37,7 @@ require 'fluent_command_builder'
 include FluentCommandBuilder::MSBuild::V40
 include FluentCommandBuilder::Nunit::V25
 
-msbuild('sample.csproj').target('rebuild').property({'configuration'=>'release'}).execute!
+msbuild('sample.proj').target('rebuild').property({'configuration'=>'release'}).execute!
 nunit('sample.dll').include('unit_tests').exclude('integration_tests').execute!
 ```
 
@@ -49,7 +49,7 @@ The second scenario involves calling a method for a specific version of each com
 require 'fluent_command_builder'
 include FluentCommandBuilder
 
-msbuild_40('sample.csproj').target('rebuild').property({'configuration'=>'release'}).execute!
+msbuild_40('sample.proj').target('rebuild').property({'configuration'=>'release'}).execute!
 nunit_25('sample.dll').include('unit_tests').exclude('integration_tests').execute!
 ```
 
@@ -62,20 +62,22 @@ Notice how the version number forms part of the method itself.
 At any point along the chain, the __execute!__ method may be called to execute the command:
 
 ```ruby
-msbuild('sample.csproj').target('rebuild').property({'configuration'=>'release'}).execute!
+msbuild('sample.proj').target('rebuild').property({'configuration'=>'release'}).execute!
 ```
+
+The __execute!__ method executes the command using Rake's __sh__ method.
 
 #### The "to_s" method
 
 At any point along the chain, the __to_s__ method may be called to get the command string:
 
 ```ruby
-command = msbuild('sample.csproj').target('rebuild').property({'configuration'=>'release'}).to_s
+command = msbuild('sample.proj').target('rebuild').property({'configuration'=>'release'}).to_s
 ```
 
 This approach enables custom execution of a command which could be useful in the following scenarios:
 
-- Executing the command by a means
+- Executing the command by a means other than Rake's to_s method.
 - Remote execution, e.g. SSH
 - Deferred execution
 - Concatenation with another command
@@ -89,12 +91,12 @@ An array can be passed to an argument that allows multiple values.
 Fluent Command Builder will format the list using the appropriate delimiter:
 
 ```ruby
-msbuild('sample.csproj').target(['clean', 'build'])
+msbuild('sample.proj').target(['clean', 'build'])
 ```
 
 Produces:
 
-    MSBuild sample.csproj /target:clean;build
+    MSBuild sample.proj /target:clean;build
 
 Notice how target is an array and has been formatted as a semicolon delimited list.
 
@@ -104,12 +106,12 @@ A hash can be passed to an argument that expects key-value pairs.
 Fluent Command Builder will format the key-value pairs using the appropriate delimiters:
 
 ```ruby
-msbuild('sample.csproj').property({'configuration'=>'release'})
+msbuild('sample.proj').property({'configuration'=>'release'})
 ```
 
 Produces:
 
-    MSBuild sample.csproj /property:configuration=release
+    MSBuild sample.proj /property:configuration=release
 
 Notice how property is a hash and has been formatted using the equals sign.
 
@@ -118,12 +120,12 @@ Notice how property is a hash and has been formatted using the equals sign.
 Fluent Command Builder will surround any argument containing a space with double quotes automatically:
 
 ```ruby
-msbuild('sample 1.csproj')
+msbuild('sample 1.proj')
 ```
 
 Produces:
 
-    MSBuild "sample 1.csproj"
+    MSBuild "sample 1.proj"
 
 Notice the space in the project name and how the output has surrounded the project name with double quotes.
 
