@@ -11,14 +11,26 @@ class SmokeTest < Test::Unit::TestCase
   end
 
   def test_list_argument
-    expected = 'MSBuild /target:clean;build'
-    actual = msbuild_40.target([:clean, :build]).to_s
+    expected = 'MSBuild /target:target1;target2'
+    actual = msbuild_40.target(['target1', 'target2']).to_s
+    assert_equal expected, actual
+  end
+
+  def test_list_argument_with_spaces
+    expected = 'MSBuild /target:"target 1";"target 2"'
+    actual = msbuild_40.target(['target 1', 'target 2']).to_s
     assert_equal expected, actual
   end
 
   def test_key_value_list_argument
-    expected = 'MSBuild /property:a=1;b=2'
-    actual = msbuild_40.property({:a => 1, :b => 2}).to_s
+    expected = 'MSBuild /property:key1=value1;key2=value2'
+    actual = msbuild_40.property({'key1' => 'value1', 'key2' => 'value2'}).to_s
+    assert_equal expected, actual
+  end
+
+  def test_key_value_list_argument_with_spaces
+    expected = 'MSBuild /property:"key 1"="value 1";"key 2"="value 2"'
+    actual = msbuild_40.property({'key 1' => 'value 1', 'key 2' => 'value 2'}).to_s
     assert_equal expected, actual
   end
 
@@ -48,7 +60,7 @@ class SmokeTest < Test::Unit::TestCase
 
   def test_yield_command_builder_on_class_method
     builder = nil
-    msbuild_40('sample.proj').target(:build) { |b| builder = b }
+    msbuild_40('sample.proj').target('target') { |b| builder = b }
     assert_kind_of CommandBuilder, builder
   end
 

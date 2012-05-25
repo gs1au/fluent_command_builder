@@ -2,7 +2,7 @@ require 'test/unit'
 require_relative '../lib/fluent_command_builder/command_builder'
 include FluentCommandBuilder
 
-class TestCommandBuilder < Test::Unit::TestCase
+class CommandBuilderTest < Test::Unit::TestCase
 
   def test_should_initialize_with_existing_command
     builder = CommandBuilder.new 'MSBuild'

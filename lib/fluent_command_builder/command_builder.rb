@@ -11,26 +11,15 @@ module FluentCommandBuilder
       @args = ''
     end
 
-    def format(value, delimiter=nil, key_value_separator=nil)
-
-      if value.kind_of? Array and delimiter.nil?
-        return array_to_s(value.map { |v| quote_if_includes_space v }, ' ')
+    def format(value, delimiter=' ', key_value_separator='=')
+      case
+        when value.kind_of?(Hash)
+          format_hash value, delimiter, key_value_separator
+        when value.kind_of?(Array)
+          format_array value, delimiter
+        else
+          value.to_s
       end
-
-      if value.kind_of? CommandBase
-        return value.to_s
-      end
-
-      value_as_array = case
-                         when value.kind_of?(Hash)
-                           hash_to_array value, key_value_separator
-                         when value.kind_of?(Array)
-                           value
-                         else
-                           [value.to_s]
-                       end
-      value_as_string = array_to_s value_as_array, delimiter
-      quote_if_includes_space value_as_string
     end
 
     def append(value)
@@ -57,12 +46,12 @@ module FluentCommandBuilder
       executable
     end
 
-    def hash_to_array(hash, key_value_separator)
-      hash.map { |k, v| k.to_s + key_value_separator + v.to_s }
+    def format_hash(hash, delimiter, key_value_separator)
+      hash.map { |k, v| quote_if_includes_space(k.to_s) + key_value_separator + quote_if_includes_space(v.to_s) }.join delimiter
     end
 
-    def array_to_s(array, delimiter)
-      array.join delimiter
+    def format_array(array, delimiter)
+      array.map { |v| quote_if_includes_space v }.join delimiter
     end
 
     def quote_if_includes_space(value)

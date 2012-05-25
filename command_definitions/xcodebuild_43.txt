@@ -1,0 +1,22 @@
+4.3
+xcodebuild (XCodeBuild)
+    [<buildAction >] (buildProject)
+        -project <projectName>
+        -target <targetName>
+        -configuration <configurationName>
+        -sdk <sdkName>
+        <setting>=<value>
+        -userdefault=<value> (userDefault)
+    -workspace <workspaceName>[ <buildAction >] (buildWorkspace)
+        -scheme <schemeName>
+        -configuration <configurationName>
+        -sdk <sdkName>
+        <setting>=<value>
+        -userdefault=<value> (userDefault)
+    -version
+        -sdk <sdkName>
+        <infoItem>
+    -showsdks
+    -list
+    -list -project <projectName> (listProject)
+    -list -workspace <workspaceName> (listWorkspace)
