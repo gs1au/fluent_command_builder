@@ -19,7 +19,7 @@ task :default => [:test_gem]
 
 desc 'Test gem.'
 Rake::TestTask.new :test_gem => [:build] do |t|
-  t.test_files = FileList['test/*.rb']
+  t.test_files = FileList['test/**/*.rb']
   t.verbose = true
 end
 
@@ -36,7 +36,7 @@ Rake::TestTask.new :test_code_generator do |t|
   t.verbose = true
 end
 
-def generate_command_builder command_definition_file
+def generate_command_builder(command_definition_file)
   puts "Processing: #{File.basename command_definition_file}"
   command_definition = CommandDefinition.new File.new(command_definition_file)
   command_definition.versions.each do |version|
