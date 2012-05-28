@@ -1,3 +1,5 @@
+# Note: Tests do not represent valid command line usage.
+
 require_relative '../lib/command_test_base'
 
 class DotCover11And12Test < CommandTestBase
