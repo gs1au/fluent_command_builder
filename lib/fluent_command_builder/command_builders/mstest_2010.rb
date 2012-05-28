@@ -19,8 +19,8 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def test_list(list_list_path)
-          @builder.append " /testList:#{@builder.format list_list_path}"
+        def test_list(test_list_path)
+          @builder.append " /testList:#{@builder.format test_list_path}"
           yield @builder if block_given?
           self
         end
