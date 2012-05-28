@@ -1,3 +1,5 @@
+# Note: Tests do not represent valid command line usage.
+
 require 'test/unit'
 require_relative '../../lib/fluent_command_builder'
 include FluentCommandBuilder
