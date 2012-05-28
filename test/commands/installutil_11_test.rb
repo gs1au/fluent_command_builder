@@ -2,7 +2,7 @@
 
 require_relative '../lib/command_test_base'
 
-class InstallUtil10Test < CommandTestBase
+class InstallUtil11Test < CommandTestBase
 
   def test_full_command
     expected = 'installUtil /help assemblyPath /logFile=fileName /logToConsole=bool /showCallStack /uninstall assemblyFileName'
