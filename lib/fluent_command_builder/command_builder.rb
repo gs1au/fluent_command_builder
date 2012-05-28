@@ -13,12 +13,14 @@ module FluentCommandBuilder
 
     def format(value, delimiter=' ', key_value_separator='=')
       case
+        when value.kind_of?(CommandBase)
+          value.to_s
         when value.kind_of?(Hash)
           format_hash value, delimiter, key_value_separator
         when value.kind_of?(Array)
           format_array value, delimiter
         else
-          value.to_s
+          quote_if_includes_space value.to_s
       end
     end
 
