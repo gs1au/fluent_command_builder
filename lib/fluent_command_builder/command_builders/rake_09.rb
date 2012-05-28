@@ -8,7 +8,7 @@ module FluentCommandBuilder
       class Rake < CommandBase
         def initialize(builder, task=nil)
           super builder
-          @builder.append " #{@builder.format task}" unless task.nil?
+          @builder.append " #{@builder.format task, ' '}" unless task.nil?
         end
         def classic_namespace
           @builder.append ' --classic-namespace'

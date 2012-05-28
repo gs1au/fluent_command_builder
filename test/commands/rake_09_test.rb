@@ -15,5 +15,17 @@ class Rake09Test < CommandTestBase
     actual = rake_09
     assert_command expected, actual
   end
+
+  def test_multiple_tasks
+    expected = 'rake task1 task2'
+    actual = rake_09(['task1', 'task2'])
+    assert_command expected, actual
+  end
+
+  def test_multiple_tasks_with_spaces
+    expected = 'rake "task 1" "task 2"'
+    actual = rake_09(['task 1', 'task 2'])
+    assert_command expected, actual
+  end
   
 end
