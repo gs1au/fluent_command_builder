@@ -9,21 +9,18 @@ module FluentCommandBuilder
         def initialize(builder)
           super builder
         end
-        def analyse(configuration_file=nil)
-          @builder.append ' analyse'
-          @builder.append " #{@builder.format configuration_file}" unless configuration_file.nil?
+        def analyse(configuration_file)
+          @builder.append " analyse #{@builder.format configuration_file}"
           yield @builder if block_given?
           self
         end
-        def cover(configuration_file=nil)
-          @builder.append ' cover'
-          @builder.append " #{@builder.format configuration_file}" unless configuration_file.nil?
+        def cover(configuration_file)
+          @builder.append " cover #{@builder.format configuration_file}"
           yield @builder if block_given?
           self
         end
-        def delete(configuration_file=nil)
-          @builder.append ' delete'
-          @builder.append " #{@builder.format configuration_file}" unless configuration_file.nil?
+        def delete(configuration_file)
+          @builder.append " delete #{@builder.format configuration_file}"
           yield @builder if block_given?
           self
         end
@@ -34,21 +31,18 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def list(configuration_file=nil)
-          @builder.append ' list'
-          @builder.append " #{@builder.format configuration_file}" unless configuration_file.nil?
+        def list(configuration_file)
+          @builder.append " list #{@builder.format configuration_file}"
           yield @builder if block_given?
           self
         end
-        def merge(configuration_file=nil)
-          @builder.append ' merge'
-          @builder.append " #{@builder.format configuration_file}" unless configuration_file.nil?
+        def merge(configuration_file)
+          @builder.append " merge #{@builder.format configuration_file}"
           yield @builder if block_given?
           self
         end
-        def report(configuration_file=nil)
-          @builder.append ' report'
-          @builder.append " #{@builder.format configuration_file}" unless configuration_file.nil?
+        def report(configuration_file)
+          @builder.append " report #{@builder.format configuration_file}"
           yield @builder if block_given?
           self
         end
