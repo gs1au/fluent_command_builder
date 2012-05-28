@@ -10,6 +10,12 @@ class SmokeTest < Test::Unit::TestCase
     assert_equal expected, actual
   end
 
+  def test_command_argument_with_spaces
+    expected = 'MSBuild "sample 1.proj"'
+    actual = msbuild_40('sample 1.proj').to_s
+    assert_equal expected, actual
+  end
+
   def test_list_argument
     expected = 'MSBuild /target:target1;target2'
     actual = msbuild_40.target(['target1', 'target2']).to_s
