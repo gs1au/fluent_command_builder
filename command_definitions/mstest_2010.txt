@@ -2,7 +2,7 @@
 MSTest
     /testContainer:<fileName>
     /testMetadata:<fileName>
-    /testList:<listListPath>
+    /testList:<testListPath>
     /category:<testCategoryFilter>
     /test:<testName>
     /noIsolation
