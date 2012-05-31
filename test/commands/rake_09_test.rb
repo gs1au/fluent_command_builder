@@ -18,7 +18,7 @@ class Rake09Test < CommandTestBase
 
   def test_multiple_tasks
     expected = 'rake task1 task2'
-    actual = rake_09(['task1', 'task2'])
+    actual = rake_09(%w(task1 task2))
     assert_command expected, actual
   end
 

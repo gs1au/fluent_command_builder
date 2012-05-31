@@ -13,7 +13,7 @@ class DotCover11And12Test < CommandTestBase
   def test_analyse_full_command
     expected = 'dotCover analyse configurationFile /analyseTargetArguments=bool /filters=filter1;filter2 /inheritConsole=bool /logFile=logFile /output=output /reportType=reportType /targetArguments=targetArguments /targetExecutable=targetExecutable /targetWorkingDir=targetWorkingDir /tempDir=tempDir'
     assert_each_dotcover_command expected do |dotcover|
-      dotcover.analyse('configurationFile').analyse_target_arguments('bool').filters(['filter1', 'filter2']).inherit_console('bool').log_file('logFile').output('output').report_type('reportType').target_arguments('targetArguments').target_executable('targetExecutable').target_working_dir('targetWorkingDir').temp_dir('tempDir')
+      dotcover.analyse('configurationFile').analyse_target_arguments('bool').filters(%w(filter1 filter2)).inherit_console('bool').log_file('logFile').output('output').report_type('reportType').target_arguments('targetArguments').target_executable('targetExecutable').target_working_dir('targetWorkingDir').temp_dir('tempDir')
     end
   end
 
@@ -27,7 +27,7 @@ class DotCover11And12Test < CommandTestBase
   def test_cover_full_command
     expected = 'dotCover cover configurationFile /analyseTargetArguments=bool /filters=filter1;filter2 /inheritConsole=bool /logFile=logFile /output=output /targetArguments=targetArguments /targetExecutable=targetExecutable /targetWorkingDir=targetWorkingDir /tempDir=tempDir'
     assert_each_dotcover_command expected do |dotcover|
-      dotcover.cover('configurationFile').analyse_target_arguments('bool').filters(['filter1', 'filter2']).inherit_console('bool').log_file('logFile').output('output').target_arguments('targetArguments').target_executable('targetExecutable').target_working_dir('targetWorkingDir').temp_dir('tempDir')
+      dotcover.cover('configurationFile').analyse_target_arguments('bool').filters(%w(filter1 filter2)).inherit_console('bool').log_file('logFile').output('output').target_arguments('targetArguments').target_executable('targetExecutable').target_working_dir('targetWorkingDir').temp_dir('tempDir')
     end
   end
 
