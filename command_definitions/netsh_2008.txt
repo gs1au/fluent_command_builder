@@ -3,63 +3,63 @@ netsh
     advfirewall
         firewall
             add rule name=<ruleName> dir=<direction> action=<action> (addRule)
-                program
-                service
-                description
-                enable
-                profile
-                localIp
-                remoteIp
-                localPort
-                remotePort
-                protocol
-                interfaceType
-                rmtcomputergrp
-                rmtusgrp
-                edge
-                security
+                program=<path>
+                service=<serviceShortName>
+                description=<ruleDescription>
+                enable=<enable>
+                profile=<profile>
+                localIp=<address,>
+                remoteIp=<address,>
+                localPort=<port,>
+                remotePort=<port,>
+                protocol=<protocol>
+                interfaceType=<type>
+                rmtcomputergrp=<sddlString> (remoteComputerGroup)
+                rmtusgrp=<sddlString> (remoteUserGroup)
+                edge=<edge>
+                security=<security>
             delete rule name=<ruleName> (deleteRule)
-                dir
-                profile
-                program
-                service
-                localIp
-                remoteIp
-                localPort
-                remotePort
-                protocol
+                dir=<direction>
+                profile=<profile>
+                program=<path>
+                service=<serviceShortName>
+                localIp=<address,>
+                remoteIp=<address,>
+                localPort=<port,>
+                remotePort=<port,>
+                protocol=<protocol>
             set rule
                 group=<groupName>
-                dir
-                profile
-                program
-                service
-                localIp
-                remoteIp
-                localPort
-                remotePort
-                protocol
+                dir=<direction>
+                profile=<profile>
+                program=<path>
+                service=<serviceShortName>
+                localIp=<address,>
+                remoteIp=<address,>
+                localPort=<port,>
+                remotePort=<port,>
+                protocol=<protocol>
                 new
                     name=<ruleName>
-                    dir
-                    program
-                    service
-                    action
-                    description
-                    enable
-                    profile
-                    localIp
-                    remoteIp
-                    localPort
-                    remotePort
-                    protocol
-                    interfaceType
-                    rmtcomputergrp
-                    rmtusgrp
-                    edge
-                    security
+                    dir=<direction>
+                    program=<path>
+                    service=<serviceShortName>
+                    action=<action>
+                    description=<ruleDescription>
+                    enable=<enable>
+                    profile=<profile>
+                    localIp=<address,>
+                    remoteIp=<address,>
+                    localPort=<port,>
+                    remotePort=<port,>
+                    protocol=<protocol>
+                    interfaceType=<type>
+                    rmtcomputergrp=<sddlString> (remoteComputerGroup)
+                    rmtusgrp=<sddlString> (remoteUserGroup)
+                    edge=<edge>
+                    security=<security>
             show rule name=<ruleName> (showRule)
-                profile
+                profile=<profile>
                 type=<type>
                 verbose
     http
@@ -69,22 +69,3 @@ netsh
             delegate=<delegate>
             sddl=<sddl>
         delete urlacl url=<url> (deleteUrlAcl)
-
-options:
-    action=<action>
-    description=<ruleDescription>
-    dir=<direction>
-    edge=<edge>
-    enable=<enable>
-    interfaceType=<type>
-    localIp=<address,>
-    localPort=<port,>
-    profile=<profile>
-    program=<path>
-    protocol=<protocol>
-    remoteIp=<address,>
-    remotePort=<port,>
-    rmtcomputergrp=<sddlString> (remoteComputerGroup)
-    rmtusgrp=<sddlString> (remoteUserGroup)
-    security=<security>
-    service=<serviceShortName>
