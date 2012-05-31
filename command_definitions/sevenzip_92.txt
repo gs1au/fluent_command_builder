@@ -1,101 +1,85 @@
 9.2
 7za (sevenZip)
     a <archive> <fileRef> (add)
-        -i
-        -m
-        -p
-        -r
-        -sfx
-        -si
-        -so
-        -ssw
-        -t
-        -u
-        -v
-        -w
-        -x
+        -i[<recurseType>]<fileRef> (include)
+        -m<methodParameters> (setCompressionMethod)
+        -p<password> (password)
+        -r[<modifier>] (recursive)
+        -sfx[<sfxModule>] (createSfxArchive)
+        -si[<fileName>] (readDataFromStdin)
+        -so (writeDataToStdout)
+        -ssw (compressFilesOpenForWriting)
+        -t<archiveType> (type)
+        -u<args> (updateOptions)
+        -v<size>[<unitOfMeasure>] (createVolumes)
+        -w[<dirPath>] (workingDir)
+        -x[<recurseType>]<fileRef> (exclude)
     b <number_of_iterations> (bench)
         -mmt<n>
         -md<n>
         -mm=<method>
     d <archive> <files> (delete)
-        -i
-        -m
-        -p
-        -r
-        -u
-        -w
-        -x
+        -i[<recurseType>]<fileRef> (include)
+        -m<methodParameters> (setCompressionMethod)
+        -p<password> (password)
+        -r[<modifier>] (recursive)
+        -u<args> (updateOptions)
+        -w[<dirPath>] (workingDir)
+        -x[<recurseType>]<fileRef> (exclude)
     e <archive> <files> (extract)
         -ai
         -an
         -ao
         -ax
-        -i
-        -o
-        -p
-        -r
-        -so
-        -t
-        -x
+        -i[<recurseType>]<fileRef> (include)
+        -o<dirPath> (output)
+        -p<password> (password)
+        -r[<modifier>] (recursive)
+        -so (writeDataToStdout)
+        -t<archiveType> (type)
+        -x[<recurseType>]<fileRef> (exclude)
         -y
     l <archive> (list)
         -ai
         -an
         -ax
-        -i
+        -i[<recurseType>]<fileRef> (include)
         -slt
-        -p
-        -r
-        -t
-        -x
+        -p<password> (password)
+        -r[<modifier>] (recursive)
+        -t<archiveType> (type)
+        -x[<recurseType>]<fileRef> (exclude)
     t <archive> <files> (test)
         -ai
         -an
         -ax
-        -i
-        -p
-        -r
-        -x
+        -i[<recurseType>]<fileRef> (include)
+        -p<password> (password)
+        -r[<modifier>] (recursive)
+        -x[<recurseType>]<fileRef> (exclude)
     u <archive> <files> (update)
-        -i
-        -m
-        -p
-        -r
-        -sfx
-        -si
-        -so
-        -ssw
-        -t
-        -u
-        -w
-        -x
+        -i[<recurseType>]<fileRef> (include)
+        -m<methodParameters> (setCompressionMethod)
+        -p<password> (password)
+        -r[<modifier>] (recursive)
+        -sfx[<sfxModule>] (createSfxArchive)
+        -si[<fileName>] (readDataFromStdin)
+        -so (writeDataToStdout)
+        -ssw (compressFilesOpenForWriting)
+        -t<archiveType> (type)
+        -u<args> (updateOptions)
+        -w[<dirPath>] (workingDir)
+        -x[<recurseType>]<fileRef> (exclude)
     x <archive>[ <files>] (extractWithFullPaths)
         -ai
         -an
         -ao
         -ax
-        -i
-        -o
-        -p
-        -r
-        -so
-        -t
-        -x
+        -i[<recurseType>]<fileRef> (include)
+        -o<dirPath> (output)
+        -p<password> (password)
+        -r[<modifier>] (recursive)
+        -so (writeDataToStdout)
+        -t<archiveType> (type)
+        -x[<recurseType>]<fileRef> (exclude)
         -y
-
-options:
-    -i[<recurseType>]<fileRef> (include)
-    -m<methodParameters> (setCompressionMethod)
-    -p<password> (password)
-    -r[<modifier>] (recursive)
-    -sfx[<sfxModule>] (createSfxArchive)
-    -si[<fileName>] (readDataFromStdin)
-    -so (writeDataToStdout)
-    -ssw (compressFilesOpenForWriting)
-    -t<archiveType> (type)
-    -u<args> (updateOptions)
-    -v<size>[<unitOfMeasure>] (createVolumes)
-    -w[<dirPath>] (workingDir)
-    -x[<recurseType>]<fileRef> (exclude)
-    -o<dirPath> (output)
