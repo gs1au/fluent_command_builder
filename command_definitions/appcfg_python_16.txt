@@ -73,6 +73,7 @@ appcfg.py (AppCfg Python)
             --include_all
             --end_date=<end_date>
         resource_limits_info <directory>
+        rollback <directory>
         set_default_version <directory>
         update <directory>
             --max_size=<size>

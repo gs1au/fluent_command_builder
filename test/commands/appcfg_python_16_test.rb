@@ -94,6 +94,12 @@ class AppCfgPython16Test < CommandTestBase
     assert_command expected, actual
   end
 
+  def test_rollback
+    expected = 'appcfg.py rollback directory'
+    actual = appcfg_python_16.action.rollback('directory')
+    assert_command expected, actual
+  end
+
   def test_set_default_version
     expected = 'appcfg.py set_default_version directory'
     actual = appcfg_python_16.action.set_default_version('directory')

@@ -137,6 +137,11 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
+        def rollback(directory)
+          @builder.append " rollback #{@builder.format directory}"
+          yield @builder if block_given?
+          self
+        end
         def set_default_version(directory)
           @builder.append " set_default_version #{@builder.format directory}"
           yield @builder if block_given?
