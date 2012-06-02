@@ -24,7 +24,7 @@ module CodeGenerator
     private
 
     def Command.command_name(command_text)
-      command_text[/^([-\w]+)/, 1]
+      command_text[/^([-\.\w]+)/, 1]
     end
 
     def Command.command_hash(command_text)

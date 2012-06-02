@@ -1,0 +1,103 @@
+1.6
+appcfg.py (AppCfg Python)
+    --help
+    --quiet
+    --verbose
+    --noisy
+    --server=<server>
+    --insecure
+    --email=<email>
+    --host=<host>
+    --no_cookies
+    --skip_sdk_update_check
+    --passin
+    --application=<appId>
+    --version=<version>
+    --runtime=<runtime>
+    --allow_any_runtime
+    --oauth2
+    --oauth2_refresh_token=<oauth2_refresh_token>
+    --noauth_local_webserver
+    (action)
+        backends <directory>
+            configure <backend>
+            delete <backend>
+            list
+            rollback <backend>
+            start <backend>
+            stop <backend>
+            update <backend>
+                --max_size=SIZE
+                --no_precompilation
+                --backends
+        create_bulkload_config <directory>
+            --url=<url>
+            --batch_size=<batch_size>
+            --bandwidth_limit=<bandwidth_limit>
+            --rps_limit=<rps_limit>
+            --http_limit=<http_limit>
+            --db_filename=<db_filename>
+            --auth_domain=<auth_domain>
+            --log_file=<log_file>
+            --dry_run
+            --namespace=<namespace>
+            --num_threads=<num_threads>
+            --filename=<filename>
+        cron_info <directory>
+            --num_runs=<num_runs>
+        download_app
+        download_data <directory>
+            --url=<url>
+            --batch_size=<batch_size>
+            --bandwidth_limit=<bandwidth_limit>
+            --rps_limit=<rps_limit>
+            --http_limit=<http_limit>
+            --db_filename=<db_filename>
+            --auth_domain=<auth_domain>
+            --log_file=<log_file>
+            --dry_run
+            --namespace=<namespace>
+            --num_threads=<num_threads>
+            --filename=<filename>
+            --kind=<kind>
+            --exporter_opts=<exporter_opts>
+            --result_db_filename=<result_db_filename>
+            --config_file=<config_file>
+        help <action>
+        request_logs <directory> <output_file>
+            --num_days=<num_days>
+            --append
+            --severity=<severity>
+            --vhost=<vhost>
+            --include_vhost
+            --include_all
+            --end_date=<end_date>
+        resource_limits_info <directory>
+        set_default_version <directory>
+        update <directory>
+            --max_size=<size>
+            --no_precompilation
+            --backends
+        update_cron <directory>
+        update_dos <directory>
+        update_indexes <directory>
+        update_queues <directory>
+        upload_data <directory>
+            --url=<url>
+            --batch_size=<batch_size>
+            --bandwidth_limit=<bandwidth_limit>
+            --rps_limit=<rps_limit>
+            --http_limit=<http_limit>
+            --db_filename=<db_filename>
+            --auth_domain=<auth_domain>
+            --log_file=<log_file>
+            --dry_run
+            --namespace=<namespace>
+            --num_threads=<num_threads>
+            --filename=<filename>
+            --kind=<kind>
+            --has_header
+            --loader_opts=<loader_opts>
+            --config_file=<config_file>
+        vacuum_indexes <directory>
+            --force
