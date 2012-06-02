@@ -1902,7 +1902,7 @@ module FluentCommandBuilder
           self
         end
         def new_owner(owner_name)
-          @builder.append " /newOwner:#{@builder.format owner_name}"
+          @builder.append " -newOwner:#{@builder.format owner_name}"
           yield @builder if block_given?
           self
         end
