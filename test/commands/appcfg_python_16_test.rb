@@ -47,8 +47,8 @@ class AppCfgPython16Test < CommandTestBase
   end
 
   def test_backends_update
-    expected = 'appcfg.py backends directory update backend'
-    actual = appcfg_python_16.action.backends('directory').update('backend')
+    expected = 'appcfg.py backends directory update backend --max_size=size'
+    actual = appcfg_python_16.action.backends('directory').update('backend').max_size('size')
     assert_command expected, actual
   end
 

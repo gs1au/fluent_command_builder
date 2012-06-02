@@ -27,7 +27,7 @@ appcfg.py (AppCfg Python)
             start <backend>
             stop <backend>
             update <backend>
-                --max_size=SIZE
+                --max_size=<size>
                 --no_precompilation
                 --backends
         create_bulkload_config <directory>

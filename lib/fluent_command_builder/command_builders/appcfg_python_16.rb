@@ -221,8 +221,8 @@ module FluentCommandBuilder
           super builder
           @builder.append " update #{@builder.format backend}"
         end
-        def max_size_s_i_z_e
-          @builder.append ' --max_size=SIZE'
+        def max_size(size)
+          @builder.append " --max_size=#{@builder.format size}"
           yield @builder if block_given?
           self
         end
