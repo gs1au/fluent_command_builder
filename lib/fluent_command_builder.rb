@@ -3,6 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/comma
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/aspnet_compiler_40.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/bundle_11.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/cucumber_11.rb')
+require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/dev_appserver_python_16.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/dotcover_10.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/dotcover_11.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/dotcover_12.rb')
