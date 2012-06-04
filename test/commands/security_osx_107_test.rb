@@ -5,8 +5,8 @@ require_relative '../lib/command_test_base'
 class SecurityOsx107Test < CommandTestBase
 
   def test_delete_certificate
-    expected = 'security delete-certificate keychain -c commonName -Z hash -t'
-    actual = security_osx_107.delete_certificate('keychain').common_name('commonName').hash('hash').delete_user_trust_settings
+    expected = 'security delete-certificate -c commonName -Z hash -t keychain'
+    actual = security_osx_107.delete_certificate.common_name('commonName').hash('hash').delete_user_trust_settings.keychain('keychain')
     assert_command expected, actual
   end
 
@@ -17,8 +17,8 @@ class SecurityOsx107Test < CommandTestBase
   end
 
   def test_unlock_keychain
-    expected = 'security unlock-keychain keychain -u -p password'
-    actual = security_osx_107.unlock_keychain('keychain').no_password.password('password')
+    expected = 'security unlock-keychain -u -p password keychain'
+    actual = security_osx_107.unlock_keychain.no_password.password('password').keychain('keychain')
     assert_command expected, actual
   end
 

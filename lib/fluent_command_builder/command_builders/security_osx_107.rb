@@ -9,20 +9,20 @@ module FluentCommandBuilder
         def initialize(builder)
           super builder
         end
-        def delete_certificate(keychain)
-          DeleteCertificate.new @builder, keychain
+        def delete_certificate
+          DeleteCertificate.new @builder
         end
         def import(input_file)
           Import.new @builder, input_file
         end
-        def unlock_keychain(keychain)
-          UnlockKeychain.new @builder, keychain
+        def unlock_keychain
+          UnlockKeychain.new @builder
         end
       end
       class DeleteCertificate < CommandBase
-        def initialize(builder, keychain)
+        def initialize(builder)
           super builder
-          @builder.append " delete-certificate #{@builder.format keychain}"
+          @builder.append ' delete-certificate'
         end
         def common_name(name)
           @builder.append " -c #{@builder.format name}"
@@ -36,6 +36,11 @@ module FluentCommandBuilder
         end
         def delete_user_trust_settings
           @builder.append ' -t'
+          yield @builder if block_given?
+          self
+        end
+        def keychain(keychain)
+          @builder.append " #{@builder.format keychain}"
           yield @builder if block_given?
           self
         end
@@ -92,9 +97,9 @@ module FluentCommandBuilder
         end
       end
       class UnlockKeychain < CommandBase
-        def initialize(builder, keychain)
+        def initialize(builder)
           super builder
-          @builder.append " unlock-keychain #{@builder.format keychain}"
+          @builder.append ' unlock-keychain'
         end
         def no_password
           @builder.append ' -u'
@@ -103,6 +108,11 @@ module FluentCommandBuilder
         end
         def password(password)
           @builder.append " -p #{@builder.format password}"
+          yield @builder if block_given?
+          self
+        end
+        def keychain(keychain)
+          @builder.append " #{@builder.format keychain}"
           yield @builder if block_given?
           self
         end

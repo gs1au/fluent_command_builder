@@ -1,9 +1,10 @@
 OSX 10.7
 security
-    delete-certificate <keychain>
+    delete-certificate
         -c <name> (commonName)
         -Z <hash> (hash)
         -t (deleteUserTrustSettings)
+        <keychain>
     import <inputFile>
         -k <keychain> (keychain)
         -t <type> (type)
@@ -14,6 +15,7 @@ security
         -a <name> <value> (attribute)
         -A (allowWithoutWarning)
         -T <appPath> (allowApplication)
-    unlock-keychain <keychain>
+    unlock-keychain
         -u (noPassword)
         -p <password> (password)
+        <keychain>
