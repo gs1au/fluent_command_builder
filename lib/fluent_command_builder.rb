@@ -23,6 +23,7 @@ require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/comma
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/nunit_25.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/nunit_26.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/rake_09.rb')
+require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/security_osx_107.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/sevenzip_92.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/simian_23.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/tf_2010.rb')
