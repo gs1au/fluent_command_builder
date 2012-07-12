@@ -1,10 +1,14 @@
+# Fluent Command Builder
+
 Fluent Command Builder makes building command lines easy and intuitive.
 
-Automated build/test/deploy processes depend heavily on tools which can be invoked using a command line.
-Building command lines for such processes is tedious as it requires many careful string manipulations.
-String manipulation code is usually hard to read, tedious to change, and is often duplicated for similar commands.
+Automated build/test/deploy processes depend heavily on tools that provide a command line interface.
+Building command lines requires a lot of string appending and interpolation and often results in code which is not only
+hard to read and maintain but results in much unwanted duplication.
 
-Fluent Command Builder hides this complexity behind code which is fluent and reads much like the resulting command.
+Fluent Command Builder hides this complexity behind a fluent interface which dramatically improves readabilty,
+maintainability and reduces duplication. The fluent interface also helps reduce barrier to entry when using new
+commands since details such as switch symbols, delimiters and casing are taken care of automatically.
 
 ## Example
 
@@ -15,7 +19,7 @@ Desired command line:
 Fluent Command Builder usage:
 
 ```ruby
-msbuild('sample.proj').target(['clean', 'build']).property({'configuration'=>'release'})
+msbuild('sample.proj').target([:clean, :build]).property(configuration: 'release')
 ```
 
 ## Intellisense
@@ -39,10 +43,10 @@ The first scenario involves including the modules for a specific version of each
 ```ruby
 require 'fluent_command_builder'
 include FluentCommandBuilder::MSBuild::V40
-include FluentCommandBuilder::Nunit::V25
+include FluentCommandBuilder::NUnit::V25
 
-msbuild('sample.proj').target('rebuild').property({'configuration'=>'release'}).execute!
-nunit('sample.dll').include('unit_tests').exclude('integration_tests').execute!
+msbuild('sample.proj').target(:rebuild).property(configuration: 'release')
+nunit('sample.dll').include(:unit_tests).exclude(:integration_tests)
 ```
 
 In this case, the msbuild method refers to MSBuild 4.0, and the nunit method refers to NUnit 2.5.
@@ -53,8 +57,8 @@ The second scenario involves calling a method for a specific version of each com
 require 'fluent_command_builder'
 include FluentCommandBuilder
 
-msbuild_40('sample.proj').target('rebuild').property({'configuration'=>'release'}).execute!
-nunit_25('sample.dll').include('unit_tests').exclude('integration_tests').execute!
+msbuild_40('sample.proj').target(:rebuild).property(configuration: 'release')
+nunit_25('sample.dll').include(:unit_tests).exclude(:integration_tests)
 ```
 
 Notice how the version number forms part of the method itself.
@@ -66,7 +70,7 @@ Notice how the version number forms part of the method itself.
 At any point along the chain, the __execute!__ method may be called to execute the command:
 
 ```ruby
-msbuild('sample.proj').target('rebuild').property({'configuration'=>'release'}).execute!
+msbuild('sample.proj').target(:rebuild).property(configuration: 'release').execute!
 ```
 
 The __execute!__ method executes the command using Rake's __sh__ method.
@@ -76,7 +80,7 @@ The __execute!__ method executes the command using Rake's __sh__ method.
 At any point along the chain, the __to_s__ method may be called to get the command string:
 
 ```ruby
-command = msbuild('sample.proj').target('rebuild').property({'configuration'=>'release'}).to_s
+command = msbuild('sample.proj').target(:rebuild).property(configuration: 'release').to_s
 ```
 
 This approach enables custom execution of a command which could be useful in the following scenarios:
@@ -101,7 +105,7 @@ Desired command line:
 Fluent Command Builder usage:
 
 ```ruby
-msbuild('sample.proj').target(['clean', 'build'])
+msbuild('sample.proj').target([:clean, :build])
 ```
 
 Notice how target is an array and has been formatted as a semicolon delimited list.
@@ -118,7 +122,7 @@ Desired command line:
 Fluent Command Builder usage:
 
 ```ruby
-msbuild('sample.proj').property({'configuration'=>'release'})
+msbuild('sample.proj').property(configuration: 'release')
 ```
 
 Notice how property is a hash and has been formatted using the equals sign.
