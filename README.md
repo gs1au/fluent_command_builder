@@ -22,7 +22,7 @@ msbuild('sample.proj').target(['clean', 'build']).property({'configuration'=>'re
 
 Extremely effective with [RubyMine](http://www.jetbrains.com/ruby/) intellisense.
 
-![RubyMine intellisense for MSBuild](https://raw.github.com/mattriley/fluent_command_builder/images/msbuild_intellisense.png)
+![RubyMine intellisense for MSBuild](https://github.com/mattriley/fluent_command_builder/raw/master/images/msbuild_intellisense.png)
 
 ## Installation
 
