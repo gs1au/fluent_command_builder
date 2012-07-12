@@ -157,6 +157,19 @@ Fluent Command Builder usage:
 bundle.exec(cucumber('sample.feature'))
 ```
 
+## Customisation
+
+Each command has an underlying command builder which provides generic functions for building command line strings.
+The underlying command builder can be exposed to enable customisation of the command line:
+
+Desired command line:
+
+   rake deploy TARGET_ENV=TEST
+
+```ruby
+rake(:deploy) { |b| b.append ' TARGET_ENV=TEST' }
+```
+
 ## Supported Commands
 
 - [appcfg.py] 1.6
