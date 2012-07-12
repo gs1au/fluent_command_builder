@@ -164,7 +164,7 @@ The underlying command builder can be exposed to enable customisation of the com
 
 Desired command line:
 
-   rake deploy TARGET_ENV=TEST
+    rake deploy TARGET_ENV=TEST
 
 ```ruby
 rake(:deploy) { |b| b.append ' TARGET_ENV=TEST' }
