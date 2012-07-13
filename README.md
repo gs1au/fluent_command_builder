@@ -166,6 +166,8 @@ Desired command line:
 
     rake deploy TARGET_ENV=TEST
 
+Fluent Command Builder usage:
+
 ```ruby
 rake(:deploy) { |b| b.append ' TARGET_ENV=TEST' }
 ```
