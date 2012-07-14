@@ -1,0 +1,31 @@
+require 'rexml/document'
+
+task :default do
+  version = app_engine_version
+  puts "Generating reference documentation for appcfg.py #{version}..."
+  output_dir = create_output_dir version
+  generate_documentation output_dir
+end
+
+def app_engine_version
+  xml = IO.read '/Applications/GoogleAppEngineLauncher.app/Contents/info.plist'
+  doc = REXML::Document.new xml
+  key = doc.elements.each('/plist/dict/key') {}.select { |key| key.text == 'CFBundleShortVersionString' }[0]
+  key.next_element.text.match(/(\d+\.\d+)/)[1]
+end
+
+def create_output_dir(version)
+  short_version =  version.gsub '.', ''
+  output_dir = "appcfg_python_#{short_version}"
+  rm_rf output_dir
+  mkdir output_dir
+  output_dir
+end
+
+def generate_documentation(output_dir)
+  output = `/usr/local/bin/appcfg.py`
+  actions_text = output.match(/Action must be one of:\n(.+)Use 'help <action>' for a detailed description./m)[1]
+  actions = actions_text.lines.map { |action| action.match(/  (.+?):/)[1] }
+  actions.each { |action| sh "/usr/local/bin/appcfg.py help #{action} > '#{output_dir}/#{action}.txt'" }
+end
+
