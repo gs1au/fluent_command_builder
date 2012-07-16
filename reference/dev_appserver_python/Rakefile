@@ -1,0 +1,28 @@
+require 'rexml/document'
+
+task :default do
+  version = app_engine_version
+  puts "Generating reference documentation for dev_appserver.py #{version}..."
+  output_dir = create_output_dir version
+  generate_documentation output_dir
+end
+
+def app_engine_version
+  xml = IO.read '/Applications/GoogleAppEngineLauncher.app/Contents/info.plist'
+  doc = REXML::Document.new xml
+  key = doc.elements.each('/plist/dict/key') {}.select { |key| key.text == 'CFBundleShortVersionString' }[0]
+  key.next_element.text.match(/(\d+\.\d+)/)[1]
+end
+
+def create_output_dir(version)
+  short_version =  version.gsub '.', ''
+  output_dir = "dev_appserver_python_#{short_version}"
+  rm_rf output_dir
+  mkdir output_dir
+  output_dir
+end
+
+def generate_documentation(output_dir)
+  sh "/usr/local/bin/dev_appserver.py --help > #{output_dir}/help.txt"
+end
+

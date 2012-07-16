@@ -1,4 +1,4 @@
-1.6
+1.6, 1.7
 dev_appserver.py <applicationRoot> (Dev Appserver Python)
     --address=<address>
     --clear_datastore
