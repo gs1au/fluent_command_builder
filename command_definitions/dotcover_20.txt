@@ -1,0 +1,63 @@
+2.0
+dotCover
+    analyse[ <configurationFile>]
+        /analyseTargetArguments
+        /attributeFilters
+        /filters
+        /inheritConsole
+        /logFile
+        /output
+        /reportType
+        /targetArguments
+        /targetExecutable
+        /targetWorkingDir
+        /tempDir
+    cover[ <configurationFile>]
+        /analyseTargetArguments
+        /attributeFilters
+        /filters
+        /inheritConsole
+        /logFile
+        /output
+        /targetArguments
+        /targetExecutable
+        /targetWorkingDir
+        /tempDir
+    delete[ <configurationFile>]
+        /logFile
+        /source
+    help[ <command>][ <fileName>]
+    list[ <configurationFile>]
+        /logFile
+        /output
+        /source
+    merge[ <configurationFile>]
+        /logFile
+        /output
+        /source
+        /tempDir
+    report[ <configurationFile>]
+        /logFile
+        /output
+        /reportType
+        /source
+    version[ <outputFileName>]
+        /logFile
+    zip[ <configurationFile>]
+        /logFile
+        /output
+        /source
+
+options:
+    /analyseTargetArguments=<bool>
+    /attributeFilters=<filters;>
+    /filters=<filters;>
+    /inheritConsole=<bool>
+    /logFile=<logFile>
+    /output=<snapshotPath>
+    /reportType=<reportType>
+    /source=<source>
+    /targetArguments=<targetArguments>
+    /targetExecutable=<targetExecutable>
+    /targetWorkingDir=<targetWorkingDir>
+    /tempDir=<tempDir>

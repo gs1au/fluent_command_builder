@@ -1,0 +1,27 @@
+task :default do
+  version = dotcover_version
+  puts "Generating reference documentation for dotcover #{version}..."
+  output_dir = create_output_dir version
+  generate_documentation output_dir
+end
+
+def dotcover_version
+  output = `dotcover version`
+  output.match(/v(\d+\.\d+)/)[1]
+end
+
+def create_output_dir(version)
+  short_version =  version.gsub '.', ''
+  output_dir = "dotcover_#{short_version}"
+  rm_rf output_dir
+  mkdir output_dir
+  output_dir
+end
+
+def generate_documentation(output_dir)
+  output = `dotcover help`
+  actions_text = output.match(/Available commands:\n(.+)/m)[1].strip
+  actions = actions_text.lines.map { |action| action.strip.match(/(.+?) /)[1] }
+  actions.each { |action| sh %Q[dotcover help #{action} > "#{output_dir}/#{action}.txt"] }
+end
+
