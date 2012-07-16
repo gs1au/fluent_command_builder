@@ -1,7 +1,0 @@
-Usage: delete-certificate [-c name] [-Z hash] [-t] [keychain...]
-    -c  Specify certificate to delete by its common name
-    -Z  Specify certificate to delete by its SHA-1 hash value
-    -t  Also delete user trust settings for this certificate
-The certificate to be deleted must be uniquely specified either by a
-string found in its common name, or by its SHA-1 hash.
-If no keychains are specified to search, the default search list is used.
