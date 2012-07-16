@@ -174,10 +174,10 @@ rake(:deploy) { |b| b.append ' TARGET_ENV=TEST' }
 
 ## Supported Commands
 
-- [appcfg.py] 1.6
+- [appcfg.py] 1.6, 1.7
 - aspnet_compiler [2.0][aspnet_compiler_20], [3.5][aspnet_compiler_35], [4.0][aspnet_compiler_40]
-- [cucumber] 1.1
-- [dev_appserver.py] 1.6
+- [cucumber] 1.1, 1.2
+- [dev_appserver.py] 1.6, 1.7
 - [dotcover] 1.0, 1.1, 1.2
 - installutil [1.1][installutil_11], [2.0][installutil_20], [3.5][installutil_35], [4.0][installutil_40]
 - msbuild [2.0][msbuild_20], [3.0][msbuild_30], [3.5][msbuild_35], [4.0][msbuild_40]
