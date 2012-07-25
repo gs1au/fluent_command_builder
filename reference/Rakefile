@@ -1,0 +1,3 @@
+require_relative 'lib/dot_net/task_generator'
+
+%w(aspnet_compiler.exe installutil.exe msbuild.exe).each { |command_name| dot_net_task command_name }

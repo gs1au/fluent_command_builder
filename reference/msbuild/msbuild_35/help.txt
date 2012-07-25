@@ -1,5 +1,5 @@
 Microsoft (R) Build Engine Version 3.5.30729.5420
-[Microsoft .NET Framework, Version 2.0.50727.5448]
+[Microsoft .NET Framework, Version 2.0.50727.5456]
 Copyright (C) Microsoft Corporation 2007. All rights reserved.
 
 Syntax:              MSBuild.exe [options] [project file]
