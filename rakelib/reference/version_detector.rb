@@ -31,6 +31,11 @@ module VersionDetector
     `rake --version`.match(/version (.+)/)[1]
   end
 
+  def visual_studio_version(path)
+    path.gsub! '\\', '/'
+    path.match(/\/Microsoft Visual Studio (.+)\//)[1]
+  end
+
   def xcodebuild_version
     `xcodebuild -version`.match(/Xcode (.+)/)[1]
   end

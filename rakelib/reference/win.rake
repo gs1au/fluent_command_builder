@@ -1,5 +1,6 @@
 require_relative 'task_maker'
 require_relative 'dot_net_task_maker'
+require_relative 'visual_studio_task_maker'
 
 DotNetTaskMaker.make_task 'aspnet_compiler.exe', '-?'
 DotNetTaskMaker.make_task 'installutil.exe', '/help'
@@ -11,3 +12,5 @@ TaskMaker.make_task 'dotcover', dotcover_version do |task_maker|
   actions = actions_text.lines.map { |action| action.strip.match(/(.+?) /)[1] }
   actions.each { |action| system %Q[dotcover help #{action} > "#{task_maker.output_dir}/#{action}.txt"] }
 end
+
+VisualStudioTaskMaker.make_task 'mstest.exe', '/help'
