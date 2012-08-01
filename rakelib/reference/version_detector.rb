@@ -14,6 +14,11 @@ module VersionDetector
     `cucumber --version`
   end
 
+  def dot_net_version(path)
+    path.gsub! '\\', '/'
+    path.match(/\/v(.+)\//)[1]
+  end
+
   def dotcover_version
     `dotcover version`.match(/v(\d+\.\d+.\d+\.\d+)/)[1]
   end
