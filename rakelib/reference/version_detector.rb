@@ -15,7 +15,7 @@ module VersionDetector
   end
 
   def cucumber_version
-    `cucumber --version`
+    `cucumber --version`.strip
   end
 
   def dot_net_version(path)
