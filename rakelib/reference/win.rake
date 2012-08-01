@@ -14,3 +14,7 @@ TaskMaker.make_task 'dotcover', dotcover_version do |task_maker|
 end
 
 VisualStudioTaskMaker.make_task 'mstest.exe', '/help'
+
+TaskMaker.make_task 'msdeploy', msdeploy_version do |task_maker|
+  system %Q["%PROGRAMFILES%/IIS/Microsoft Web Deploy/msdeploy" > "#{task_maker.output_dir}/help.txt"]
+end

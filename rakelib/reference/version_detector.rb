@@ -27,6 +27,10 @@ module VersionDetector
     `dotcover version`.match(/v(\d+\.\d+.\d+\.\d+)/)[1]
   end
 
+  def msdeploy_version
+    `"%PROGRAMFILES%/IIS/Microsoft Web Deploy/msdeploy"`.match(/Version (.+)/)[1]
+  end
+
   def rake_version
     `rake --version`.match(/version (.+)/)[1]
   end
