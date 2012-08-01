@@ -1,7 +1,6 @@
-require_relative 'lib/app_engine'
 require_relative '../task_maker'
 
-TaskMaker.make_task 'appcfg_python', AppEngine.version do |task_maker|
+TaskMaker.make_task 'appcfg_python', appengine_version do |task_maker|
   command = '/usr/local/bin/appcfg.py'
   output = `#{command}`
   actions_text = output.match(/Action must be one of:\n(.+)Use 'help <action>' for a detailed description./m)[1]
