@@ -10,6 +10,10 @@ module VersionDetector
     key.next_element.text
   end
 
+  def bundler_version
+    `bundle --version`.match(/version (.+)/)[1]
+  end
+
   def cucumber_version
     `cucumber --version`
   end
@@ -25,6 +29,10 @@ module VersionDetector
 
   def rake_version
     `rake --version`.match(/version (.+)/)[1]
+  end
+
+  def xcodebuild_version
+    `xcodebuild -version`.match(/Xcode (.+)/)[1]
   end
 
 end

@@ -19,3 +19,7 @@ end
 TaskMaker.make_task 'rake', rake_version do |task_maker|
   system "rake --help > #{task_maker.output_dir}/help.txt"
 end
+
+TaskMaker.make_task 'xcodebuild', xcodebuild_version do |task_maker|
+  system "xcodebuild --help &> #{task_maker.output_dir}/help.txt"
+end
