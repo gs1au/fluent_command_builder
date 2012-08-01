@@ -1,0 +1,28 @@
+rake [-f rakefile] {options} targets...
+
+Options are ...
+    -C, --classic-namespace          Put Task and FileTask in the top level namespace
+    -D, --describe [PATTERN]         Describe the tasks (matching optional PATTERN), then exit.
+    -n, --dry-run                    Do a dry run without executing actions.
+    -e, --execute CODE               Execute some Ruby code and exit.
+    -p, --execute-print CODE         Execute some Ruby code, print the result, then exit.
+    -E, --execute-continue CODE      Execute some Ruby code, then continue with normal task processing.
+    -I, --libdir LIBDIR              Include LIBDIR in the search path for required modules.
+    -N, --no-search, --nosearch      Do not search parent directories for the Rakefile.
+    -P, --prereqs                    Display the tasks and dependencies, then exit.
+    -q, --quiet                      Do not log messages to standard output.
+    -f, --rakefile [FILE]            Use FILE as the rakefile.
+    -R, --rakelibdir RAKELIBDIR,     Auto-import any .rake files in RAKELIBDIR. (default is 'rakelib')
+        --rakelib
+    -r, --require MODULE             Require MODULE before executing rakefile.
+        --rules                      Trace the rules resolution.
+    -s, --silent                     Like --quiet, but also suppresses the 'in directory' announcement.
+    -g, --system                     Using system wide (global) rakefiles (usually '~/.rake/*.rake').
+    -G, --no-system, --nosystem      Use standard project Rakefile search paths, ignore system wide rakefiles.
+    -T, --tasks [PATTERN]            Display the tasks (matching optional PATTERN) with descriptions, then exit.
+    -t, --trace                      Turn on invoke/execute tracing, enable full backtrace.
+    -v, --verbose                    Log message to standard output.
+    -V, --version                    Display the program version.
+    -W, --where [PATTERN]            Describe the tasks (matching optional PATTERN), then exit.
+    -X, --no-deprecation-warnings    Disable the deprecation warnings.
+    -h, -H, --help                   Display this help message.

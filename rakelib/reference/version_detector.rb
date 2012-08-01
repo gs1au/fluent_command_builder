@@ -23,4 +23,8 @@ module VersionDetector
     `dotcover version`.match(/v(\d+\.\d+.\d+\.\d+)/)[1]
   end
 
+  def rake_version
+    `rake --version`.match(/version (.+)/)[1]
+  end
+
 end

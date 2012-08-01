@@ -15,3 +15,7 @@ end
 TaskMaker.make_task 'cucumber', cucumber_version do |task_maker|
   system "cucumber --help > #{task_maker.output_dir}/help.txt"
 end
+
+TaskMaker.make_task 'rake', rake_version do |task_maker|
+  system "rake --help > #{task_maker.output_dir}/help.txt"
+end
