@@ -92,6 +92,12 @@ class SmokeTest < CommandTestBase
     assert_command expected, actual
   end
 
+  def test_provide_path_on_to_s
+    expected = 'C:\\tools\\MSBuild sample.proj'
+    actual = msbuild_40('sample.proj').to_s(path: 'C:\\tools')
+    assert_command expected, actual
+  end
+
   def test_subcommand
     expected = 'dotCover analyse /targetExecutable=nunit'
     actual = dotcover_11.analyse.target_executable('nunit')

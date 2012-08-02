@@ -32,8 +32,9 @@ module FluentCommandBuilder
       append " #{arg.to_s}"
     end
 
-    def to_s
-      "#{executable} #{args}".strip
+    def to_s(options={})
+      path = options[:path] || @path
+      "#{executable path} #{args}".strip
     end
 
     def args
@@ -42,8 +43,8 @@ module FluentCommandBuilder
 
     private
 
-    def executable
-      executable = @path ? File.join(@path, @command_name) : @command_name
+    def executable(path)
+      executable = path ? File.join(path, @command_name) : @command_name
       executable.gsub! '/', '\\' if executable.include? '\\'
       executable
     end
