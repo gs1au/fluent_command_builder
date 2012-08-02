@@ -1,22 +1,44 @@
 4.3
 xcodebuild (XCodeBuild)
     [<buildAction >] (buildProject)
+        -alltargets (allTargets)
+        -arch <architecture> (architecture)
+        -configuration <configurationName>
+        -jobs <number>
+        -parallelizeTargets
         -project <projectName>
         -target <targetName>
-        -configuration <configurationName>
         -sdk <sdkName>
+        -verbose
+        -xcconfig <path>
         <setting>=<value>
-        -userdefault=<value> (userDefault)
-    -workspace <workspaceName>[ <buildAction >] (buildWorkspace)
+    [<buildAction >] (buildProjectScheme)
+        -arch <architecture> (architecture)
+        -configuration <configurationName>
+        -jobs <number>
+        -parallelizeTargets
         -scheme <schemeName>
-        -configuration <configurationName>
         -sdk <sdkName>
+        -verbose
+        -xcconfig <path>
         <setting>=<value>
-        -userdefault=<value> (userDefault)
+    -workspace <workspaceName>[ <buildAction >] (buildWorkspace)
+        -arch <architecture> (architecture)
+        -configuration <configurationName>
+        -jobs <number>
+        -parallelizeTargets
+        -scheme <schemeName>
+        -sdk <sdkName>
+        -verbose
+        -xcconfig <path>
+        <setting>=<value>
     -version
         -sdk <sdkName>
         <infoItem>
-    -showsdks
     -list
     -list -project <projectName> (listProject)
     -list -workspace <workspaceName> (listWorkspace)
+    -find <binary>
+    -license
+    -showsdks (showSdks)
+    -usage

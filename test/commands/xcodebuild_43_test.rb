@@ -5,8 +5,8 @@ require_relative '../lib/command_test_base'
 class XCodeBuild43Test < CommandTestBase
 
   def test_build_project_full_command
-    expected = 'xcodebuild action1 action2 -project project -target target -configuration configuration -sdk sdk key=value -userdefault=value'
-    actual = xcodebuild_43.build_project(%w(action1 action2)).project('project').target('target').configuration('configuration').sdk('sdk').setting('key', 'value').user_default('value')
+    expected = 'xcodebuild action1 action2 -project project -target target -configuration configuration -sdk sdk key=value'
+    actual = xcodebuild_43.build_project(%w(action1 action2)).project('project').target('target').configuration('configuration').sdk('sdk').setting('key', 'value')
     assert_command expected, actual
   end
 
@@ -17,8 +17,8 @@ class XCodeBuild43Test < CommandTestBase
   end
 
   def test_build_workspace_full_command
-    expected = 'xcodebuild -workspace workspace action1 action2 -scheme scheme -configuration configuration -sdk sdk key=value -userdefault=value'
-    actual = xcodebuild_43.build_workspace('workspace', %w(action1 action2)).scheme('scheme').configuration('configuration').sdk('sdk').setting('key', 'value').user_default('value')
+    expected = 'xcodebuild -workspace workspace action1 action2 -scheme scheme -configuration configuration -sdk sdk key=value'
+    actual = xcodebuild_43.build_workspace('workspace', %w(action1 action2)).scheme('scheme').configuration('configuration').sdk('sdk').setting('key', 'value')
     assert_command expected, actual
   end
 
@@ -36,7 +36,7 @@ class XCodeBuild43Test < CommandTestBase
 
   def test_showsdks_full_command
     expected = 'xcodebuild -showsdks'
-    actual = xcodebuild_43.showsdks
+    actual = xcodebuild_43.show_sdks
     assert_command expected, actual
   end
 

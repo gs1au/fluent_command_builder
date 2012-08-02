@@ -12,16 +12,14 @@ module FluentCommandBuilder
         def build_project(build_action=nil)
           BuildProject.new @builder, build_action
         end
+        def build_project_scheme(build_action=nil)
+          BuildProjectScheme.new @builder, build_action
+        end
         def build_workspace(workspace_name, build_action=nil)
           BuildWorkspace.new @builder, workspace_name, build_action
         end
         def version
           Version.new @builder
-        end
-        def showsdks
-          @builder.append ' -showsdks'
-          yield @builder if block_given?
-          self
         end
         def list
           @builder.append ' -list'
@@ -38,12 +36,57 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
+        def find(binary)
+          @builder.append " -find #{@builder.format binary}"
+          yield @builder if block_given?
+          self
+        end
+        def license
+          @builder.append ' -license'
+          yield @builder if block_given?
+          self
+        end
+        def show_sdks
+          @builder.append ' -showsdks'
+          yield @builder if block_given?
+          self
+        end
+        def usage
+          @builder.append ' -usage'
+          yield @builder if block_given?
+          self
+        end
       end
       class BuildProject < CommandBase
         def initialize(builder, build_action=nil)
           super builder
           @builder.append ' '
           @builder.append "#{@builder.format build_action, ' '}" unless build_action.nil?
+        end
+        def all_targets
+          @builder.append ' -alltargets'
+          yield @builder if block_given?
+          self
+        end
+        def architecture(architecture)
+          @builder.append " -arch #{@builder.format architecture}"
+          yield @builder if block_given?
+          self
+        end
+        def configuration(configuration_name)
+          @builder.append " -configuration #{@builder.format configuration_name}"
+          yield @builder if block_given?
+          self
+        end
+        def jobs(number)
+          @builder.append " -jobs #{@builder.format number}"
+          yield @builder if block_given?
+          self
+        end
+        def parallelize_targets
+          @builder.append ' -parallelizeTargets'
+          yield @builder if block_given?
+          self
         end
         def project(project_name)
           @builder.append " -project #{@builder.format project_name}"
@@ -55,13 +98,18 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def configuration(configuration_name)
-          @builder.append " -configuration #{@builder.format configuration_name}"
+        def sdk(sdk_name)
+          @builder.append " -sdk #{@builder.format sdk_name}"
           yield @builder if block_given?
           self
         end
-        def sdk(sdk_name)
-          @builder.append " -sdk #{@builder.format sdk_name}"
+        def verbose
+          @builder.append ' -verbose'
+          yield @builder if block_given?
+          self
+        end
+        def xcconfig(path)
+          @builder.append " -xcconfig #{@builder.format path}"
           yield @builder if block_given?
           self
         end
@@ -70,8 +118,55 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
-        def user_default(value)
-          @builder.append " -userdefault=#{@builder.format value}"
+      end
+      class BuildProjectScheme < CommandBase
+        def initialize(builder, build_action=nil)
+          super builder
+          @builder.append ' '
+          @builder.append "#{@builder.format build_action, ' '}" unless build_action.nil?
+        end
+        def architecture(architecture)
+          @builder.append " -arch #{@builder.format architecture}"
+          yield @builder if block_given?
+          self
+        end
+        def configuration(configuration_name)
+          @builder.append " -configuration #{@builder.format configuration_name}"
+          yield @builder if block_given?
+          self
+        end
+        def jobs(number)
+          @builder.append " -jobs #{@builder.format number}"
+          yield @builder if block_given?
+          self
+        end
+        def parallelize_targets
+          @builder.append ' -parallelizeTargets'
+          yield @builder if block_given?
+          self
+        end
+        def scheme(scheme_name)
+          @builder.append " -scheme #{@builder.format scheme_name}"
+          yield @builder if block_given?
+          self
+        end
+        def sdk(sdk_name)
+          @builder.append " -sdk #{@builder.format sdk_name}"
+          yield @builder if block_given?
+          self
+        end
+        def verbose
+          @builder.append ' -verbose'
+          yield @builder if block_given?
+          self
+        end
+        def xcconfig(path)
+          @builder.append " -xcconfig #{@builder.format path}"
+          yield @builder if block_given?
+          self
+        end
+        def setting(setting, value)
+          @builder.append " #{@builder.format setting}=#{@builder.format value}"
           yield @builder if block_given?
           self
         end
@@ -82,8 +177,8 @@ module FluentCommandBuilder
           @builder.append " -workspace #{@builder.format workspace_name}"
           @builder.append " #{@builder.format build_action, ' '}" unless build_action.nil?
         end
-        def scheme(scheme_name)
-          @builder.append " -scheme #{@builder.format scheme_name}"
+        def architecture(architecture)
+          @builder.append " -arch #{@builder.format architecture}"
           yield @builder if block_given?
           self
         end
@@ -92,18 +187,38 @@ module FluentCommandBuilder
           yield @builder if block_given?
           self
         end
+        def jobs(number)
+          @builder.append " -jobs #{@builder.format number}"
+          yield @builder if block_given?
+          self
+        end
+        def parallelize_targets
+          @builder.append ' -parallelizeTargets'
+          yield @builder if block_given?
+          self
+        end
+        def scheme(scheme_name)
+          @builder.append " -scheme #{@builder.format scheme_name}"
+          yield @builder if block_given?
+          self
+        end
         def sdk(sdk_name)
           @builder.append " -sdk #{@builder.format sdk_name}"
           yield @builder if block_given?
           self
         end
-        def setting(setting, value)
-          @builder.append " #{@builder.format setting}=#{@builder.format value}"
+        def verbose
+          @builder.append ' -verbose'
           yield @builder if block_given?
           self
         end
-        def user_default(value)
-          @builder.append " -userdefault=#{@builder.format value}"
+        def xcconfig(path)
+          @builder.append " -xcconfig #{@builder.format path}"
+          yield @builder if block_given?
+          self
+        end
+        def setting(setting, value)
+          @builder.append " #{@builder.format setting}=#{@builder.format value}"
           yield @builder if block_given?
           self
         end
