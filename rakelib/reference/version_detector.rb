@@ -4,6 +4,7 @@ module VersionDetector
 
   def appengine_version
     path = '/Applications/GoogleAppEngineLauncher.app'
+    return unless File.exist? path
     xml = IO.read File.join(path, 'Contents/Info.plist')
     doc = REXML::Document.new xml
     key = doc.elements.each('/plist/dict/key') {}.select { |key| key.text == 'CFBundleShortVersionString' }[0]

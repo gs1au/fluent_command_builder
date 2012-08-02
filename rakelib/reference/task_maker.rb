@@ -8,6 +8,7 @@ class TaskMaker
   end
 
   def make_task
+    return unless @version
     directory output_dir
     desc task_desc
     task command_name_with_version => [output_dir] do
