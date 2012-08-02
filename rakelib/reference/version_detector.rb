@@ -20,16 +20,15 @@ module VersionDetector
   end
 
   def dot_net_version(path)
-    path.gsub! '\\', '/'
-    path.match(/\/v(.+)\//)[1]
+    match_version path
   end
 
   def dotcover_version
-    `dotcover version`.match(/v(\d+\.\d+.\d+\.\d+)/)[1]
+    match_version `dotcover version`
   end
 
   def msdeploy_version
-    `"%PROGRAMFILES%/IIS/Microsoft Web Deploy/msdeploy"`.match(/Version (.+)/)[1]
+    match_version `"%PROGRAMFILES%/IIS/Microsoft Web Deploy/msdeploy"`
   end
 
   def rake_version
@@ -37,8 +36,7 @@ module VersionDetector
   end
 
   def visual_studio_version(path)
-    path.gsub! '\\', '/'
-    path.match(/\/Microsoft Visual Studio (.+)\//)[1]
+    match_version path
   end
 
   def xcodebuild_version
@@ -48,7 +46,7 @@ module VersionDetector
   private
 
   def match_version(text)
-    text.match(/(?:\d+\.?){2,4}/) { |m| m[0] }
+    text.match(/(?:\d+\.)(?:\d+\.?)+/) { |m| m[0] }
   end
 
 end
