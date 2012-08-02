@@ -12,11 +12,11 @@ module VersionDetector
   end
 
   def bundler_version
-    `bundle --version`.match(/version (.+)/)[1]
+    match_version `bundle --version`
   end
 
   def cucumber_version
-    `cucumber --version`.strip
+    match_version `cucumber --version`
   end
 
   def dot_net_version(path)
@@ -33,7 +33,7 @@ module VersionDetector
   end
 
   def rake_version
-    `rake --version`.match(/version (.+)/)[1]
+    match_version `rake --version`
   end
 
   def visual_studio_version(path)
@@ -42,7 +42,13 @@ module VersionDetector
   end
 
   def xcodebuild_version
-    `xcodebuild -version`.match(/Xcode (.+)/)[1]
+    match_version `xcodebuild -version`
+  end
+
+  private
+
+  def match_version(text)
+    text.match(/(?:\d+\.?){2,4}/) { |m| m[0] }
   end
 
 end
