@@ -1,0 +1,13 @@
+Usage: authorize [<options>] <right(s)...>
+  -u        Allow user interaction.
+  -c        Use login name and prompt for password.
+  -C login  Use given login name and prompt for password.
+  -x        Do NOT share -c/-C explicit credentials
+  -p        Allow returning partial rights.
+  -d        Destroy acquired rights.
+  -P        Pre-authorize rights only.
+  -l        Operate authorizations in least privileged mode.
+  -i        Internalize authref passed on stdin.
+  -e        Externalize authref to stdout.
+  -w        Wait until stdout is closed (to allow reading authref from pipe).
+Extend rights flag is passed per default.

@@ -1,0 +1,8 @@
+Usage: find-certificate [-a] [-c name] [-e emailAddress] [-m] [-p] [-Z] [keychain...]
+    -a  Find all matching certificates, not just the first one
+    -c  Match on "name" when searching (optional)
+    -e  Match on "emailAddress" when searching (optional)
+    -m  Show the email addresses in the certificate
+    -p  Output certificate in pem format
+    -Z  Print SHA-1 hash of the certificate
+If no keychains are specified to search, the default search list is used.

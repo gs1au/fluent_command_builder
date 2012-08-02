@@ -27,3 +27,11 @@ end
 TaskMaker.make_task 'xcodebuild', xcodebuild_version do |task_maker|
   system "xcodebuild --help &> #{task_maker.output_dir}/help.txt"
 end
+
+TaskMaker.make_task 'security_osx', osx_version do |task_maker|
+  command = 'security'
+  output = `#{command}`
+  actions_text = output.match(/security commands are:\n(.+)/m)[1]
+  actions = actions_text.lines.map { |action| action.match(/    (.+?) /)[1] }
+  actions.each { |action| system "#{command} help #{action} > '#{task_maker.output_dir}/#{action}.txt'" }
+end

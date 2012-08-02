@@ -31,6 +31,10 @@ module VersionDetector
     match_version `"%PROGRAMFILES%/IIS/Microsoft Web Deploy/msdeploy"`
   end
 
+  def osx_version
+    match_version `sw_vers -productVersion`
+  end
+
   def rake_version
     match_version `rake --version`
   end

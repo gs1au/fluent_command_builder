@@ -1,0 +1,4 @@
+Usage: dump-trust-settings  [-s] [-d]
+    -s                  Display trusted system certs (default is user)
+    -d                  Display trusted admin certs (default is user)
+

@@ -1,0 +1,47 @@
+Usage: cms [-C|-D|-E|-S] [<options>]
+  -C           create a CMS encrypted message
+  -D           decode a CMS message
+  -E           create a CMS enveloped message
+  -S           create a CMS signed message
+
+Decoding options:
+  -c content   use this detached content file
+  -h level     generate email headers with info about CMS message
+                 (output level >= 0)
+  -n           suppress output of content
+
+Encoding options:
+  -r id,...    create envelope for these recipients,
+               where id can be a certificate nickname or email address
+  -G           include a signing time attribute
+  -H hash      hash = MD2|MD4|MD5|SHA1|SHA256|SHA384|SHA512 (default: SHA1)
+  -N nick      use certificate named "nick" for signing
+  -P           include a SMIMECapabilities attribute
+  -T           do not include content in CMS message
+  -Y nick      include an EncryptionKeyPreference attribute with certificate
+                 (use "NONE" to omit)
+  -Z hash      find a certificate by subject key ID
+
+Common options:
+  -e envelope  specify envelope file (valid with -D or -E)
+  -k keychain  specify keychain to use
+  -i infile    use infile as source of data (default: stdin)
+  -o outfile   use outfile as destination of data (default: stdout)
+  -p password  use password as key db password (default: prompt)
+  -s           pass data a single byte at a time to CMS
+  -u certusage set type of certificate usage (default: certUsageEmailSigner)
+  -v           print debugging information
+
+Cert usage codes:
+                  0 - certUsageSSLClient
+                  1 - certUsageSSLServer
+                  2 - certUsageSSLServerWithStepUp
+                  3 - certUsageSSLCA
+                  4 - certUsageEmailSigner
+                  5 - certUsageEmailRecipient
+                  6 - certUsageObjectSigner
+                  7 - certUsageUserCertImport
+                  8 - certUsageVerifyCA
+                  9 - certUsageProtectedObjectSigner
+                 10 - certUsageStatusResponder
+                 11 - certUsageAnyCA

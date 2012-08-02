@@ -1,0 +1,3 @@
+Usage: create-keychain [-P] [-p password] [keychains...]
+    -p  Use "password" as the password for the keychains being created
+    -P  Prompt the user for a password using the SecurityAgent
