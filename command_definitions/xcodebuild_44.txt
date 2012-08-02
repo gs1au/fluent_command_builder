@@ -1,0 +1,54 @@
+4.4
+xcodebuild (XCodeBuild)
+    [<buildAction >] (buildProject)
+        -alltargets (allTargets)
+        -arch <architecture> (architecture)
+        -configuration <configurationName>
+        -dry-run
+        -jobs <number>
+        -parallelizeTargets
+        -project <projectName>
+        -target <targetName>
+        -sdk <sdkName>
+        -showBuildSettings
+        -toolchain <name>
+        -verbose
+        -xcconfig <path>
+        <setting>=<value>
+    [<buildAction >] (buildProjectScheme)
+        -arch <architecture> (architecture)
+        -configuration <configurationName>
+        -dry-run
+        -jobs <number>
+        -parallelizeTargets
+        -scheme <schemeName>
+        -sdk <sdkName>
+        -showBuildSettings
+        -toolchain <name>
+        -verbose
+        -xcconfig <path>
+        <setting>=<value>
+    -workspace <workspaceName>[ <buildAction >] (buildWorkspace)
+        -arch <architecture> (architecture)
+        -configuration <configurationName>
+        -dry-run
+        -jobs <number>
+        -parallelizeTargets
+        -scheme <schemeName>
+        -sdk <sdkName>
+        -showBuildSettings
+        -toolchain <name>
+        -verbose
+        -xcconfig <path>
+        <setting>=<value>
+    -version
+        -sdk <sdkName>
+        <infoItem>
+    -list
+    -list -project <projectName> (listProject)
+    -list -workspace <workspaceName> (listWorkspace)
+    -find <binary>
+    -help
+    -license
+    -showsdks (showSdks)
+    -usage
