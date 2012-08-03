@@ -7,12 +7,12 @@ class CommandBase
     @builder = builder
   end
 
-  def execute!(options={})
-    sh to_s(options)
+  def execute!
+    sh to_s
   end
 
-  def to_s(options={})
-    @builder.to_s options
+  def to_s
+    @builder.to_s
   end
 
 end

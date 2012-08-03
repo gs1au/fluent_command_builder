@@ -83,14 +83,6 @@ At any point along the chain, the __to_s__ method may be called to get the comma
 command = msbuild('sample.proj').target(:rebuild).property(configuration: 'release').to_s
 ```
 
-This approach enables custom execution of a command which could be useful in the following scenarios:
-
-- Executing the command by a means other than Rake's to_s method.
-- Remote execution, e.g. SSH
-- Deferred execution
-- Concatenation with another command
-- Generated scripts such as a batch script
-
 ### Argument Formatting
 
 #### Lists
@@ -159,7 +151,9 @@ bundle.exec(cucumber('sample.feature'))
 
 ## Customisation
 
-Each command has an underlying command builder which provides generic functions for building command line strings.
+### Custom String Appending
+
+Each command has an underlying command builder that provides generic functions for building command line strings.
 The underlying command builder can be exposed to enable customisation of the command line:
 
 Desired command line:
@@ -172,54 +166,34 @@ Fluent Command Builder usage:
 rake(:deploy) { |b| b.append ' TARGET_ENV=TEST' }
 ```
 
+### Set the Command Path
+
+Desired command line:
+
+    "C:\Program Files\MSBuild" "sample 1.proj"
+
+Fluent Command Builder usage:
+
+```ruby
+msbuild('sample 1.proj').execute! { |b| b.path = 'C:\\Program Files' }
+```
+
 ## Supported Commands
 
-- [appcfg.py] 1.6, 1.7
-- aspnet_compiler [2.0][aspnet_compiler_20], [3.5][aspnet_compiler_35], [4.0][aspnet_compiler_40]
-- [cucumber] 1.1, 1.2
-- [dev_appserver.py] 1.6, 1.7
-- [dotcover] 1.0, 1.1, 1.2, 2.0
-- installutil [1.1][installutil_11], [2.0][installutil_20], [3.5][installutil_35], [4.0][installutil_40]
-- msbuild [2.0][msbuild_20], [3.0][msbuild_30], [3.5][msbuild_35], [4.0][msbuild_40]
-- msdeploy [4.0][msdeploy_40]
-- mstest [2005][mstest_2005], [2008][mstest_2008], [2010][mstest_2010]
-- netsh [2008][netsh_2008] (WIP)
-- nunit [2.5][nunit_25], [2.6][nunit_26]
-- [rake] 0.9
-- security [OSX 10.7][security_osx_107] (WIP)
-- [sevenzip] 9.2 (WIP)
-- [simian] 2.3
-- tf [2010][tf_2010], [tee 2010][tf_tee_2010]
-- xcodebuild [4.3][xcodebuild_43]
-
-Additional commands can be easily added, please email suggestions to: matthew-github@matthewriley.name
-
-[appcfg.py]: https://developers.google.com/appengine/docs/python/tools/uploadinganapp
-[aspnet_compiler_20]: http://msdn.microsoft.com/en-us/library/ms229863(v=vs.80).aspx
-[aspnet_compiler_35]: http://msdn.microsoft.com/en-us/library/ms229863(v=vs.90).aspx
-[aspnet_compiler_40]: http://msdn.microsoft.com/en-us/library/ms229863(v=vs.100).aspx
-[cucumber]: http://http://cukes.info/
-[dev_appserver.py]: https://developers.google.com/appengine/docs/python/tools/devserver
-[dotcover]: http://www.jetbrains.com/dotcover/
-[installutil_11]: http://msdn.microsoft.com/en-us/library/50614e95(v=vs.71).aspx
-[installutil_20]: http://msdn.microsoft.com/en-us/library/50614e95(v=vs.80).aspx
-[installutil_35]: http://msdn.microsoft.com/en-us/library/50614e95(v=vs.90).aspx
-[installutil_40]: http://msdn.microsoft.com/en-us/library/50614e95(v=vs.100).aspx
-[msbuild_20]: http://msdn.microsoft.com/en-us/library/0k6kkbsd(v=vs.80).aspx
-[msbuild_30]: http://msdn.microsoft.com/en-us/library/0k6kkbsd(v=vs.85).aspx
-[msbuild_35]: http://msdn.microsoft.com/en-us/library/0k6kkbsd(v=vs.90).aspx
-[msbuild_40]: http://msdn.microsoft.com/en-us/library/0k6kkbsd(v=vs.100).aspx
-[msdeploy_40]: http://technet.microsoft.com/en-us/library/dd569106(v=ws.10).aspx
-[mstest_2005]: http://msdn.microsoft.com/en-us/library/ms182489(v=vs.80).aspx
-[mstest_2008]: http://msdn.microsoft.com/en-us/library/ms182489(v=vs.90).aspx
-[mstest_2010]: http://msdn.microsoft.com/en-us/library/ms182489(v=vs.100).aspx
-[netsh_2008]: http://technet.microsoft.com/en-us/library/cc754516(v=ws.10).aspx
-[nunit_25]: http://www.nunit.org/index.php?p=consoleCommandLine&r=2.5.10
-[nunit_26]: http://www.nunit.org/index.php?p=consoleCommandLine&r=2.6
-[rake]: http://docs.rubyrake.org/user_guide/chapter02.html
-[security_osx_107]: https://developer.apple.com/library/mac/#documentation/Darwin/Reference/Manpages/man1/security.1.html
-[sevenzip]: http://www.7-zip.org/
-[simian]: http://www.harukizaemon.com/simian/
-[tf_2010]: http://msdn.microsoft.com/en-us/library/z51z7zy0(v=vs.100).aspx
-[tf_tee_2010]: http://msdn.microsoft.com/en-us/library/gg413282.aspx
-[xcodebuild_43]: https://developer.apple.com/library/mac/#documentation/Darwin/Reference/ManPages/man1/xcodebuild.1.html
+- appcfg.py 1.6, 1.7
+- aspnet_compiler 2.0, 3.5, 4.0
+- cucumber 1.1, 1.2
+- dev_appserver.py 1.6, 1.7
+- dotcover 1.0, 1.1, 1.2, 2.0
+- installutil 1.1, 2.0, 3.5, 4.0
+- msbuild 2.0, 3.0, 3.5, 4.0
+- msdeploy 4.0
+- mstest 2005, 2008, 2010
+- netsh 2008 (WIP)
+- nunit 2.5, 2.6
+- rake 0.9
+- security OSX 10.7 (WIP)
+- sevenzip 9.2 (WIP)
+- simian 2.3
+- tf 2010, tee 2010
+- xcodebuild 4.3, 4.4

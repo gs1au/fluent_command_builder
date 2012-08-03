@@ -5,9 +5,9 @@ module FluentCommandBuilder
 
     attr_accessor :command_name, :path
 
-    def initialize(command_name, path=nil)
+    def initialize(command_name)
       @command_name = command_name
-      @path = path
+      @path = nil
       @args = ''
     end
 
@@ -28,26 +28,22 @@ module FluentCommandBuilder
       @args << value.to_s
     end
 
-    def append_arg(arg)
-      append " #{arg.to_s}"
-    end
-
-    def to_s(options={})
-      path = options[:path] || @path
-      "#{executable path} #{args}".strip
+    def to_s
+      return yield self if block_given?
+      "#{quote_if_includes_space executable} #{args}".strip
     end
 
     def args
       @args.strip
     end
 
-    private
-
-    def executable(path)
-      executable = path ? File.join(path, @command_name) : @command_name
+    def executable
+      executable = @path ? File.join(@path, @command_name) : @command_name
       executable.gsub! '/', '\\' if executable.include? '\\'
       executable
     end
+
+    private
 
     def format_hash(hash, delimiter, key_value_separator)
       hash.map { |k, v| quote_if_includes_space(k.to_s) + key_value_separator + quote_if_includes_space(v.to_s) }.join delimiter

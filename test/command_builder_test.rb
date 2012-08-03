@@ -39,4 +39,23 @@ class CommandBuilderTest < Test::Unit::TestCase
     assert_no_match /\s$/, builder.to_s
   end
 
+  def test_should_return_result_of_yield_on_to_s
+    builder = CommandBuilder.new 'commandName'
+    value = builder.to_s { 'abc' }
+    assert_equal 'abc', value
+  end
+
+  def test_should_return_args_on_yield_on_to_s
+    builder = CommandBuilder.new 'commandName'
+    builder.append ' abc'
+    value = builder.to_s { |b| b.args }
+    assert_equal 'abc', value
+  end
+
+  def test_should_return_executable
+    builder = CommandBuilder.new 'commandName'
+    value = builder.to_s { |b| b.executable }
+    assert_equal 'commandName', value
+  end
+
 end
