@@ -12,6 +12,7 @@ class CommandBase
   end
 
   def to_s
+    return yield @builder if block_given?
     @builder.to_s
   end
 

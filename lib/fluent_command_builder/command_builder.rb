@@ -29,7 +29,6 @@ module FluentCommandBuilder
     end
 
     def to_s
-      return yield self if block_given?
       "#{quote_if_includes_space executable} #{args}".strip
     end
 
