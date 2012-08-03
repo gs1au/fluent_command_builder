@@ -12,6 +12,9 @@ module FluentCommandBuilder
         def delete_certificate
           DeleteCertificate.new @builder
         end
+        def find_certificate
+          FindCertificate.new @builder
+        end
         def import(input_file)
           Import.new @builder, input_file
         end
@@ -36,6 +39,47 @@ module FluentCommandBuilder
         end
         def delete_user_trust_settings
           @builder.append ' -t'
+          yield @builder if block_given?
+          self
+        end
+        def keychain(keychain)
+          @builder.append " #{@builder.format keychain}"
+          yield @builder if block_given?
+          self
+        end
+      end
+      class FindCertificate < CommandBase
+        def initialize(builder)
+          super builder
+          @builder.append ' find-certificate'
+        end
+        def all
+          @builder.append ' -a'
+          yield @builder if block_given?
+          self
+        end
+        def name(name)
+          @builder.append " -c #{@builder.format name}"
+          yield @builder if block_given?
+          self
+        end
+        def email_address(email_address)
+          @builder.append " -e #{@builder.format email_address}"
+          yield @builder if block_given?
+          self
+        end
+        def show_email_addresses
+          @builder.append ' -m'
+          yield @builder if block_given?
+          self
+        end
+        def output_pem_format
+          @builder.append ' -p'
+          yield @builder if block_given?
+          self
+        end
+        def print_sha1_hash
+          @builder.append ' -Z'
           yield @builder if block_given?
           self
         end

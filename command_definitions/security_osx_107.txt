@@ -5,6 +5,14 @@ security
         -Z <hash> (hash)
         -t (deleteUserTrustSettings)
         <keychain>
+    find-certificate
+        -a (all)
+        -c <name> (name)
+        -e <emailAddress> (emailAddress)
+        -m (showEmailAddresses)
+        -p (outputPemFormat)
+        -Z (printSha1Hash)
+        <keychain>
     import <inputFile>
         -k <keychain> (keychain)
         -t <type> (type)
