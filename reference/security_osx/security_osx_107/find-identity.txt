@@ -1,0 +1,8 @@
+Usage: find-identity [-p policy] [-s string] [-v] [keychain...]
+    -p  Specify policy to evaluate (multiple -p options are allowed)
+        Supported policies: basic, ssl-client, ssl-server, smime, eap,
+        ipsec, ichat, codesigning, sys-default, sys-kerberos-kdc, macappstore, appleID
+    -s  Specify optional policy-specific string (e.g. DNS hostname for SSL,
+        or RFC822 email address for S/MIME)
+    -v  Show valid identities only (default is to show all identities)
+If no keychains are specified to search, the default search list is used.

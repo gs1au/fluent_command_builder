@@ -1,0 +1,4 @@
+Usage: user-trust-settings-enable [-d] [-e]
+    -d                  Disable user-level trust Settings
+    -e                  Enable user-level trust Settings
+With no parameters, show current enable state of user-level trust settings.

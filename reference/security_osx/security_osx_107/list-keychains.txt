@@ -1,0 +1,4 @@
+Usage: list-keychains [-d user|system|common|dynamic] [-s [keychain...]]
+    -d  Use the specified preference domain
+    -s  Set the search list to the specified keychains
+With no parameters, display the search list.

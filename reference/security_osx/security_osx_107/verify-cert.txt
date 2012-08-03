@@ -1,0 +1,13 @@
+Usage: verify-cert  [<options>]
+    -c certFile         Certificate to verify. Can be specified multiple times, leaf first.
+    -r rootCertFile     Root Certificate. Can be specified multiple times.
+    -p policy           Verify Policy (basic, ssl, smime, codeSign, IPSec, iChat, swUpdate
+                              pkgSign, pkinitClient, pkinitServer, eap, macappstore, appleID);								default is basic.
+    -k keychain         Keychain. Can be called multiple times. Default is default search list.
+    -n                  No keychain search list.
+    -L                  Local certificates only (do not try to fetch missing CA certs from net).
+    -l                  Leaf cert is a CA (normally an error, unless this option is given).
+    -e emailAddress     Email address for smime policy.
+    -s sslHost          SSL host name for ssl policy.
+    -q                  Quiet.
+

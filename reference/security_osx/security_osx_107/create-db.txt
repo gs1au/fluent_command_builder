@@ -1,0 +1,7 @@
+Usage: create-db [-ao0] [-g dl|cspdl] [-m mode] [name]
+    -a  Turn off autocommit
+    -g  Attach to "guid" rather than the AppleFileDL
+    -m  Set the inital mode of the created db to "mode"
+    -o  Force using openparams argument
+    -0  Force using version 0 openparams
+If no name is provided, ask the user interactively.

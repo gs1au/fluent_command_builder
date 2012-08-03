@@ -1,0 +1,5 @@
+Usage: create-filevaultmaster-keychain [-p password] [keychain name]
+    -p       Use "password" as the password for the keychain being created
+    -s  Specify the keysize in bits (default 2048; 1024 & 4096 are allowed)
+By default the keychain will be created in ~/Library/Keychains/
+
