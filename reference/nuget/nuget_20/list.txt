@@ -1,0 +1,16 @@
+usage: NuGet list [search terms] [options]
+
+Displays a list of packages from a given source. If no sources are specified, all sources defined in %AppData%\NuGet\NuGet.config are used. If NuGet.config specifies no sources, uses the default NuGet feed.
+
+     Specify optional search terms.
+
+options:
+
+ -Source +                                     A list of packages sources to search.
+ -Verbose                                      Displays a detailed list of information for each package.
+ -AllVersions                                  List all versions of a package. By default, only the latest package version is displayed.
+ -Prerelease                                   Allow prerelease packages to be shown.
+ -Help             (?)                         help
+
+For more information, visit http://docs.nuget.org/docs/reference/command-line-reference
+

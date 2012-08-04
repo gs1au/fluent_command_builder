@@ -1,0 +1,16 @@
+usage: NuGet help [command]
+
+alias: ?
+
+Displays general help information and help information about other commands.
+
+     Pass a command name to display help information for that command.
+
+options:
+
+ -All                                    Print detailed help for all available commands.
+ -Markdown                               Print detailed all help in markdown format.
+ -Help          (?)                      help
+
+For more information, visit http://docs.nuget.org/docs/reference/command-line-reference
+

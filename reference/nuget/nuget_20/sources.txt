@@ -1,0 +1,14 @@
+usage: NuGet sources <List|Add|Remove|Enable|Disable|Update> -Name [name] -Source [source]
+
+Provides the ability to manage list of sources located in  %AppData%\NuGet\NuGet.config
+
+options:
+
+ -Name                                       Name of the source.
+ -Source        (src)                        Path to the package(s) source.
+ -UserName                                   UserName to be used when connecting to an authenticated source.
+ -Password                                   Password to be used when connecting to an authenticated source.
+ -Help          (?)                          help
+
+For more information, visit http://docs.nuget.org/docs/reference/command-line-reference
+

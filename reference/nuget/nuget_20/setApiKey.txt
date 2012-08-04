@@ -1,0 +1,13 @@
+usage: NuGet setApiKey <API key> [options]
+
+Saves an API key for a given server URL. When no URL is provided API key is saved for the NuGet gallery.
+
+     Specify the API key to save and an optional URL to the server that provided the API key.
+
+options:
+
+ -Source      (src)                      Server URL where the API key is valid.
+ -Help        (?)                        help
+
+For more information, visit http://docs.nuget.org/docs/reference/command-line-reference
+

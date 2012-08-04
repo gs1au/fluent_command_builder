@@ -12,9 +12,9 @@ class TaskMaker
     directory output_dir
     desc task_desc
     task command_name_with_version => [output_dir] do
-      print "#{task_desc}..".sub('Generate', 'Generating')
+      puts generating_message
       yield self
-      puts ' done'
+      puts 'Done.'
     end
   end
 
@@ -43,6 +43,10 @@ class TaskMaker
 
   def task_desc
     "Generate reference for #{@command_name} #{@version}."
+  end
+
+  def generating_message
+    "#{task_desc}..".sub('Generate', 'Generating')
   end
 
 end

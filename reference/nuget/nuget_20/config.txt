@@ -1,0 +1,11 @@
+usage: NuGet config -Set name=value
+
+Gets or sets NuGet config values.
+
+options:
+
+ -Set +                          One on more key-value pairs to be set in config.
+ -Help      (?)                  help
+
+For more information, visit http://docs.nuget.org/docs/reference/command-line-reference
+

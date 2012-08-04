@@ -18,3 +18,10 @@ VisualStudioTaskMaker.make_task 'mstest.exe', '/help'
 TaskMaker.make_task 'msdeploy', msdeploy_version do |task_maker|
   system %Q["%PROGRAMFILES%/IIS/Microsoft Web Deploy/msdeploy" > "#{task_maker.output_dir}/help.txt"]
 end
+
+TaskMaker.make_task 'nuget', nuget_version do |task_maker|
+  output = `nuget`
+  actions_text = output.match(/Available commands:\n(.+)/m)[1]
+  actions = actions_text.lines.map { |l| l.match(/^ (\w+)/) { |m| m[1] } }
+  actions.compact.each { |action| system %Q[nuget help #{action} > "#{task_maker.output_dir}/#{action}.txt"] }
+end

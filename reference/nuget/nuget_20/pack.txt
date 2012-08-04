@@ -1,0 +1,25 @@
+usage: NuGet pack <nuspec | project> [options]
+
+Creates a NuGet package based on the specified nuspec or project file.
+
+     Specify the location of the nuspec or project file to create a package.
+
+options:
+
+ -OutputDirectory                                                      Specifies the directory for the created NuGet package file. If not specified, uses the current directory.
+ -BasePath                                                             The base path of the files defined in the nuspec file.
+ -Verbose                                                              Shows verbose output for package building.
+ -Version                                                              Overrides the version number from the nuspec file.
+ -Exclude +                                                            Specifies one or more wildcard patterns to exclude when creating a package.
+ -Symbols                                                              Determines if a package containing sources and symbols should be created. When specified with a nuspec, creates a regular NuGet pac
+                                    kage file and the corresponding symbols package.
+ -Tool                                                                 Determines if the output files of the project should be in the tool folder. 
+ -Build                                                                Determines if the project should be built before building the package.
+ -NoDefaultExcludes                                                    Prevent default exclusion of NuGet package files and files and folders starting with a dot e.g. .svn.
+ -NoPackageAnalysis                                                    Specify if the command should not run package analysis after building the package.
+ -ExcludeEmptyDirectories                                              Prevent inclusion of empty directories when building the package.
+ -Properties +                                                         Provides the ability to specify a semicolon ";" delimited list of properties when creating a package.
+ -Help                         (?)                                     help
+
+For more information, visit http://docs.nuget.org/docs/reference/command-line-reference
+

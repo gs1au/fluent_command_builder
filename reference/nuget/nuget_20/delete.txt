@@ -1,0 +1,15 @@
+usage: NuGet delete <package Id> <package version> [API Key] [options]
+
+Deletes a package from the server.
+
+     Specify the Id and version of the package to delete from the server.
+
+options:
+
+ -Source        (src)                        Specifies the server URL.
+ -NoPrompt      (np)                         Do not prompt when deleting.
+ -ApiKey                                     The API key for the server.
+ -Help          (?)                          help
+
+For more information, visit http://docs.nuget.org/docs/reference/command-line-reference
+
