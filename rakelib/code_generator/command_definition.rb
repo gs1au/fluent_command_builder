@@ -1,11 +1,11 @@
-require_relative 'command'
+require_relative 'lib/command'
 
 module CodeGenerator
   class CommandDefinition
 
     def initialize(stream)
       text = stream.read
-      @lines = text.split NEW_LINE
+      @lines = text.split String::NEW_LINE
     end
 
     def versions
@@ -21,7 +21,7 @@ module CodeGenerator
     def command_text
       lines = expand_options
       end_index = option_references_line_index ? option_references_line_index - 1 : lines.length - 1
-      lines[1..end_index].join NEW_LINE
+      lines[1..end_index].join String::NEW_LINE
     end
 
     def expand_options

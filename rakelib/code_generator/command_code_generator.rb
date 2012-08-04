@@ -1,5 +1,5 @@
-require_relative 'command_code_names'
-require_relative 'node_code_generator'
+require_relative 'lib/command_code_names'
+require_relative 'lib/node_code_generator'
 
 module CodeGenerator
   class CommandCodeGenerator

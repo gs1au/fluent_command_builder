@@ -2,7 +2,7 @@ require 'rake/clean'
 require 'rake/testtask'
 require 'bundler'
 Bundler::GemHelper.install_tasks
-require_relative 'rakelib/code_generator/ruby_code_writer'
+require_relative 'rakelib/code_generator/lib/ruby_code_writer'
 require_relative 'rakelib/code_generator/command_code_generator'
 require_relative 'rakelib/code_generator/command_definition'
 
@@ -19,8 +19,10 @@ task :default => [:test_gem]
 
 desc 'Test gem.'
 Rake::TestTask.new :test_gem => [:build] do |t|
-  t.test_files = FileList['test/**/*.rb']
   t.verbose = true
+  test_files = FileList['test/**/*.rb'] # TODO: rename test files to start with "test_"
+  raise 'No tests found.' unless test_files.length > 0
+  t.test_files = test_files
 end
 
 desc 'Build.'
@@ -32,8 +34,10 @@ end
 
 desc 'Test code generator.'
 Rake::TestTask.new :test_code_generator do |t|
-  t.test_files = FileList['rakelib/code_generator/test/*.rb']
   t.verbose = true
+  test_files = FileList['rakelib/code_generator_tests/**/test_*.rb']
+  raise 'No tests found.' unless test_files.length > 0
+  t.test_files = test_files
 end
 
 def generate_command_builder(command_definition_file)
