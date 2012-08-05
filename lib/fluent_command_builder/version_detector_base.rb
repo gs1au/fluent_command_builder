@@ -27,8 +27,8 @@ class VersionDetectorBase
   end
 
   def find_executable_on_windows(paths)
-    extensions = ENV['PATHEXT'].split ';'
-    executables = paths.map { |path| extensions.map { |ext| File.join path, "#{executable_name}.#{ext}" } }
+    extensions = pathext_var.split ';'
+    executables = paths.map { |path| extensions.map { |ext| File.join(path, executable_name + ext.downcase).gsub('/', '\\') } }.flatten
     executables.select { |exe| File.exist? exe }.first
   end
 
@@ -38,11 +38,15 @@ class VersionDetectorBase
   end
 
   def is_unix?
-    path_var.include? ':'
+    pathext_var.nil?
   end
 
   def path_var
     ENV['PATH']
+  end
+
+  def pathext_var
+    ENV['PATHEXT']
   end
 
   def match_version(text)
