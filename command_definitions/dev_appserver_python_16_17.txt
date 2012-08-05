@@ -34,4 +34,3 @@ dev_appserver.py <applicationRoot> (Dev Appserver Python)
     --smtp_password=<password>
     --task_retry_seconds
     --use_sqlite
-

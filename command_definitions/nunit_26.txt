@@ -31,8 +31,3 @@ nunit-console <inputFiles> (NUnit)
     /stopOnError
     /cleanup
     /help
-
-
-
-
-

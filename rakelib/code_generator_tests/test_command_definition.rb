@@ -6,7 +6,7 @@ include CodeGenerator
 class TestCommandDefinition < Test::Unit::TestCase
 
   def test_should_return_versions
-    stream = StringIO.new '1.0, 1.1, 2.0'
+    stream = StringIO.new "1.0, 1.1, 2.0\ncommand"
     command_definition = CommandDefinition.new stream
     assert_equal '1.0', command_definition.versions[0]
     assert_equal '1.1', command_definition.versions[1]

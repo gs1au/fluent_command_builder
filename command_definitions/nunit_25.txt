@@ -23,8 +23,3 @@ nunit-console <inputFiles> (NUnit)
     /noLogo
     /noDots
     /help
-
-
-
-
-
