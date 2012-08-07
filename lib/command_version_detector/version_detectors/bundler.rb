@@ -1,11 +1,14 @@
 require File.expand_path(File.dirname(__FILE__) + '/../standard_version_detector')
 
 module CommandVersionDetector
-  class Bundler
+  class Bundler < StandardVersionDetector
 
-    def version(path=nil)
-      d = StandardVersionDetector.new 'bundle', '--version'
-      d.version path
+    def executable_name
+      'bundle'
+    end
+
+    def executable_args
+      '--version'
     end
 
   end

@@ -3,16 +3,21 @@ require File.expand_path(File.dirname(__FILE__) + '/path_finder')
 module CommandVersionDetector
   class StandardVersionDetector
 
-    def initialize(executable_name, executable_args=nil)
-      @executable_name = executable_name
-      @executable_args = executable_args
+    def version(path=nil)
+      path ||= PathFinder.find_path executable_name
+      executable = File.join path, executable_name
+      output = `"#{executable}" #{executable_args}`
+      match_version output
     end
 
-    def version(path=nil)
-      path ||= PathFinder.find_path @executable_name
-      executable = File.join path, @executable_name
-      output = `"#{executable}" #{@executable_args}`
-      match_version output
+    protected
+
+    def executable_name
+      raise 'Not implemented.'
+    end
+
+    def executable_args
+      ''
     end
 
     private

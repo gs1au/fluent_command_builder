@@ -1,3 +1,3 @@
-require_relative 'version_detectors/appcfg_python'; include CommandVersionDetector
+require_relative 'version_detectors/cucumber'; include CommandVersionDetector
 
-puts AppCfgPython.new.version
+puts Cucumber.new.version

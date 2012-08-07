@@ -1,11 +1,14 @@
 require File.expand_path(File.dirname(__FILE__) + '/../standard_version_detector')
 
 module CommandVersionDetector
-  class Cucumber
+  class Cucumber < StandardVersionDetector
 
-    def version(path=nil)
-      d = StandardVersionDetector.new 'dotcover', 'version'
-      d.version path
+    def executable_name
+      'dotcover'
+    end
+
+    def executable_args
+      'version'
     end
 
   end

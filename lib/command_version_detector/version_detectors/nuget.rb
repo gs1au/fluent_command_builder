@@ -1,11 +1,10 @@
 require File.expand_path(File.dirname(__FILE__) + '/../standard_version_detector')
 
 module CommandVersionDetector
-  class NuGet
+  class NuGet < StandardVersionDetector
 
-    def version(path=nil)
-      d = StandardVersionDetector.new 'nuget'
-      d.version path
+    def executable_name
+      'nuget'
     end
 
   end

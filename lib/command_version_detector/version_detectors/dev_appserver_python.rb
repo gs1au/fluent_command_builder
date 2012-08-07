@@ -1,10 +1,10 @@
 require File.expand_path(File.dirname(__FILE__) + '/../appengine_python_version_detector')
 
 module CommandVersionDetector
-  class AppCfgPython < AppEnginePythonVersionDetector
+  class DevAppserverPython < AppEnginePythonVersionDetector
 
     def executable_name
-      'appcfg.py'
+      'dev_appserver.py'
     end
 
   end

@@ -1,10 +1,14 @@
 require File.expand_path(File.dirname(__FILE__) + '/../standard_version_detector')
 
 module CommandVersionDetector
-  class MSDeploy < StandardVersionDetector
+  class Rake < StandardVersionDetector
 
     def executable_name
-      'msdeploy'
+      'rake'
+    end
+
+    def executable_args
+      '--version'
     end
 
   end
