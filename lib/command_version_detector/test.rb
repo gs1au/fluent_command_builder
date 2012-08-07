@@ -1,3 +1,3 @@
-require_relative 'version_detectors/cucumber'; include CommandVersionDetector
+require_relative 'version_detectors/tf'; include CommandVersionDetector
 
-puts Cucumber.new.version
+puts Tf.new.version 'C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE'

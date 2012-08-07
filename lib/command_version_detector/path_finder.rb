@@ -27,7 +27,7 @@ module CommandVersionDetector
     end
 
     def find_executable_on_windows
-      paths = ENV['PATHS'].split ';'
+      paths = ENV['PATH'].split ';'
       extensions = ENV['PATHEXT'].split ';'
       possibilities = paths.map { |path| extensions.map { |ext| File.join(path, @executable_name + ext.downcase).gsub('/', '\\') } }.flatten
       possibilities.select { |exe| File.exist? exe }.first
