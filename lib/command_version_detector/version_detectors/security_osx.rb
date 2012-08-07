@@ -1,18 +1,18 @@
 require File.expand_path(File.dirname(__FILE__) + '/../standard_version_detector')
 
 module CommandVersionDetector
-  class Rake < StandardVersionDetector
+  class SecurityOsx < StandardVersionDetector
 
     def executable_name
-      'rake'
+      'sw_vers'
     end
 
     def executable_args
-      '--version'
+      '-productVersion'
     end
 
     def self.version(path=nil)
-      Rake.new.version path
+      SecurityOsx.new.version path
     end
 
   end

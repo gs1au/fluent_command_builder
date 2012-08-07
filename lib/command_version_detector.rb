@@ -1,0 +1,1 @@
+Dir[File.expand_path(File.dirname(__FILE__) + '/command_version_detector/version_detectors/*')].each { |f| require f }

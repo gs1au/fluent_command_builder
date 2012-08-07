@@ -7,5 +7,9 @@ module CommandVersionDetector
       'nuget'
     end
 
+    def self.version(path=nil)
+      NuGet.new.version path
+    end
+
   end
 end

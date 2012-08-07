@@ -11,5 +11,9 @@ module CommandVersionDetector
       '/version'
     end
 
+    def self.version(path=nil)
+      MSBuild.new.version path
+    end
+
   end
 end

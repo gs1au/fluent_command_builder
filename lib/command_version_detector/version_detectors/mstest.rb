@@ -11,5 +11,9 @@ module CommandVersionDetector
       '/help'
     end
 
+    def self.version(path=nil)
+      MSTest.new.version path
+    end
+
   end
 end

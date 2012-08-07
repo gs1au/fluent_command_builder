@@ -7,5 +7,9 @@ module CommandVersionDetector
       'dev_appserver.py'
     end
 
+    def self.version(path=nil)
+      DevAppserverPython.new.version path
+    end
+
   end
 end

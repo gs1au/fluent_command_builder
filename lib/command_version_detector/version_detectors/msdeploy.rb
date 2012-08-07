@@ -7,5 +7,9 @@ module CommandVersionDetector
       'msdeploy'
     end
 
+    def self.version(path=nil)
+      MSDeploy.new.version path
+    end
+
   end
 end

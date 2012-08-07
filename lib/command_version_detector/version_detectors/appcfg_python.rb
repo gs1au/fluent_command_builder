@@ -7,5 +7,9 @@ module CommandVersionDetector
       'appcfg.py'
     end
 
+    def self.version(path=nil)
+      AppCfgPython.new.version path
+    end
+
   end
 end

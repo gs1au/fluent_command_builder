@@ -8,5 +8,9 @@ module CommandVersionDetector
       msbuild.version path
     end
 
+    def self.version(path=nil)
+      AspNetCompiler.new.version path
+    end
+
   end
 end

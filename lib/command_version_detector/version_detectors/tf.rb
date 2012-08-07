@@ -7,5 +7,9 @@ module CommandVersionDetector
       'tf'
     end
 
+    def self.version(path=nil)
+      Tf.new.version path
+    end
+
   end
 end

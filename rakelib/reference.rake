@@ -1,4 +1,4 @@
-require_relative 'reference/version_detector'; include VersionDetector
+require_relative '../lib/command_version_detector'; include CommandVersionDetector
 
 namespace :reference do
   is_windows = RUBY_PLATFORM =~ /(win|w)32$/

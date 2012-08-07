@@ -7,5 +7,9 @@ module CommandVersionDetector
       '7za'
     end
 
+    def self.version(path=nil)
+      SevenZip.new.version path
+    end
+
   end
 end

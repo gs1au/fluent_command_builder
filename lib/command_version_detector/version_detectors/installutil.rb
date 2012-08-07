@@ -7,5 +7,9 @@ module CommandVersionDetector
       'installutil'
     end
 
+    def self.version(path=nil)
+      InstallUtil.new.version path
+    end
+
   end
 end
