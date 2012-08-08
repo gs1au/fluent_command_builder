@@ -1,4 +1,4 @@
-require_relative '../lib/command_version_detector'; include CommandVersionDetector
+require_relative '../lib/command_version_detector'; include FluentCommandBuilder
 
 namespace :reference do
   is_windows = RUBY_PLATFORM =~ /(win|w)32$/
