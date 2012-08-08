@@ -6,6 +6,7 @@ module FluentCommandBuilder
 
     def self.version(executable_name, path=nil)
       path ||= PathFinder.find_path executable_name
+      return unless path
       version_file = File.join path, 'VERSION'
       version_hash = YAML::load_file version_file
       version_hash['release']

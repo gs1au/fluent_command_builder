@@ -6,7 +6,9 @@ module FluentCommandBuilder
     end
 
     def find_path
-      File.dirname find_executable
+      executable = find_executable
+      return unless executable
+      File.dirname executable
     end
 
     def self.find_path(executable_name)
