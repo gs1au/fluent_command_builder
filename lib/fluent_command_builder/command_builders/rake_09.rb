@@ -3,6 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 
 module FluentCommandBuilder
   module Rake
+    COMMAND_NAME = 'rake' unless const_defined? :COMMAND_NAME
     module V09
       COMMAND_NAME = 'rake'
       class Rake < CommandBase

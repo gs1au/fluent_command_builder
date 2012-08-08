@@ -27,6 +27,16 @@ class TaskMaker
     task_maker.make_task &block
   end
 
+  def self.make_task1(mod, args='')
+    self.make_task mod::COMMAND_NAME.downcase, mod.version do |task_maker|
+      system "#{mod::COMMAND_NAME} #{args} > #{task_maker.output_dir}/help.txt"
+    end
+  end
+
+  def self.make_task2(mod, &block)
+    self.make_task mod::COMMAND_NAME.downcase, mod.version, &block
+  end
+
   private
 
   def major_version

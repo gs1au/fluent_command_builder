@@ -3,6 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 
 module FluentCommandBuilder
   module AppCfgPython
+    COMMAND_NAME = 'appcfg.py' unless const_defined? :COMMAND_NAME
     module V16
       COMMAND_NAME = 'appcfg.py'
       class AppCfgPython < CommandBase

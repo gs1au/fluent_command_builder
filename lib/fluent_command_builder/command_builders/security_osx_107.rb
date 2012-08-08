@@ -3,6 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 
 module FluentCommandBuilder
   module Security
+    COMMAND_NAME = 'security' unless const_defined? :COMMAND_NAME
     module OSX107
       COMMAND_NAME = 'security'
       class Security < CommandBase

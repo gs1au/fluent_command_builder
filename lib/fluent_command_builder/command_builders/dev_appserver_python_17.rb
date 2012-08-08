@@ -3,6 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 
 module FluentCommandBuilder
   module DevAppserverPython
+    COMMAND_NAME = 'dev_appserver.py' unless const_defined? :COMMAND_NAME
     module V17
       COMMAND_NAME = 'dev_appserver.py'
       class DevAppserverPython < CommandBase

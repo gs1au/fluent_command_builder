@@ -3,6 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 
 module FluentCommandBuilder
   module NUnit
+    COMMAND_NAME = 'nunit-console' unless const_defined? :COMMAND_NAME
     module V26
       COMMAND_NAME = 'nunit-console'
       class NUnit < CommandBase

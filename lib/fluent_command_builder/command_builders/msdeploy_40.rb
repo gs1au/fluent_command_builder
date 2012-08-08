@@ -3,6 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 
 module FluentCommandBuilder
   module MSDeploy
+    COMMAND_NAME = 'MSDeploy' unless const_defined? :COMMAND_NAME
     module V40
       COMMAND_NAME = 'MSDeploy'
       class MSDeploy < CommandBase

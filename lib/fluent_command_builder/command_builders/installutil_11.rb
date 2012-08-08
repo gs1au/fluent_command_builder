@@ -3,6 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 
 module FluentCommandBuilder
   module InstallUtil
+    COMMAND_NAME = 'installUtil' unless const_defined? :COMMAND_NAME
     module V11
       COMMAND_NAME = 'installUtil'
       class InstallUtil < CommandBase

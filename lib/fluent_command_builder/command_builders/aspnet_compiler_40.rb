@@ -3,6 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 
 module FluentCommandBuilder
   module AspnetCompiler
+    COMMAND_NAME = 'aspnet_compiler' unless const_defined? :COMMAND_NAME
     module V40
       COMMAND_NAME = 'aspnet_compiler'
       class AspnetCompiler < CommandBase

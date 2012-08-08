@@ -3,6 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 
 module FluentCommandBuilder
   module DotCover
+    COMMAND_NAME = 'dotCover' unless const_defined? :COMMAND_NAME
     module V10
       COMMAND_NAME = 'dotCover'
       class DotCover < CommandBase

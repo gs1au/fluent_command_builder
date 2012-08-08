@@ -3,6 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 
 module FluentCommandBuilder
   module Tf
+    COMMAND_NAME = 'tf' unless const_defined? :COMMAND_NAME
     module V2010
       COMMAND_NAME = 'tf'
       class Tf < CommandBase

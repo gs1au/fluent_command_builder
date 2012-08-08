@@ -3,6 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 
 module FluentCommandBuilder
   module Simian
+    COMMAND_NAME = 'simian' unless const_defined? :COMMAND_NAME
     module V23
       COMMAND_NAME = 'simian'
       class Simian < CommandBase

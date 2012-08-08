@@ -3,6 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 
 module FluentCommandBuilder
   module XCodeBuild
+    COMMAND_NAME = 'xcodebuild' unless const_defined? :COMMAND_NAME
     module V44
       COMMAND_NAME = 'xcodebuild'
       class XCodeBuild < CommandBase

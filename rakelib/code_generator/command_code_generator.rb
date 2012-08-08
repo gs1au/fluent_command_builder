@@ -16,6 +16,7 @@ module CodeGenerator
       w.write_line
       w.write_module 'FluentCommandBuilder' do
         w.write_module command_code_names.module_name do
+          w.write_line "COMMAND_NAME = '#{@command.command_name}' unless const_defined? :COMMAND_NAME"
           w.write_module command_code_names.version_module_name do
             w.write_line "COMMAND_NAME = '#{@command.command_name}'"
 

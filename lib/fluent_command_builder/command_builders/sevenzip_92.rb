@@ -3,6 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 
 module FluentCommandBuilder
   module SevenZip
+    COMMAND_NAME = '7za' unless const_defined? :COMMAND_NAME
     module V92
       COMMAND_NAME = '7za'
       class SevenZip < CommandBase
