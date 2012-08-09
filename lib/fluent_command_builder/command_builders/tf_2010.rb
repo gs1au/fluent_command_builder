@@ -2144,6 +2144,12 @@ module FluentCommandBuilder
         yield builder if block_given?
         command
       end
+      def self.create
+        builder = CommandBuilder.new FluentCommandBuilder::Tf::COMMAND_NAME
+        command = Tf.new builder
+        yield builder if block_given?
+        command
+      end
     end
   end
   def tf_2010

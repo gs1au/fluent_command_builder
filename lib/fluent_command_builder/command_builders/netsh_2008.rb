@@ -397,6 +397,12 @@ module FluentCommandBuilder
         yield builder if block_given?
         command
       end
+      def self.create
+        builder = CommandBuilder.new FluentCommandBuilder::Netsh::COMMAND_NAME
+        command = Netsh.new builder
+        yield builder if block_given?
+        command
+      end
     end
   end
   def netsh_2008

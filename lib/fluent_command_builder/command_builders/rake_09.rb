@@ -132,6 +132,12 @@ module FluentCommandBuilder
         yield builder if block_given?
         command
       end
+      def self.create(task=nil)
+        builder = CommandBuilder.new FluentCommandBuilder::Rake::COMMAND_NAME
+        command = Rake.new builder, task
+        yield builder if block_given?
+        command
+      end
     end
   end
   def rake_09(task=nil)

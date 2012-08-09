@@ -187,6 +187,12 @@ module FluentCommandBuilder
         yield builder if block_given?
         command
       end
+      def self.create(application_root)
+        builder = CommandBuilder.new FluentCommandBuilder::DevAppserverPython::COMMAND_NAME
+        command = DevAppserverPython.new builder, application_root
+        yield builder if block_given?
+        command
+      end
     end
   end
   def dev_appserver_python_17(application_root)

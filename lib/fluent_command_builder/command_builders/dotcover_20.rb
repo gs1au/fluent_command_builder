@@ -293,6 +293,12 @@ module FluentCommandBuilder
         yield builder if block_given?
         command
       end
+      def self.create
+        builder = CommandBuilder.new FluentCommandBuilder::DotCover::COMMAND_NAME
+        command = DotCover.new builder
+        yield builder if block_given?
+        command
+      end
     end
   end
   def dotcover_20

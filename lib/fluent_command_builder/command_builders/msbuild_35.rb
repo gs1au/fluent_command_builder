@@ -118,6 +118,12 @@ module FluentCommandBuilder
         yield builder if block_given?
         command
       end
+      def self.create(project_file=nil)
+        builder = CommandBuilder.new FluentCommandBuilder::MSBuild::COMMAND_NAME
+        command = MSBuild.new builder, project_file
+        yield builder if block_given?
+        command
+      end
     end
   end
   def msbuild_35(project_file=nil)

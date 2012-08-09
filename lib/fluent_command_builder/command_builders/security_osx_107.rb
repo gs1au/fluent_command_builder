@@ -167,6 +167,12 @@ module FluentCommandBuilder
         yield builder if block_given?
         command
       end
+      def self.create
+        builder = CommandBuilder.new FluentCommandBuilder::Security::COMMAND_NAME
+        command = Security.new builder
+        yield builder if block_given?
+        command
+      end
     end
   end
   def security_osx_107

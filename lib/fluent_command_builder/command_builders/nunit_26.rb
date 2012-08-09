@@ -172,6 +172,12 @@ module FluentCommandBuilder
         yield builder if block_given?
         command
       end
+      def self.create(input_files)
+        builder = CommandBuilder.new FluentCommandBuilder::NUnit::COMMAND_NAME
+        command = NUnit.new builder, input_files
+        yield builder if block_given?
+        command
+      end
     end
   end
   def nunit_26(input_files)

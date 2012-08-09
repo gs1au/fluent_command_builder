@@ -33,11 +33,34 @@ class TaskMaker
     end
   end
 
+
+
   def self.make_task2(mod, &block)
     self.make_task mod::COMMAND_NAME.downcase, mod.version, &block
   end
 
+  def self.make_task3(mod)
+    m = version_module mod
+    c = m.create
+
+    self.make_task mod::COMMAND_NAME.downcase, mod.version do |task_maker|
+
+      if block_given?
+        yield c
+      else
+        c.help
+      end
+
+      c.execute! { |b| b.append " > #{task_maker.output_dir}/help.txt" }
+    end
+  end
+
   private
+
+  def self.version_module(command_module)
+    version = command_module.version.match(/^(\d+\.\d+)/)[1].sub '.', ''
+    eval "#{command_module.name}::V#{version}"
+  end
 
   def major_version
     @version.match(/^(\d+)\.\d+/)[1]

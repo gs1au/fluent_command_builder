@@ -2597,6 +2597,12 @@ module FluentCommandBuilder
         yield builder if block_given?
         command
       end
+      def self.create
+        builder = CommandBuilder.new FluentCommandBuilder::AppCfgPython::COMMAND_NAME
+        command = AppCfgPython.new builder
+        yield builder if block_given?
+        command
+      end
     end
   end
   def appcfg_python_16

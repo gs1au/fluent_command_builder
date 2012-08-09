@@ -87,6 +87,12 @@ module FluentCommandBuilder
         yield builder if block_given?
         command
       end
+      def self.create(target_dir=nil)
+        builder = CommandBuilder.new FluentCommandBuilder::AspnetCompiler::COMMAND_NAME
+        command = AspnetCompiler.new builder, target_dir
+        yield builder if block_given?
+        command
+      end
     end
   end
   def aspnet_compiler_40(target_dir=nil)

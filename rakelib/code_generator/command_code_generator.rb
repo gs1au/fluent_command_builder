@@ -28,6 +28,13 @@ module CodeGenerator
               w.write_line 'yield builder if block_given?'
               w.write_line 'command'
             end
+
+            w.write_method 'self.create', command_code_names.factory_method_args do
+              w.write_line "builder = CommandBuilder.new FluentCommandBuilder::#{command_code_names.module_name}::COMMAND_NAME"
+              w.write_line "command = #{command_code_names.class_name}.new #{command_code_names.initializer_values.join ', '}"
+              w.write_line 'yield builder if block_given?'
+              w.write_line 'command'
+            end
           end
         end
         w.write_method command_code_names.version_factory_method_name, command_code_names.factory_method_args do

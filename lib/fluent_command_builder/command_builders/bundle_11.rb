@@ -305,6 +305,12 @@ module FluentCommandBuilder
         yield builder if block_given?
         command
       end
+      def self.create
+        builder = CommandBuilder.new FluentCommandBuilder::Bundle::COMMAND_NAME
+        command = Bundle.new builder
+        yield builder if block_given?
+        command
+      end
     end
   end
   def bundle_11

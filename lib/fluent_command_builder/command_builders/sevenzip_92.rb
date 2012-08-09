@@ -507,6 +507,12 @@ module FluentCommandBuilder
         yield builder if block_given?
         command
       end
+      def self.create
+        builder = CommandBuilder.new FluentCommandBuilder::SevenZip::COMMAND_NAME
+        command = SevenZip.new builder
+        yield builder if block_given?
+        command
+      end
     end
   end
   def sevenzip_92

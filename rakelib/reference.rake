@@ -16,7 +16,8 @@ namespace :ref do
 
   TaskMaker.make_task1 FluentCommandBuilder::Bundle, '--help'
 
-  TaskMaker.make_task1 Cucumber, '--help'
+
+  TaskMaker.make_task3 Cucumber
 
   TaskMaker.make_task1 FluentCommandBuilder::Rake, '--help'
 
@@ -41,19 +42,12 @@ namespace :ref do
 
   TaskMaker.make_task1 MSDeploy
 
-  #TaskMaker.make_task2 NuGet do |task_maker|
-  #  output = `nuget`
-  #  actions_text = output.match(/Available commands:\n(.+)/m)[1]
-  #  actions = actions_text.lines.map { |l| l.match(/^ (\w+)/) { |m| m[1] } }
-  #  actions.compact.each { |action| system %Q[nuget help #{action} > "#{task_maker.output_dir}/#{action}.txt"] }
-  #end
-
-  #TaskMaker.make_task 'security_osx', SecurityOsx.version do |task_maker|
-  #  command = 'security'
-  #  output = `#{command}`
-  #  actions_text = output.match(/security commands are:\n(.+)/m)[1]
-  #  actions = actions_text.lines.map { |action| action.match(/    (.+?) /)[1] }
-  #  actions.each { |action| system "#{command} help #{action} > '#{task_maker.output_dir}/#{action}.txt'" }
-  #end
+  TaskMaker.make_task2 Security do |task_maker|
+    command = 'security'
+    output = `#{command}`
+    actions_text = output.match(/security commands are:\n(.+)/m)[1]
+    actions = actions_text.lines.map { |action| action.match(/    (.+?) /)[1] }
+    actions.each { |action| system "#{command} help #{action} > '#{task_maker.output_dir}/#{action}.txt'" }
+  end
 
 end

@@ -166,6 +166,12 @@ module FluentCommandBuilder
         yield builder if block_given?
         command
       end
+      def self.create
+        builder = CommandBuilder.new FluentCommandBuilder::MSDeploy::COMMAND_NAME
+        command = MSDeploy.new builder
+        yield builder if block_given?
+        command
+      end
     end
   end
   def msdeploy_40

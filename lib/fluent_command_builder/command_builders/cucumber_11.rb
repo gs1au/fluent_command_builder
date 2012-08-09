@@ -162,6 +162,12 @@ module FluentCommandBuilder
         yield builder if block_given?
         command
       end
+      def self.create(feature=nil)
+        builder = CommandBuilder.new FluentCommandBuilder::Cucumber::COMMAND_NAME
+        command = Cucumber.new builder, feature
+        yield builder if block_given?
+        command
+      end
     end
   end
   def cucumber_11(feature=nil)

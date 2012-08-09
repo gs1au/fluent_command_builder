@@ -101,6 +101,12 @@ module FluentCommandBuilder
         yield builder if block_given?
         command
       end
+      def self.create
+        builder = CommandBuilder.new FluentCommandBuilder::MSTest::COMMAND_NAME
+        command = MSTest.new builder
+        yield builder if block_given?
+        command
+      end
     end
   end
   def mstest_2008

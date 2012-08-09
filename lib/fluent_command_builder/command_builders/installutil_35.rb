@@ -53,6 +53,12 @@ module FluentCommandBuilder
         yield builder if block_given?
         command
       end
+      def self.create
+        builder = CommandBuilder.new FluentCommandBuilder::InstallUtil::COMMAND_NAME
+        command = InstallUtil.new builder
+        yield builder if block_given?
+        command
+      end
     end
   end
   def installutil_35

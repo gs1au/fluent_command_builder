@@ -295,6 +295,12 @@ module FluentCommandBuilder
         yield builder if block_given?
         command
       end
+      def self.create
+        builder = CommandBuilder.new FluentCommandBuilder::XCodeBuild::COMMAND_NAME
+        command = XCodeBuild.new builder
+        yield builder if block_given?
+        command
+      end
     end
   end
   def xcodebuild_44

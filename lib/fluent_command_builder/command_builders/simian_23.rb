@@ -131,6 +131,12 @@ module FluentCommandBuilder
         yield builder if block_given?
         command
       end
+      def self.create
+        builder = CommandBuilder.new FluentCommandBuilder::Simian::COMMAND_NAME
+        command = Simian.new builder
+        yield builder if block_given?
+        command
+      end
     end
   end
   def simian_23
