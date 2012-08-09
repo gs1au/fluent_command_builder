@@ -12,24 +12,22 @@ namespace :ref do
     actions.each { |action| system "#{command} help #{action} > '#{task_maker.output_dir}/#{action}.txt'" }
   end
 
-  TaskMaker.make_task1 DevAppserverPython
+  TaskMaker.make_task3 DevAppserverPython
 
-  TaskMaker.make_task1 FluentCommandBuilder::Bundle, '--help'
+  TaskMaker.make_task3 FluentCommandBuilder::Bundle
 
 
   TaskMaker.make_task3 Cucumber
 
-  TaskMaker.make_task1 FluentCommandBuilder::Rake, '--help'
+  TaskMaker.make_task3 FluentCommandBuilder::Rake
 
-  TaskMaker.make_task 'xcodebuild', XCodeBuild.version do |task_maker|
-    system "xcodebuild --help &> #{task_maker.output_dir}/help.txt"
-  end
+  TaskMaker.make_task3 XCodeBuild
 
-  TaskMaker.make_task1 AspnetCompiler, '/help'
+  TaskMaker.make_task3 AspnetCompiler
 
-  TaskMaker.make_task1 InstallUtil, '/help'
+  TaskMaker.make_task3 InstallUtil
 
-  TaskMaker.make_task1 MSBuild, '/help'
+  TaskMaker.make_task3 MSBuild
 
   TaskMaker.make_task2 DotCover do |task_maker|
     output = `dotcover help`
@@ -38,7 +36,7 @@ namespace :ref do
     actions.each { |action| system %Q[dotcover help #{action} > "#{task_maker.output_dir}/#{action}.txt"] }
   end
 
-  TaskMaker.make_task1 MSTest, '/help'
+  TaskMaker.make_task3 MSTest
 
   TaskMaker.make_task1 MSDeploy
 

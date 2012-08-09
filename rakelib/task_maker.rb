@@ -34,24 +34,27 @@ class TaskMaker
   end
 
 
-
   def self.make_task2(mod, &block)
     self.make_task mod::COMMAND_NAME.downcase, mod.version, &block
   end
 
   def self.make_task3(mod)
-    m = version_module mod
-    c = m.create
+    begin
+      m = version_module mod
+      c = m.create
 
-    self.make_task mod::COMMAND_NAME.downcase, mod.version do |task_maker|
+      self.make_task mod::COMMAND_NAME.downcase, mod.version do |task_maker|
 
-      if block_given?
-        yield c
-      else
-        c.help
+        if block_given?
+          yield c
+        else
+          c.help
+        end
+
+        c.execute! { |b| b.append " > #{task_maker.output_dir}/help.txt" }
       end
-
-      c.execute! { |b| b.append " > #{task_maker.output_dir}/help.txt" }
+    rescue
+      # do nothing
     end
   end
 
