@@ -12,7 +12,7 @@ namespace :ref do
     actions.each { |action| system "#{command} help #{action} > '#{task_maker.output_dir}/#{action}.txt'" }
   end
 
-  TaskMaker.make_task1 DevAppserverPython, '--help'
+  TaskMaker.make_task1 DevAppserverPython
 
   TaskMaker.make_task1 FluentCommandBuilder::Bundle, '--help'
 

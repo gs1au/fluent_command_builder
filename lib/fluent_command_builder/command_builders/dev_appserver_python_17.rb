@@ -6,9 +6,14 @@ module FluentCommandBuilder
     COMMAND_NAME = 'dev_appserver.py' unless const_defined? :COMMAND_NAME
     module V17
       class DevAppserverPython < CommandBase
-        def initialize(builder, application_root)
+        def initialize(builder, application_root=nil)
           super builder
+          @builder.append " #{@builder.format application_root}" unless application_root.nil?
+        end
+        def application_root(application_root)
           @builder.append " #{@builder.format application_root}"
+          yield @builder if block_given?
+          self
         end
         def address(address)
           @builder.append " --address=#{@builder.format address}"
@@ -181,13 +186,13 @@ module FluentCommandBuilder
           self
         end
       end
-      def dev_appserver_python(application_root)
+      def dev_appserver_python(application_root=nil)
         builder = CommandBuilder.new FluentCommandBuilder::DevAppserverPython::COMMAND_NAME
         command = DevAppserverPython.new builder, application_root
         yield builder if block_given?
         command
       end
-      def self.create(application_root)
+      def self.create(application_root=nil)
         builder = CommandBuilder.new FluentCommandBuilder::DevAppserverPython::COMMAND_NAME
         command = DevAppserverPython.new builder, application_root
         yield builder if block_given?
@@ -195,7 +200,7 @@ module FluentCommandBuilder
       end
     end
   end
-  def dev_appserver_python_17(application_root)
+  def dev_appserver_python_17(application_root=nil)
     builder = CommandBuilder.new FluentCommandBuilder::DevAppserverPython::COMMAND_NAME
     command = DevAppserverPython::V17::DevAppserverPython.new builder, application_root
     yield builder if block_given?
