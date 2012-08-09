@@ -5,7 +5,6 @@ module FluentCommandBuilder
   module XCodeBuild
     COMMAND_NAME = 'xcodebuild' unless const_defined? :COMMAND_NAME
     module V43
-      COMMAND_NAME = 'xcodebuild'
       class XCodeBuild < CommandBase
         def initialize(builder)
           super builder
@@ -241,7 +240,7 @@ module FluentCommandBuilder
         end
       end
       def xcodebuild
-        builder = CommandBuilder.new COMMAND_NAME
+        builder = CommandBuilder.new FluentCommandBuilder::XCodeBuild::COMMAND_NAME
         command = XCodeBuild.new builder
         yield builder if block_given?
         command
@@ -249,7 +248,7 @@ module FluentCommandBuilder
     end
   end
   def xcodebuild_43
-    builder = CommandBuilder.new XCodeBuild::V43::COMMAND_NAME
+    builder = CommandBuilder.new FluentCommandBuilder::XCodeBuild::COMMAND_NAME
     command = XCodeBuild::V43::XCodeBuild.new builder
     yield builder if block_given?
     command

@@ -5,7 +5,6 @@ module FluentCommandBuilder
   module Bundle
     COMMAND_NAME = 'bundle' unless const_defined? :COMMAND_NAME
     module V11
-      COMMAND_NAME = 'bundle'
       class Bundle < CommandBase
         def initialize(builder)
           super builder
@@ -301,7 +300,7 @@ module FluentCommandBuilder
         end
       end
       def bundle
-        builder = CommandBuilder.new COMMAND_NAME
+        builder = CommandBuilder.new FluentCommandBuilder::Bundle::COMMAND_NAME
         command = Bundle.new builder
         yield builder if block_given?
         command
@@ -309,7 +308,7 @@ module FluentCommandBuilder
     end
   end
   def bundle_11
-    builder = CommandBuilder.new Bundle::V11::COMMAND_NAME
+    builder = CommandBuilder.new FluentCommandBuilder::Bundle::COMMAND_NAME
     command = Bundle::V11::Bundle.new builder
     yield builder if block_given?
     command

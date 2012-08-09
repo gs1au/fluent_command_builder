@@ -5,7 +5,6 @@ module FluentCommandBuilder
   module Simian
     COMMAND_NAME = 'simian' unless const_defined? :COMMAND_NAME
     module V23
-      COMMAND_NAME = 'simian'
       class Simian < CommandBase
         def initialize(builder)
           super builder
@@ -127,7 +126,7 @@ module FluentCommandBuilder
         end
       end
       def simian
-        builder = CommandBuilder.new COMMAND_NAME
+        builder = CommandBuilder.new FluentCommandBuilder::Simian::COMMAND_NAME
         command = Simian.new builder
         yield builder if block_given?
         command
@@ -135,7 +134,7 @@ module FluentCommandBuilder
     end
   end
   def simian_23
-    builder = CommandBuilder.new Simian::V23::COMMAND_NAME
+    builder = CommandBuilder.new FluentCommandBuilder::Simian::COMMAND_NAME
     command = Simian::V23::Simian.new builder
     yield builder if block_given?
     command

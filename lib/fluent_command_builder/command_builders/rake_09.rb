@@ -5,7 +5,6 @@ module FluentCommandBuilder
   module Rake
     COMMAND_NAME = 'rake' unless const_defined? :COMMAND_NAME
     module V09
-      COMMAND_NAME = 'rake'
       class Rake < CommandBase
         def initialize(builder, task=nil)
           super builder
@@ -128,7 +127,7 @@ module FluentCommandBuilder
         end
       end
       def rake(task=nil)
-        builder = CommandBuilder.new COMMAND_NAME
+        builder = CommandBuilder.new FluentCommandBuilder::Rake::COMMAND_NAME
         command = Rake.new builder, task
         yield builder if block_given?
         command
@@ -136,7 +135,7 @@ module FluentCommandBuilder
     end
   end
   def rake_09(task=nil)
-    builder = CommandBuilder.new Rake::V09::COMMAND_NAME
+    builder = CommandBuilder.new FluentCommandBuilder::Rake::COMMAND_NAME
     command = Rake::V09::Rake.new builder, task
     yield builder if block_given?
     command

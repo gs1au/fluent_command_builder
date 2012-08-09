@@ -5,7 +5,6 @@ module FluentCommandBuilder
   module InstallUtil
     COMMAND_NAME = 'installUtil' unless const_defined? :COMMAND_NAME
     module V35
-      COMMAND_NAME = 'installUtil'
       class InstallUtil < CommandBase
         def initialize(builder)
           super builder
@@ -49,7 +48,7 @@ module FluentCommandBuilder
         end
       end
       def installutil
-        builder = CommandBuilder.new COMMAND_NAME
+        builder = CommandBuilder.new FluentCommandBuilder::InstallUtil::COMMAND_NAME
         command = InstallUtil.new builder
         yield builder if block_given?
         command
@@ -57,7 +56,7 @@ module FluentCommandBuilder
     end
   end
   def installutil_35
-    builder = CommandBuilder.new InstallUtil::V35::COMMAND_NAME
+    builder = CommandBuilder.new FluentCommandBuilder::InstallUtil::COMMAND_NAME
     command = InstallUtil::V35::InstallUtil.new builder
     yield builder if block_given?
     command

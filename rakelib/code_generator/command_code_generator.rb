@@ -18,13 +18,12 @@ module CodeGenerator
         w.write_module command_code_names.module_name do
           w.write_line "COMMAND_NAME = '#{@command.command_name}' unless const_defined? :COMMAND_NAME"
           w.write_module command_code_names.version_module_name do
-            w.write_line "COMMAND_NAME = '#{@command.command_name}'"
 
             node_code_generator = NodeCodeGenerator.new @command, writer
             node_code_generator.render
 
             w.write_method command_code_names.factory_method_name, command_code_names.factory_method_args do
-              w.write_line "builder = CommandBuilder.new COMMAND_NAME"
+              w.write_line "builder = CommandBuilder.new FluentCommandBuilder::#{command_code_names.module_name}::COMMAND_NAME"
               w.write_line "command = #{command_code_names.class_name}.new #{command_code_names.initializer_values.join ', '}"
               w.write_line 'yield builder if block_given?'
               w.write_line 'command'
@@ -32,7 +31,7 @@ module CodeGenerator
           end
         end
         w.write_method command_code_names.version_factory_method_name, command_code_names.factory_method_args do
-          w.write_line "builder = CommandBuilder.new #{command_code_names.module_name}::#{command_code_names.version_module_name}::COMMAND_NAME"
+          w.write_line "builder = CommandBuilder.new FluentCommandBuilder::#{command_code_names.module_name}::COMMAND_NAME"
           w.write_line "command = #{command_code_names.module_name}::#{command_code_names.version_module_name}::#{command_code_names.class_name}.new #{command_code_names.initializer_values.join ', '}"
           w.write_line 'yield builder if block_given?'
           w.write_line 'command'

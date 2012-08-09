@@ -5,7 +5,6 @@ module FluentCommandBuilder
   module MSDeploy
     COMMAND_NAME = 'MSDeploy' unless const_defined? :COMMAND_NAME
     module V40
-      COMMAND_NAME = 'MSDeploy'
       class MSDeploy < CommandBase
         def initialize(builder)
           super builder
@@ -162,7 +161,7 @@ module FluentCommandBuilder
         end
       end
       def msdeploy
-        builder = CommandBuilder.new COMMAND_NAME
+        builder = CommandBuilder.new FluentCommandBuilder::MSDeploy::COMMAND_NAME
         command = MSDeploy.new builder
         yield builder if block_given?
         command
@@ -170,7 +169,7 @@ module FluentCommandBuilder
     end
   end
   def msdeploy_40
-    builder = CommandBuilder.new MSDeploy::V40::COMMAND_NAME
+    builder = CommandBuilder.new FluentCommandBuilder::MSDeploy::COMMAND_NAME
     command = MSDeploy::V40::MSDeploy.new builder
     yield builder if block_given?
     command

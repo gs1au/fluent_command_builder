@@ -5,7 +5,6 @@ module FluentCommandBuilder
   module MSTest
     COMMAND_NAME = 'MSTest' unless const_defined? :COMMAND_NAME
     module V2010
-      COMMAND_NAME = 'MSTest'
       class MSTest < CommandBase
         def initialize(builder)
           super builder
@@ -112,7 +111,7 @@ module FluentCommandBuilder
         end
       end
       def mstest
-        builder = CommandBuilder.new COMMAND_NAME
+        builder = CommandBuilder.new FluentCommandBuilder::MSTest::COMMAND_NAME
         command = MSTest.new builder
         yield builder if block_given?
         command
@@ -120,7 +119,7 @@ module FluentCommandBuilder
     end
   end
   def mstest_2010
-    builder = CommandBuilder.new MSTest::V2010::COMMAND_NAME
+    builder = CommandBuilder.new FluentCommandBuilder::MSTest::COMMAND_NAME
     command = MSTest::V2010::MSTest.new builder
     yield builder if block_given?
     command

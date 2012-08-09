@@ -5,7 +5,6 @@ module FluentCommandBuilder
   module Security
     COMMAND_NAME = 'security' unless const_defined? :COMMAND_NAME
     module OSX107
-      COMMAND_NAME = 'security'
       class Security < CommandBase
         def initialize(builder)
           super builder
@@ -163,7 +162,7 @@ module FluentCommandBuilder
         end
       end
       def security
-        builder = CommandBuilder.new COMMAND_NAME
+        builder = CommandBuilder.new FluentCommandBuilder::Security::COMMAND_NAME
         command = Security.new builder
         yield builder if block_given?
         command
@@ -171,7 +170,7 @@ module FluentCommandBuilder
     end
   end
   def security_osx_107
-    builder = CommandBuilder.new Security::OSX107::COMMAND_NAME
+    builder = CommandBuilder.new FluentCommandBuilder::Security::COMMAND_NAME
     command = Security::OSX107::Security.new builder
     yield builder if block_given?
     command

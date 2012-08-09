@@ -5,7 +5,6 @@ module FluentCommandBuilder
   module AspnetCompiler
     COMMAND_NAME = 'aspnet_compiler' unless const_defined? :COMMAND_NAME
     module V20
-      COMMAND_NAME = 'aspnet_compiler'
       class AspnetCompiler < CommandBase
         def initialize(builder, target_dir=nil)
           super builder
@@ -83,7 +82,7 @@ module FluentCommandBuilder
         end
       end
       def aspnet_compiler(target_dir=nil)
-        builder = CommandBuilder.new COMMAND_NAME
+        builder = CommandBuilder.new FluentCommandBuilder::AspnetCompiler::COMMAND_NAME
         command = AspnetCompiler.new builder, target_dir
         yield builder if block_given?
         command
@@ -91,7 +90,7 @@ module FluentCommandBuilder
     end
   end
   def aspnet_compiler_20(target_dir=nil)
-    builder = CommandBuilder.new AspnetCompiler::V20::COMMAND_NAME
+    builder = CommandBuilder.new FluentCommandBuilder::AspnetCompiler::COMMAND_NAME
     command = AspnetCompiler::V20::AspnetCompiler.new builder, target_dir
     yield builder if block_given?
     command

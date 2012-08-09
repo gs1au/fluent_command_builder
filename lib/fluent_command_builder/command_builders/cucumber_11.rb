@@ -5,7 +5,6 @@ module FluentCommandBuilder
   module Cucumber
     COMMAND_NAME = 'cucumber' unless const_defined? :COMMAND_NAME
     module V11
-      COMMAND_NAME = 'cucumber'
       class Cucumber < CommandBase
         def initialize(builder, feature=nil)
           super builder
@@ -158,7 +157,7 @@ module FluentCommandBuilder
         end
       end
       def cucumber(feature=nil)
-        builder = CommandBuilder.new COMMAND_NAME
+        builder = CommandBuilder.new FluentCommandBuilder::Cucumber::COMMAND_NAME
         command = Cucumber.new builder, feature
         yield builder if block_given?
         command
@@ -166,7 +165,7 @@ module FluentCommandBuilder
     end
   end
   def cucumber_11(feature=nil)
-    builder = CommandBuilder.new Cucumber::V11::COMMAND_NAME
+    builder = CommandBuilder.new FluentCommandBuilder::Cucumber::COMMAND_NAME
     command = Cucumber::V11::Cucumber.new builder, feature
     yield builder if block_given?
     command

@@ -5,7 +5,6 @@ module FluentCommandBuilder
   module DevAppserverPython
     COMMAND_NAME = 'dev_appserver.py' unless const_defined? :COMMAND_NAME
     module V16
-      COMMAND_NAME = 'dev_appserver.py'
       class DevAppserverPython < CommandBase
         def initialize(builder, application_root)
           super builder
@@ -183,7 +182,7 @@ module FluentCommandBuilder
         end
       end
       def dev_appserver_python(application_root)
-        builder = CommandBuilder.new COMMAND_NAME
+        builder = CommandBuilder.new FluentCommandBuilder::DevAppserverPython::COMMAND_NAME
         command = DevAppserverPython.new builder, application_root
         yield builder if block_given?
         command
@@ -191,7 +190,7 @@ module FluentCommandBuilder
     end
   end
   def dev_appserver_python_16(application_root)
-    builder = CommandBuilder.new DevAppserverPython::V16::COMMAND_NAME
+    builder = CommandBuilder.new FluentCommandBuilder::DevAppserverPython::COMMAND_NAME
     command = DevAppserverPython::V16::DevAppserverPython.new builder, application_root
     yield builder if block_given?
     command

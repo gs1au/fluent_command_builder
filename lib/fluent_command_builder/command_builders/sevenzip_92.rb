@@ -5,7 +5,6 @@ module FluentCommandBuilder
   module SevenZip
     COMMAND_NAME = '7za' unless const_defined? :COMMAND_NAME
     module V92
-      COMMAND_NAME = '7za'
       class SevenZip < CommandBase
         def initialize(builder)
           super builder
@@ -503,7 +502,7 @@ module FluentCommandBuilder
         end
       end
       def sevenzip
-        builder = CommandBuilder.new COMMAND_NAME
+        builder = CommandBuilder.new FluentCommandBuilder::SevenZip::COMMAND_NAME
         command = SevenZip.new builder
         yield builder if block_given?
         command
@@ -511,7 +510,7 @@ module FluentCommandBuilder
     end
   end
   def sevenzip_92
-    builder = CommandBuilder.new SevenZip::V92::COMMAND_NAME
+    builder = CommandBuilder.new FluentCommandBuilder::SevenZip::COMMAND_NAME
     command = SevenZip::V92::SevenZip.new builder
     yield builder if block_given?
     command

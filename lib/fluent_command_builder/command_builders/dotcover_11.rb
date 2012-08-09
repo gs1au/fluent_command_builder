@@ -5,7 +5,6 @@ module FluentCommandBuilder
   module DotCover
     COMMAND_NAME = 'dotCover' unless const_defined? :COMMAND_NAME
     module V11
-      COMMAND_NAME = 'dotCover'
       class DotCover < CommandBase
         def initialize(builder)
           super builder
@@ -279,7 +278,7 @@ module FluentCommandBuilder
         end
       end
       def dotcover
-        builder = CommandBuilder.new COMMAND_NAME
+        builder = CommandBuilder.new FluentCommandBuilder::DotCover::COMMAND_NAME
         command = DotCover.new builder
         yield builder if block_given?
         command
@@ -287,7 +286,7 @@ module FluentCommandBuilder
     end
   end
   def dotcover_11
-    builder = CommandBuilder.new DotCover::V11::COMMAND_NAME
+    builder = CommandBuilder.new FluentCommandBuilder::DotCover::COMMAND_NAME
     command = DotCover::V11::DotCover.new builder
     yield builder if block_given?
     command

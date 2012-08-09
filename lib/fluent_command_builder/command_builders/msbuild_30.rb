@@ -5,7 +5,6 @@ module FluentCommandBuilder
   module MSBuild
     COMMAND_NAME = 'MSBuild' unless const_defined? :COMMAND_NAME
     module V30
-      COMMAND_NAME = 'MSBuild'
       class MSBuild < CommandBase
         def initialize(builder, project_file=nil)
           super builder
@@ -74,7 +73,7 @@ module FluentCommandBuilder
         end
       end
       def msbuild(project_file=nil)
-        builder = CommandBuilder.new COMMAND_NAME
+        builder = CommandBuilder.new FluentCommandBuilder::MSBuild::COMMAND_NAME
         command = MSBuild.new builder, project_file
         yield builder if block_given?
         command
@@ -82,7 +81,7 @@ module FluentCommandBuilder
     end
   end
   def msbuild_30(project_file=nil)
-    builder = CommandBuilder.new MSBuild::V30::COMMAND_NAME
+    builder = CommandBuilder.new FluentCommandBuilder::MSBuild::COMMAND_NAME
     command = MSBuild::V30::MSBuild.new builder, project_file
     yield builder if block_given?
     command

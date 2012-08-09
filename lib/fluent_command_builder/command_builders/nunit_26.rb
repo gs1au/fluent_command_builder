@@ -5,7 +5,6 @@ module FluentCommandBuilder
   module NUnit
     COMMAND_NAME = 'nunit-console' unless const_defined? :COMMAND_NAME
     module V26
-      COMMAND_NAME = 'nunit-console'
       class NUnit < CommandBase
         def initialize(builder, input_files)
           super builder
@@ -168,7 +167,7 @@ module FluentCommandBuilder
         end
       end
       def nunit(input_files)
-        builder = CommandBuilder.new COMMAND_NAME
+        builder = CommandBuilder.new FluentCommandBuilder::NUnit::COMMAND_NAME
         command = NUnit.new builder, input_files
         yield builder if block_given?
         command
@@ -176,7 +175,7 @@ module FluentCommandBuilder
     end
   end
   def nunit_26(input_files)
-    builder = CommandBuilder.new NUnit::V26::COMMAND_NAME
+    builder = CommandBuilder.new FluentCommandBuilder::NUnit::COMMAND_NAME
     command = NUnit::V26::NUnit.new builder, input_files
     yield builder if block_given?
     command

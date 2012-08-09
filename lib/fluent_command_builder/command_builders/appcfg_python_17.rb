@@ -5,7 +5,6 @@ module FluentCommandBuilder
   module AppCfgPython
     COMMAND_NAME = 'appcfg.py' unless const_defined? :COMMAND_NAME
     module V17
-      COMMAND_NAME = 'appcfg.py'
       class AppCfgPython < CommandBase
         def initialize(builder)
           super builder
@@ -2583,7 +2582,7 @@ module FluentCommandBuilder
         end
       end
       def appcfg_python
-        builder = CommandBuilder.new COMMAND_NAME
+        builder = CommandBuilder.new FluentCommandBuilder::AppCfgPython::COMMAND_NAME
         command = AppCfgPython.new builder
         yield builder if block_given?
         command
@@ -2591,7 +2590,7 @@ module FluentCommandBuilder
     end
   end
   def appcfg_python_17
-    builder = CommandBuilder.new AppCfgPython::V17::COMMAND_NAME
+    builder = CommandBuilder.new FluentCommandBuilder::AppCfgPython::COMMAND_NAME
     command = AppCfgPython::V17::AppCfgPython.new builder
     yield builder if block_given?
     command

@@ -5,7 +5,6 @@ module FluentCommandBuilder
   module Netsh
     COMMAND_NAME = 'netsh' unless const_defined? :COMMAND_NAME
     module V2008
-      COMMAND_NAME = 'netsh'
       class Netsh < CommandBase
         def initialize(builder)
           super builder
@@ -393,7 +392,7 @@ module FluentCommandBuilder
         end
       end
       def netsh
-        builder = CommandBuilder.new COMMAND_NAME
+        builder = CommandBuilder.new FluentCommandBuilder::Netsh::COMMAND_NAME
         command = Netsh.new builder
         yield builder if block_given?
         command
@@ -401,7 +400,7 @@ module FluentCommandBuilder
     end
   end
   def netsh_2008
-    builder = CommandBuilder.new Netsh::V2008::COMMAND_NAME
+    builder = CommandBuilder.new FluentCommandBuilder::Netsh::COMMAND_NAME
     command = Netsh::V2008::Netsh.new builder
     yield builder if block_given?
     command

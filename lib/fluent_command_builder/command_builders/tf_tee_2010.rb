@@ -5,7 +5,6 @@ module FluentCommandBuilder
   module Tf
     COMMAND_NAME = 'tf' unless const_defined? :COMMAND_NAME
     module TEE2010
-      COMMAND_NAME = 'tf'
       class Tf < CommandBase
         def initialize(builder)
           super builder
@@ -1963,7 +1962,7 @@ module FluentCommandBuilder
         end
       end
       def tf
-        builder = CommandBuilder.new COMMAND_NAME
+        builder = CommandBuilder.new FluentCommandBuilder::Tf::COMMAND_NAME
         command = Tf.new builder
         yield builder if block_given?
         command
@@ -1971,7 +1970,7 @@ module FluentCommandBuilder
     end
   end
   def tf_tee_2010
-    builder = CommandBuilder.new Tf::TEE2010::COMMAND_NAME
+    builder = CommandBuilder.new FluentCommandBuilder::Tf::COMMAND_NAME
     command = Tf::TEE2010::Tf.new builder
     yield builder if block_given?
     command
