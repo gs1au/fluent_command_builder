@@ -3,7 +3,13 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 
 module FluentCommandBuilder
   module Tf
+    
     COMMAND_NAME = 'tf' unless const_defined? :COMMAND_NAME
+    
+    def self.create_builder
+      CommandBuilder.new COMMAND_NAME
+    end
+    
     module V2010
       class Tf < CommandBase
         def initialize(builder)
@@ -2138,22 +2144,25 @@ module FluentCommandBuilder
           self
         end
       end
+      
       def tf
-        builder = CommandBuilder.new FluentCommandBuilder::Tf::COMMAND_NAME
+        builder = FluentCommandBuilder::Tf.create_builder
         command = Tf.new builder
         yield builder if block_given?
         command
       end
+      
       def self.create
-        builder = CommandBuilder.new FluentCommandBuilder::Tf::COMMAND_NAME
+        builder = FluentCommandBuilder::Tf.create_builder
         command = Tf.new builder
         yield builder if block_given?
         command
       end
     end
   end
+  
   def tf_2010
-    builder = CommandBuilder.new FluentCommandBuilder::Tf::COMMAND_NAME
+    builder = FluentCommandBuilder::Tf.create_builder
     command = Tf::V2010::Tf.new builder
     yield builder if block_given?
     command

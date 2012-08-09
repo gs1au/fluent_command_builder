@@ -3,7 +3,13 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 
 module FluentCommandBuilder
   module NUnit
+    
     COMMAND_NAME = 'nunit-console' unless const_defined? :COMMAND_NAME
+    
+    def self.create_builder
+      CommandBuilder.new COMMAND_NAME
+    end
+    
     module V26
       class NUnit < CommandBase
         def initialize(builder, input_files)
@@ -166,22 +172,25 @@ module FluentCommandBuilder
           self
         end
       end
+      
       def nunit(input_files)
-        builder = CommandBuilder.new FluentCommandBuilder::NUnit::COMMAND_NAME
+        builder = FluentCommandBuilder::NUnit.create_builder
         command = NUnit.new builder, input_files
         yield builder if block_given?
         command
       end
+      
       def self.create(input_files)
-        builder = CommandBuilder.new FluentCommandBuilder::NUnit::COMMAND_NAME
+        builder = FluentCommandBuilder::NUnit.create_builder
         command = NUnit.new builder, input_files
         yield builder if block_given?
         command
       end
     end
   end
+  
   def nunit_26(input_files)
-    builder = CommandBuilder.new FluentCommandBuilder::NUnit::COMMAND_NAME
+    builder = FluentCommandBuilder::NUnit.create_builder
     command = NUnit::V26::NUnit.new builder, input_files
     yield builder if block_given?
     command

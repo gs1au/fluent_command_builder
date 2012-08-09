@@ -3,7 +3,13 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 
 module FluentCommandBuilder
   module DevAppserverPython
+    
     COMMAND_NAME = 'dev_appserver.py' unless const_defined? :COMMAND_NAME
+    
+    def self.create_builder
+      CommandBuilder.new COMMAND_NAME
+    end
+    
     module V17
       class DevAppserverPython < CommandBase
         def initialize(builder, application_root=nil)
@@ -186,22 +192,25 @@ module FluentCommandBuilder
           self
         end
       end
+      
       def dev_appserver_python(application_root=nil)
-        builder = CommandBuilder.new FluentCommandBuilder::DevAppserverPython::COMMAND_NAME
+        builder = FluentCommandBuilder::DevAppserverPython.create_builder
         command = DevAppserverPython.new builder, application_root
         yield builder if block_given?
         command
       end
+      
       def self.create(application_root=nil)
-        builder = CommandBuilder.new FluentCommandBuilder::DevAppserverPython::COMMAND_NAME
+        builder = FluentCommandBuilder::DevAppserverPython.create_builder
         command = DevAppserverPython.new builder, application_root
         yield builder if block_given?
         command
       end
     end
   end
+  
   def dev_appserver_python_17(application_root=nil)
-    builder = CommandBuilder.new FluentCommandBuilder::DevAppserverPython::COMMAND_NAME
+    builder = FluentCommandBuilder::DevAppserverPython.create_builder
     command = DevAppserverPython::V17::DevAppserverPython.new builder, application_root
     yield builder if block_given?
     command

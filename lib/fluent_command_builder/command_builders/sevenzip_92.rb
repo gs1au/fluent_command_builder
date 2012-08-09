@@ -3,7 +3,13 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 
 module FluentCommandBuilder
   module SevenZip
+    
     COMMAND_NAME = '7za' unless const_defined? :COMMAND_NAME
+    
+    def self.create_builder
+      CommandBuilder.new COMMAND_NAME
+    end
+    
     module V92
       class SevenZip < CommandBase
         def initialize(builder)
@@ -501,22 +507,25 @@ module FluentCommandBuilder
           self
         end
       end
+      
       def sevenzip
-        builder = CommandBuilder.new FluentCommandBuilder::SevenZip::COMMAND_NAME
+        builder = FluentCommandBuilder::SevenZip.create_builder
         command = SevenZip.new builder
         yield builder if block_given?
         command
       end
+      
       def self.create
-        builder = CommandBuilder.new FluentCommandBuilder::SevenZip::COMMAND_NAME
+        builder = FluentCommandBuilder::SevenZip.create_builder
         command = SevenZip.new builder
         yield builder if block_given?
         command
       end
     end
   end
+  
   def sevenzip_92
-    builder = CommandBuilder.new FluentCommandBuilder::SevenZip::COMMAND_NAME
+    builder = FluentCommandBuilder::SevenZip.create_builder
     command = SevenZip::V92::SevenZip.new builder
     yield builder if block_given?
     command

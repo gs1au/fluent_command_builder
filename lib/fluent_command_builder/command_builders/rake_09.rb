@@ -3,7 +3,13 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 
 module FluentCommandBuilder
   module Rake
+    
     COMMAND_NAME = 'rake' unless const_defined? :COMMAND_NAME
+    
+    def self.create_builder
+      CommandBuilder.new COMMAND_NAME
+    end
+    
     module V09
       class Rake < CommandBase
         def initialize(builder, task=nil)
@@ -126,22 +132,25 @@ module FluentCommandBuilder
           self
         end
       end
+      
       def rake(task=nil)
-        builder = CommandBuilder.new FluentCommandBuilder::Rake::COMMAND_NAME
+        builder = FluentCommandBuilder::Rake.create_builder
         command = Rake.new builder, task
         yield builder if block_given?
         command
       end
+      
       def self.create(task=nil)
-        builder = CommandBuilder.new FluentCommandBuilder::Rake::COMMAND_NAME
+        builder = FluentCommandBuilder::Rake.create_builder
         command = Rake.new builder, task
         yield builder if block_given?
         command
       end
     end
   end
+  
   def rake_09(task=nil)
-    builder = CommandBuilder.new FluentCommandBuilder::Rake::COMMAND_NAME
+    builder = FluentCommandBuilder::Rake.create_builder
     command = Rake::V09::Rake.new builder, task
     yield builder if block_given?
     command

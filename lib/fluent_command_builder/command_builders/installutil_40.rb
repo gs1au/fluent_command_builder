@@ -3,7 +3,13 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 
 module FluentCommandBuilder
   module InstallUtil
+    
     COMMAND_NAME = 'installUtil' unless const_defined? :COMMAND_NAME
+    
+    def self.create_builder
+      CommandBuilder.new COMMAND_NAME
+    end
+    
     module V40
       class InstallUtil < CommandBase
         def initialize(builder)
@@ -53,22 +59,25 @@ module FluentCommandBuilder
           self
         end
       end
+      
       def installutil
-        builder = CommandBuilder.new FluentCommandBuilder::InstallUtil::COMMAND_NAME
+        builder = FluentCommandBuilder::InstallUtil.create_builder
         command = InstallUtil.new builder
         yield builder if block_given?
         command
       end
+      
       def self.create
-        builder = CommandBuilder.new FluentCommandBuilder::InstallUtil::COMMAND_NAME
+        builder = FluentCommandBuilder::InstallUtil.create_builder
         command = InstallUtil.new builder
         yield builder if block_given?
         command
       end
     end
   end
+  
   def installutil_40
-    builder = CommandBuilder.new FluentCommandBuilder::InstallUtil::COMMAND_NAME
+    builder = FluentCommandBuilder::InstallUtil.create_builder
     command = InstallUtil::V40::InstallUtil.new builder
     yield builder if block_given?
     command

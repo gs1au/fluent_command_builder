@@ -3,7 +3,13 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 
 module FluentCommandBuilder
   module Security
+    
     COMMAND_NAME = 'security' unless const_defined? :COMMAND_NAME
+    
+    def self.create_builder
+      CommandBuilder.new COMMAND_NAME
+    end
+    
     module OSX107
       class Security < CommandBase
         def initialize(builder)
@@ -161,22 +167,25 @@ module FluentCommandBuilder
           self
         end
       end
+      
       def security
-        builder = CommandBuilder.new FluentCommandBuilder::Security::COMMAND_NAME
+        builder = FluentCommandBuilder::Security.create_builder
         command = Security.new builder
         yield builder if block_given?
         command
       end
+      
       def self.create
-        builder = CommandBuilder.new FluentCommandBuilder::Security::COMMAND_NAME
+        builder = FluentCommandBuilder::Security.create_builder
         command = Security.new builder
         yield builder if block_given?
         command
       end
     end
   end
+  
   def security_osx_107
-    builder = CommandBuilder.new FluentCommandBuilder::Security::COMMAND_NAME
+    builder = FluentCommandBuilder::Security.create_builder
     command = Security::OSX107::Security.new builder
     yield builder if block_given?
     command

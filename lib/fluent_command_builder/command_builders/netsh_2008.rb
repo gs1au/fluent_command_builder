@@ -3,7 +3,13 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 
 module FluentCommandBuilder
   module Netsh
+    
     COMMAND_NAME = 'netsh' unless const_defined? :COMMAND_NAME
+    
+    def self.create_builder
+      CommandBuilder.new COMMAND_NAME
+    end
+    
     module V2008
       class Netsh < CommandBase
         def initialize(builder)
@@ -391,22 +397,25 @@ module FluentCommandBuilder
           self
         end
       end
+      
       def netsh
-        builder = CommandBuilder.new FluentCommandBuilder::Netsh::COMMAND_NAME
+        builder = FluentCommandBuilder::Netsh.create_builder
         command = Netsh.new builder
         yield builder if block_given?
         command
       end
+      
       def self.create
-        builder = CommandBuilder.new FluentCommandBuilder::Netsh::COMMAND_NAME
+        builder = FluentCommandBuilder::Netsh.create_builder
         command = Netsh.new builder
         yield builder if block_given?
         command
       end
     end
   end
+  
   def netsh_2008
-    builder = CommandBuilder.new FluentCommandBuilder::Netsh::COMMAND_NAME
+    builder = FluentCommandBuilder::Netsh.create_builder
     command = Netsh::V2008::Netsh.new builder
     yield builder if block_given?
     command

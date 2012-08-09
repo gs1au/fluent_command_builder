@@ -3,7 +3,13 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 
 module FluentCommandBuilder
   module AppCfgPython
+    
     COMMAND_NAME = 'appcfg.py' unless const_defined? :COMMAND_NAME
+    
+    def self.create_builder
+      CommandBuilder.new COMMAND_NAME
+    end
+    
     module V16
       class AppCfgPython < CommandBase
         def initialize(builder)
@@ -2591,22 +2597,25 @@ module FluentCommandBuilder
           self
         end
       end
+      
       def appcfg_python
-        builder = CommandBuilder.new FluentCommandBuilder::AppCfgPython::COMMAND_NAME
+        builder = FluentCommandBuilder::AppCfgPython.create_builder
         command = AppCfgPython.new builder
         yield builder if block_given?
         command
       end
+      
       def self.create
-        builder = CommandBuilder.new FluentCommandBuilder::AppCfgPython::COMMAND_NAME
+        builder = FluentCommandBuilder::AppCfgPython.create_builder
         command = AppCfgPython.new builder
         yield builder if block_given?
         command
       end
     end
   end
+  
   def appcfg_python_16
-    builder = CommandBuilder.new FluentCommandBuilder::AppCfgPython::COMMAND_NAME
+    builder = FluentCommandBuilder::AppCfgPython.create_builder
     command = AppCfgPython::V16::AppCfgPython.new builder
     yield builder if block_given?
     command

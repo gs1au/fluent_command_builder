@@ -3,7 +3,13 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 
 module FluentCommandBuilder
   module MSTest
+    
     COMMAND_NAME = 'MSTest' unless const_defined? :COMMAND_NAME
+    
+    def self.create_builder
+      CommandBuilder.new COMMAND_NAME
+    end
+    
     module V2010
       class MSTest < CommandBase
         def initialize(builder)
@@ -110,22 +116,25 @@ module FluentCommandBuilder
           self
         end
       end
+      
       def mstest
-        builder = CommandBuilder.new FluentCommandBuilder::MSTest::COMMAND_NAME
+        builder = FluentCommandBuilder::MSTest.create_builder
         command = MSTest.new builder
         yield builder if block_given?
         command
       end
+      
       def self.create
-        builder = CommandBuilder.new FluentCommandBuilder::MSTest::COMMAND_NAME
+        builder = FluentCommandBuilder::MSTest.create_builder
         command = MSTest.new builder
         yield builder if block_given?
         command
       end
     end
   end
+  
   def mstest_2010
-    builder = CommandBuilder.new FluentCommandBuilder::MSTest::COMMAND_NAME
+    builder = FluentCommandBuilder::MSTest.create_builder
     command = MSTest::V2010::MSTest.new builder
     yield builder if block_given?
     command

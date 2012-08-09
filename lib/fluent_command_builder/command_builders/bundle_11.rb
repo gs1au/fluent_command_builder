@@ -3,7 +3,13 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 
 module FluentCommandBuilder
   module Bundle
+    
     COMMAND_NAME = 'bundle' unless const_defined? :COMMAND_NAME
+    
+    def self.create_builder
+      CommandBuilder.new COMMAND_NAME
+    end
+    
     module V11
       class Bundle < CommandBase
         def initialize(builder)
@@ -299,22 +305,25 @@ module FluentCommandBuilder
           self
         end
       end
+      
       def bundle
-        builder = CommandBuilder.new FluentCommandBuilder::Bundle::COMMAND_NAME
+        builder = FluentCommandBuilder::Bundle.create_builder
         command = Bundle.new builder
         yield builder if block_given?
         command
       end
+      
       def self.create
-        builder = CommandBuilder.new FluentCommandBuilder::Bundle::COMMAND_NAME
+        builder = FluentCommandBuilder::Bundle.create_builder
         command = Bundle.new builder
         yield builder if block_given?
         command
       end
     end
   end
+  
   def bundle_11
-    builder = CommandBuilder.new FluentCommandBuilder::Bundle::COMMAND_NAME
+    builder = FluentCommandBuilder::Bundle.create_builder
     command = Bundle::V11::Bundle.new builder
     yield builder if block_given?
     command

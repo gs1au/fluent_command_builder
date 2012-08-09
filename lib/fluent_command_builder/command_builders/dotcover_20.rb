@@ -3,7 +3,13 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 
 module FluentCommandBuilder
   module DotCover
+    
     COMMAND_NAME = 'dotCover' unless const_defined? :COMMAND_NAME
+    
+    def self.create_builder
+      CommandBuilder.new COMMAND_NAME
+    end
+    
     module V20
       class DotCover < CommandBase
         def initialize(builder)
@@ -287,22 +293,25 @@ module FluentCommandBuilder
           self
         end
       end
+      
       def dotcover
-        builder = CommandBuilder.new FluentCommandBuilder::DotCover::COMMAND_NAME
+        builder = FluentCommandBuilder::DotCover.create_builder
         command = DotCover.new builder
         yield builder if block_given?
         command
       end
+      
       def self.create
-        builder = CommandBuilder.new FluentCommandBuilder::DotCover::COMMAND_NAME
+        builder = FluentCommandBuilder::DotCover.create_builder
         command = DotCover.new builder
         yield builder if block_given?
         command
       end
     end
   end
+  
   def dotcover_20
-    builder = CommandBuilder.new FluentCommandBuilder::DotCover::COMMAND_NAME
+    builder = FluentCommandBuilder::DotCover.create_builder
     command = DotCover::V20::DotCover.new builder
     yield builder if block_given?
     command

@@ -3,7 +3,13 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 
 module FluentCommandBuilder
   module Cucumber
+    
     COMMAND_NAME = 'cucumber' unless const_defined? :COMMAND_NAME
+    
+    def self.create_builder
+      CommandBuilder.new COMMAND_NAME
+    end
+    
     module V11
       class Cucumber < CommandBase
         def initialize(builder, feature=nil)
@@ -156,22 +162,25 @@ module FluentCommandBuilder
           self
         end
       end
+      
       def cucumber(feature=nil)
-        builder = CommandBuilder.new FluentCommandBuilder::Cucumber::COMMAND_NAME
+        builder = FluentCommandBuilder::Cucumber.create_builder
         command = Cucumber.new builder, feature
         yield builder if block_given?
         command
       end
+      
       def self.create(feature=nil)
-        builder = CommandBuilder.new FluentCommandBuilder::Cucumber::COMMAND_NAME
+        builder = FluentCommandBuilder::Cucumber.create_builder
         command = Cucumber.new builder, feature
         yield builder if block_given?
         command
       end
     end
   end
+  
   def cucumber_11(feature=nil)
-    builder = CommandBuilder.new FluentCommandBuilder::Cucumber::COMMAND_NAME
+    builder = FluentCommandBuilder::Cucumber.create_builder
     command = Cucumber::V11::Cucumber.new builder, feature
     yield builder if block_given?
     command

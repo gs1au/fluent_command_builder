@@ -3,7 +3,13 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 
 module FluentCommandBuilder
   module AspnetCompiler
+    
     COMMAND_NAME = 'aspnet_compiler' unless const_defined? :COMMAND_NAME
+    
+    def self.create_builder
+      CommandBuilder.new COMMAND_NAME
+    end
+    
     module V20
       class AspnetCompiler < CommandBase
         def initialize(builder, target_dir=nil)
@@ -81,22 +87,25 @@ module FluentCommandBuilder
           self
         end
       end
+      
       def aspnet_compiler(target_dir=nil)
-        builder = CommandBuilder.new FluentCommandBuilder::AspnetCompiler::COMMAND_NAME
+        builder = FluentCommandBuilder::AspnetCompiler.create_builder
         command = AspnetCompiler.new builder, target_dir
         yield builder if block_given?
         command
       end
+      
       def self.create(target_dir=nil)
-        builder = CommandBuilder.new FluentCommandBuilder::AspnetCompiler::COMMAND_NAME
+        builder = FluentCommandBuilder::AspnetCompiler.create_builder
         command = AspnetCompiler.new builder, target_dir
         yield builder if block_given?
         command
       end
     end
   end
+  
   def aspnet_compiler_20(target_dir=nil)
-    builder = CommandBuilder.new FluentCommandBuilder::AspnetCompiler::COMMAND_NAME
+    builder = FluentCommandBuilder::AspnetCompiler.create_builder
     command = AspnetCompiler::V20::AspnetCompiler.new builder, target_dir
     yield builder if block_given?
     command

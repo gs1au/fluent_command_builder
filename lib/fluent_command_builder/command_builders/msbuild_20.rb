@@ -3,7 +3,13 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 
 module FluentCommandBuilder
   module MSBuild
+    
     COMMAND_NAME = 'MSBuild' unless const_defined? :COMMAND_NAME
+    
+    def self.create_builder
+      CommandBuilder.new COMMAND_NAME
+    end
+    
     module V20
       class MSBuild < CommandBase
         def initialize(builder, project_file=nil)
@@ -72,22 +78,25 @@ module FluentCommandBuilder
           self
         end
       end
+      
       def msbuild(project_file=nil)
-        builder = CommandBuilder.new FluentCommandBuilder::MSBuild::COMMAND_NAME
+        builder = FluentCommandBuilder::MSBuild.create_builder
         command = MSBuild.new builder, project_file
         yield builder if block_given?
         command
       end
+      
       def self.create(project_file=nil)
-        builder = CommandBuilder.new FluentCommandBuilder::MSBuild::COMMAND_NAME
+        builder = FluentCommandBuilder::MSBuild.create_builder
         command = MSBuild.new builder, project_file
         yield builder if block_given?
         command
       end
     end
   end
+  
   def msbuild_20(project_file=nil)
-    builder = CommandBuilder.new FluentCommandBuilder::MSBuild::COMMAND_NAME
+    builder = FluentCommandBuilder::MSBuild.create_builder
     command = MSBuild::V20::MSBuild.new builder, project_file
     yield builder if block_given?
     command

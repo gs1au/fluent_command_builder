@@ -16,29 +16,46 @@ module CodeGenerator
       w.write_line
       w.write_module 'FluentCommandBuilder' do
         w.write_module command_code_names.module_name do
+          w.write_line
           w.write_line "COMMAND_NAME = '#{@command.command_name}' unless const_defined? :COMMAND_NAME"
+          w.write_line
+          w.write_method 'self.create_builder' do
+            w.write_line "CommandBuilder.new COMMAND_NAME"
+          end
+          w.write_line
           w.write_module command_code_names.version_module_name do
 
             node_code_generator = NodeCodeGenerator.new @command, writer
             node_code_generator.render
 
+            w.write_line
             w.write_method command_code_names.factory_method_name, command_code_names.factory_method_args do
-              w.write_line "builder = CommandBuilder.new FluentCommandBuilder::#{command_code_names.module_name}::COMMAND_NAME"
+              w.write_line "builder = FluentCommandBuilder::#{command_code_names.module_name}.create_builder"
               w.write_line "command = #{command_code_names.class_name}.new #{command_code_names.initializer_values.join ', '}"
               w.write_line 'yield builder if block_given?'
               w.write_line 'command'
             end
 
+            w.write_line
+
             w.write_method 'self.create', command_code_names.factory_method_args do
-              w.write_line "builder = CommandBuilder.new FluentCommandBuilder::#{command_code_names.module_name}::COMMAND_NAME"
+              w.write_line "builder = FluentCommandBuilder::#{command_code_names.module_name}.create_builder"
+
               w.write_line "command = #{command_code_names.class_name}.new #{command_code_names.initializer_values.join ', '}"
               w.write_line 'yield builder if block_given?'
               w.write_line 'command'
             end
+
+
+
           end
         end
+        w.write_line
+
+
         w.write_method command_code_names.version_factory_method_name, command_code_names.factory_method_args do
-          w.write_line "builder = CommandBuilder.new FluentCommandBuilder::#{command_code_names.module_name}::COMMAND_NAME"
+          w.write_line "builder = FluentCommandBuilder::#{command_code_names.module_name}.create_builder"
+
           w.write_line "command = #{command_code_names.module_name}::#{command_code_names.version_module_name}::#{command_code_names.class_name}.new #{command_code_names.initializer_values.join ', '}"
           w.write_line 'yield builder if block_given?'
           w.write_line 'command'

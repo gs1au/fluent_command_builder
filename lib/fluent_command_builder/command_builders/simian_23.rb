@@ -3,7 +3,13 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
 
 module FluentCommandBuilder
   module Simian
+    
     COMMAND_NAME = 'simian' unless const_defined? :COMMAND_NAME
+    
+    def self.create_builder
+      CommandBuilder.new COMMAND_NAME
+    end
+    
     module V23
       class Simian < CommandBase
         def initialize(builder)
@@ -125,22 +131,25 @@ module FluentCommandBuilder
           self
         end
       end
+      
       def simian
-        builder = CommandBuilder.new FluentCommandBuilder::Simian::COMMAND_NAME
+        builder = FluentCommandBuilder::Simian.create_builder
         command = Simian.new builder
         yield builder if block_given?
         command
       end
+      
       def self.create
-        builder = CommandBuilder.new FluentCommandBuilder::Simian::COMMAND_NAME
+        builder = FluentCommandBuilder::Simian.create_builder
         command = Simian.new builder
         yield builder if block_given?
         command
       end
     end
   end
+  
   def simian_23
-    builder = CommandBuilder.new FluentCommandBuilder::Simian::COMMAND_NAME
+    builder = FluentCommandBuilder::Simian.create_builder
     command = Simian::V23::Simian.new builder
     yield builder if block_given?
     command
