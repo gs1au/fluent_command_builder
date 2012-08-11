@@ -48,8 +48,9 @@ module CodeGenerator
     end
 
     def write_method(method_name, *args)
+      args = [args].flatten
       line = "def #{method_name}"
-      line << "(#{args.flatten.join ', '})" unless args.flatten.empty?
+      line << "(#{args.join ', '})" unless args.empty?
       write_block(line) { yield }
     end
 

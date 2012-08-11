@@ -1,19 +1,28 @@
 require File.expand_path(File.dirname(__FILE__) + '/../command_base')
-require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
+require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
+  def dotcover_10
+    b = UnderlyingBuilder.new
+    c = FluentCommandBuilder::DotCover::V10.create b
+    yield b if block_given?
+    c
+  end
   module DotCover
-    
-    COMMAND_NAME = 'dotCover' unless const_defined? :COMMAND_NAME
-    
-    def self.create_builder
-      CommandBuilder.new COMMAND_NAME
-    end
-    
     module V10
+      def self.create(underlying_builder)
+        DotCover.new underlying_builder
+      end
+      def dotcover
+        b = UnderlyingBuilder.new
+        c = FluentCommandBuilder::DotCover::V10.create b
+        yield b if block_given?
+        c
+      end
       class DotCover < CommandBase
-        def initialize(builder)
-          super builder
+        def initialize(underlying_builder)
+          super underlying_builder
+          @builder.command_name = 'dotCover'
         end
         def analyse(configuration_file)
           @builder.append " analyse #{@builder.format configuration_file}"
@@ -53,27 +62,6 @@ module FluentCommandBuilder
           self
         end
       end
-      
-      def dotcover
-        builder = FluentCommandBuilder::DotCover.create_builder
-        command = DotCover.new builder
-        yield builder if block_given?
-        command
-      end
-      
-      def self.create
-        builder = FluentCommandBuilder::DotCover.create_builder
-        command = DotCover.new builder
-        yield builder if block_given?
-        command
-      end
     end
-  end
-  
-  def dotcover_10
-    builder = FluentCommandBuilder::DotCover.create_builder
-    command = DotCover::V10::DotCover.new builder
-    yield builder if block_given?
-    command
   end
 end

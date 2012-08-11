@@ -1,19 +1,28 @@
 require File.expand_path(File.dirname(__FILE__) + '/../command_base')
-require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
+require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
+  def cucumber_12(feature=nil)
+    b = UnderlyingBuilder.new
+    c = FluentCommandBuilder::Cucumber::V12.create b, feature
+    yield b if block_given?
+    c
+  end
   module Cucumber
-    
-    COMMAND_NAME = 'cucumber' unless const_defined? :COMMAND_NAME
-    
-    def self.create_builder
-      CommandBuilder.new COMMAND_NAME
-    end
-    
     module V12
+      def self.create(underlying_builder, feature=nil)
+        Cucumber.new underlying_builder, feature
+      end
+      def cucumber(feature=nil)
+        b = UnderlyingBuilder.new
+        c = FluentCommandBuilder::Cucumber::V12.create b, feature
+        yield b if block_given?
+        c
+      end
       class Cucumber < CommandBase
-        def initialize(builder, feature=nil)
-          super builder
+        def initialize(underlying_builder, feature=nil)
+          super underlying_builder
+          @builder.command_name = 'cucumber'
           @builder.append " #{@builder.format feature}" unless feature.nil?
         end
         def require(library)
@@ -167,27 +176,6 @@ module FluentCommandBuilder
           self
         end
       end
-      
-      def cucumber(feature=nil)
-        builder = FluentCommandBuilder::Cucumber.create_builder
-        command = Cucumber.new builder, feature
-        yield builder if block_given?
-        command
-      end
-      
-      def self.create(feature=nil)
-        builder = FluentCommandBuilder::Cucumber.create_builder
-        command = Cucumber.new builder, feature
-        yield builder if block_given?
-        command
-      end
     end
-  end
-  
-  def cucumber_12(feature=nil)
-    builder = FluentCommandBuilder::Cucumber.create_builder
-    command = Cucumber::V12::Cucumber.new builder, feature
-    yield builder if block_given?
-    command
   end
 end

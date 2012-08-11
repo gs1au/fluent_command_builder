@@ -1,19 +1,28 @@
 require File.expand_path(File.dirname(__FILE__) + '/../command_base')
-require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
+require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
+  def tf_tee_2010
+    b = UnderlyingBuilder.new
+    c = FluentCommandBuilder::Tf::TEE2010.create b
+    yield b if block_given?
+    c
+  end
   module Tf
-    
-    COMMAND_NAME = 'tf' unless const_defined? :COMMAND_NAME
-    
-    def self.create_builder
-      CommandBuilder.new COMMAND_NAME
-    end
-    
     module TEE2010
+      def self.create(underlying_builder)
+        Tf.new underlying_builder
+      end
+      def tf
+        b = UnderlyingBuilder.new
+        c = FluentCommandBuilder::Tf::TEE2010.create b
+        yield b if block_given?
+        c
+      end
       class Tf < CommandBase
-        def initialize(builder)
-          super builder
+        def initialize(underlying_builder)
+          super underlying_builder
+          @builder.command_name = 'tf'
         end
         def add(item_spec)
           Add.new @builder, item_spec
@@ -200,8 +209,9 @@ module FluentCommandBuilder
         end
       end
       class Add < CommandBase
-        def initialize(builder, item_spec)
-          super builder
+        def initialize(underlying_builder, item_spec)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append " add #{@builder.format item_spec}"
         end
         def lock(lock_type)
@@ -232,8 +242,9 @@ module FluentCommandBuilder
         end
       end
       class Branch < CommandBase
-        def initialize(builder, old_item, new_item)
-          super builder
+        def initialize(underlying_builder, old_item, new_item)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append " branch #{@builder.format old_item} #{@builder.format new_item}"
         end
         def version(version_spec)
@@ -284,8 +295,9 @@ module FluentCommandBuilder
         end
       end
       class Branches < CommandBase
-        def initialize(builder, item_spec)
-          super builder
+        def initialize(underlying_builder, item_spec)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append " branches #{@builder.format item_spec}"
         end
         def version(version_spec)
@@ -306,8 +318,9 @@ module FluentCommandBuilder
         end
       end
       class Changeset < CommandBase
-        def initialize(builder, changeset_number=nil)
-          super builder
+        def initialize(underlying_builder, changeset_number=nil)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append ' changeset'
           @builder.append " #{@builder.format changeset_number}" unless changeset_number.nil?
         end
@@ -344,8 +357,9 @@ module FluentCommandBuilder
         end
       end
       class Checkin < CommandBase
-        def initialize(builder, item_spec=nil)
-          super builder
+        def initialize(underlying_builder, item_spec=nil)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append ' checkin'
           @builder.append " #{@builder.format item_spec}" unless item_spec.nil?
         end
@@ -407,8 +421,9 @@ module FluentCommandBuilder
         end
       end
       class CheckinShelveset < CommandBase
-        def initialize(builder, shelveset_name, shelveset_owner=nil)
-          super builder
+        def initialize(underlying_builder, shelveset_name, shelveset_owner=nil)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append " checkin -shelveset:#{@builder.format shelveset_name}"
           @builder.append ";#{@builder.format shelveset_owner}" unless shelveset_owner.nil?
         end
@@ -445,8 +460,9 @@ module FluentCommandBuilder
         end
       end
       class Checkout < CommandBase
-        def initialize(builder, item_spec=nil)
-          super builder
+        def initialize(underlying_builder, item_spec=nil)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append ' checkout'
           @builder.append " #{@builder.format item_spec}" unless item_spec.nil?
         end
@@ -473,8 +489,9 @@ module FluentCommandBuilder
         end
       end
       class Delete < CommandBase
-        def initialize(builder, item_spec)
-          super builder
+        def initialize(underlying_builder, item_spec)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append " delete #{@builder.format item_spec}"
         end
         def lock(lock_type)
@@ -495,8 +512,9 @@ module FluentCommandBuilder
         end
       end
       class Destroy < CommandBase
-        def initialize(builder, item_spec)
-          super builder
+        def initialize(underlying_builder, item_spec)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append " destroy #{@builder.format item_spec}"
         end
         def keep_history
@@ -542,8 +560,9 @@ module FluentCommandBuilder
         end
       end
       class CompareWithCurrentWorkspaceVersion < CommandBase
-        def initialize(builder, item_spec)
-          super builder
+        def initialize(underlying_builder, item_spec)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append " difference #{@builder.format item_spec}"
         end
         def version(version_spec)
@@ -599,8 +618,9 @@ module FluentCommandBuilder
         end
       end
       class Compare < CommandBase
-        def initialize(builder, item_spec, item_spec2)
-          super builder
+        def initialize(underlying_builder, item_spec, item_spec2)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append " difference #{@builder.format item_spec} #{@builder.format item_spec2}"
         end
         def type(file_type)
@@ -651,8 +671,9 @@ module FluentCommandBuilder
         end
       end
       class CompareWithShelvesetVersion < CommandBase
-        def initialize(builder, shelveset_item_spec)
-          super builder
+        def initialize(underlying_builder, shelveset_item_spec)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append " difference #{@builder.format shelveset_item_spec}"
         end
         def shelveset(shelveset_name, shelveset_owner=nil)
@@ -709,8 +730,9 @@ module FluentCommandBuilder
         end
       end
       class Dir < CommandBase
-        def initialize(builder, item_spec)
-          super builder
+        def initialize(underlying_builder, item_spec)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append " dir #{@builder.format item_spec}"
         end
         def version(version_spec)
@@ -746,8 +768,9 @@ module FluentCommandBuilder
         end
       end
       class Eula < CommandBase
-        def initialize(builder)
-          super builder
+        def initialize(underlying_builder)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append ' eula'
         end
         def accept
@@ -757,8 +780,9 @@ module FluentCommandBuilder
         end
       end
       class Get < CommandBase
-        def initialize(builder, item_spec=nil)
-          super builder
+        def initialize(underlying_builder, item_spec=nil)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append ' get'
           @builder.append " #{@builder.format item_spec}" unless item_spec.nil?
         end
@@ -810,8 +834,9 @@ module FluentCommandBuilder
         end
       end
       class Getcs < CommandBase
-        def initialize(builder)
-          super builder
+        def initialize(underlying_builder)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append ' getcs'
         end
         def changeset(changeset_number)
@@ -826,8 +851,9 @@ module FluentCommandBuilder
         end
       end
       class History < CommandBase
-        def initialize(builder, item_spec)
-          super builder
+        def initialize(underlying_builder, item_spec)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append " history #{@builder.format item_spec}"
         end
         def version(version_spec)
@@ -888,8 +914,9 @@ module FluentCommandBuilder
         end
       end
       class Label < CommandBase
-        def initialize(builder, label_name, item_spec, scope=nil)
-          super builder
+        def initialize(underlying_builder, label_name, item_spec, scope=nil)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append " label #{@builder.format label_name}"
           @builder.append "@#{@builder.format scope}" unless scope.nil?
           @builder.append " #{@builder.format item_spec}"
@@ -932,8 +959,9 @@ module FluentCommandBuilder
         end
       end
       class DeleteLabel < CommandBase
-        def initialize(builder, label_name, item_spec, scope=nil)
-          super builder
+        def initialize(underlying_builder, label_name, item_spec, scope=nil)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append " label -delete #{@builder.format label_name}"
           @builder.append "@#{@builder.format scope}" unless scope.nil?
           @builder.append " #{@builder.format item_spec}"
@@ -951,8 +979,9 @@ module FluentCommandBuilder
         end
       end
       class Labels < CommandBase
-        def initialize(builder, label_name=nil)
-          super builder
+        def initialize(underlying_builder, label_name=nil)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append ' labels'
           @builder.append " #{@builder.format label_name}" unless label_name.nil?
         end
@@ -979,8 +1008,9 @@ module FluentCommandBuilder
         end
       end
       class Lock < CommandBase
-        def initialize(builder, item_spec)
-          super builder
+        def initialize(underlying_builder, item_spec)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append " lock #{@builder.format item_spec}"
         end
         def lock(lock_type)
@@ -1012,8 +1042,9 @@ module FluentCommandBuilder
         end
       end
       class Merge < CommandBase
-        def initialize(builder, source, destination)
-          super builder
+        def initialize(underlying_builder, source, destination)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append " merge #{@builder.format source} #{@builder.format destination}"
         end
         def recursive
@@ -1089,8 +1120,9 @@ module FluentCommandBuilder
         end
       end
       class Merges < CommandBase
-        def initialize(builder, destination, source=nil)
-          super builder
+        def initialize(underlying_builder, destination, source=nil)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append ' merges'
           @builder.append " #{@builder.format source}" unless source.nil?
           @builder.append " #{@builder.format destination}"
@@ -1128,8 +1160,9 @@ module FluentCommandBuilder
         end
       end
       class Print < CommandBase
-        def initialize(builder, item_spec)
-          super builder
+        def initialize(underlying_builder, item_spec)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append " print #{@builder.format item_spec}"
         end
         def version(version_spec)
@@ -1139,8 +1172,9 @@ module FluentCommandBuilder
         end
       end
       class ProductKey < CommandBase
-        def initialize(builder)
-          super builder
+        def initialize(underlying_builder)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append ' productKey'
         end
         def set(my_product_key)
@@ -1155,8 +1189,9 @@ module FluentCommandBuilder
         end
       end
       class EditProfile < CommandBase
-        def initialize(builder, existing_profile_name)
-          super builder
+        def initialize(underlying_builder, existing_profile_name)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append " profile -edit #{@builder.format existing_profile_name}"
         end
         def string(property_name, value)
@@ -1176,8 +1211,9 @@ module FluentCommandBuilder
         end
       end
       class NewProfile < CommandBase
-        def initialize(builder, new_profile_name)
-          super builder
+        def initialize(underlying_builder, new_profile_name)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append " profile -new #{@builder.format new_profile_name}"
         end
         def string(property_name, value)
@@ -1197,8 +1233,9 @@ module FluentCommandBuilder
         end
       end
       class Profiles < CommandBase
-        def initialize(builder)
-          super builder
+        def initialize(underlying_builder)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append ' profiles'
         end
         def format(format)
@@ -1208,8 +1245,9 @@ module FluentCommandBuilder
         end
       end
       class Properties < CommandBase
-        def initialize(builder, item_spec)
-          super builder
+        def initialize(underlying_builder, item_spec)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append " properties #{@builder.format item_spec}"
         end
         def collection(team_project_collection_url)
@@ -1241,8 +1279,9 @@ module FluentCommandBuilder
         end
       end
       class Reconcile < CommandBase
-        def initialize(builder)
-          super builder
+        def initialize(underlying_builder)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append ' reconcile'
         end
         def team_project(team_project_name)
@@ -1258,8 +1297,9 @@ module FluentCommandBuilder
         end
       end
       class ReconcileBuild < CommandBase
-        def initialize(builder, build_name, item_spec=nil)
-          super builder
+        def initialize(underlying_builder, build_name, item_spec=nil)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append " reconcile -buildName:#{@builder.format build_name}"
           @builder.append " #{@builder.format item_spec}" unless item_spec.nil?
         end
@@ -1281,8 +1321,9 @@ module FluentCommandBuilder
         end
       end
       class ReconcileChangeset < CommandBase
-        def initialize(builder, changeset_name, item_spec=nil)
-          super builder
+        def initialize(underlying_builder, changeset_name, item_spec=nil)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append " reconcile -changeset:#{@builder.format changeset_name}"
           @builder.append " #{@builder.format item_spec}" unless item_spec.nil?
         end
@@ -1304,8 +1345,9 @@ module FluentCommandBuilder
         end
       end
       class ReconcileForgetBuild < CommandBase
-        def initialize(builder, build_name, item_spec=nil)
-          super builder
+        def initialize(underlying_builder, build_name, item_spec=nil)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append " reconcile -forgetBuild:#{@builder.format build_name}"
           @builder.append " #{@builder.format item_spec}" unless item_spec.nil?
         end
@@ -1327,8 +1369,9 @@ module FluentCommandBuilder
         end
       end
       class Rename < CommandBase
-        def initialize(builder, old_item, new_item)
-          super builder
+        def initialize(underlying_builder, old_item, new_item)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append " rename #{@builder.format old_item} #{@builder.format new_item}"
         end
         def lock(lock_type)
@@ -1344,8 +1387,9 @@ module FluentCommandBuilder
         end
       end
       class Resolve < CommandBase
-        def initialize(builder, item_spec=nil)
-          super builder
+        def initialize(underlying_builder, item_spec=nil)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append ' resolve'
           @builder.append " #{@builder.format item_spec}" unless item_spec.nil?
         end
@@ -1392,8 +1436,9 @@ module FluentCommandBuilder
         end
       end
       class ReplaceShelveset < CommandBase
-        def initialize(builder, shelveset_name)
-          super builder
+        def initialize(underlying_builder, shelveset_name)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append " shelve -replace #{@builder.format shelveset_name}"
         end
         def comment(comment)
@@ -1419,8 +1464,9 @@ module FluentCommandBuilder
         end
       end
       class Shelve < CommandBase
-        def initialize(builder, shelveset_name, item_spec)
-          super builder
+        def initialize(underlying_builder, shelveset_name, item_spec)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append " shelve #{@builder.format shelveset_name} #{@builder.format item_spec}"
         end
         def move
@@ -1461,8 +1507,9 @@ module FluentCommandBuilder
         end
       end
       class DeleteShelveset < CommandBase
-        def initialize(builder, shelveset_name, shelveset_owner=nil)
-          super builder
+        def initialize(underlying_builder, shelveset_name, shelveset_owner=nil)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append " shelve -delete #{@builder.format shelveset_name}"
           @builder.append ";#{@builder.format shelveset_owner}" unless shelveset_owner.nil?
         end
@@ -1479,8 +1526,9 @@ module FluentCommandBuilder
         end
       end
       class Shelvesets < CommandBase
-        def initialize(builder, shelveset_name=nil)
-          super builder
+        def initialize(underlying_builder, shelveset_name=nil)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append ' shelvesets'
           @builder.append " #{@builder.format shelveset_name}" unless shelveset_name.nil?
         end
@@ -1507,8 +1555,9 @@ module FluentCommandBuilder
         end
       end
       class Status < CommandBase
-        def initialize(builder, item_spec)
-          super builder
+        def initialize(underlying_builder, item_spec)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append " status #{@builder.format item_spec}"
         end
         def collection(team_project_collection_url)
@@ -1551,8 +1600,9 @@ module FluentCommandBuilder
         end
       end
       class Undelete < CommandBase
-        def initialize(builder, item_spec, deletion_id=nil)
-          super builder
+        def initialize(underlying_builder, item_spec, deletion_id=nil)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append " undelete #{@builder.format item_spec}"
           @builder.append ";#{@builder.format deletion_id}" unless deletion_id.nil?
         end
@@ -1579,8 +1629,9 @@ module FluentCommandBuilder
         end
       end
       class Undo < CommandBase
-        def initialize(builder, item_spec)
-          super builder
+        def initialize(underlying_builder, item_spec)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append " undo #{@builder.format item_spec}"
         end
         def workspace(workspace_name, workspace_owner=nil)
@@ -1612,8 +1663,9 @@ module FluentCommandBuilder
         end
       end
       class Unlabel < CommandBase
-        def initialize(builder, label_name, item_spec)
-          super builder
+        def initialize(underlying_builder, label_name, item_spec)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append " unlabel #{@builder.format label_name} #{@builder.format item_spec}"
         end
         def collection(team_project_collection_url)
@@ -1634,8 +1686,9 @@ module FluentCommandBuilder
         end
       end
       class Unshelve < CommandBase
-        def initialize(builder, shelveset_name=nil, username=nil, item_spec=nil)
-          super builder
+        def initialize(underlying_builder, shelveset_name=nil, username=nil, item_spec=nil)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append ' unshelve'
           @builder.append " #{@builder.format shelveset_name}" unless shelveset_name.nil?
           @builder.append ";#{@builder.format username}" unless username.nil?
@@ -1664,8 +1717,9 @@ module FluentCommandBuilder
         end
       end
       class ShowLocalFolderMapping < CommandBase
-        def initialize(builder, local_folder)
-          super builder
+        def initialize(underlying_builder, local_folder)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append " workfold #{@builder.format local_folder}"
         end
         def login(username, password=nil)
@@ -1676,8 +1730,9 @@ module FluentCommandBuilder
         end
       end
       class ShowWorkspaceMappings < CommandBase
-        def initialize(builder, workspace_name)
-          super builder
+        def initialize(underlying_builder, workspace_name)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append " workfold -workspace:#{@builder.format workspace_name}"
         end
         def login(username, password=nil)
@@ -1688,8 +1743,9 @@ module FluentCommandBuilder
         end
       end
       class ShowServerFolderMappings < CommandBase
-        def initialize(builder, server_folder)
-          super builder
+        def initialize(underlying_builder, server_folder)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append " workfold #{@builder.format server_folder}"
         end
         def login(username, password=nil)
@@ -1711,8 +1767,9 @@ module FluentCommandBuilder
         end
       end
       class MapFolder < CommandBase
-        def initialize(builder, server_folder, local_folder)
-          super builder
+        def initialize(underlying_builder, server_folder, local_folder)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append " workfold -map #{@builder.format server_folder} #{@builder.format local_folder}"
         end
         def login(username, password=nil)
@@ -1734,8 +1791,9 @@ module FluentCommandBuilder
         end
       end
       class UnmapFolder < CommandBase
-        def initialize(builder)
-          super builder
+        def initialize(underlying_builder)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append ' workfold -unmap'
         end
         def login(username, password=nil)
@@ -1762,8 +1820,9 @@ module FluentCommandBuilder
         end
       end
       class CloakFolder < CommandBase
-        def initialize(builder, server_folder)
-          super builder
+        def initialize(underlying_builder, server_folder)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append " workfold -cloak #{@builder.format server_folder}"
         end
         def login(username, password=nil)
@@ -1785,8 +1844,9 @@ module FluentCommandBuilder
         end
       end
       class DecloakFolder < CommandBase
-        def initialize(builder, server_folder)
-          super builder
+        def initialize(underlying_builder, server_folder)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append " workfold -decloak #{@builder.format server_folder}"
         end
         def login(username, password=nil)
@@ -1808,8 +1868,9 @@ module FluentCommandBuilder
         end
       end
       class CreateWorkspace < CommandBase
-        def initialize(builder, workspace_name, workspace_owner=nil)
-          super builder
+        def initialize(underlying_builder, workspace_name, workspace_owner=nil)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append " workspace -new #{@builder.format workspace_name}"
           @builder.append ";#{@builder.format workspace_owner}" unless workspace_owner.nil?
         end
@@ -1852,8 +1913,9 @@ module FluentCommandBuilder
         end
       end
       class DeleteWorkspace < CommandBase
-        def initialize(builder, workspace_name, workspace_owner=nil)
-          super builder
+        def initialize(underlying_builder, workspace_name, workspace_owner=nil)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append " workspace -delete #{@builder.format workspace_name}"
           @builder.append ";#{@builder.format workspace_owner}" unless workspace_owner.nil?
         end
@@ -1870,8 +1932,9 @@ module FluentCommandBuilder
         end
       end
       class ModifyWorkspace < CommandBase
-        def initialize(builder, workspace_name=nil, workspace_owner=nil)
-          super builder
+        def initialize(underlying_builder, workspace_name=nil, workspace_owner=nil)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append ' workspace '
           @builder.append "#{@builder.format workspace_name}" unless workspace_name.nil?
           @builder.append ";#{@builder.format workspace_owner}" unless workspace_owner.nil?
@@ -1914,8 +1977,9 @@ module FluentCommandBuilder
         end
       end
       class Workspaces < CommandBase
-        def initialize(builder, workspace_name=nil)
-          super builder
+        def initialize(underlying_builder, workspace_name=nil)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append ' workspaces'
           @builder.append " #{@builder.format workspace_name}" unless workspace_name.nil?
         end
@@ -1957,8 +2021,9 @@ module FluentCommandBuilder
         end
       end
       class RemoveWorkspace < CommandBase
-        def initialize(builder, workspace_name)
-          super builder
+        def initialize(underlying_builder, workspace_name)
+          super underlying_builder
+          @builder.command_name = 'tf'
           @builder.append " workspaces -remove:#{@builder.format workspace_name, ','}"
         end
         def collection(team_project_collection_url)
@@ -1967,27 +2032,6 @@ module FluentCommandBuilder
           self
         end
       end
-      
-      def tf
-        builder = FluentCommandBuilder::Tf.create_builder
-        command = Tf.new builder
-        yield builder if block_given?
-        command
-      end
-      
-      def self.create
-        builder = FluentCommandBuilder::Tf.create_builder
-        command = Tf.new builder
-        yield builder if block_given?
-        command
-      end
     end
-  end
-  
-  def tf_tee_2010
-    builder = FluentCommandBuilder::Tf.create_builder
-    command = Tf::TEE2010::Tf.new builder
-    yield builder if block_given?
-    command
   end
 end

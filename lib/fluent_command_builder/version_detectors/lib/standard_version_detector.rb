@@ -6,7 +6,8 @@ module FluentCommandBuilder
       path ||= PathFinder.find_path executable_name
       return unless path
       executable = File.join path, executable_name
-      output = `"#{executable}" #{executable_args} 2>&1`
+      command = %Q["#{executable}" #{executable_args} 2>&1]
+      output = `#{command}`
       output.match(/(?:\d+\.)(?:\d+\.?)+/) { |m| m[0] }
     end
   end

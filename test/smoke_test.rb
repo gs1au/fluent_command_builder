@@ -77,13 +77,13 @@ class SmokeTest < CommandTestBase
   def test_yield_command_builder_on_module_method
     builder = nil
     msbuild_40('sample.proj') { |b| builder = b }
-    assert_kind_of CommandBuilder, builder
+    assert_kind_of UnderlyingBuilder, builder
   end
 
   def test_yield_command_builder_on_class_method
     builder = nil
     msbuild_40('sample.proj').target('target') { |b| builder = b }
-    assert_kind_of CommandBuilder, builder
+    assert_kind_of UnderlyingBuilder, builder
   end
 
   def test_full_command_path

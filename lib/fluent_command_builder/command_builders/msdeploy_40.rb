@@ -1,19 +1,28 @@
 require File.expand_path(File.dirname(__FILE__) + '/../command_base')
-require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
+require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
+  def msdeploy_40
+    b = UnderlyingBuilder.new
+    c = FluentCommandBuilder::MSDeploy::V40.create b
+    yield b if block_given?
+    c
+  end
   module MSDeploy
-    
-    COMMAND_NAME = 'MSDeploy' unless const_defined? :COMMAND_NAME
-    
-    def self.create_builder
-      CommandBuilder.new COMMAND_NAME
-    end
-    
     module V40
+      def self.create(underlying_builder)
+        MSDeploy.new underlying_builder
+      end
+      def msdeploy
+        b = UnderlyingBuilder.new
+        c = FluentCommandBuilder::MSDeploy::V40.create b
+        yield b if block_given?
+        c
+      end
       class MSDeploy < CommandBase
-        def initialize(builder)
-          super builder
+        def initialize(underlying_builder)
+          super underlying_builder
+          @builder.command_name = 'MSDeploy'
         end
         def allow_untrusted(bool)
           @builder.append " -allowUntrusted:#{@builder.format bool}"
@@ -166,27 +175,6 @@ module FluentCommandBuilder
           self
         end
       end
-      
-      def msdeploy
-        builder = FluentCommandBuilder::MSDeploy.create_builder
-        command = MSDeploy.new builder
-        yield builder if block_given?
-        command
-      end
-      
-      def self.create
-        builder = FluentCommandBuilder::MSDeploy.create_builder
-        command = MSDeploy.new builder
-        yield builder if block_given?
-        command
-      end
     end
-  end
-  
-  def msdeploy_40
-    builder = FluentCommandBuilder::MSDeploy.create_builder
-    command = MSDeploy::V40::MSDeploy.new builder
-    yield builder if block_given?
-    command
   end
 end

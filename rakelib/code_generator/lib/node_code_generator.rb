@@ -5,8 +5,9 @@ require_relative 'node_code_names'
 module CodeGenerator
   class NodeCodeGenerator
 
-    def initialize(node, writer)
+    def initialize(node, command, writer)
       @node = node
+      @command = command
       @writer = writer
     end
 
@@ -33,7 +34,7 @@ module CodeGenerator
       @writer.write_class node_code_names.class_name, 'CommandBase' do
         render_constructor
         @node.child_nodes.each do |n|
-          generator = NodeCodeGenerator.new n, @writer
+          generator = NodeCodeGenerator.new n, @command, @writer
           generator.render_method
         end
       end
@@ -46,14 +47,15 @@ module CodeGenerator
 
     def render_child_nodes
       @node.child_nodes.each do |n|
-        generator = NodeCodeGenerator.new n, @writer
+        generator = NodeCodeGenerator.new n, @command, @writer
         generator.render
       end
     end
 
     def render_constructor
-      @writer.write_method 'initialize', 'builder', node_code_names.method_args do
-        @writer.write_line 'super builder'
+      @writer.write_method 'initialize', 'underlying_builder', node_code_names.method_args do
+        @writer.write_line 'super underlying_builder'
+        @writer.write_line "@builder.command_name = '#{@command.command_name}'"
         render_leaf_node_method_body
       end
     end

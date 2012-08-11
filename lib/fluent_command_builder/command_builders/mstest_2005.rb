@@ -1,19 +1,28 @@
 require File.expand_path(File.dirname(__FILE__) + '/../command_base')
-require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
+require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
+  def mstest_2005
+    b = UnderlyingBuilder.new
+    c = FluentCommandBuilder::MSTest::V2005.create b
+    yield b if block_given?
+    c
+  end
   module MSTest
-    
-    COMMAND_NAME = 'MSTest' unless const_defined? :COMMAND_NAME
-    
-    def self.create_builder
-      CommandBuilder.new COMMAND_NAME
-    end
-    
     module V2005
+      def self.create(underlying_builder)
+        MSTest.new underlying_builder
+      end
+      def mstest
+        b = UnderlyingBuilder.new
+        c = FluentCommandBuilder::MSTest::V2005.create b
+        yield b if block_given?
+        c
+      end
       class MSTest < CommandBase
-        def initialize(builder)
-          super builder
+        def initialize(underlying_builder)
+          super underlying_builder
+          @builder.command_name = 'MSTest'
         end
         def test_container(file_name)
           @builder.append " /testContainer:#{@builder.format file_name}"
@@ -96,27 +105,6 @@ module FluentCommandBuilder
           self
         end
       end
-      
-      def mstest
-        builder = FluentCommandBuilder::MSTest.create_builder
-        command = MSTest.new builder
-        yield builder if block_given?
-        command
-      end
-      
-      def self.create
-        builder = FluentCommandBuilder::MSTest.create_builder
-        command = MSTest.new builder
-        yield builder if block_given?
-        command
-      end
     end
-  end
-  
-  def mstest_2005
-    builder = FluentCommandBuilder::MSTest.create_builder
-    command = MSTest::V2005::MSTest.new builder
-    yield builder if block_given?
-    command
   end
 end

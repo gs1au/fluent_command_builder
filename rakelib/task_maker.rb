@@ -1,4 +1,5 @@
 include Rake::DSL
+require_relative '../lib/fluent_command_builder'; include FluentCommandBuilder
 
 class TaskMaker
 
@@ -22,36 +23,17 @@ class TaskMaker
     File.join 'reference', @command_name, command_name_with_version
   end
 
-  def self.make_task(command_name, version, &block)
-    task_maker = TaskMaker.new command_name, version
-    task_maker.make_task &block
-  end
-
-  def self.make_task1(mod, args='')
-    self.make_task mod::COMMAND_NAME.downcase, mod.version do |task_maker|
-      system "#{mod::COMMAND_NAME} #{args} > #{task_maker.output_dir}/help.txt"
-    end
-  end
-
-
-  def self.make_task2(mod, &block)
-    self.make_task mod::COMMAND_NAME.downcase, mod.version, &block
-  end
-
-  def self.make_task3(mod)
+  def self.make_task(mod)
     begin
-      m = version_module mod
-      c = m.create
-
-      self.make_task mod::COMMAND_NAME.downcase, mod.version do |task_maker|
-
+      task_maker = TaskMaker.new mod::COMMAND_NAME.downcase, mod.version
+      task_maker.make_task do |task_maker|
         if block_given?
-          yield c
+          yield task_maker
         else
-          c.help
+          c = mod.create
+          c.help if c.respond_to? :help
+          c.execute! { |b| b.append " > #{task_maker.output_dir}/help.txt" }
         end
-
-        c.execute! { |b| b.append " > #{task_maker.output_dir}/help.txt" }
       end
     rescue
       # do nothing
@@ -59,11 +41,6 @@ class TaskMaker
   end
 
   private
-
-  def self.version_module(command_module)
-    version = command_module.version.match(/^(\d+\.\d+)/)[1].sub '.', ''
-    eval "#{command_module.name}::V#{version}"
-  end
 
   def major_version
     @version.match(/^(\d+)\.\d+/)[1]

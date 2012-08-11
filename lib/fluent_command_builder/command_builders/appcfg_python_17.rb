@@ -1,19 +1,28 @@
 require File.expand_path(File.dirname(__FILE__) + '/../command_base')
-require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
+require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
+  def appcfg_python_17
+    b = UnderlyingBuilder.new
+    c = FluentCommandBuilder::AppCfgPython::V17.create b
+    yield b if block_given?
+    c
+  end
   module AppCfgPython
-    
-    COMMAND_NAME = 'appcfg.py' unless const_defined? :COMMAND_NAME
-    
-    def self.create_builder
-      CommandBuilder.new COMMAND_NAME
-    end
-    
     module V17
+      def self.create(underlying_builder)
+        AppCfgPython.new underlying_builder
+      end
+      def appcfg_python
+        b = UnderlyingBuilder.new
+        c = FluentCommandBuilder::AppCfgPython::V17.create b
+        yield b if block_given?
+        c
+      end
       class AppCfgPython < CommandBase
-        def initialize(builder)
-          super builder
+        def initialize(underlying_builder)
+          super underlying_builder
+          @builder.command_name = 'appcfg.py'
         end
         def backends(directory)
           Backends.new @builder, directory
@@ -68,8 +77,9 @@ module FluentCommandBuilder
         end
       end
       class Backends < CommandBase
-        def initialize(builder, directory)
-          super builder
+        def initialize(underlying_builder, directory)
+          super underlying_builder
+          @builder.command_name = 'appcfg.py'
           @builder.append " backends #{@builder.format directory}"
         end
         def configure(backend)
@@ -95,8 +105,9 @@ module FluentCommandBuilder
         end
       end
       class Configure < CommandBase
-        def initialize(builder, backend)
-          super builder
+        def initialize(underlying_builder, backend)
+          super underlying_builder
+          @builder.command_name = 'appcfg.py'
           @builder.append " configure #{@builder.format backend}"
         end
         def help
@@ -191,8 +202,9 @@ module FluentCommandBuilder
         end
       end
       class Delete < CommandBase
-        def initialize(builder, backend)
-          super builder
+        def initialize(underlying_builder, backend)
+          super underlying_builder
+          @builder.command_name = 'appcfg.py'
           @builder.append " delete #{@builder.format backend}"
         end
         def help
@@ -287,8 +299,9 @@ module FluentCommandBuilder
         end
       end
       class List < CommandBase
-        def initialize(builder)
-          super builder
+        def initialize(underlying_builder)
+          super underlying_builder
+          @builder.command_name = 'appcfg.py'
           @builder.append ' list'
         end
         def help
@@ -383,8 +396,9 @@ module FluentCommandBuilder
         end
       end
       class Rollback < CommandBase
-        def initialize(builder, backend)
-          super builder
+        def initialize(underlying_builder, backend)
+          super underlying_builder
+          @builder.command_name = 'appcfg.py'
           @builder.append " rollback #{@builder.format backend}"
         end
         def help
@@ -479,8 +493,9 @@ module FluentCommandBuilder
         end
       end
       class Start < CommandBase
-        def initialize(builder, backend)
-          super builder
+        def initialize(underlying_builder, backend)
+          super underlying_builder
+          @builder.command_name = 'appcfg.py'
           @builder.append " start #{@builder.format backend}"
         end
         def help
@@ -575,8 +590,9 @@ module FluentCommandBuilder
         end
       end
       class Stop < CommandBase
-        def initialize(builder, backend)
-          super builder
+        def initialize(underlying_builder, backend)
+          super underlying_builder
+          @builder.command_name = 'appcfg.py'
           @builder.append " stop #{@builder.format backend}"
         end
         def help
@@ -671,8 +687,9 @@ module FluentCommandBuilder
         end
       end
       class Update < CommandBase
-        def initialize(builder, backend)
-          super builder
+        def initialize(underlying_builder, backend)
+          super underlying_builder
+          @builder.command_name = 'appcfg.py'
           @builder.append " update #{@builder.format backend}"
         end
         def help
@@ -777,8 +794,9 @@ module FluentCommandBuilder
         end
       end
       class CreateBulkloadConfig < CommandBase
-        def initialize(builder, directory)
-          super builder
+        def initialize(underlying_builder, directory)
+          super underlying_builder
+          @builder.command_name = 'appcfg.py'
           @builder.append " create_bulkload_config #{@builder.format directory}"
         end
         def help
@@ -933,8 +951,9 @@ module FluentCommandBuilder
         end
       end
       class CronInfo < CommandBase
-        def initialize(builder, directory)
-          super builder
+        def initialize(underlying_builder, directory)
+          super underlying_builder
+          @builder.command_name = 'appcfg.py'
           @builder.append " cron_info #{@builder.format directory}"
         end
         def help
@@ -1034,8 +1053,9 @@ module FluentCommandBuilder
         end
       end
       class DownloadApp < CommandBase
-        def initialize(builder)
-          super builder
+        def initialize(underlying_builder)
+          super underlying_builder
+          @builder.command_name = 'appcfg.py'
           @builder.append ' download_app'
         end
         def help
@@ -1130,8 +1150,9 @@ module FluentCommandBuilder
         end
       end
       class DownloadData < CommandBase
-        def initialize(builder, directory)
-          super builder
+        def initialize(underlying_builder, directory)
+          super underlying_builder
+          @builder.command_name = 'appcfg.py'
           @builder.append " download_data #{@builder.format directory}"
         end
         def help
@@ -1306,8 +1327,9 @@ module FluentCommandBuilder
         end
       end
       class Help < CommandBase
-        def initialize(builder, action)
-          super builder
+        def initialize(underlying_builder, action)
+          super underlying_builder
+          @builder.command_name = 'appcfg.py'
           @builder.append " help #{@builder.format action}"
         end
         def help
@@ -1402,8 +1424,9 @@ module FluentCommandBuilder
         end
       end
       class RequestLogs < CommandBase
-        def initialize(builder, directory, output_file)
-          super builder
+        def initialize(underlying_builder, directory, output_file)
+          super underlying_builder
+          @builder.command_name = 'appcfg.py'
           @builder.append " request_logs #{@builder.format directory} #{@builder.format output_file}"
         end
         def help
@@ -1533,8 +1556,9 @@ module FluentCommandBuilder
         end
       end
       class ResourceLimitsInfo < CommandBase
-        def initialize(builder, directory)
-          super builder
+        def initialize(underlying_builder, directory)
+          super underlying_builder
+          @builder.command_name = 'appcfg.py'
           @builder.append " resource_limits_info #{@builder.format directory}"
         end
         def help
@@ -1629,8 +1653,9 @@ module FluentCommandBuilder
         end
       end
       class Rollback < CommandBase
-        def initialize(builder, directory)
-          super builder
+        def initialize(underlying_builder, directory)
+          super underlying_builder
+          @builder.command_name = 'appcfg.py'
           @builder.append " rollback #{@builder.format directory}"
         end
         def help
@@ -1725,8 +1750,9 @@ module FluentCommandBuilder
         end
       end
       class SetDefaultVersion < CommandBase
-        def initialize(builder, directory)
-          super builder
+        def initialize(underlying_builder, directory)
+          super underlying_builder
+          @builder.command_name = 'appcfg.py'
           @builder.append " set_default_version #{@builder.format directory}"
         end
         def help
@@ -1821,8 +1847,9 @@ module FluentCommandBuilder
         end
       end
       class Update < CommandBase
-        def initialize(builder, directory)
-          super builder
+        def initialize(underlying_builder, directory)
+          super underlying_builder
+          @builder.command_name = 'appcfg.py'
           @builder.append " update #{@builder.format directory}"
         end
         def help
@@ -1927,8 +1954,9 @@ module FluentCommandBuilder
         end
       end
       class UpdateCron < CommandBase
-        def initialize(builder, directory)
-          super builder
+        def initialize(underlying_builder, directory)
+          super underlying_builder
+          @builder.command_name = 'appcfg.py'
           @builder.append " update_cron #{@builder.format directory}"
         end
         def help
@@ -2023,8 +2051,9 @@ module FluentCommandBuilder
         end
       end
       class UpdateDos < CommandBase
-        def initialize(builder, directory)
-          super builder
+        def initialize(underlying_builder, directory)
+          super underlying_builder
+          @builder.command_name = 'appcfg.py'
           @builder.append " update_dos #{@builder.format directory}"
         end
         def help
@@ -2119,8 +2148,9 @@ module FluentCommandBuilder
         end
       end
       class UpdateIndexes < CommandBase
-        def initialize(builder, directory)
-          super builder
+        def initialize(underlying_builder, directory)
+          super underlying_builder
+          @builder.command_name = 'appcfg.py'
           @builder.append " update_indexes #{@builder.format directory}"
         end
         def help
@@ -2215,8 +2245,9 @@ module FluentCommandBuilder
         end
       end
       class UpdateQueues < CommandBase
-        def initialize(builder, directory)
-          super builder
+        def initialize(underlying_builder, directory)
+          super underlying_builder
+          @builder.command_name = 'appcfg.py'
           @builder.append " update_queues #{@builder.format directory}"
         end
         def help
@@ -2311,8 +2342,9 @@ module FluentCommandBuilder
         end
       end
       class UploadData < CommandBase
-        def initialize(builder, directory)
-          super builder
+        def initialize(underlying_builder, directory)
+          super underlying_builder
+          @builder.command_name = 'appcfg.py'
           @builder.append " upload_data #{@builder.format directory}"
         end
         def help
@@ -2487,8 +2519,9 @@ module FluentCommandBuilder
         end
       end
       class VacuumIndexes < CommandBase
-        def initialize(builder, directory)
-          super builder
+        def initialize(underlying_builder, directory)
+          super underlying_builder
+          @builder.command_name = 'appcfg.py'
           @builder.append " vacuum_indexes #{@builder.format directory}"
         end
         def help
@@ -2587,27 +2620,6 @@ module FluentCommandBuilder
           self
         end
       end
-      
-      def appcfg_python
-        builder = FluentCommandBuilder::AppCfgPython.create_builder
-        command = AppCfgPython.new builder
-        yield builder if block_given?
-        command
-      end
-      
-      def self.create
-        builder = FluentCommandBuilder::AppCfgPython.create_builder
-        command = AppCfgPython.new builder
-        yield builder if block_given?
-        command
-      end
     end
-  end
-  
-  def appcfg_python_17
-    builder = FluentCommandBuilder::AppCfgPython.create_builder
-    command = AppCfgPython::V17::AppCfgPython.new builder
-    yield builder if block_given?
-    command
   end
 end

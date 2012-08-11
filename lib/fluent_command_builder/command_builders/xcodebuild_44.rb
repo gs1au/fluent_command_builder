@@ -1,19 +1,28 @@
 require File.expand_path(File.dirname(__FILE__) + '/../command_base')
-require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
+require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
+  def xcodebuild_44
+    b = UnderlyingBuilder.new
+    c = FluentCommandBuilder::XCodeBuild::V44.create b
+    yield b if block_given?
+    c
+  end
   module XCodeBuild
-    
-    COMMAND_NAME = 'xcodebuild' unless const_defined? :COMMAND_NAME
-    
-    def self.create_builder
-      CommandBuilder.new COMMAND_NAME
-    end
-    
     module V44
+      def self.create(underlying_builder)
+        XCodeBuild.new underlying_builder
+      end
+      def xcodebuild
+        b = UnderlyingBuilder.new
+        c = FluentCommandBuilder::XCodeBuild::V44.create b
+        yield b if block_given?
+        c
+      end
       class XCodeBuild < CommandBase
-        def initialize(builder)
-          super builder
+        def initialize(underlying_builder)
+          super underlying_builder
+          @builder.command_name = 'xcodebuild'
         end
         def build_project(build_action=nil)
           BuildProject.new @builder, build_action
@@ -69,8 +78,9 @@ module FluentCommandBuilder
         end
       end
       class BuildProject < CommandBase
-        def initialize(builder, build_action=nil)
-          super builder
+        def initialize(underlying_builder, build_action=nil)
+          super underlying_builder
+          @builder.command_name = 'xcodebuild'
           @builder.append ' '
           @builder.append "#{@builder.format build_action, ' '}" unless build_action.nil?
         end
@@ -146,8 +156,9 @@ module FluentCommandBuilder
         end
       end
       class BuildProjectScheme < CommandBase
-        def initialize(builder, build_action=nil)
-          super builder
+        def initialize(underlying_builder, build_action=nil)
+          super underlying_builder
+          @builder.command_name = 'xcodebuild'
           @builder.append ' '
           @builder.append "#{@builder.format build_action, ' '}" unless build_action.nil?
         end
@@ -213,8 +224,9 @@ module FluentCommandBuilder
         end
       end
       class BuildWorkspace < CommandBase
-        def initialize(builder, workspace_name, build_action=nil)
-          super builder
+        def initialize(underlying_builder, workspace_name, build_action=nil)
+          super underlying_builder
+          @builder.command_name = 'xcodebuild'
           @builder.append " -workspace #{@builder.format workspace_name}"
           @builder.append " #{@builder.format build_action, ' '}" unless build_action.nil?
         end
@@ -280,8 +292,9 @@ module FluentCommandBuilder
         end
       end
       class Version < CommandBase
-        def initialize(builder)
-          super builder
+        def initialize(underlying_builder)
+          super underlying_builder
+          @builder.command_name = 'xcodebuild'
           @builder.append ' -version'
         end
         def sdk(sdk_name)
@@ -295,27 +308,6 @@ module FluentCommandBuilder
           self
         end
       end
-      
-      def xcodebuild
-        builder = FluentCommandBuilder::XCodeBuild.create_builder
-        command = XCodeBuild.new builder
-        yield builder if block_given?
-        command
-      end
-      
-      def self.create
-        builder = FluentCommandBuilder::XCodeBuild.create_builder
-        command = XCodeBuild.new builder
-        yield builder if block_given?
-        command
-      end
     end
-  end
-  
-  def xcodebuild_44
-    builder = FluentCommandBuilder::XCodeBuild.create_builder
-    command = XCodeBuild::V44::XCodeBuild.new builder
-    yield builder if block_given?
-    command
   end
 end

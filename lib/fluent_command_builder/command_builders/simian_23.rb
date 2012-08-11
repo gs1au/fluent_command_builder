@@ -1,19 +1,28 @@
 require File.expand_path(File.dirname(__FILE__) + '/../command_base')
-require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
+require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
+  def simian_23
+    b = UnderlyingBuilder.new
+    c = FluentCommandBuilder::Simian::V23.create b
+    yield b if block_given?
+    c
+  end
   module Simian
-    
-    COMMAND_NAME = 'simian' unless const_defined? :COMMAND_NAME
-    
-    def self.create_builder
-      CommandBuilder.new COMMAND_NAME
-    end
-    
     module V23
+      def self.create(underlying_builder)
+        Simian.new underlying_builder
+      end
+      def simian
+        b = UnderlyingBuilder.new
+        c = FluentCommandBuilder::Simian::V23.create b
+        yield b if block_given?
+        c
+      end
       class Simian < CommandBase
-        def initialize(builder)
-          super builder
+        def initialize(underlying_builder)
+          super underlying_builder
+          @builder.command_name = 'simian'
         end
         def formatter(formatter)
           @builder.append " -formatter=#{@builder.format formatter}"
@@ -131,27 +140,6 @@ module FluentCommandBuilder
           self
         end
       end
-      
-      def simian
-        builder = FluentCommandBuilder::Simian.create_builder
-        command = Simian.new builder
-        yield builder if block_given?
-        command
-      end
-      
-      def self.create
-        builder = FluentCommandBuilder::Simian.create_builder
-        command = Simian.new builder
-        yield builder if block_given?
-        command
-      end
     end
-  end
-  
-  def simian_23
-    builder = FluentCommandBuilder::Simian.create_builder
-    command = Simian::V23::Simian.new builder
-    yield builder if block_given?
-    command
   end
 end

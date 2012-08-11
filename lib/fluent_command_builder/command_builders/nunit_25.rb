@@ -1,19 +1,28 @@
 require File.expand_path(File.dirname(__FILE__) + '/../command_base')
-require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
+require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
+  def nunit_25(input_files)
+    b = UnderlyingBuilder.new
+    c = FluentCommandBuilder::NUnit::V25.create b, input_files
+    yield b if block_given?
+    c
+  end
   module NUnit
-    
-    COMMAND_NAME = 'nunit-console' unless const_defined? :COMMAND_NAME
-    
-    def self.create_builder
-      CommandBuilder.new COMMAND_NAME
-    end
-    
     module V25
+      def self.create(underlying_builder, input_files)
+        NUnit.new underlying_builder, input_files
+      end
+      def nunit(input_files)
+        b = UnderlyingBuilder.new
+        c = FluentCommandBuilder::NUnit::V25.create b, input_files
+        yield b if block_given?
+        c
+      end
       class NUnit < CommandBase
-        def initialize(builder, input_files)
-          super builder
+        def initialize(underlying_builder, input_files)
+          super underlying_builder
+          @builder.command_name = 'nunit-console'
           @builder.append " #{@builder.format input_files}"
         end
         def fixture(fixture)
@@ -132,27 +141,6 @@ module FluentCommandBuilder
           self
         end
       end
-      
-      def nunit(input_files)
-        builder = FluentCommandBuilder::NUnit.create_builder
-        command = NUnit.new builder, input_files
-        yield builder if block_given?
-        command
-      end
-      
-      def self.create(input_files)
-        builder = FluentCommandBuilder::NUnit.create_builder
-        command = NUnit.new builder, input_files
-        yield builder if block_given?
-        command
-      end
     end
-  end
-  
-  def nunit_25(input_files)
-    builder = FluentCommandBuilder::NUnit.create_builder
-    command = NUnit::V25::NUnit.new builder, input_files
-    yield builder if block_given?
-    command
   end
 end

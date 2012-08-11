@@ -1,19 +1,28 @@
 require File.expand_path(File.dirname(__FILE__) + '/../command_base')
-require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
+require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
+  def dev_appserver_python_17(application_root=nil)
+    b = UnderlyingBuilder.new
+    c = FluentCommandBuilder::DevAppserverPython::V17.create b, application_root
+    yield b if block_given?
+    c
+  end
   module DevAppserverPython
-    
-    COMMAND_NAME = 'dev_appserver.py' unless const_defined? :COMMAND_NAME
-    
-    def self.create_builder
-      CommandBuilder.new COMMAND_NAME
-    end
-    
     module V17
+      def self.create(underlying_builder, application_root=nil)
+        DevAppserverPython.new underlying_builder, application_root
+      end
+      def dev_appserver_python(application_root=nil)
+        b = UnderlyingBuilder.new
+        c = FluentCommandBuilder::DevAppserverPython::V17.create b, application_root
+        yield b if block_given?
+        c
+      end
       class DevAppserverPython < CommandBase
-        def initialize(builder, application_root=nil)
-          super builder
+        def initialize(underlying_builder, application_root=nil)
+          super underlying_builder
+          @builder.command_name = 'dev_appserver.py'
           @builder.append " #{@builder.format application_root}" unless application_root.nil?
         end
         def application_root(application_root)
@@ -192,27 +201,6 @@ module FluentCommandBuilder
           self
         end
       end
-      
-      def dev_appserver_python(application_root=nil)
-        builder = FluentCommandBuilder::DevAppserverPython.create_builder
-        command = DevAppserverPython.new builder, application_root
-        yield builder if block_given?
-        command
-      end
-      
-      def self.create(application_root=nil)
-        builder = FluentCommandBuilder::DevAppserverPython.create_builder
-        command = DevAppserverPython.new builder, application_root
-        yield builder if block_given?
-        command
-      end
     end
-  end
-  
-  def dev_appserver_python_17(application_root=nil)
-    builder = FluentCommandBuilder::DevAppserverPython.create_builder
-    command = DevAppserverPython::V17::DevAppserverPython.new builder, application_root
-    yield builder if block_given?
-    command
   end
 end

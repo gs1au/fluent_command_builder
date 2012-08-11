@@ -1,19 +1,28 @@
 require File.expand_path(File.dirname(__FILE__) + '/../command_base')
-require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
+require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
+  def rake_09(task=nil)
+    b = UnderlyingBuilder.new
+    c = FluentCommandBuilder::Rake::V09.create b, task
+    yield b if block_given?
+    c
+  end
   module Rake
-    
-    COMMAND_NAME = 'rake' unless const_defined? :COMMAND_NAME
-    
-    def self.create_builder
-      CommandBuilder.new COMMAND_NAME
-    end
-    
     module V09
+      def self.create(underlying_builder, task=nil)
+        Rake.new underlying_builder, task
+      end
+      def rake(task=nil)
+        b = UnderlyingBuilder.new
+        c = FluentCommandBuilder::Rake::V09.create b, task
+        yield b if block_given?
+        c
+      end
       class Rake < CommandBase
-        def initialize(builder, task=nil)
-          super builder
+        def initialize(underlying_builder, task=nil)
+          super underlying_builder
+          @builder.command_name = 'rake'
           @builder.append " #{@builder.format task, ' '}" unless task.nil?
         end
         def classic_namespace
@@ -132,27 +141,6 @@ module FluentCommandBuilder
           self
         end
       end
-      
-      def rake(task=nil)
-        builder = FluentCommandBuilder::Rake.create_builder
-        command = Rake.new builder, task
-        yield builder if block_given?
-        command
-      end
-      
-      def self.create(task=nil)
-        builder = FluentCommandBuilder::Rake.create_builder
-        command = Rake.new builder, task
-        yield builder if block_given?
-        command
-      end
     end
-  end
-  
-  def rake_09(task=nil)
-    builder = FluentCommandBuilder::Rake.create_builder
-    command = Rake::V09::Rake.new builder, task
-    yield builder if block_given?
-    command
   end
 end

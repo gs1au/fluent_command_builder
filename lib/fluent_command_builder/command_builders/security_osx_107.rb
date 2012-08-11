@@ -1,19 +1,28 @@
 require File.expand_path(File.dirname(__FILE__) + '/../command_base')
-require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
+require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
+  def security_osx_107
+    b = UnderlyingBuilder.new
+    c = FluentCommandBuilder::Security::OSX107.create b
+    yield b if block_given?
+    c
+  end
   module Security
-    
-    COMMAND_NAME = 'security' unless const_defined? :COMMAND_NAME
-    
-    def self.create_builder
-      CommandBuilder.new COMMAND_NAME
-    end
-    
     module OSX107
+      def self.create(underlying_builder)
+        Security.new underlying_builder
+      end
+      def security
+        b = UnderlyingBuilder.new
+        c = FluentCommandBuilder::Security::OSX107.create b
+        yield b if block_given?
+        c
+      end
       class Security < CommandBase
-        def initialize(builder)
-          super builder
+        def initialize(underlying_builder)
+          super underlying_builder
+          @builder.command_name = 'security'
         end
         def delete_certificate
           DeleteCertificate.new @builder
@@ -29,8 +38,9 @@ module FluentCommandBuilder
         end
       end
       class DeleteCertificate < CommandBase
-        def initialize(builder)
-          super builder
+        def initialize(underlying_builder)
+          super underlying_builder
+          @builder.command_name = 'security'
           @builder.append ' delete-certificate'
         end
         def common_name(name)
@@ -55,8 +65,9 @@ module FluentCommandBuilder
         end
       end
       class FindCertificate < CommandBase
-        def initialize(builder)
-          super builder
+        def initialize(underlying_builder)
+          super underlying_builder
+          @builder.command_name = 'security'
           @builder.append ' find-certificate'
         end
         def all
@@ -96,8 +107,9 @@ module FluentCommandBuilder
         end
       end
       class Import < CommandBase
-        def initialize(builder, input_file)
-          super builder
+        def initialize(underlying_builder, input_file)
+          super underlying_builder
+          @builder.command_name = 'security'
           @builder.append " import #{@builder.format input_file}"
         end
         def keychain(keychain)
@@ -147,8 +159,9 @@ module FluentCommandBuilder
         end
       end
       class UnlockKeychain < CommandBase
-        def initialize(builder)
-          super builder
+        def initialize(underlying_builder)
+          super underlying_builder
+          @builder.command_name = 'security'
           @builder.append ' unlock-keychain'
         end
         def no_password
@@ -167,27 +180,6 @@ module FluentCommandBuilder
           self
         end
       end
-      
-      def security
-        builder = FluentCommandBuilder::Security.create_builder
-        command = Security.new builder
-        yield builder if block_given?
-        command
-      end
-      
-      def self.create
-        builder = FluentCommandBuilder::Security.create_builder
-        command = Security.new builder
-        yield builder if block_given?
-        command
-      end
     end
-  end
-  
-  def security_osx_107
-    builder = FluentCommandBuilder::Security.create_builder
-    command = Security::OSX107::Security.new builder
-    yield builder if block_given?
-    command
   end
 end

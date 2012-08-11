@@ -1,19 +1,28 @@
 require File.expand_path(File.dirname(__FILE__) + '/../command_base')
-require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
+require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
+  def bundle_11
+    b = UnderlyingBuilder.new
+    c = FluentCommandBuilder::Bundle::V11.create b
+    yield b if block_given?
+    c
+  end
   module Bundle
-    
-    COMMAND_NAME = 'bundle' unless const_defined? :COMMAND_NAME
-    
-    def self.create_builder
-      CommandBuilder.new COMMAND_NAME
-    end
-    
     module V11
+      def self.create(underlying_builder)
+        Bundle.new underlying_builder
+      end
+      def bundle
+        b = UnderlyingBuilder.new
+        c = FluentCommandBuilder::Bundle::V11.create b
+        yield b if block_given?
+        c
+      end
       class Bundle < CommandBase
-        def initialize(builder)
-          super builder
+        def initialize(underlying_builder)
+          super underlying_builder
+          @builder.command_name = 'bundle'
         end
         def cache
           Cache.new @builder
@@ -77,8 +86,9 @@ module FluentCommandBuilder
         end
       end
       class Cache < CommandBase
-        def initialize(builder)
-          super builder
+        def initialize(underlying_builder)
+          super underlying_builder
+          @builder.command_name = 'bundle'
           @builder.append ' cache'
         end
         def no_prune
@@ -88,8 +98,9 @@ module FluentCommandBuilder
         end
       end
       class Check < CommandBase
-        def initialize(builder)
-          super builder
+        def initialize(underlying_builder)
+          super underlying_builder
+          @builder.command_name = 'bundle'
           @builder.append ' check'
         end
         def gemfile(file)
@@ -104,8 +115,9 @@ module FluentCommandBuilder
         end
       end
       class Clean < CommandBase
-        def initialize(builder)
-          super builder
+        def initialize(underlying_builder)
+          super underlying_builder
+          @builder.command_name = 'bundle'
           @builder.append ' clean'
         end
         def force
@@ -115,8 +127,9 @@ module FluentCommandBuilder
         end
       end
       class Gem < CommandBase
-        def initialize(builder, gem)
-          super builder
+        def initialize(underlying_builder, gem)
+          super underlying_builder
+          @builder.command_name = 'bundle'
           @builder.append " gem #{@builder.format gem}"
         end
         def bin
@@ -126,8 +139,9 @@ module FluentCommandBuilder
         end
       end
       class Init < CommandBase
-        def initialize(builder)
-          super builder
+        def initialize(underlying_builder)
+          super underlying_builder
+          @builder.command_name = 'bundle'
           @builder.append ' init'
         end
         def gemspec(file)
@@ -137,8 +151,9 @@ module FluentCommandBuilder
         end
       end
       class Install < CommandBase
-        def initialize(builder)
-          super builder
+        def initialize(underlying_builder)
+          super underlying_builder
+          @builder.command_name = 'bundle'
           @builder.append ' install'
         end
         def binstubs(path)
@@ -218,8 +233,9 @@ module FluentCommandBuilder
         end
       end
       class Outdated < CommandBase
-        def initialize(builder, gem=nil)
-          super builder
+        def initialize(underlying_builder, gem=nil)
+          super underlying_builder
+          @builder.command_name = 'bundle'
           @builder.append ' outdated'
           @builder.append " #{@builder.format gem}" unless gem.nil?
         end
@@ -240,8 +256,9 @@ module FluentCommandBuilder
         end
       end
       class Package < CommandBase
-        def initialize(builder)
-          super builder
+        def initialize(underlying_builder)
+          super underlying_builder
+          @builder.command_name = 'bundle'
           @builder.append ' package'
         end
         def no_prune
@@ -251,8 +268,9 @@ module FluentCommandBuilder
         end
       end
       class Show < CommandBase
-        def initialize(builder, gem=nil)
-          super builder
+        def initialize(underlying_builder, gem=nil)
+          super underlying_builder
+          @builder.command_name = 'bundle'
           @builder.append ' show'
           @builder.append " #{@builder.format gem}" unless gem.nil?
         end
@@ -263,8 +281,9 @@ module FluentCommandBuilder
         end
       end
       class Update < CommandBase
-        def initialize(builder, gem=nil)
-          super builder
+        def initialize(underlying_builder, gem=nil)
+          super underlying_builder
+          @builder.command_name = 'bundle'
           @builder.append ' update'
           @builder.append " #{@builder.format gem}" unless gem.nil?
         end
@@ -280,8 +299,9 @@ module FluentCommandBuilder
         end
       end
       class Viz < CommandBase
-        def initialize(builder)
-          super builder
+        def initialize(underlying_builder)
+          super underlying_builder
+          @builder.command_name = 'bundle'
           @builder.append ' viz'
         end
         def file(file)
@@ -305,27 +325,6 @@ module FluentCommandBuilder
           self
         end
       end
-      
-      def bundle
-        builder = FluentCommandBuilder::Bundle.create_builder
-        command = Bundle.new builder
-        yield builder if block_given?
-        command
-      end
-      
-      def self.create
-        builder = FluentCommandBuilder::Bundle.create_builder
-        command = Bundle.new builder
-        yield builder if block_given?
-        command
-      end
     end
-  end
-  
-  def bundle_11
-    builder = FluentCommandBuilder::Bundle.create_builder
-    command = Bundle::V11::Bundle.new builder
-    yield builder if block_given?
-    command
   end
 end

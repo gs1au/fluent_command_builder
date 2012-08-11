@@ -1,19 +1,28 @@
 require File.expand_path(File.dirname(__FILE__) + '/../command_base')
-require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
+require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
+  def dotcover_11
+    b = UnderlyingBuilder.new
+    c = FluentCommandBuilder::DotCover::V11.create b
+    yield b if block_given?
+    c
+  end
   module DotCover
-    
-    COMMAND_NAME = 'dotCover' unless const_defined? :COMMAND_NAME
-    
-    def self.create_builder
-      CommandBuilder.new COMMAND_NAME
-    end
-    
     module V11
+      def self.create(underlying_builder)
+        DotCover.new underlying_builder
+      end
+      def dotcover
+        b = UnderlyingBuilder.new
+        c = FluentCommandBuilder::DotCover::V11.create b
+        yield b if block_given?
+        c
+      end
       class DotCover < CommandBase
-        def initialize(builder)
-          super builder
+        def initialize(underlying_builder)
+          super underlying_builder
+          @builder.command_name = 'dotCover'
         end
         def analyse(configuration_file=nil)
           Analyse.new @builder, configuration_file
@@ -48,8 +57,9 @@ module FluentCommandBuilder
         end
       end
       class Analyse < CommandBase
-        def initialize(builder, configuration_file=nil)
-          super builder
+        def initialize(underlying_builder, configuration_file=nil)
+          super underlying_builder
+          @builder.command_name = 'dotCover'
           @builder.append ' analyse'
           @builder.append " #{@builder.format configuration_file}" unless configuration_file.nil?
         end
@@ -105,8 +115,9 @@ module FluentCommandBuilder
         end
       end
       class Cover < CommandBase
-        def initialize(builder, configuration_file=nil)
-          super builder
+        def initialize(underlying_builder, configuration_file=nil)
+          super underlying_builder
+          @builder.command_name = 'dotCover'
           @builder.append ' cover'
           @builder.append " #{@builder.format configuration_file}" unless configuration_file.nil?
         end
@@ -157,8 +168,9 @@ module FluentCommandBuilder
         end
       end
       class Delete < CommandBase
-        def initialize(builder, configuration_file=nil)
-          super builder
+        def initialize(underlying_builder, configuration_file=nil)
+          super underlying_builder
+          @builder.command_name = 'dotCover'
           @builder.append ' delete'
           @builder.append " #{@builder.format configuration_file}" unless configuration_file.nil?
         end
@@ -174,8 +186,9 @@ module FluentCommandBuilder
         end
       end
       class List < CommandBase
-        def initialize(builder, configuration_file=nil)
-          super builder
+        def initialize(underlying_builder, configuration_file=nil)
+          super underlying_builder
+          @builder.command_name = 'dotCover'
           @builder.append ' list'
           @builder.append " #{@builder.format configuration_file}" unless configuration_file.nil?
         end
@@ -196,8 +209,9 @@ module FluentCommandBuilder
         end
       end
       class Merge < CommandBase
-        def initialize(builder, configuration_file=nil)
-          super builder
+        def initialize(underlying_builder, configuration_file=nil)
+          super underlying_builder
+          @builder.command_name = 'dotCover'
           @builder.append ' merge'
           @builder.append " #{@builder.format configuration_file}" unless configuration_file.nil?
         end
@@ -223,8 +237,9 @@ module FluentCommandBuilder
         end
       end
       class Report < CommandBase
-        def initialize(builder, configuration_file=nil)
-          super builder
+        def initialize(underlying_builder, configuration_file=nil)
+          super underlying_builder
+          @builder.command_name = 'dotCover'
           @builder.append ' report'
           @builder.append " #{@builder.format configuration_file}" unless configuration_file.nil?
         end
@@ -250,8 +265,9 @@ module FluentCommandBuilder
         end
       end
       class Version < CommandBase
-        def initialize(builder, output_file_name=nil)
-          super builder
+        def initialize(underlying_builder, output_file_name=nil)
+          super underlying_builder
+          @builder.command_name = 'dotCover'
           @builder.append ' version'
           @builder.append " #{@builder.format output_file_name}" unless output_file_name.nil?
         end
@@ -262,8 +278,9 @@ module FluentCommandBuilder
         end
       end
       class Zip < CommandBase
-        def initialize(builder, configuration_file=nil)
-          super builder
+        def initialize(underlying_builder, configuration_file=nil)
+          super underlying_builder
+          @builder.command_name = 'dotCover'
           @builder.append ' zip'
           @builder.append " #{@builder.format configuration_file}" unless configuration_file.nil?
         end
@@ -283,27 +300,6 @@ module FluentCommandBuilder
           self
         end
       end
-      
-      def dotcover
-        builder = FluentCommandBuilder::DotCover.create_builder
-        command = DotCover.new builder
-        yield builder if block_given?
-        command
-      end
-      
-      def self.create
-        builder = FluentCommandBuilder::DotCover.create_builder
-        command = DotCover.new builder
-        yield builder if block_given?
-        command
-      end
     end
-  end
-  
-  def dotcover_11
-    builder = FluentCommandBuilder::DotCover.create_builder
-    command = DotCover::V11::DotCover.new builder
-    yield builder if block_given?
-    command
   end
 end

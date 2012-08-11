@@ -1,19 +1,28 @@
 require File.expand_path(File.dirname(__FILE__) + '/../command_base')
-require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
+require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
+  def installutil_35
+    b = UnderlyingBuilder.new
+    c = FluentCommandBuilder::InstallUtil::V35.create b
+    yield b if block_given?
+    c
+  end
   module InstallUtil
-    
-    COMMAND_NAME = 'installUtil' unless const_defined? :COMMAND_NAME
-    
-    def self.create_builder
-      CommandBuilder.new COMMAND_NAME
-    end
-    
     module V35
+      def self.create(underlying_builder)
+        InstallUtil.new underlying_builder
+      end
+      def installutil
+        b = UnderlyingBuilder.new
+        c = FluentCommandBuilder::InstallUtil::V35.create b
+        yield b if block_given?
+        c
+      end
       class InstallUtil < CommandBase
-        def initialize(builder)
-          super builder
+        def initialize(underlying_builder)
+          super underlying_builder
+          @builder.command_name = 'installUtil'
         end
         def help(assembly_path=nil)
           @builder.append ' /help'
@@ -53,27 +62,6 @@ module FluentCommandBuilder
           self
         end
       end
-      
-      def installutil
-        builder = FluentCommandBuilder::InstallUtil.create_builder
-        command = InstallUtil.new builder
-        yield builder if block_given?
-        command
-      end
-      
-      def self.create
-        builder = FluentCommandBuilder::InstallUtil.create_builder
-        command = InstallUtil.new builder
-        yield builder if block_given?
-        command
-      end
     end
-  end
-  
-  def installutil_35
-    builder = FluentCommandBuilder::InstallUtil.create_builder
-    command = InstallUtil::V35::InstallUtil.new builder
-    yield builder if block_given?
-    command
   end
 end

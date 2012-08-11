@@ -3,7 +3,7 @@ require_relative 'string_extensions'
 module CodeGenerator
   class CommandCodeNames
 
-    def initialize(command, version)
+    def initialize(command, version=nil)
       @command = command
       @version = version.to_s
     end
@@ -34,7 +34,7 @@ module CodeGenerator
     end
 
     def initializer_values
-      %w(builder) + @command.args.map { |arg| arg.arg_name.snakecase }
+      @command.args.map { |arg| arg.arg_name.snakecase }
     end
 
     def class_name

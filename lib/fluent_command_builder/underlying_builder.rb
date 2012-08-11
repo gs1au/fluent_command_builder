@@ -1,11 +1,11 @@
 require File.expand_path(File.dirname(__FILE__) + '/command_base')
 
 module FluentCommandBuilder
-  class CommandBuilder
+  class UnderlyingBuilder
 
     attr_accessor :command_name, :path
 
-    def initialize(command_name)
+    def initialize(command_name=nil)
       @command_name = command_name
       @path = nil
       @args = ''

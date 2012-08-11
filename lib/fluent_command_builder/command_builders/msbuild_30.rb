@@ -1,19 +1,28 @@
 require File.expand_path(File.dirname(__FILE__) + '/../command_base')
-require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
+require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
+  def msbuild_30(project_file=nil)
+    b = UnderlyingBuilder.new
+    c = FluentCommandBuilder::MSBuild::V30.create b, project_file
+    yield b if block_given?
+    c
+  end
   module MSBuild
-    
-    COMMAND_NAME = 'MSBuild' unless const_defined? :COMMAND_NAME
-    
-    def self.create_builder
-      CommandBuilder.new COMMAND_NAME
-    end
-    
     module V30
+      def self.create(underlying_builder, project_file=nil)
+        MSBuild.new underlying_builder, project_file
+      end
+      def msbuild(project_file=nil)
+        b = UnderlyingBuilder.new
+        c = FluentCommandBuilder::MSBuild::V30.create b, project_file
+        yield b if block_given?
+        c
+      end
       class MSBuild < CommandBase
-        def initialize(builder, project_file=nil)
-          super builder
+        def initialize(underlying_builder, project_file=nil)
+          super underlying_builder
+          @builder.command_name = 'MSBuild'
           @builder.append " #{@builder.format project_file}" unless project_file.nil?
         end
         def help
@@ -78,27 +87,6 @@ module FluentCommandBuilder
           self
         end
       end
-      
-      def msbuild(project_file=nil)
-        builder = FluentCommandBuilder::MSBuild.create_builder
-        command = MSBuild.new builder, project_file
-        yield builder if block_given?
-        command
-      end
-      
-      def self.create(project_file=nil)
-        builder = FluentCommandBuilder::MSBuild.create_builder
-        command = MSBuild.new builder, project_file
-        yield builder if block_given?
-        command
-      end
     end
-  end
-  
-  def msbuild_30(project_file=nil)
-    builder = FluentCommandBuilder::MSBuild.create_builder
-    command = MSBuild::V30::MSBuild.new builder, project_file
-    yield builder if block_given?
-    command
   end
 end

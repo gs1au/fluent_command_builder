@@ -1,19 +1,28 @@
 require File.expand_path(File.dirname(__FILE__) + '/../command_base')
-require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
+require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
+  def netsh_2008
+    b = UnderlyingBuilder.new
+    c = FluentCommandBuilder::Netsh::V2008.create b
+    yield b if block_given?
+    c
+  end
   module Netsh
-    
-    COMMAND_NAME = 'netsh' unless const_defined? :COMMAND_NAME
-    
-    def self.create_builder
-      CommandBuilder.new COMMAND_NAME
-    end
-    
     module V2008
+      def self.create(underlying_builder)
+        Netsh.new underlying_builder
+      end
+      def netsh
+        b = UnderlyingBuilder.new
+        c = FluentCommandBuilder::Netsh::V2008.create b
+        yield b if block_given?
+        c
+      end
       class Netsh < CommandBase
-        def initialize(builder)
-          super builder
+        def initialize(underlying_builder)
+          super underlying_builder
+          @builder.command_name = 'netsh'
         end
         def advfirewall
           Advfirewall.new @builder
@@ -23,8 +32,9 @@ module FluentCommandBuilder
         end
       end
       class Advfirewall < CommandBase
-        def initialize(builder)
-          super builder
+        def initialize(underlying_builder)
+          super underlying_builder
+          @builder.command_name = 'netsh'
           @builder.append ' advfirewall'
         end
         def firewall
@@ -32,8 +42,9 @@ module FluentCommandBuilder
         end
       end
       class Firewall < CommandBase
-        def initialize(builder)
-          super builder
+        def initialize(underlying_builder)
+          super underlying_builder
+          @builder.command_name = 'netsh'
           @builder.append ' firewall'
         end
         def add_rule(rule_name, direction, action)
@@ -50,8 +61,9 @@ module FluentCommandBuilder
         end
       end
       class AddRule < CommandBase
-        def initialize(builder, rule_name, direction, action)
-          super builder
+        def initialize(underlying_builder, rule_name, direction, action)
+          super underlying_builder
+          @builder.command_name = 'netsh'
           @builder.append " add rule name=#{@builder.format rule_name} dir=#{@builder.format direction} action=#{@builder.format action}"
         end
         def program(path)
@@ -131,8 +143,9 @@ module FluentCommandBuilder
         end
       end
       class DeleteRule < CommandBase
-        def initialize(builder, rule_name)
-          super builder
+        def initialize(underlying_builder, rule_name)
+          super underlying_builder
+          @builder.command_name = 'netsh'
           @builder.append " delete rule name=#{@builder.format rule_name}"
         end
         def dir(direction)
@@ -182,8 +195,9 @@ module FluentCommandBuilder
         end
       end
       class SetRule < CommandBase
-        def initialize(builder)
-          super builder
+        def initialize(underlying_builder)
+          super underlying_builder
+          @builder.command_name = 'netsh'
           @builder.append ' set rule'
         end
         def group(group_name)
@@ -241,8 +255,9 @@ module FluentCommandBuilder
         end
       end
       class New < CommandBase
-        def initialize(builder)
-          super builder
+        def initialize(underlying_builder)
+          super underlying_builder
+          @builder.command_name = 'netsh'
           @builder.append ' new'
         end
         def name(rule_name)
@@ -337,8 +352,9 @@ module FluentCommandBuilder
         end
       end
       class ShowRule < CommandBase
-        def initialize(builder, rule_name)
-          super builder
+        def initialize(underlying_builder, rule_name)
+          super underlying_builder
+          @builder.command_name = 'netsh'
           @builder.append " show rule name=#{@builder.format rule_name}"
         end
         def profile(profile)
@@ -358,8 +374,9 @@ module FluentCommandBuilder
         end
       end
       class Http < CommandBase
-        def initialize(builder)
-          super builder
+        def initialize(underlying_builder)
+          super underlying_builder
+          @builder.command_name = 'netsh'
           @builder.append ' http'
         end
         def add_url_acl(url)
@@ -372,8 +389,9 @@ module FluentCommandBuilder
         end
       end
       class AddUrlAcl < CommandBase
-        def initialize(builder, url)
-          super builder
+        def initialize(underlying_builder, url)
+          super underlying_builder
+          @builder.command_name = 'netsh'
           @builder.append " add urlacl url=#{@builder.format url}"
         end
         def user(user)
@@ -397,27 +415,6 @@ module FluentCommandBuilder
           self
         end
       end
-      
-      def netsh
-        builder = FluentCommandBuilder::Netsh.create_builder
-        command = Netsh.new builder
-        yield builder if block_given?
-        command
-      end
-      
-      def self.create
-        builder = FluentCommandBuilder::Netsh.create_builder
-        command = Netsh.new builder
-        yield builder if block_given?
-        command
-      end
     end
-  end
-  
-  def netsh_2008
-    builder = FluentCommandBuilder::Netsh.create_builder
-    command = Netsh::V2008::Netsh.new builder
-    yield builder if block_given?
-    command
   end
 end

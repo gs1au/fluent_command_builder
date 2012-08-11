@@ -1,19 +1,28 @@
 require File.expand_path(File.dirname(__FILE__) + '/../command_base')
-require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
+require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
+  def aspnet_compiler_40(target_dir=nil)
+    b = UnderlyingBuilder.new
+    c = FluentCommandBuilder::AspnetCompiler::V40.create b, target_dir
+    yield b if block_given?
+    c
+  end
   module AspnetCompiler
-    
-    COMMAND_NAME = 'aspnet_compiler' unless const_defined? :COMMAND_NAME
-    
-    def self.create_builder
-      CommandBuilder.new COMMAND_NAME
-    end
-    
     module V40
+      def self.create(underlying_builder, target_dir=nil)
+        AspnetCompiler.new underlying_builder, target_dir
+      end
+      def aspnet_compiler(target_dir=nil)
+        b = UnderlyingBuilder.new
+        c = FluentCommandBuilder::AspnetCompiler::V40.create b, target_dir
+        yield b if block_given?
+        c
+      end
       class AspnetCompiler < CommandBase
-        def initialize(builder, target_dir=nil)
-          super builder
+        def initialize(underlying_builder, target_dir=nil)
+          super underlying_builder
+          @builder.command_name = 'aspnet_compiler'
           @builder.append " #{@builder.format target_dir}" unless target_dir.nil?
         end
         def metabase_path(metabase_path)
@@ -87,27 +96,6 @@ module FluentCommandBuilder
           self
         end
       end
-      
-      def aspnet_compiler(target_dir=nil)
-        builder = FluentCommandBuilder::AspnetCompiler.create_builder
-        command = AspnetCompiler.new builder, target_dir
-        yield builder if block_given?
-        command
-      end
-      
-      def self.create(target_dir=nil)
-        builder = FluentCommandBuilder::AspnetCompiler.create_builder
-        command = AspnetCompiler.new builder, target_dir
-        yield builder if block_given?
-        command
-      end
     end
-  end
-  
-  def aspnet_compiler_40(target_dir=nil)
-    builder = FluentCommandBuilder::AspnetCompiler.create_builder
-    command = AspnetCompiler::V40::AspnetCompiler.new builder, target_dir
-    yield builder if block_given?
-    command
   end
 end

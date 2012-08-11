@@ -1,19 +1,28 @@
 require File.expand_path(File.dirname(__FILE__) + '/../command_base')
-require File.expand_path(File.dirname(__FILE__) + '/../command_builder')
+require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
+  def sevenzip_92
+    b = UnderlyingBuilder.new
+    c = FluentCommandBuilder::SevenZip::V92.create b
+    yield b if block_given?
+    c
+  end
   module SevenZip
-    
-    COMMAND_NAME = '7za' unless const_defined? :COMMAND_NAME
-    
-    def self.create_builder
-      CommandBuilder.new COMMAND_NAME
-    end
-    
     module V92
+      def self.create(underlying_builder)
+        SevenZip.new underlying_builder
+      end
+      def sevenzip
+        b = UnderlyingBuilder.new
+        c = FluentCommandBuilder::SevenZip::V92.create b
+        yield b if block_given?
+        c
+      end
       class SevenZip < CommandBase
-        def initialize(builder)
-          super builder
+        def initialize(underlying_builder)
+          super underlying_builder
+          @builder.command_name = '7za'
         end
         def add(archive, file_ref)
           Add.new @builder, archive, file_ref
@@ -41,8 +50,9 @@ module FluentCommandBuilder
         end
       end
       class Add < CommandBase
-        def initialize(builder, archive, file_ref)
-          super builder
+        def initialize(underlying_builder, archive, file_ref)
+          super underlying_builder
+          @builder.command_name = '7za'
           @builder.append " a #{@builder.format archive} #{@builder.format file_ref}"
         end
         def include(file_ref, recurse_type=nil)
@@ -121,8 +131,9 @@ module FluentCommandBuilder
         end
       end
       class Bench < CommandBase
-        def initialize(builder, number_of_iterations)
-          super builder
+        def initialize(underlying_builder, number_of_iterations)
+          super underlying_builder
+          @builder.command_name = '7za'
           @builder.append " b #{@builder.format number_of_iterations}"
         end
         def mmt(n)
@@ -142,8 +153,9 @@ module FluentCommandBuilder
         end
       end
       class Delete < CommandBase
-        def initialize(builder, archive, files)
-          super builder
+        def initialize(underlying_builder, archive, files)
+          super underlying_builder
+          @builder.command_name = '7za'
           @builder.append " d #{@builder.format archive} #{@builder.format files}"
         end
         def include(file_ref, recurse_type=nil)
@@ -189,8 +201,9 @@ module FluentCommandBuilder
         end
       end
       class Extract < CommandBase
-        def initialize(builder, archive, files)
-          super builder
+        def initialize(underlying_builder, archive, files)
+          super underlying_builder
+          @builder.command_name = '7za'
           @builder.append " e #{@builder.format archive} #{@builder.format files}"
         end
         def ai
@@ -260,8 +273,9 @@ module FluentCommandBuilder
         end
       end
       class List < CommandBase
-        def initialize(builder, archive)
-          super builder
+        def initialize(underlying_builder, archive)
+          super underlying_builder
+          @builder.command_name = '7za'
           @builder.append " l #{@builder.format archive}"
         end
         def ai
@@ -316,8 +330,9 @@ module FluentCommandBuilder
         end
       end
       class Test < CommandBase
-        def initialize(builder, archive, files)
-          super builder
+        def initialize(underlying_builder, archive, files)
+          super underlying_builder
+          @builder.command_name = '7za'
           @builder.append " t #{@builder.format archive} #{@builder.format files}"
         end
         def ai
@@ -362,8 +377,9 @@ module FluentCommandBuilder
         end
       end
       class Update < CommandBase
-        def initialize(builder, archive, files)
-          super builder
+        def initialize(underlying_builder, archive, files)
+          super underlying_builder
+          @builder.command_name = '7za'
           @builder.append " u #{@builder.format archive} #{@builder.format files}"
         end
         def include(file_ref, recurse_type=nil)
@@ -436,8 +452,9 @@ module FluentCommandBuilder
         end
       end
       class ExtractWithFullPaths < CommandBase
-        def initialize(builder, archive, files=nil)
-          super builder
+        def initialize(underlying_builder, archive, files=nil)
+          super underlying_builder
+          @builder.command_name = '7za'
           @builder.append " x #{@builder.format archive}"
           @builder.append " #{@builder.format files}" unless files.nil?
         end
@@ -507,27 +524,6 @@ module FluentCommandBuilder
           self
         end
       end
-      
-      def sevenzip
-        builder = FluentCommandBuilder::SevenZip.create_builder
-        command = SevenZip.new builder
-        yield builder if block_given?
-        command
-      end
-      
-      def self.create
-        builder = FluentCommandBuilder::SevenZip.create_builder
-        command = SevenZip.new builder
-        yield builder if block_given?
-        command
-      end
     end
-  end
-  
-  def sevenzip_92
-    builder = FluentCommandBuilder::SevenZip.create_builder
-    command = SevenZip::V92::SevenZip.new builder
-    yield builder if block_given?
-    command
   end
 end
