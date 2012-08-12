@@ -2,19 +2,19 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_base')
 require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
-  def <%= version_factory_method_name %>(<%= factory_method_args.join(', ') %>)
-    <%= command_module_name %>::<%= version_module_name %>.create(<%= initializer_values.join(', ') %>) { |b| yield b if block_given? }
+  def <%= version_factory_method_signature %>
+    <%= create_method_call %> { |b| yield b if block_given? }
   end
   module <%= command_module_name %>
     module <%= version_module_name %>
-      def self.create(<%= factory_method_args.join(', ') %>)
+      def <%= create_method_signature %>
         b = UnderlyingBuilder.new FluentCommandBuilder::<%= command_module_name %>::COMMAND_NAME
-        c = <%= command_class_name %>.new <%= (%w(b) + initializer_values).join(', ') %>
+        c = <%= command_initializer_call %>
         yield b if block_given?
         c
       end
-      def <%= command_factory_method_name %>(<%= factory_method_args.join(', ') %>)
-        <%= version_module_name %>.create(<%= initializer_values.join(', ') %>) { |b| yield b if block_given? }
+      def <%= command_factory_method_signature %>
+        <%= create_method_call %> { |b| yield b if block_given? }
       end
 <%= command_class %>
     end

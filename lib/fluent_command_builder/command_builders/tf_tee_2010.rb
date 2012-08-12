@@ -2,19 +2,19 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_base')
 require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
-  def tf_tee_2010()
-    Tf::TEE2010.create() { |b| yield b if block_given? }
+  def tf_tee_2010
+    FluentCommandBuilder::Tf::TEE2010.create { |b| yield b if block_given? }
   end
   module Tf
     module TEE2010
-      def self.create()
+      def self.create
         b = UnderlyingBuilder.new FluentCommandBuilder::Tf::COMMAND_NAME
-        c = Tf.new b
+        c = Tf.new(b)
         yield b if block_given?
         c
       end
-      def tf()
-        TEE2010.create() { |b| yield b if block_given? }
+      def tf
+        FluentCommandBuilder::Tf::TEE2010.create { |b| yield b if block_given? }
       end
       class Tf < CommandBase
         def initialize(underlying_builder)

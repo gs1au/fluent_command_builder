@@ -2,19 +2,19 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_base')
 require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
-  def dotcover_10()
-    DotCover::V10.create() { |b| yield b if block_given? }
+  def dotcover_10
+    FluentCommandBuilder::DotCover::V10.create { |b| yield b if block_given? }
   end
   module DotCover
     module V10
-      def self.create()
+      def self.create
         b = UnderlyingBuilder.new FluentCommandBuilder::DotCover::COMMAND_NAME
-        c = DotCover.new b
+        c = DotCover.new(b)
         yield b if block_given?
         c
       end
-      def dotcover()
-        V10.create() { |b| yield b if block_given? }
+      def dotcover
+        FluentCommandBuilder::DotCover::V10.create { |b| yield b if block_given? }
       end
       class DotCover < CommandBase
         def initialize(underlying_builder)

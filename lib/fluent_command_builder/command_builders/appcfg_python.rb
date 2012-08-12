@@ -8,7 +8,7 @@ module FluentCommandBuilder
   module AppCfgPython
     COMMAND_NAME = 'appcfg.py'
     def self.create
-      b = UnderlyingBuilder.new FluentCommandBuilder::COMMAND_NAME
+      b = UnderlyingBuilder.new FluentCommandBuilder::AppCfgPython::COMMAND_NAME
       c = version_module(AppCfgPython).create b
       yield b if block_given?
       c

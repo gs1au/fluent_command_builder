@@ -8,7 +8,7 @@ module FluentCommandBuilder
   module Bundle
     COMMAND_NAME = 'bundle'
     def self.create
-      b = UnderlyingBuilder.new FluentCommandBuilder::COMMAND_NAME
+      b = UnderlyingBuilder.new FluentCommandBuilder::Bundle::COMMAND_NAME
       c = version_module(Bundle).create b
       yield b if block_given?
       c

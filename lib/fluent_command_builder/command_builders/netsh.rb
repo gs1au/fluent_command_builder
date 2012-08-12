@@ -8,7 +8,7 @@ module FluentCommandBuilder
   module Netsh
     COMMAND_NAME = 'netsh'
     def self.create
-      b = UnderlyingBuilder.new FluentCommandBuilder::COMMAND_NAME
+      b = UnderlyingBuilder.new FluentCommandBuilder::Netsh::COMMAND_NAME
       c = version_module(Netsh).create b
       yield b if block_given?
       c

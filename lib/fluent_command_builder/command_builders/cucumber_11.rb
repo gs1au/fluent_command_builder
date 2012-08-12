@@ -3,18 +3,18 @@ require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
   def cucumber_11(feature=nil)
-    Cucumber::V11.create(feature) { |b| yield b if block_given? }
+    FluentCommandBuilder::Cucumber::V11.create(feature) { |b| yield b if block_given? }
   end
   module Cucumber
     module V11
       def self.create(feature=nil)
         b = UnderlyingBuilder.new FluentCommandBuilder::Cucumber::COMMAND_NAME
-        c = Cucumber.new b, feature
+        c = Cucumber.new(b, feature)
         yield b if block_given?
         c
       end
       def cucumber(feature=nil)
-        V11.create(feature) { |b| yield b if block_given? }
+        FluentCommandBuilder::Cucumber::V11.create(feature) { |b| yield b if block_given? }
       end
       class Cucumber < CommandBase
         def initialize(underlying_builder, feature=nil)

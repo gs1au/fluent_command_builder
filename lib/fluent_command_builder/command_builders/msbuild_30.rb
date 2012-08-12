@@ -3,18 +3,18 @@ require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
   def msbuild_30(project_file=nil)
-    MSBuild::V30.create(project_file) { |b| yield b if block_given? }
+    FluentCommandBuilder::MSBuild::V30.create(project_file) { |b| yield b if block_given? }
   end
   module MSBuild
     module V30
       def self.create(project_file=nil)
         b = UnderlyingBuilder.new FluentCommandBuilder::MSBuild::COMMAND_NAME
-        c = MSBuild.new b, project_file
+        c = MSBuild.new(b, project_file)
         yield b if block_given?
         c
       end
       def msbuild(project_file=nil)
-        V30.create(project_file) { |b| yield b if block_given? }
+        FluentCommandBuilder::MSBuild::V30.create(project_file) { |b| yield b if block_given? }
       end
       class MSBuild < CommandBase
         def initialize(underlying_builder, project_file=nil)

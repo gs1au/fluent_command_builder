@@ -2,19 +2,19 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_base')
 require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
-  def xcodebuild_44()
-    XCodeBuild::V44.create() { |b| yield b if block_given? }
+  def xcodebuild_44
+    FluentCommandBuilder::XCodeBuild::V44.create { |b| yield b if block_given? }
   end
   module XCodeBuild
     module V44
-      def self.create()
+      def self.create
         b = UnderlyingBuilder.new FluentCommandBuilder::XCodeBuild::COMMAND_NAME
-        c = XCodeBuild.new b
+        c = XCodeBuild.new(b)
         yield b if block_given?
         c
       end
-      def xcodebuild()
-        V44.create() { |b| yield b if block_given? }
+      def xcodebuild
+        FluentCommandBuilder::XCodeBuild::V44.create { |b| yield b if block_given? }
       end
       class XCodeBuild < CommandBase
         def initialize(underlying_builder)

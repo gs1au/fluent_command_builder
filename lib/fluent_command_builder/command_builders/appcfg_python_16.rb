@@ -2,19 +2,19 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_base')
 require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
-  def appcfg_python_16()
-    AppCfgPython::V16.create() { |b| yield b if block_given? }
+  def appcfg_python_16
+    FluentCommandBuilder::AppCfgPython::V16.create { |b| yield b if block_given? }
   end
   module AppCfgPython
     module V16
-      def self.create()
+      def self.create
         b = UnderlyingBuilder.new FluentCommandBuilder::AppCfgPython::COMMAND_NAME
-        c = AppCfgPython.new b
+        c = AppCfgPython.new(b)
         yield b if block_given?
         c
       end
-      def appcfg_python()
-        V16.create() { |b| yield b if block_given? }
+      def appcfg_python
+        FluentCommandBuilder::AppCfgPython::V16.create { |b| yield b if block_given? }
       end
       class AppCfgPython < CommandBase
         def initialize(underlying_builder)

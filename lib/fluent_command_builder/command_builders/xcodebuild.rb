@@ -8,7 +8,7 @@ module FluentCommandBuilder
   module XCodeBuild
     COMMAND_NAME = 'xcodebuild'
     def self.create
-      b = UnderlyingBuilder.new FluentCommandBuilder::COMMAND_NAME
+      b = UnderlyingBuilder.new FluentCommandBuilder::XCodeBuild::COMMAND_NAME
       c = version_module(XCodeBuild).create b
       yield b if block_given?
       c

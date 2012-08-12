@@ -8,7 +8,7 @@ module FluentCommandBuilder
   module SevenZip
     COMMAND_NAME = '7za'
     def self.create
-      b = UnderlyingBuilder.new FluentCommandBuilder::COMMAND_NAME
+      b = UnderlyingBuilder.new FluentCommandBuilder::SevenZip::COMMAND_NAME
       c = version_module(SevenZip).create b
       yield b if block_given?
       c

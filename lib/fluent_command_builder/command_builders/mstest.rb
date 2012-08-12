@@ -8,7 +8,7 @@ module FluentCommandBuilder
   module MSTest
     COMMAND_NAME = 'MSTest'
     def self.create
-      b = UnderlyingBuilder.new FluentCommandBuilder::COMMAND_NAME
+      b = UnderlyingBuilder.new FluentCommandBuilder::MSTest::COMMAND_NAME
       c = version_module(MSTest).create b
       yield b if block_given?
       c

@@ -3,18 +3,18 @@ require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
   def rake_09(task=nil)
-    Rake::V09.create(task) { |b| yield b if block_given? }
+    FluentCommandBuilder::Rake::V09.create(task) { |b| yield b if block_given? }
   end
   module Rake
     module V09
       def self.create(task=nil)
         b = UnderlyingBuilder.new FluentCommandBuilder::Rake::COMMAND_NAME
-        c = Rake.new b, task
+        c = Rake.new(b, task)
         yield b if block_given?
         c
       end
       def rake(task=nil)
-        V09.create(task) { |b| yield b if block_given? }
+        FluentCommandBuilder::Rake::V09.create(task) { |b| yield b if block_given? }
       end
       class Rake < CommandBase
         def initialize(underlying_builder, task=nil)

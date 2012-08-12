@@ -2,19 +2,19 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_base')
 require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
-  def simian_23()
-    Simian::V23.create() { |b| yield b if block_given? }
+  def simian_23
+    FluentCommandBuilder::Simian::V23.create { |b| yield b if block_given? }
   end
   module Simian
     module V23
-      def self.create()
+      def self.create
         b = UnderlyingBuilder.new FluentCommandBuilder::Simian::COMMAND_NAME
-        c = Simian.new b
+        c = Simian.new(b)
         yield b if block_given?
         c
       end
-      def simian()
-        V23.create() { |b| yield b if block_given? }
+      def simian
+        FluentCommandBuilder::Simian::V23.create { |b| yield b if block_given? }
       end
       class Simian < CommandBase
         def initialize(underlying_builder)

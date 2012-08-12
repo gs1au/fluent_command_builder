@@ -3,18 +3,18 @@ require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
   def aspnet_compiler_20(target_dir=nil)
-    AspnetCompiler::V20.create(target_dir) { |b| yield b if block_given? }
+    FluentCommandBuilder::AspnetCompiler::V20.create(target_dir) { |b| yield b if block_given? }
   end
   module AspnetCompiler
     module V20
       def self.create(target_dir=nil)
         b = UnderlyingBuilder.new FluentCommandBuilder::AspnetCompiler::COMMAND_NAME
-        c = AspnetCompiler.new b, target_dir
+        c = AspnetCompiler.new(b, target_dir)
         yield b if block_given?
         c
       end
       def aspnet_compiler(target_dir=nil)
-        V20.create(target_dir) { |b| yield b if block_given? }
+        FluentCommandBuilder::AspnetCompiler::V20.create(target_dir) { |b| yield b if block_given? }
       end
       class AspnetCompiler < CommandBase
         def initialize(underlying_builder, target_dir=nil)

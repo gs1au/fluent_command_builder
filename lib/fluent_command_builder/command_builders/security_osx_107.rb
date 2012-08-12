@@ -2,19 +2,19 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_base')
 require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
-  def security_osx_107()
-    Security::OSX107.create() { |b| yield b if block_given? }
+  def security_osx_107
+    FluentCommandBuilder::Security::OSX107.create { |b| yield b if block_given? }
   end
   module Security
     module OSX107
-      def self.create()
+      def self.create
         b = UnderlyingBuilder.new FluentCommandBuilder::Security::COMMAND_NAME
-        c = Security.new b
+        c = Security.new(b)
         yield b if block_given?
         c
       end
-      def security()
-        OSX107.create() { |b| yield b if block_given? }
+      def security
+        FluentCommandBuilder::Security::OSX107.create { |b| yield b if block_given? }
       end
       class Security < CommandBase
         def initialize(underlying_builder)

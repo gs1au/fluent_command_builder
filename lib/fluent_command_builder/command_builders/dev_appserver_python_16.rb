@@ -3,18 +3,18 @@ require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
   def dev_appserver_python_16(application_root=nil)
-    DevAppserverPython::V16.create(application_root) { |b| yield b if block_given? }
+    FluentCommandBuilder::DevAppserverPython::V16.create(application_root) { |b| yield b if block_given? }
   end
   module DevAppserverPython
     module V16
       def self.create(application_root=nil)
         b = UnderlyingBuilder.new FluentCommandBuilder::DevAppserverPython::COMMAND_NAME
-        c = DevAppserverPython.new b, application_root
+        c = DevAppserverPython.new(b, application_root)
         yield b if block_given?
         c
       end
       def dev_appserver_python(application_root=nil)
-        V16.create(application_root) { |b| yield b if block_given? }
+        FluentCommandBuilder::DevAppserverPython::V16.create(application_root) { |b| yield b if block_given? }
       end
       class DevAppserverPython < CommandBase
         def initialize(underlying_builder, application_root=nil)

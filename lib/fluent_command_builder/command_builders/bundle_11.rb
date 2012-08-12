@@ -2,19 +2,19 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_base')
 require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
-  def bundle_11()
-    Bundle::V11.create() { |b| yield b if block_given? }
+  def bundle_11
+    FluentCommandBuilder::Bundle::V11.create { |b| yield b if block_given? }
   end
   module Bundle
     module V11
-      def self.create()
+      def self.create
         b = UnderlyingBuilder.new FluentCommandBuilder::Bundle::COMMAND_NAME
-        c = Bundle.new b
+        c = Bundle.new(b)
         yield b if block_given?
         c
       end
-      def bundle()
-        V11.create() { |b| yield b if block_given? }
+      def bundle
+        FluentCommandBuilder::Bundle::V11.create { |b| yield b if block_given? }
       end
       class Bundle < CommandBase
         def initialize(underlying_builder)

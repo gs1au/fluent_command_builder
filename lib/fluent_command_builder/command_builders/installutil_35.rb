@@ -2,19 +2,19 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_base')
 require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
-  def installutil_35()
-    InstallUtil::V35.create() { |b| yield b if block_given? }
+  def installutil_35
+    FluentCommandBuilder::InstallUtil::V35.create { |b| yield b if block_given? }
   end
   module InstallUtil
     module V35
-      def self.create()
+      def self.create
         b = UnderlyingBuilder.new FluentCommandBuilder::InstallUtil::COMMAND_NAME
-        c = InstallUtil.new b
+        c = InstallUtil.new(b)
         yield b if block_given?
         c
       end
-      def installutil()
-        V35.create() { |b| yield b if block_given? }
+      def installutil
+        FluentCommandBuilder::InstallUtil::V35.create { |b| yield b if block_given? }
       end
       class InstallUtil < CommandBase
         def initialize(underlying_builder)

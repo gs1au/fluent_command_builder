@@ -8,7 +8,7 @@ module FluentCommandBuilder
   module Security
     COMMAND_NAME = 'security'
     def self.create
-      b = UnderlyingBuilder.new FluentCommandBuilder::COMMAND_NAME
+      b = UnderlyingBuilder.new FluentCommandBuilder::Security::COMMAND_NAME
       c = version_module(Security).create b
       yield b if block_given?
       c

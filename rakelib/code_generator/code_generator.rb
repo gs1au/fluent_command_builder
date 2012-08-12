@@ -51,13 +51,13 @@ class CodeGenerator
     code_names = CommandCodeNames.new command, version
 
     # erb values
-    version_factory_method_name = code_names.version_factory_method_name
-    factory_method_args = code_names.factory_method_args
+    command_factory_method_signature = code_names.command_factory_method_signature
+    version_factory_method_signature = code_names.version_factory_method_signature
+    create_method_signature = code_names.create_method_signature
+    create_method_call = code_names.create_method_call
+    command_initializer_call = code_names.command_initializer_call
     command_module_name = code_names.command_module_name
     version_module_name = code_names.version_module_name
-    initializer_values = code_names.initializer_values
-    command_factory_method_name = code_names.command_factory_method_name
-    command_class_name = code_names.class_name
     command_class = generate_command_class command
 
     template_file = File.expand_path(File.dirname(__FILE__) + '/templates/version_module.erb')

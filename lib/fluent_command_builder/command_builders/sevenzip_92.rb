@@ -2,19 +2,19 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_base')
 require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
-  def sevenzip_92()
-    SevenZip::V92.create() { |b| yield b if block_given? }
+  def sevenzip_92
+    FluentCommandBuilder::SevenZip::V92.create { |b| yield b if block_given? }
   end
   module SevenZip
     module V92
-      def self.create()
+      def self.create
         b = UnderlyingBuilder.new FluentCommandBuilder::SevenZip::COMMAND_NAME
-        c = SevenZip.new b
+        c = SevenZip.new(b)
         yield b if block_given?
         c
       end
-      def sevenzip()
-        V92.create() { |b| yield b if block_given? }
+      def sevenzip
+        FluentCommandBuilder::SevenZip::V92.create { |b| yield b if block_given? }
       end
       class SevenZip < CommandBase
         def initialize(underlying_builder)

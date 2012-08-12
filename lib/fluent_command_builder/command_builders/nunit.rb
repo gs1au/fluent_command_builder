@@ -8,7 +8,7 @@ module FluentCommandBuilder
   module NUnit
     COMMAND_NAME = 'nunit-console'
     def self.create
-      b = UnderlyingBuilder.new FluentCommandBuilder::COMMAND_NAME
+      b = UnderlyingBuilder.new FluentCommandBuilder::NUnit::COMMAND_NAME
       c = version_module(NUnit).create b
       yield b if block_given?
       c

@@ -3,18 +3,18 @@ require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
   def nunit_25(input_files)
-    NUnit::V25.create(input_files) { |b| yield b if block_given? }
+    FluentCommandBuilder::NUnit::V25.create(input_files) { |b| yield b if block_given? }
   end
   module NUnit
     module V25
       def self.create(input_files)
         b = UnderlyingBuilder.new FluentCommandBuilder::NUnit::COMMAND_NAME
-        c = NUnit.new b, input_files
+        c = NUnit.new(b, input_files)
         yield b if block_given?
         c
       end
       def nunit(input_files)
-        V25.create(input_files) { |b| yield b if block_given? }
+        FluentCommandBuilder::NUnit::V25.create(input_files) { |b| yield b if block_given? }
       end
       class NUnit < CommandBase
         def initialize(underlying_builder, input_files)
