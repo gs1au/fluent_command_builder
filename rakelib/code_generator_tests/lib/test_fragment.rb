@@ -1,6 +1,5 @@
 require 'test/unit'
 require_relative '../../code_generator/lib/fragment'
-include CodeGenerator
 
 class TestFragment < Test::Unit::TestCase
 

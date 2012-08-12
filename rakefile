@@ -2,16 +2,11 @@ require 'rake/clean'
 require 'rake/testtask'
 require 'bundler'
 Bundler::GemHelper.install_tasks
-require_relative 'rakelib/code_generator/lib/ruby_code_writer'
-require_relative 'rakelib/code_generator/lib/command_code_names'
-require_relative 'rakelib/code_generator/command_code_generator'
-require_relative 'rakelib/code_generator/command_module_generator'
-require_relative 'rakelib/code_generator/command_definition'
+require_relative 'rakelib/code_generator/code_generator'
 
-include CodeGenerator
-
-COMMAND_DEFINITIONS_DIR = 'command_definitions'
-LIB_DIR = 'lib'
+ROOT_DIR = File.expand_path(File.dirname(__FILE__))
+COMMAND_DEFINITIONS_DIR = File.join ROOT_DIR, 'command_definitions'
+LIB_DIR = File.join ROOT_DIR, 'lib'
 COMMAND_BUILDERS_DIR = File.join LIB_DIR, 'fluent_command_builder', 'command_builders'
 
 CLOBBER.include COMMAND_BUILDERS_DIR
@@ -29,9 +24,8 @@ end
 
 desc 'Build.'
 task :build => [:test_code_generator, :clobber, COMMAND_BUILDERS_DIR] do
-  command_definition_file_pattern = File.join COMMAND_DEFINITIONS_DIR, '*.txt'
-  Dir[command_definition_file_pattern].each { |f| generate_command_builder f }
-  generate_fluent_command_builder_rb
+  code_generator = CodeGenerator.new COMMAND_DEFINITIONS_DIR, LIB_DIR
+  code_generator.execute
 end
 
 desc 'Test code generator.'
@@ -41,33 +35,3 @@ Rake::TestTask.new :test_code_generator do |t|
   raise 'No tests found.' unless test_files.length > 0
   t.test_files = test_files
 end
-
-def generate_command_builder(command_definition_file)
-  puts "Processing: #{File.basename command_definition_file}"
-  command_definition = CommandDefinition.new File.new(command_definition_file)
-  command_definition.versions.each do |version|
-
-    command_module_generator = CommandModuleGenerator.new command_definition.command
-    file_name = CommandCodeNames.new(command_definition.command, version).command_factory_method_name
-    dest_file = File.join COMMAND_BUILDERS_DIR, "#{file_name}.rb"
-    File.open(dest_file, 'w') { |f| command_module_generator.render RubyCodeWriter.new(f) }
-
-    command_code_generator = CommandCodeGenerator.new command_definition.command, version
-    version_method_name = CommandCodeNames.new(command_definition.command, version).version_factory_method_name
-    dest_file = File.join COMMAND_BUILDERS_DIR, "#{version_method_name}.rb"
-    File.open(dest_file, 'w') { |f| command_code_generator.render RubyCodeWriter.new(f) }
-  end
-end
-
-def generate_fluent_command_builder_rb
-  Dir.chdir LIB_DIR do
-    File.open 'fluent_command_builder.rb', 'w' do |f|
-      Dir['fluent_command_builder/command_builders/*.rb'].each do |command_builder_file|
-        f.puts %Q[require File.expand_path(File.dirname(__FILE__) + '/#{command_builder_file}')]
-      end
-    end
-  end
-end
-
-
-

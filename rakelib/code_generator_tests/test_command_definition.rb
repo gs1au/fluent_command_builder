@@ -1,7 +1,6 @@
 require 'stringio'
 require 'test/unit'
-require_relative '../code_generator/command_definition'
-include CodeGenerator
+require_relative '../code_generator/lib/command_definition'
 
 class TestCommandDefinition < Test::Unit::TestCase
 

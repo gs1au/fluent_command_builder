@@ -1,7 +1,6 @@
 require 'test/unit'
 require_relative '../../code_generator/lib/command'
 require_relative '../../code_generator/lib/command_code_names'
-include CodeGenerator
 
 class TestCommandCodeNames < Test::Unit::TestCase
 

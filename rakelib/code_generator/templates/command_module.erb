@@ -2,14 +2,14 @@ require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 require File.expand_path(File.dirname(__FILE__) + '/../util')
 
 module FluentCommandBuilder
-  def <%= @model.factory_method_name %>(&block)
-    <%= @model.module_name %>.create &block
+  def <%= factory_method_name %>(&block)
+    <%= module_name %>.create &block
   end
-  module <%= @model.module_name %>
-    COMMAND_NAME = '<%= @model.command_name %>'
+  module <%= module_name %>
+    COMMAND_NAME = '<%= command_name %>'
     def self.create
       b = UnderlyingBuilder.new FluentCommandBuilder::COMMAND_NAME
-      c = version_module(<%= @model.module_name %>).create b
+      c = version_module(<%= module_name %>).create b
       yield b if block_given?
       c
     end

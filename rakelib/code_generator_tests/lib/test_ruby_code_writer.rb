@@ -1,7 +1,6 @@
 require 'stringio'
 require 'test/unit'
 require_relative '../../code_generator/lib/ruby_code_writer'
-include CodeGenerator
 
 class TestRubyCodeWriter < Test::Unit::TestCase
 

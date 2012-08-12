@@ -2,21 +2,21 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_base')
 require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
-  def <%= @model.version_factory_method_name %>(<%= @model.factory_method_args.join(', ') %>)
-    <%= @model.command_module_name %>::<%= @model.version_module_name %>.create(<%= @model.initializer_values.join(', ') %>) { |b| yield b if block_given? }
+  def <%= version_factory_method_name %>(<%= factory_method_args.join(', ') %>)
+    <%= command_module_name %>::<%= version_module_name %>.create(<%= initializer_values.join(', ') %>) { |b| yield b if block_given? }
   end
-  module <%= @model.command_module_name %>
-    module <%= @model.version_module_name %>
-      def self.create(<%= @model.factory_method_args.join(', ') %>)
-        b = UnderlyingBuilder.new FluentCommandBuilder::<%= @model.command_module_name %>::COMMAND_NAME
-        c = <%= @model.command_class_name %>.new <%= (%w(b) + @model.initializer_values).join(', ') %>
+  module <%= command_module_name %>
+    module <%= version_module_name %>
+      def self.create(<%= factory_method_args.join(', ') %>)
+        b = UnderlyingBuilder.new FluentCommandBuilder::<%= command_module_name %>::COMMAND_NAME
+        c = <%= command_class_name %>.new <%= (%w(b) + initializer_values).join(', ') %>
         yield b if block_given?
         c
       end
-      def <%= @model.command_factory_method_name %>(<%= @model.factory_method_args.join(', ') %>)
-        <%= @model.version_module_name %>.create(<%= @model.initializer_values.join(', ') %>) { |b| yield b if block_given? }
+      def <%= command_factory_method_name %>(<%= factory_method_args.join(', ') %>)
+        <%= version_module_name %>.create(<%= initializer_values.join(', ') %>) { |b| yield b if block_given? }
       end
-<%= @model.command_class %>
+<%= command_class %>
     end
   end
 end
