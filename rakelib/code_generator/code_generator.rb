@@ -34,38 +34,40 @@ class CodeGenerator
   def generate_command_module(command, version)
     code_names = CommandCodeNames.new command, version
 
-    # erb values
-    module_name = code_names.command_module_name
-    factory_method_name = code_names.command_factory_method_name
-    command_name = command.command_name
+    model = {
+        module_name: code_names.command_module_name,
+        factory_method_name: code_names.command_factory_method_name,
+        command_name: command.command_name
+    }
 
     template_file = File.expand_path(File.dirname(__FILE__) + '/templates/command_module.erb')
-    template = ERB.new File.read(template_file)
-    result = template.result(binding)
-
-    dest_file = File.join @command_builders_dir, "#{code_names.command_factory_method_name}.rb"
-    File.open(dest_file, 'w') { |f| f.write result }
+    result_file = File.join @command_builders_dir, "#{code_names.command_factory_method_name}.rb"
+    sub_template model, template_file, result_file
   end
 
   def generate_version_module(command, version)
     code_names = CommandCodeNames.new command, version
 
-    # erb values
-    command_factory_method_signature = code_names.command_factory_method_signature
-    version_factory_method_signature = code_names.version_factory_method_signature
-    create_method_signature = code_names.create_method_signature
-    create_method_call = code_names.create_method_call
-    command_initializer_call = code_names.command_initializer_call
-    command_module_name = code_names.command_module_name
-    version_module_name = code_names.version_module_name
-    command_class = generate_command_class command
+    model = {
+        command_factory_method_signature: code_names.command_factory_method_signature,
+        version_factory_method_signature: code_names.version_factory_method_signature,
+        create_method_signature: code_names.create_method_signature,
+        create_method_call: code_names.create_method_call,
+        command_initializer_call: code_names.command_initializer_call,
+        command_module_name: code_names.command_module_name,
+        version_module_name: code_names.version_module_name,
+        command_class: generate_command_class(command)
+    }
 
     template_file = File.expand_path(File.dirname(__FILE__) + '/templates/version_module.erb')
+    result_file = File.join @command_builders_dir, "#{code_names.version_factory_method_name}.rb"
+    sub_template model, template_file, result_file
+  end
+
+  def sub_template(model, template_file, result_file)
     template = ERB.new File.read(template_file)
     result = template.result(binding)
-
-    dest_file = File.join @command_builders_dir, "#{code_names.version_factory_method_name}.rb"
-    File.open(dest_file, 'w') { |f| f.write result }
+    File.open(result_file, 'w') { |f| f.write result }
   end
 
   def generate_command_class(command)
