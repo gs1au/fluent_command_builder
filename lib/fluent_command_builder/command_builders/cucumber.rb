@@ -8,7 +8,7 @@ module FluentCommandBuilder
   module Cucumber
     COMMAND_NAME = 'cucumber'
     def self.create
-      b = UnderlyingBuilder.new
+      b = UnderlyingBuilder.new FluentCommandBuilder::COMMAND_NAME
       c = version_module(Cucumber).create b
       yield b if block_given?
       c

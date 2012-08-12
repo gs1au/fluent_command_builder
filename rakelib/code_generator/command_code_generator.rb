@@ -32,6 +32,7 @@ module CodeGenerator
     def command_class(command)
       stream = StringIO.new
       writer = RubyCodeWriter.new stream
+      writer.indent = 3
       node_code_generator = NodeCodeGenerator.new command, command, writer
       node_code_generator.render
       stream.string

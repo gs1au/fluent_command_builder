@@ -8,7 +8,7 @@ module FluentCommandBuilder
   module AspnetCompiler
     COMMAND_NAME = 'aspnet_compiler'
     def self.create
-      b = UnderlyingBuilder.new
+      b = UnderlyingBuilder.new FluentCommandBuilder::COMMAND_NAME
       c = version_module(AspnetCompiler).create b
       yield b if block_given?
       c

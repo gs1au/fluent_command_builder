@@ -3,6 +3,8 @@ module CodeGenerator
 
     INDENT_SPACES = 2
 
+    attr_accessor :indent
+
     def initialize(stream)
       @stream = stream
       @indent = 0

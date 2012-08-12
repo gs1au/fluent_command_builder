@@ -55,7 +55,6 @@ module CodeGenerator
     def render_constructor
       @writer.write_method 'initialize', 'underlying_builder', node_code_names.method_args do
         @writer.write_line 'super underlying_builder'
-        @writer.write_line "@builder.command_name = '#{@command.command_name}'"
         render_leaf_node_method_body
       end
     end

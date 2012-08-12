@@ -8,7 +8,7 @@ module FluentCommandBuilder
   module InstallUtil
     COMMAND_NAME = 'installUtil'
     def self.create
-      b = UnderlyingBuilder.new
+      b = UnderlyingBuilder.new FluentCommandBuilder::COMMAND_NAME
       c = version_module(InstallUtil).create b
       yield b if block_given?
       c
