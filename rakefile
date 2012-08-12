@@ -3,6 +3,7 @@ require 'rake/testtask'
 require 'bundler'
 Bundler::GemHelper.install_tasks
 require_relative 'rakelib/code_generator/lib/ruby_code_writer'
+require_relative 'rakelib/code_generator/lib/command_code_names'
 require_relative 'rakelib/code_generator/command_code_generator'
 require_relative 'rakelib/code_generator/command_module_generator'
 require_relative 'rakelib/code_generator/command_definition'

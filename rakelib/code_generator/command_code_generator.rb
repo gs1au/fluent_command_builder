@@ -1,8 +1,11 @@
-require_relative 'lib/command_code_names'
+require 'erb'
+require_relative 'lib/code_names'
 require_relative 'lib/node_code_generator'
+require_relative 'lib/ruby_code_writer'
 
 module CodeGenerator
   class CommandCodeGenerator
+    include CodeNames
 
     def initialize(command, version)
       @command = command
@@ -10,50 +13,19 @@ module CodeGenerator
     end
 
     def render(writer)
-      w = writer
-      w.write_line %Q[require File.expand_path(File.dirname(__FILE__) + '/../command_base')]
-      w.write_line %Q[require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')]
-      w.write_line
-      w.write_module 'FluentCommandBuilder' do
-
-        w.write_method command_code_names.version_factory_method_name, command_code_names.factory_method_args do
-          initializer_values = ['b'] + command_code_names.initializer_values
-          w.write_line 'b = UnderlyingBuilder.new'
-          w.write_line "c = FluentCommandBuilder::#{command_code_names.module_name}::#{command_code_names.version_module_name}.create " + initializer_values.join(', ')
-          w.write_line 'yield b if block_given?'
-          w.write_line 'c'
-        end
-
-        w.write_module command_code_names.module_name do
-
-
-          w.write_module command_code_names.version_module_name do
-            w.write_method 'self.create', ['underlying_builder'] + command_code_names.factory_method_args do
-              initializer_values = ['underlying_builder'] + command_code_names.initializer_values
-              w.write_line "#{command_code_names.class_name}.new #{initializer_values.join(', ')}"
-            end
-
-            w.write_method command_code_names.factory_method_name, command_code_names.factory_method_args do
-              initializer_values = ['b'] + command_code_names.initializer_values
-              w.write_line 'b = UnderlyingBuilder.new'
-              w.write_line "c = FluentCommandBuilder::#{command_code_names.module_name}::#{command_code_names.version_module_name}.create " + initializer_values.join(', ')
-              w.write_line 'yield b if block_given?'
-              w.write_line 'c'
-            end
-
-            node_code_generator = NodeCodeGenerator.new @command, @command, writer
-            node_code_generator.render
-          end
-        end
-
-
-      end
+      template_file = File.expand_path(File.dirname(__FILE__) + '/templates/version_module.erb')
+      template = ERB.new File.read(template_file)
+      writer.write template.result(binding)
     end
 
     private
 
-    def command_code_names
-      @command_code_names ||= CommandCodeNames.new @command, @version
+    def command_class
+      stream = StringIO.new
+      writer = RubyCodeWriter.new stream
+      node_code_generator = NodeCodeGenerator.new @command, @command, writer
+      node_code_generator.render
+      stream.string
     end
 
   end
