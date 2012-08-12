@@ -8,7 +8,7 @@ module CodeGenerator
       @version = version.to_s
     end
 
-    def module_name
+    def command_module_name
       @command.node_name.camelcase
     end
 
@@ -17,12 +17,12 @@ module CodeGenerator
       result.camelcase
     end
 
-    def factory_method_name
+    def command_factory_method_name
       @command.node_name.downcase.snakecase
     end
 
     def version_factory_method_name
-      "#{factory_method_name}_#{version.downcase.snakecase}"
+      "#{command_factory_method_name}_#{version.downcase.snakecase}"
     end
 
     def factory_method_args

@@ -48,7 +48,7 @@ def generate_command_builder(command_definition_file)
   command_definition.versions.each do |version|
 
     command_module_generator = CommandModuleGenerator.new command_definition.command
-    file_name = CommandCodeNames.new(command_definition.command, version).factory_method_name
+    file_name = CommandCodeNames.new(command_definition.command, version).command_factory_method_name
     dest_file = File.join COMMAND_BUILDERS_DIR, "#{file_name}.rb"
     File.open(dest_file, 'w') { |f| command_module_generator.render RubyCodeWriter.new(f) }
 

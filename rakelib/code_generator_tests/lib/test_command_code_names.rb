@@ -6,10 +6,10 @@ include CodeGenerator
 class TestCommandCodeNames < Test::Unit::TestCase
 
   def test_module_name
-    assert_module_name 'Command', 'command', 'COMMAND'
-    assert_module_name 'CommandTool', 'command_tool', 'command-tool', 'commandTool', 'CommandTool'
-    assert_module_name 'CMDTool', 'CMDTool'
-    assert_module_name 'CMD123', 'CMD123'
+    assert_command_module_name 'Command', 'command', 'COMMAND'
+    assert_command_module_name 'CommandTool', 'command_tool', 'command-tool', 'commandTool', 'CommandTool'
+    assert_command_module_name 'CMDTool', 'CMDTool'
+    assert_command_module_name 'CMD123', 'CMD123'
   end
 
   def test_version_module_name
@@ -22,11 +22,11 @@ class TestCommandCodeNames < Test::Unit::TestCase
   end
 
   def test_factory_method_name
-    assert_factory_method_name 'command', 'command', 'COMMAND'
-    assert_factory_method_name 'command_tool', 'command_tool', 'command-tool'
-    assert_factory_method_name 'commandtool', 'commandTool', 'CommandTool'
-    assert_factory_method_name 'cmdtool', 'CMDTool'
-    assert_factory_method_name 'cmd123', 'CMD123'
+    assert_command_factory_method_name 'command', 'command', 'COMMAND'
+    assert_command_factory_method_name 'command_tool', 'command_tool', 'command-tool'
+    assert_command_factory_method_name 'commandtool', 'commandTool', 'CommandTool'
+    assert_command_factory_method_name 'cmdtool', 'CMDTool'
+    assert_command_factory_method_name 'cmd123', 'CMD123'
   end
 
   def test_version_factory_method_name
@@ -45,24 +45,24 @@ class TestCommandCodeNames < Test::Unit::TestCase
   end
 
   def test_class_name
-    assert_module_name 'Command', 'command', 'COMMAND'
-    assert_module_name 'CommandTool', 'command_tool', 'command-tool', 'commandTool', 'CommandTool'
-    assert_module_name 'CMDTool', 'CMDTool'
-    assert_module_name 'CMD123', 'CMD123'
+    assert_command_module_name 'Command', 'command', 'COMMAND'
+    assert_command_module_name 'CommandTool', 'command_tool', 'command-tool', 'commandTool', 'CommandTool'
+    assert_command_module_name 'CMDTool', 'CMDTool'
+    assert_command_module_name 'CMD123', 'CMD123'
   end
 
   private
 
-  def assert_module_name(expected_module_name, *command_def)
-    command_def.each { |c| assert_equal expected_module_name, command_code_names(c, '0').module_name }
+  def assert_command_module_name(expected_module_name, *command_def)
+    command_def.each { |c| assert_equal expected_module_name, command_code_names(c, '0').command_module_name }
   end
 
   def assert_version_module_name(expected_module_name, *version)
     version.each { |v| assert_equal expected_module_name, command_code_names('command', v).version_module_name }
   end
 
-  def assert_factory_method_name(expected_method_name, *command_def)
-    command_def.each { |c| assert_equal expected_method_name, command_code_names(c, '0').factory_method_name }
+  def assert_command_factory_method_name(expected_method_name, *command_def)
+    command_def.each { |c| assert_equal expected_method_name, command_code_names(c, '0').command_factory_method_name }
   end
 
   def assert_version_factory_method_name_starts_with(expected_method_name, *command_def)
