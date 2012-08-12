@@ -21,83 +21,83 @@ module FluentCommandBuilder
           super underlying_builder
         end
         def test_container(file_name)
-          @builder.append " /testContainer:#{@builder.format file_name}"
-          yield @builder if block_given?
+          b.append " /testContainer:#{b.format file_name}"
+          yield b if block_given?
           self
         end
         def test_metadata(file_name)
-          @builder.append " /testMetadata:#{@builder.format file_name}"
-          yield @builder if block_given?
+          b.append " /testMetadata:#{b.format file_name}"
+          yield b if block_given?
           self
         end
         def test_list(list_list_path)
-          @builder.append " /testList:#{@builder.format list_list_path}"
-          yield @builder if block_given?
+          b.append " /testList:#{b.format list_list_path}"
+          yield b if block_given?
           self
         end
         def test(test_name)
-          @builder.append " /test:#{@builder.format test_name}"
-          yield @builder if block_given?
+          b.append " /test:#{b.format test_name}"
+          yield b if block_given?
           self
         end
         def run_config(file_name)
-          @builder.append " /runConfig:#{@builder.format file_name}"
-          yield @builder if block_given?
+          b.append " /runConfig:#{b.format file_name}"
+          yield b if block_given?
           self
         end
         def results_file(file_name)
-          @builder.append " /resultsFile:#{@builder.format file_name}"
-          yield @builder if block_given?
+          b.append " /resultsFile:#{b.format file_name}"
+          yield b if block_given?
           self
         end
         def unique
-          @builder.append ' /unique'
-          yield @builder if block_given?
+          b.append ' /unique'
+          yield b if block_given?
           self
         end
         def detail(property_id)
-          @builder.append " /detail:#{@builder.format property_id}"
-          yield @builder if block_given?
+          b.append " /detail:#{b.format property_id}"
+          yield b if block_given?
           self
         end
         def help
-          @builder.append ' /help'
-          yield @builder if block_given?
+          b.append ' /help'
+          yield b if block_given?
           self
         end
         def no_logo
-          @builder.append ' /noLogo'
-          yield @builder if block_given?
+          b.append ' /noLogo'
+          yield b if block_given?
           self
         end
         def publish(server_name)
-          @builder.append " /publish:#{@builder.format server_name}"
-          yield @builder if block_given?
+          b.append " /publish:#{b.format server_name}"
+          yield b if block_given?
           self
         end
         def publish_results_file(file_name)
-          @builder.append " /publishResultsFile:#{@builder.format file_name}"
-          yield @builder if block_given?
+          b.append " /publishResultsFile:#{b.format file_name}"
+          yield b if block_given?
           self
         end
         def publish_build(build_id)
-          @builder.append " /publishBuild:#{@builder.format build_id}"
-          yield @builder if block_given?
+          b.append " /publishBuild:#{b.format build_id}"
+          yield b if block_given?
           self
         end
         def team_project(team_project_name)
-          @builder.append " /teamProject:#{@builder.format team_project_name}"
-          yield @builder if block_given?
+          b.append " /teamProject:#{b.format team_project_name}"
+          yield b if block_given?
           self
         end
         def platform(platform)
-          @builder.append " /platform:#{@builder.format platform}"
-          yield @builder if block_given?
+          b.append " /platform:#{b.format platform}"
+          yield b if block_given?
           self
         end
         def flavor(flavor)
-          @builder.append " /flavor:#{@builder.format flavor}"
-          yield @builder if block_given?
+          b.append " /flavor:#{b.format flavor}"
+          yield b if block_given?
           self
         end
       end

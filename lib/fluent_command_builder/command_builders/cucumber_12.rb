@@ -19,156 +19,156 @@ module FluentCommandBuilder
       class Cucumber < CommandBase
         def initialize(underlying_builder, feature=nil)
           super underlying_builder
-          @builder.append " #{@builder.format feature}" unless feature.nil?
+          b.append " #{b.format feature}" unless feature.nil?
         end
         def require(library)
-          @builder.append " --require #{@builder.format library}"
-          yield @builder if block_given?
+          b.append " --require #{b.format library}"
+          yield b if block_given?
           self
         end
         def i18n(lang)
-          @builder.append " --i18n #{@builder.format lang}"
-          yield @builder if block_given?
+          b.append " --i18n #{b.format lang}"
+          yield b if block_given?
           self
         end
         def format(format)
-          @builder.append " --format #{@builder.format format}"
-          yield @builder if block_given?
+          b.append " --format #{b.format format}"
+          yield b if block_given?
           self
         end
         def out(file)
-          @builder.append " --out #{@builder.format file}"
-          yield @builder if block_given?
+          b.append " --out #{b.format file}"
+          yield b if block_given?
           self
         end
         def tags(tag_expression)
-          @builder.append " --tags #{@builder.format tag_expression, ','}"
-          yield @builder if block_given?
+          b.append " --tags #{b.format tag_expression, ','}"
+          yield b if block_given?
           self
         end
         def name(name)
-          @builder.append " --name #{@builder.format name}"
-          yield @builder if block_given?
+          b.append " --name #{b.format name}"
+          yield b if block_given?
           self
         end
         def exclude(pattern)
-          @builder.append " --exclude #{@builder.format pattern}"
-          yield @builder if block_given?
+          b.append " --exclude #{b.format pattern}"
+          yield b if block_given?
           self
         end
         def profile(profile)
-          @builder.append " --profile #{@builder.format profile}"
-          yield @builder if block_given?
+          b.append " --profile #{b.format profile}"
+          yield b if block_given?
           self
         end
         def no_profile
-          @builder.append ' --no-profile'
-          yield @builder if block_given?
+          b.append ' --no-profile'
+          yield b if block_given?
           self
         end
         def color
-          @builder.append ' --color'
-          yield @builder if block_given?
+          b.append ' --color'
+          yield b if block_given?
           self
         end
         def no_color
-          @builder.append ' --no-color'
-          yield @builder if block_given?
+          b.append ' --no-color'
+          yield b if block_given?
           self
         end
         def dry_run
-          @builder.append ' --dry-run'
-          yield @builder if block_given?
+          b.append ' --dry-run'
+          yield b if block_given?
           self
         end
         def autoformat(dir)
-          @builder.append " --autoformat #{@builder.format dir}"
-          yield @builder if block_given?
+          b.append " --autoformat #{b.format dir}"
+          yield b if block_given?
           self
         end
         def no_multiline
-          @builder.append ' --no-multiline'
-          yield @builder if block_given?
+          b.append ' --no-multiline'
+          yield b if block_given?
           self
         end
         def no_source
-          @builder.append ' --no-source'
-          yield @builder if block_given?
+          b.append ' --no-source'
+          yield b if block_given?
           self
         end
         def no_snippets
-          @builder.append ' --no-snippets'
-          yield @builder if block_given?
+          b.append ' --no-snippets'
+          yield b if block_given?
           self
         end
         def quiet
-          @builder.append ' --quiet'
-          yield @builder if block_given?
+          b.append ' --quiet'
+          yield b if block_given?
           self
         end
         def backtrace
-          @builder.append ' --backtrace'
-          yield @builder if block_given?
+          b.append ' --backtrace'
+          yield b if block_given?
           self
         end
         def strict
-          @builder.append ' --strict'
-          yield @builder if block_given?
+          b.append ' --strict'
+          yield b if block_given?
           self
         end
         def wip
-          @builder.append ' --wip'
-          yield @builder if block_given?
+          b.append ' --wip'
+          yield b if block_given?
           self
         end
         def verbose
-          @builder.append ' --verbose'
-          yield @builder if block_given?
+          b.append ' --verbose'
+          yield b if block_given?
           self
         end
         def guess
-          @builder.append ' --guess'
-          yield @builder if block_given?
+          b.append ' --guess'
+          yield b if block_given?
           self
         end
         def lines(lines)
-          @builder.append " --lines #{@builder.format lines}"
-          yield @builder if block_given?
+          b.append " --lines #{b.format lines}"
+          yield b if block_given?
           self
         end
         def expand
-          @builder.append ' --expand'
-          yield @builder if block_given?
+          b.append ' --expand'
+          yield b if block_given?
           self
         end
         def drb
-          @builder.append ' --drb'
-          yield @builder if block_given?
+          b.append ' --drb'
+          yield b if block_given?
           self
         end
         def no_drb
-          @builder.append ' --no-drb'
-          yield @builder if block_given?
+          b.append ' --no-drb'
+          yield b if block_given?
           self
         end
         def port(port)
-          @builder.append " --port #{@builder.format port}"
-          yield @builder if block_given?
+          b.append " --port #{b.format port}"
+          yield b if block_given?
           self
         end
         def dotcucumber(dir)
-          @builder.append " --dotcucumber #{@builder.format dir}"
-          yield @builder if block_given?
+          b.append " --dotcucumber #{b.format dir}"
+          yield b if block_given?
           self
         end
         def version
-          @builder.append ' --version'
-          yield @builder if block_given?
+          b.append ' --version'
+          yield b if block_given?
           self
         end
         def help
-          @builder.append ' --help'
-          yield @builder if block_given?
+          b.append ' --help'
+          yield b if block_given?
           self
         end
       end

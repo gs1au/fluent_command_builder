@@ -21,118 +21,118 @@ module FluentCommandBuilder
           super underlying_builder
         end
         def formatter(formatter)
-          @builder.append " -formatter=#{@builder.format formatter}"
-          yield @builder if block_given?
+          b.append " -formatter=#{b.format formatter}"
+          yield b if block_given?
           self
         end
         def threshold(threshold)
-          @builder.append " -threshold=#{@builder.format threshold}"
-          yield @builder if block_given?
+          b.append " -threshold=#{b.format threshold}"
+          yield b if block_given?
           self
         end
         def language(language)
-          @builder.append " -language=#{@builder.format language}"
-          yield @builder if block_given?
+          b.append " -language=#{b.format language}"
+          yield b if block_given?
           self
         end
         def default_language(language)
-          @builder.append " -defaultLanguage=#{@builder.format language}"
-          yield @builder if block_given?
+          b.append " -defaultLanguage=#{b.format language}"
+          yield b if block_given?
           self
         end
         def fail_on_duplication(bool)
-          @builder.append " -failOnDuplication=#{@builder.format bool}"
-          yield @builder if block_given?
+          b.append " -failOnDuplication=#{b.format bool}"
+          yield b if block_given?
           self
         end
         def report_duplicate_text(bool)
-          @builder.append " -reportDuplicateText=#{@builder.format bool}"
-          yield @builder if block_given?
+          b.append " -reportDuplicateText=#{b.format bool}"
+          yield b if block_given?
           self
         end
         def ignore_blocks(markers)
-          @builder.append " -ignoreBlocks=#{@builder.format markers}"
-          yield @builder if block_given?
+          b.append " -ignoreBlocks=#{b.format markers}"
+          yield b if block_given?
           self
         end
         def ignore_curly_braces(bool)
-          @builder.append " -ignoreCurlyBraces=#{@builder.format bool}"
-          yield @builder if block_given?
+          b.append " -ignoreCurlyBraces=#{b.format bool}"
+          yield b if block_given?
           self
         end
         def ignore_identifiers(bool)
-          @builder.append " -ignoreIdentifiers=#{@builder.format bool}"
-          yield @builder if block_given?
+          b.append " -ignoreIdentifiers=#{b.format bool}"
+          yield b if block_given?
           self
         end
         def ignore_identifier_case(bool)
-          @builder.append " -ignoreIdentifierCase=#{@builder.format bool}"
-          yield @builder if block_given?
+          b.append " -ignoreIdentifierCase=#{b.format bool}"
+          yield b if block_given?
           self
         end
         def ignore_regions(bool)
-          @builder.append " -ignoreRegions=#{@builder.format bool}"
-          yield @builder if block_given?
+          b.append " -ignoreRegions=#{b.format bool}"
+          yield b if block_given?
           self
         end
         def ignore_strings(bool)
-          @builder.append " -ignoreStrings=#{@builder.format bool}"
-          yield @builder if block_given?
+          b.append " -ignoreStrings=#{b.format bool}"
+          yield b if block_given?
           self
         end
         def ignore_string_case(bool)
-          @builder.append " -ignoreStringCase=#{@builder.format bool}"
-          yield @builder if block_given?
+          b.append " -ignoreStringCase=#{b.format bool}"
+          yield b if block_given?
           self
         end
         def ignore_numbers(bool)
-          @builder.append " -ignoreNumbers=#{@builder.format bool}"
-          yield @builder if block_given?
+          b.append " -ignoreNumbers=#{b.format bool}"
+          yield b if block_given?
           self
         end
         def ignore_characters(bool)
-          @builder.append " -ignoreCharacters=#{@builder.format bool}"
-          yield @builder if block_given?
+          b.append " -ignoreCharacters=#{b.format bool}"
+          yield b if block_given?
           self
         end
         def ignore_character_case(bool)
-          @builder.append " -ignoreCharacterCase=#{@builder.format bool}"
-          yield @builder if block_given?
+          b.append " -ignoreCharacterCase=#{b.format bool}"
+          yield b if block_given?
           self
         end
         def ignore_literals(bool)
-          @builder.append " -ignoreLiterals=#{@builder.format bool}"
-          yield @builder if block_given?
+          b.append " -ignoreLiterals=#{b.format bool}"
+          yield b if block_given?
           self
         end
         def ignore_subtype_names(bool)
-          @builder.append " -ignoreSubtypeNames=#{@builder.format bool}"
-          yield @builder if block_given?
+          b.append " -ignoreSubtypeNames=#{b.format bool}"
+          yield b if block_given?
           self
         end
         def ignore_modifiers(bool)
-          @builder.append " -ignoreModifiers=#{@builder.format bool}"
-          yield @builder if block_given?
+          b.append " -ignoreModifiers=#{b.format bool}"
+          yield b if block_given?
           self
         end
         def ignore_variable_names(bool)
-          @builder.append " -ignoreVariableNames=#{@builder.format bool}"
-          yield @builder if block_given?
+          b.append " -ignoreVariableNames=#{b.format bool}"
+          yield b if block_given?
           self
         end
         def balance_parentheses(bool)
-          @builder.append " -balanceParentheses=#{@builder.format bool}"
-          yield @builder if block_given?
+          b.append " -balanceParentheses=#{b.format bool}"
+          yield b if block_given?
           self
         end
         def balance_curly_braces(bool)
-          @builder.append " -balanceCurlyBraces=#{@builder.format bool}"
-          yield @builder if block_given?
+          b.append " -balanceCurlyBraces=#{b.format bool}"
+          yield b if block_given?
           self
         end
         def balance_square_brackets(bool)
-          @builder.append " -balanceSquareBrackets=#{@builder.format bool}"
-          yield @builder if block_given?
+          b.append " -balanceSquareBrackets=#{b.format bool}"
+          yield b if block_given?
           self
         end
       end

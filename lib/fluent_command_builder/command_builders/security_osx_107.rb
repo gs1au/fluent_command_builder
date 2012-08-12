@@ -21,154 +21,154 @@ module FluentCommandBuilder
           super underlying_builder
         end
         def delete_certificate
-          DeleteCertificate.new @builder
+          DeleteCertificate.new b
         end
         def find_certificate
-          FindCertificate.new @builder
+          FindCertificate.new b
         end
         def import(input_file)
-          Import.new @builder, input_file
+          Import.new b, input_file
         end
         def unlock_keychain
-          UnlockKeychain.new @builder
+          UnlockKeychain.new b
         end
       end
       class DeleteCertificate < CommandBase
         def initialize(underlying_builder)
           super underlying_builder
-          @builder.append ' delete-certificate'
+          b.append ' delete-certificate'
         end
         def common_name(name)
-          @builder.append " -c #{@builder.format name}"
-          yield @builder if block_given?
+          b.append " -c #{b.format name}"
+          yield b if block_given?
           self
         end
         def hash(hash)
-          @builder.append " -Z #{@builder.format hash}"
-          yield @builder if block_given?
+          b.append " -Z #{b.format hash}"
+          yield b if block_given?
           self
         end
         def delete_user_trust_settings
-          @builder.append ' -t'
-          yield @builder if block_given?
+          b.append ' -t'
+          yield b if block_given?
           self
         end
         def keychain(keychain)
-          @builder.append " #{@builder.format keychain}"
-          yield @builder if block_given?
+          b.append " #{b.format keychain}"
+          yield b if block_given?
           self
         end
       end
       class FindCertificate < CommandBase
         def initialize(underlying_builder)
           super underlying_builder
-          @builder.append ' find-certificate'
+          b.append ' find-certificate'
         end
         def all
-          @builder.append ' -a'
-          yield @builder if block_given?
+          b.append ' -a'
+          yield b if block_given?
           self
         end
         def name(name)
-          @builder.append " -c #{@builder.format name}"
-          yield @builder if block_given?
+          b.append " -c #{b.format name}"
+          yield b if block_given?
           self
         end
         def email_address(email_address)
-          @builder.append " -e #{@builder.format email_address}"
-          yield @builder if block_given?
+          b.append " -e #{b.format email_address}"
+          yield b if block_given?
           self
         end
         def show_email_addresses
-          @builder.append ' -m'
-          yield @builder if block_given?
+          b.append ' -m'
+          yield b if block_given?
           self
         end
         def output_pem_format
-          @builder.append ' -p'
-          yield @builder if block_given?
+          b.append ' -p'
+          yield b if block_given?
           self
         end
         def print_sha1_hash
-          @builder.append ' -Z'
-          yield @builder if block_given?
+          b.append ' -Z'
+          yield b if block_given?
           self
         end
         def keychain(keychain)
-          @builder.append " #{@builder.format keychain}"
-          yield @builder if block_given?
+          b.append " #{b.format keychain}"
+          yield b if block_given?
           self
         end
       end
       class Import < CommandBase
         def initialize(underlying_builder, input_file)
           super underlying_builder
-          @builder.append " import #{@builder.format input_file}"
+          b.append " import #{b.format input_file}"
         end
         def keychain(keychain)
-          @builder.append " -k #{@builder.format keychain}"
-          yield @builder if block_given?
+          b.append " -k #{b.format keychain}"
+          yield b if block_given?
           self
         end
         def type(type)
-          @builder.append " -t #{@builder.format type}"
-          yield @builder if block_given?
+          b.append " -t #{b.format type}"
+          yield b if block_given?
           self
         end
         def format(format)
-          @builder.append " -f #{@builder.format format}"
-          yield @builder if block_given?
+          b.append " -f #{b.format format}"
+          yield b if block_given?
           self
         end
         def wrapped
-          @builder.append ' -w'
-          yield @builder if block_given?
+          b.append ' -w'
+          yield b if block_given?
           self
         end
         def not_extractable
-          @builder.append ' -x'
-          yield @builder if block_given?
+          b.append ' -x'
+          yield b if block_given?
           self
         end
         def passphrase(passphrase)
-          @builder.append " -P #{@builder.format passphrase}"
-          yield @builder if block_given?
+          b.append " -P #{b.format passphrase}"
+          yield b if block_given?
           self
         end
         def attribute(name, value)
-          @builder.append " -a #{@builder.format name} #{@builder.format value}"
-          yield @builder if block_given?
+          b.append " -a #{b.format name} #{b.format value}"
+          yield b if block_given?
           self
         end
         def allow_without_warning
-          @builder.append ' -A'
-          yield @builder if block_given?
+          b.append ' -A'
+          yield b if block_given?
           self
         end
         def allow_application(app_path)
-          @builder.append " -T #{@builder.format app_path}"
-          yield @builder if block_given?
+          b.append " -T #{b.format app_path}"
+          yield b if block_given?
           self
         end
       end
       class UnlockKeychain < CommandBase
         def initialize(underlying_builder)
           super underlying_builder
-          @builder.append ' unlock-keychain'
+          b.append ' unlock-keychain'
         end
         def no_password
-          @builder.append ' -u'
-          yield @builder if block_given?
+          b.append ' -u'
+          yield b if block_given?
           self
         end
         def password(password)
-          @builder.append " -p #{@builder.format password}"
-          yield @builder if block_given?
+          b.append " -p #{b.format password}"
+          yield b if block_given?
           self
         end
         def keychain(keychain)
-          @builder.append " #{@builder.format keychain}"
-          yield @builder if block_given?
+          b.append " #{b.format keychain}"
+          yield b if block_given?
           self
         end
       end

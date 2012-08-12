@@ -24,7 +24,7 @@ module CodeGenerator
     end
 
     def initializer_values
-      %w(@builder) + @node.args.map { |arg| arg.arg_name.snakecase }
+      %w(b) + @node.args.map { |arg| arg.arg_name.snakecase }
     end
 
   end

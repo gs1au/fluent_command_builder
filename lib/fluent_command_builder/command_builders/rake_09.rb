@@ -19,121 +19,121 @@ module FluentCommandBuilder
       class Rake < CommandBase
         def initialize(underlying_builder, task=nil)
           super underlying_builder
-          @builder.append " #{@builder.format task, ' '}" unless task.nil?
+          b.append " #{b.format task, ' '}" unless task.nil?
         end
         def classic_namespace
-          @builder.append ' --classic-namespace'
-          yield @builder if block_given?
+          b.append ' --classic-namespace'
+          yield b if block_given?
           self
         end
         def describe(pattern)
-          @builder.append " --describe #{@builder.format pattern}"
-          yield @builder if block_given?
+          b.append " --describe #{b.format pattern}"
+          yield b if block_given?
           self
         end
         def dry_run
-          @builder.append ' --dry-run'
-          yield @builder if block_given?
+          b.append ' --dry-run'
+          yield b if block_given?
           self
         end
         def execute(code)
-          @builder.append " --execute #{@builder.format code}"
-          yield @builder if block_given?
+          b.append " --execute #{b.format code}"
+          yield b if block_given?
           self
         end
         def execute_print(code)
-          @builder.append " --execute-print #{@builder.format code}"
-          yield @builder if block_given?
+          b.append " --execute-print #{b.format code}"
+          yield b if block_given?
           self
         end
         def execute_continue(code)
-          @builder.append " --execute-continue #{@builder.format code}"
-          yield @builder if block_given?
+          b.append " --execute-continue #{b.format code}"
+          yield b if block_given?
           self
         end
         def libdir(lib_dir)
-          @builder.append " --libdir #{@builder.format lib_dir}"
-          yield @builder if block_given?
+          b.append " --libdir #{b.format lib_dir}"
+          yield b if block_given?
           self
         end
         def no_search
-          @builder.append ' --no-search'
-          yield @builder if block_given?
+          b.append ' --no-search'
+          yield b if block_given?
           self
         end
         def prereqs
-          @builder.append ' --prereqs'
-          yield @builder if block_given?
+          b.append ' --prereqs'
+          yield b if block_given?
           self
         end
         def quiet
-          @builder.append ' --quiet'
-          yield @builder if block_given?
+          b.append ' --quiet'
+          yield b if block_given?
           self
         end
         def rakefile(file)
-          @builder.append " --rakefile #{@builder.format file}"
-          yield @builder if block_given?
+          b.append " --rakefile #{b.format file}"
+          yield b if block_given?
           self
         end
         def rakelibdir(rake_lib_dir)
-          @builder.append " --rakelibdir #{@builder.format rake_lib_dir}"
-          yield @builder if block_given?
+          b.append " --rakelibdir #{b.format rake_lib_dir}"
+          yield b if block_given?
           self
         end
         def require(file)
-          @builder.append " --require #{@builder.format file}"
-          yield @builder if block_given?
+          b.append " --require #{b.format file}"
+          yield b if block_given?
           self
         end
         def rules
-          @builder.append ' --rules'
-          yield @builder if block_given?
+          b.append ' --rules'
+          yield b if block_given?
           self
         end
         def silent
-          @builder.append ' --silent'
-          yield @builder if block_given?
+          b.append ' --silent'
+          yield b if block_given?
           self
         end
         def no_system
-          @builder.append ' --no-system'
-          yield @builder if block_given?
+          b.append ' --no-system'
+          yield b if block_given?
           self
         end
         def tasks(pattern)
-          @builder.append " --tasks #{@builder.format pattern}"
-          yield @builder if block_given?
+          b.append " --tasks #{b.format pattern}"
+          yield b if block_given?
           self
         end
         def trace
-          @builder.append ' --trace'
-          yield @builder if block_given?
+          b.append ' --trace'
+          yield b if block_given?
           self
         end
         def verbose
-          @builder.append ' --verbose'
-          yield @builder if block_given?
+          b.append ' --verbose'
+          yield b if block_given?
           self
         end
         def version
-          @builder.append ' --version'
-          yield @builder if block_given?
+          b.append ' --version'
+          yield b if block_given?
           self
         end
         def where(pattern)
-          @builder.append " --where #{@builder.format pattern}"
-          yield @builder if block_given?
+          b.append " --where #{b.format pattern}"
+          yield b if block_given?
           self
         end
         def no_deprecation_warnings
-          @builder.append ' --no-deprecation-warnings'
-          yield @builder if block_given?
+          b.append ' --no-deprecation-warnings'
+          yield b if block_given?
           self
         end
         def help
-          @builder.append ' --help'
-          yield @builder if block_given?
+          b.append ' --help'
+          yield b if block_given?
           self
         end
       end

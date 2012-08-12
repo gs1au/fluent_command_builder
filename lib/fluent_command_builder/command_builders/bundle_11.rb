@@ -21,292 +21,292 @@ module FluentCommandBuilder
           super underlying_builder
         end
         def cache
-          Cache.new @builder
+          Cache.new b
         end
         def check
-          Check.new @builder
+          Check.new b
         end
         def clean
-          Clean.new @builder
+          Clean.new b
         end
         def config(name, value=nil)
-          @builder.append " config #{@builder.format name}"
-          @builder.append " #{@builder.format value}" unless value.nil?
-          yield @builder if block_given?
+          b.append " config #{b.format name}"
+          b.append " #{b.format value}" unless value.nil?
+          yield b if block_given?
           self
         end
         def console(group=nil)
-          @builder.append ' console'
-          @builder.append " #{@builder.format group}" unless group.nil?
-          yield @builder if block_given?
+          b.append ' console'
+          b.append " #{b.format group}" unless group.nil?
+          yield b if block_given?
           self
         end
         def exec(command)
-          @builder.append " exec #{@builder.format command}"
-          yield @builder if block_given?
+          b.append " exec #{b.format command}"
+          yield b if block_given?
           self
         end
         def gem(gem)
-          Gem.new @builder, gem
+          Gem.new b, gem
         end
         def init
-          Init.new @builder
+          Init.new b
         end
         def install
-          Install.new @builder
+          Install.new b
         end
         def open(gem)
-          @builder.append " open #{@builder.format gem}"
-          yield @builder if block_given?
+          b.append " open #{b.format gem}"
+          yield b if block_given?
           self
         end
         def outdated(gem=nil)
-          Outdated.new @builder, gem
+          Outdated.new b, gem
         end
         def package
-          Package.new @builder
+          Package.new b
         end
         def show(gem=nil)
-          Show.new @builder, gem
+          Show.new b, gem
         end
         def update(gem=nil)
-          Update.new @builder, gem
+          Update.new b, gem
         end
         def version
-          @builder.append ' version'
-          yield @builder if block_given?
+          b.append ' version'
+          yield b if block_given?
           self
         end
         def viz
-          Viz.new @builder
+          Viz.new b
         end
       end
       class Cache < CommandBase
         def initialize(underlying_builder)
           super underlying_builder
-          @builder.append ' cache'
+          b.append ' cache'
         end
         def no_prune
-          @builder.append ' --no-prune'
-          yield @builder if block_given?
+          b.append ' --no-prune'
+          yield b if block_given?
           self
         end
       end
       class Check < CommandBase
         def initialize(underlying_builder)
           super underlying_builder
-          @builder.append ' check'
+          b.append ' check'
         end
         def gemfile(file)
-          @builder.append " --gemfile=#{@builder.format file}"
-          yield @builder if block_given?
+          b.append " --gemfile=#{b.format file}"
+          yield b if block_given?
           self
         end
         def path(path)
-          @builder.append " --path=#{@builder.format path}"
-          yield @builder if block_given?
+          b.append " --path=#{b.format path}"
+          yield b if block_given?
           self
         end
       end
       class Clean < CommandBase
         def initialize(underlying_builder)
           super underlying_builder
-          @builder.append ' clean'
+          b.append ' clean'
         end
         def force
-          @builder.append ' --force'
-          yield @builder if block_given?
+          b.append ' --force'
+          yield b if block_given?
           self
         end
       end
       class Gem < CommandBase
         def initialize(underlying_builder, gem)
           super underlying_builder
-          @builder.append " gem #{@builder.format gem}"
+          b.append " gem #{b.format gem}"
         end
         def bin
-          @builder.append ' --bin'
-          yield @builder if block_given?
+          b.append ' --bin'
+          yield b if block_given?
           self
         end
       end
       class Init < CommandBase
         def initialize(underlying_builder)
           super underlying_builder
-          @builder.append ' init'
+          b.append ' init'
         end
         def gemspec(file)
-          @builder.append " --gemspec=#{@builder.format file}"
-          yield @builder if block_given?
+          b.append " --gemspec=#{b.format file}"
+          yield b if block_given?
           self
         end
       end
       class Install < CommandBase
         def initialize(underlying_builder)
           super underlying_builder
-          @builder.append ' install'
+          b.append ' install'
         end
         def binstubs(path)
-          @builder.append " --binstubs=#{@builder.format path}"
-          yield @builder if block_given?
+          b.append " --binstubs=#{b.format path}"
+          yield b if block_given?
           self
         end
         def clean
-          @builder.append ' --clean'
-          yield @builder if block_given?
+          b.append ' --clean'
+          yield b if block_given?
           self
         end
         def deployment
-          @builder.append ' --deployment'
-          yield @builder if block_given?
+          b.append ' --deployment'
+          yield b if block_given?
           self
         end
         def frozen
-          @builder.append ' --frozen'
-          yield @builder if block_given?
+          b.append ' --frozen'
+          yield b if block_given?
           self
         end
         def full_index
-          @builder.append ' --full-index'
-          yield @builder if block_given?
+          b.append ' --full-index'
+          yield b if block_given?
           self
         end
         def gemfile(file)
-          @builder.append " --gemfile=#{@builder.format file}"
-          yield @builder if block_given?
+          b.append " --gemfile=#{b.format file}"
+          yield b if block_given?
           self
         end
         def local
-          @builder.append ' --local'
-          yield @builder if block_given?
+          b.append ' --local'
+          yield b if block_given?
           self
         end
         def no_cache
-          @builder.append ' --no-cache'
-          yield @builder if block_given?
+          b.append ' --no-cache'
+          yield b if block_given?
           self
         end
         def no_prune
-          @builder.append ' --no-prune'
-          yield @builder if block_given?
+          b.append ' --no-prune'
+          yield b if block_given?
           self
         end
         def path(path)
-          @builder.append " --path=#{@builder.format path}"
-          yield @builder if block_given?
+          b.append " --path=#{b.format path}"
+          yield b if block_given?
           self
         end
         def quiet
-          @builder.append ' --quiet'
-          yield @builder if block_given?
+          b.append ' --quiet'
+          yield b if block_given?
           self
         end
         def shebang(string)
-          @builder.append " --shebang=#{@builder.format string}"
-          yield @builder if block_given?
+          b.append " --shebang=#{b.format string}"
+          yield b if block_given?
           self
         end
         def standalone(array)
-          @builder.append " --standalone=#{@builder.format array}"
-          yield @builder if block_given?
+          b.append " --standalone=#{b.format array}"
+          yield b if block_given?
           self
         end
         def system
-          @builder.append ' --system'
-          yield @builder if block_given?
+          b.append ' --system'
+          yield b if block_given?
           self
         end
         def without(group)
-          @builder.append " --without=#{@builder.format group}"
-          yield @builder if block_given?
+          b.append " --without=#{b.format group}"
+          yield b if block_given?
           self
         end
       end
       class Outdated < CommandBase
         def initialize(underlying_builder, gem=nil)
           super underlying_builder
-          @builder.append ' outdated'
-          @builder.append " #{@builder.format gem}" unless gem.nil?
+          b.append ' outdated'
+          b.append " #{b.format gem}" unless gem.nil?
         end
         def local
-          @builder.append ' --local'
-          yield @builder if block_given?
+          b.append ' --local'
+          yield b if block_given?
           self
         end
         def pre
-          @builder.append ' --pre'
-          yield @builder if block_given?
+          b.append ' --pre'
+          yield b if block_given?
           self
         end
         def source
-          @builder.append ' --source'
-          yield @builder if block_given?
+          b.append ' --source'
+          yield b if block_given?
           self
         end
       end
       class Package < CommandBase
         def initialize(underlying_builder)
           super underlying_builder
-          @builder.append ' package'
+          b.append ' package'
         end
         def no_prune
-          @builder.append ' --no-prune'
-          yield @builder if block_given?
+          b.append ' --no-prune'
+          yield b if block_given?
           self
         end
       end
       class Show < CommandBase
         def initialize(underlying_builder, gem=nil)
           super underlying_builder
-          @builder.append ' show'
-          @builder.append " #{@builder.format gem}" unless gem.nil?
+          b.append ' show'
+          b.append " #{b.format gem}" unless gem.nil?
         end
         def paths
-          @builder.append ' --paths'
-          yield @builder if block_given?
+          b.append ' --paths'
+          yield b if block_given?
           self
         end
       end
       class Update < CommandBase
         def initialize(underlying_builder, gem=nil)
           super underlying_builder
-          @builder.append ' update'
-          @builder.append " #{@builder.format gem}" unless gem.nil?
+          b.append ' update'
+          b.append " #{b.format gem}" unless gem.nil?
         end
         def local
-          @builder.append ' --local'
-          yield @builder if block_given?
+          b.append ' --local'
+          yield b if block_given?
           self
         end
         def source(source)
-          @builder.append " --source=#{@builder.format source}"
-          yield @builder if block_given?
+          b.append " --source=#{b.format source}"
+          yield b if block_given?
           self
         end
       end
       class Viz < CommandBase
         def initialize(underlying_builder)
           super underlying_builder
-          @builder.append ' viz'
+          b.append ' viz'
         end
         def file(file)
-          @builder.append " --file=#{@builder.format file}"
-          yield @builder if block_given?
+          b.append " --file=#{b.format file}"
+          yield b if block_given?
           self
         end
         def format(format)
-          @builder.append " --format=#{@builder.format format}"
-          yield @builder if block_given?
+          b.append " --format=#{b.format format}"
+          yield b if block_given?
           self
         end
         def requirements
-          @builder.append ' --requirements'
-          yield @builder if block_given?
+          b.append ' --requirements'
+          yield b if block_given?
           self
         end
         def version
-          @builder.append ' --version'
-          yield @builder if block_given?
+          b.append ' --version'
+          yield b if block_given?
           self
         end
       end

@@ -21,232 +21,232 @@ module FluentCommandBuilder
           super underlying_builder
         end
         def build_project(build_action=nil)
-          BuildProject.new @builder, build_action
+          BuildProject.new b, build_action
         end
         def build_project_scheme(build_action=nil)
-          BuildProjectScheme.new @builder, build_action
+          BuildProjectScheme.new b, build_action
         end
         def build_workspace(workspace_name, build_action=nil)
-          BuildWorkspace.new @builder, workspace_name, build_action
+          BuildWorkspace.new b, workspace_name, build_action
         end
         def version
-          Version.new @builder
+          Version.new b
         end
         def list
-          @builder.append ' -list'
-          yield @builder if block_given?
+          b.append ' -list'
+          yield b if block_given?
           self
         end
         def list_project(project_name)
-          @builder.append " -list -project #{@builder.format project_name}"
-          yield @builder if block_given?
+          b.append " -list -project #{b.format project_name}"
+          yield b if block_given?
           self
         end
         def list_workspace(workspace_name)
-          @builder.append " -list -workspace #{@builder.format workspace_name}"
-          yield @builder if block_given?
+          b.append " -list -workspace #{b.format workspace_name}"
+          yield b if block_given?
           self
         end
         def find(binary)
-          @builder.append " -find #{@builder.format binary}"
-          yield @builder if block_given?
+          b.append " -find #{b.format binary}"
+          yield b if block_given?
           self
         end
         def license
-          @builder.append ' -license'
-          yield @builder if block_given?
+          b.append ' -license'
+          yield b if block_given?
           self
         end
         def show_sdks
-          @builder.append ' -showsdks'
-          yield @builder if block_given?
+          b.append ' -showsdks'
+          yield b if block_given?
           self
         end
         def usage
-          @builder.append ' -usage'
-          yield @builder if block_given?
+          b.append ' -usage'
+          yield b if block_given?
           self
         end
       end
       class BuildProject < CommandBase
         def initialize(underlying_builder, build_action=nil)
           super underlying_builder
-          @builder.append ' '
-          @builder.append "#{@builder.format build_action, ' '}" unless build_action.nil?
+          b.append ' '
+          b.append "#{b.format build_action, ' '}" unless build_action.nil?
         end
         def all_targets
-          @builder.append ' -alltargets'
-          yield @builder if block_given?
+          b.append ' -alltargets'
+          yield b if block_given?
           self
         end
         def architecture(architecture)
-          @builder.append " -arch #{@builder.format architecture}"
-          yield @builder if block_given?
+          b.append " -arch #{b.format architecture}"
+          yield b if block_given?
           self
         end
         def configuration(configuration_name)
-          @builder.append " -configuration #{@builder.format configuration_name}"
-          yield @builder if block_given?
+          b.append " -configuration #{b.format configuration_name}"
+          yield b if block_given?
           self
         end
         def jobs(number)
-          @builder.append " -jobs #{@builder.format number}"
-          yield @builder if block_given?
+          b.append " -jobs #{b.format number}"
+          yield b if block_given?
           self
         end
         def parallelize_targets
-          @builder.append ' -parallelizeTargets'
-          yield @builder if block_given?
+          b.append ' -parallelizeTargets'
+          yield b if block_given?
           self
         end
         def project(project_name)
-          @builder.append " -project #{@builder.format project_name}"
-          yield @builder if block_given?
+          b.append " -project #{b.format project_name}"
+          yield b if block_given?
           self
         end
         def target(target_name)
-          @builder.append " -target #{@builder.format target_name}"
-          yield @builder if block_given?
+          b.append " -target #{b.format target_name}"
+          yield b if block_given?
           self
         end
         def sdk(sdk_name)
-          @builder.append " -sdk #{@builder.format sdk_name}"
-          yield @builder if block_given?
+          b.append " -sdk #{b.format sdk_name}"
+          yield b if block_given?
           self
         end
         def verbose
-          @builder.append ' -verbose'
-          yield @builder if block_given?
+          b.append ' -verbose'
+          yield b if block_given?
           self
         end
         def xcconfig(path)
-          @builder.append " -xcconfig #{@builder.format path}"
-          yield @builder if block_given?
+          b.append " -xcconfig #{b.format path}"
+          yield b if block_given?
           self
         end
         def setting(setting, value)
-          @builder.append " #{@builder.format setting}=#{@builder.format value}"
-          yield @builder if block_given?
+          b.append " #{b.format setting}=#{b.format value}"
+          yield b if block_given?
           self
         end
       end
       class BuildProjectScheme < CommandBase
         def initialize(underlying_builder, build_action=nil)
           super underlying_builder
-          @builder.append ' '
-          @builder.append "#{@builder.format build_action, ' '}" unless build_action.nil?
+          b.append ' '
+          b.append "#{b.format build_action, ' '}" unless build_action.nil?
         end
         def architecture(architecture)
-          @builder.append " -arch #{@builder.format architecture}"
-          yield @builder if block_given?
+          b.append " -arch #{b.format architecture}"
+          yield b if block_given?
           self
         end
         def configuration(configuration_name)
-          @builder.append " -configuration #{@builder.format configuration_name}"
-          yield @builder if block_given?
+          b.append " -configuration #{b.format configuration_name}"
+          yield b if block_given?
           self
         end
         def jobs(number)
-          @builder.append " -jobs #{@builder.format number}"
-          yield @builder if block_given?
+          b.append " -jobs #{b.format number}"
+          yield b if block_given?
           self
         end
         def parallelize_targets
-          @builder.append ' -parallelizeTargets'
-          yield @builder if block_given?
+          b.append ' -parallelizeTargets'
+          yield b if block_given?
           self
         end
         def scheme(scheme_name)
-          @builder.append " -scheme #{@builder.format scheme_name}"
-          yield @builder if block_given?
+          b.append " -scheme #{b.format scheme_name}"
+          yield b if block_given?
           self
         end
         def sdk(sdk_name)
-          @builder.append " -sdk #{@builder.format sdk_name}"
-          yield @builder if block_given?
+          b.append " -sdk #{b.format sdk_name}"
+          yield b if block_given?
           self
         end
         def verbose
-          @builder.append ' -verbose'
-          yield @builder if block_given?
+          b.append ' -verbose'
+          yield b if block_given?
           self
         end
         def xcconfig(path)
-          @builder.append " -xcconfig #{@builder.format path}"
-          yield @builder if block_given?
+          b.append " -xcconfig #{b.format path}"
+          yield b if block_given?
           self
         end
         def setting(setting, value)
-          @builder.append " #{@builder.format setting}=#{@builder.format value}"
-          yield @builder if block_given?
+          b.append " #{b.format setting}=#{b.format value}"
+          yield b if block_given?
           self
         end
       end
       class BuildWorkspace < CommandBase
         def initialize(underlying_builder, workspace_name, build_action=nil)
           super underlying_builder
-          @builder.append " -workspace #{@builder.format workspace_name}"
-          @builder.append " #{@builder.format build_action, ' '}" unless build_action.nil?
+          b.append " -workspace #{b.format workspace_name}"
+          b.append " #{b.format build_action, ' '}" unless build_action.nil?
         end
         def architecture(architecture)
-          @builder.append " -arch #{@builder.format architecture}"
-          yield @builder if block_given?
+          b.append " -arch #{b.format architecture}"
+          yield b if block_given?
           self
         end
         def configuration(configuration_name)
-          @builder.append " -configuration #{@builder.format configuration_name}"
-          yield @builder if block_given?
+          b.append " -configuration #{b.format configuration_name}"
+          yield b if block_given?
           self
         end
         def jobs(number)
-          @builder.append " -jobs #{@builder.format number}"
-          yield @builder if block_given?
+          b.append " -jobs #{b.format number}"
+          yield b if block_given?
           self
         end
         def parallelize_targets
-          @builder.append ' -parallelizeTargets'
-          yield @builder if block_given?
+          b.append ' -parallelizeTargets'
+          yield b if block_given?
           self
         end
         def scheme(scheme_name)
-          @builder.append " -scheme #{@builder.format scheme_name}"
-          yield @builder if block_given?
+          b.append " -scheme #{b.format scheme_name}"
+          yield b if block_given?
           self
         end
         def sdk(sdk_name)
-          @builder.append " -sdk #{@builder.format sdk_name}"
-          yield @builder if block_given?
+          b.append " -sdk #{b.format sdk_name}"
+          yield b if block_given?
           self
         end
         def verbose
-          @builder.append ' -verbose'
-          yield @builder if block_given?
+          b.append ' -verbose'
+          yield b if block_given?
           self
         end
         def xcconfig(path)
-          @builder.append " -xcconfig #{@builder.format path}"
-          yield @builder if block_given?
+          b.append " -xcconfig #{b.format path}"
+          yield b if block_given?
           self
         end
         def setting(setting, value)
-          @builder.append " #{@builder.format setting}=#{@builder.format value}"
-          yield @builder if block_given?
+          b.append " #{b.format setting}=#{b.format value}"
+          yield b if block_given?
           self
         end
       end
       class Version < CommandBase
         def initialize(underlying_builder)
           super underlying_builder
-          @builder.append ' -version'
+          b.append ' -version'
         end
         def sdk(sdk_name)
-          @builder.append " -sdk #{@builder.format sdk_name}"
-          yield @builder if block_given?
+          b.append " -sdk #{b.format sdk_name}"
+          yield b if block_given?
           self
         end
         def info_item(info_item)
-          @builder.append " #{@builder.format info_item}"
-          yield @builder if block_given?
+          b.append " #{b.format info_item}"
+          yield b if block_given?
           self
         end
       end

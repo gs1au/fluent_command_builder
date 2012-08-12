@@ -21,153 +21,153 @@ module FluentCommandBuilder
           super underlying_builder
         end
         def allow_untrusted(bool)
-          @builder.append " -allowUntrusted:#{@builder.format bool}"
-          yield @builder if block_given?
+          b.append " -allowUntrusted:#{b.format bool}"
+          yield b if block_given?
           self
         end
         def app_host_config_dir(path)
-          @builder.append " -appHostConfigDir:#{@builder.format path}"
-          yield @builder if block_given?
+          b.append " -appHostConfigDir:#{b.format path}"
+          yield b if block_given?
           self
         end
         def declare_param(param)
-          @builder.append " -declareParam:#{@builder.format param, ',', '='}"
-          yield @builder if block_given?
+          b.append " -declareParam:#{b.format param, ',', '='}"
+          yield b if block_given?
           self
         end
         def declare_param_file(xml_file)
-          @builder.append " -declareParamFile:#{@builder.format xml_file}"
-          yield @builder if block_given?
+          b.append " -declareParamFile:#{b.format xml_file}"
+          yield b if block_given?
           self
         end
         def dest(provider)
-          @builder.append " -dest:#{@builder.format provider}"
-          yield @builder if block_given?
+          b.append " -dest:#{b.format provider}"
+          yield b if block_given?
           self
         end
         def disable_link(link_extension)
-          @builder.append " -disableLink:#{@builder.format link_extension}"
-          yield @builder if block_given?
+          b.append " -disableLink:#{b.format link_extension}"
+          yield b if block_given?
           self
         end
         def disable_rule(rule)
-          @builder.append " -disableRule:#{@builder.format rule, ','}"
-          yield @builder if block_given?
+          b.append " -disableRule:#{b.format rule, ','}"
+          yield b if block_given?
           self
         end
         def disable_skip_directive(skip_directive_name)
-          @builder.append " -disableSkipDirective:#{@builder.format skip_directive_name}"
-          yield @builder if block_given?
+          b.append " -disableSkipDirective:#{b.format skip_directive_name}"
+          yield b if block_given?
           self
         end
         def enable_link(link_extension)
-          @builder.append " -enableLink:#{@builder.format link_extension}"
-          yield @builder if block_given?
+          b.append " -enableLink:#{b.format link_extension}"
+          yield b if block_given?
           self
         end
         def enable_rule(rule)
-          @builder.append " -enableRule:#{@builder.format rule, ','}"
-          yield @builder if block_given?
+          b.append " -enableRule:#{b.format rule, ','}"
+          yield b if block_given?
           self
         end
         def enable_skip_directive(skip_directive_name)
-          @builder.append " -enableSkipDirective:#{@builder.format skip_directive_name}"
-          yield @builder if block_given?
+          b.append " -enableSkipDirective:#{b.format skip_directive_name}"
+          yield b if block_given?
           self
         end
         def post_sync(command)
-          @builder.append " -postSync:#{@builder.format command}"
-          yield @builder if block_given?
+          b.append " -postSync:#{b.format command}"
+          yield b if block_given?
           self
         end
         def pre_sync(command)
-          @builder.append " -preSync:#{@builder.format command}"
-          yield @builder if block_given?
+          b.append " -preSync:#{b.format command}"
+          yield b if block_given?
           self
         end
         def remove_param(param)
-          @builder.append " -removeParam:#{@builder.format param}"
-          yield @builder if block_given?
+          b.append " -removeParam:#{b.format param}"
+          yield b if block_given?
           self
         end
         def replace(arg)
-          @builder.append " -replace:#{@builder.format arg}"
-          yield @builder if block_given?
+          b.append " -replace:#{b.format arg}"
+          yield b if block_given?
           self
         end
         def retry_attempts(number)
-          @builder.append " -retryAttempts:#{@builder.format number}"
-          yield @builder if block_given?
+          b.append " -retryAttempts:#{b.format number}"
+          yield b if block_given?
           self
         end
         def retry_interval(milliseconds)
-          @builder.append " -retryInterval:#{@builder.format milliseconds}"
-          yield @builder if block_given?
+          b.append " -retryInterval:#{b.format milliseconds}"
+          yield b if block_given?
           self
         end
         def set_param(param)
-          @builder.append " -setParam:#{@builder.format param, ',', '='}"
-          yield @builder if block_given?
+          b.append " -setParam:#{b.format param, ',', '='}"
+          yield b if block_given?
           self
         end
         def set_param_file(xml_file)
-          @builder.append " -setParamFile:#{@builder.format xml_file}"
-          yield @builder if block_given?
+          b.append " -setParamFile:#{b.format xml_file}"
+          yield b if block_given?
           self
         end
         def show_secure
-          @builder.append ' -showSecure'
-          yield @builder if block_given?
+          b.append ' -showSecure'
+          yield b if block_given?
           self
         end
         def skip(arg)
-          @builder.append " -skip:#{@builder.format arg}"
-          yield @builder if block_given?
+          b.append " -skip:#{b.format arg}"
+          yield b if block_given?
           self
         end
         def source(provider)
-          @builder.append " -source:#{@builder.format provider}"
-          yield @builder if block_given?
+          b.append " -source:#{b.format provider}"
+          yield b if block_given?
           self
         end
         def unicode
-          @builder.append ' -unicode'
-          yield @builder if block_given?
+          b.append ' -unicode'
+          yield b if block_given?
           self
         end
         def use_check_sum
-          @builder.append ' -useCheckSum'
-          yield @builder if block_given?
+          b.append ' -useCheckSum'
+          yield b if block_given?
           self
         end
         def verb(verb_name)
-          @builder.append " -verb:#{@builder.format verb_name}"
-          yield @builder if block_given?
+          b.append " -verb:#{b.format verb_name}"
+          yield b if block_given?
           self
         end
         def verbose
-          @builder.append ' -verbose'
-          yield @builder if block_given?
+          b.append ' -verbose'
+          yield b if block_given?
           self
         end
         def web_server_dir(path)
-          @builder.append " -webServerDir:#{@builder.format path}"
-          yield @builder if block_given?
+          b.append " -webServerDir:#{b.format path}"
+          yield b if block_given?
           self
         end
         def whatif
-          @builder.append ' -whatif'
-          yield @builder if block_given?
+          b.append ' -whatif'
+          yield b if block_given?
           self
         end
         def xml
-          @builder.append ' -xml'
-          yield @builder if block_given?
+          b.append ' -xml'
+          yield b if block_given?
           self
         end
         def xpath(path)
-          @builder.append " -xpath:#{@builder.format path}"
-          yield @builder if block_given?
+          b.append " -xpath:#{b.format path}"
+          yield b if block_given?
           self
         end
       end

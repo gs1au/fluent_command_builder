@@ -21,46 +21,46 @@ module FluentCommandBuilder
           super underlying_builder
         end
         def help(assembly_path=nil)
-          @builder.append ' /help'
-          @builder.append " #{@builder.format assembly_path}" unless assembly_path.nil?
-          yield @builder if block_given?
+          b.append ' /help'
+          b.append " #{b.format assembly_path}" unless assembly_path.nil?
+          yield b if block_given?
           self
         end
         def assembly_strong_name(assembly_name)
-          @builder.append " /assemblyName=#{@builder.format assembly_name}"
-          yield @builder if block_given?
+          b.append " /assemblyName=#{b.format assembly_name}"
+          yield b if block_given?
           self
         end
         def install_state_dir(directory_name=nil)
-          @builder.append ' /installStateDir'
-          @builder.append "=#{@builder.format directory_name}" unless directory_name.nil?
-          yield @builder if block_given?
+          b.append ' /installStateDir'
+          b.append "=#{b.format directory_name}" unless directory_name.nil?
+          yield b if block_given?
           self
         end
         def log_file(file_name=nil)
-          @builder.append ' /logFile'
-          @builder.append "=#{@builder.format file_name}" unless file_name.nil?
-          yield @builder if block_given?
+          b.append ' /logFile'
+          b.append "=#{b.format file_name}" unless file_name.nil?
+          yield b if block_given?
           self
         end
         def log_to_console(bool)
-          @builder.append " /logToConsole=#{@builder.format bool}"
-          yield @builder if block_given?
+          b.append " /logToConsole=#{b.format bool}"
+          yield b if block_given?
           self
         end
         def show_call_stack
-          @builder.append ' /showCallStack'
-          yield @builder if block_given?
+          b.append ' /showCallStack'
+          yield b if block_given?
           self
         end
         def uninstall
-          @builder.append ' /uninstall'
-          yield @builder if block_given?
+          b.append ' /uninstall'
+          yield b if block_given?
           self
         end
         def assembly_file_name(assembly_file_name)
-          @builder.append " #{@builder.format assembly_file_name}"
-          yield @builder if block_given?
+          b.append " #{b.format assembly_file_name}"
+          yield b if block_given?
           self
         end
       end

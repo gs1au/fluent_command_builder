@@ -19,67 +19,67 @@ module FluentCommandBuilder
       class MSBuild < CommandBase
         def initialize(underlying_builder, project_file=nil)
           super underlying_builder
-          @builder.append " #{@builder.format project_file}" unless project_file.nil?
+          b.append " #{b.format project_file}" unless project_file.nil?
         end
         def help
-          @builder.append ' /help'
-          yield @builder if block_given?
+          b.append ' /help'
+          yield b if block_given?
           self
         end
         def no_logo
-          @builder.append ' /noLogo'
-          yield @builder if block_given?
+          b.append ' /noLogo'
+          yield b if block_given?
           self
         end
         def version
-          @builder.append ' /version'
-          yield @builder if block_given?
+          b.append ' /version'
+          yield b if block_given?
           self
         end
         def file(file)
-          @builder.append " @#{@builder.format file}"
-          yield @builder if block_given?
+          b.append " @#{b.format file}"
+          yield b if block_given?
           self
         end
         def no_auto_response
-          @builder.append ' /noAutoResponse'
-          yield @builder if block_given?
+          b.append ' /noAutoResponse'
+          yield b if block_given?
           self
         end
         def target(target)
-          @builder.append " /target:#{@builder.format target, ';'}"
-          yield @builder if block_given?
+          b.append " /target:#{b.format target, ';'}"
+          yield b if block_given?
           self
         end
         def property(property)
-          @builder.append " /property:#{@builder.format property, ';', '='}"
-          yield @builder if block_given?
+          b.append " /property:#{b.format property, ';', '='}"
+          yield b if block_given?
           self
         end
         def logger(logger)
-          @builder.append " /logger:#{@builder.format logger}"
-          yield @builder if block_given?
+          b.append " /logger:#{b.format logger}"
+          yield b if block_given?
           self
         end
         def console_logger_parameters(parameters)
-          @builder.append " /consoleLoggerParameters:#{@builder.format parameters}"
-          yield @builder if block_given?
+          b.append " /consoleLoggerParameters:#{b.format parameters}"
+          yield b if block_given?
           self
         end
         def verbosity(level)
-          @builder.append " /verbosity:#{@builder.format level}"
-          yield @builder if block_given?
+          b.append " /verbosity:#{b.format level}"
+          yield b if block_given?
           self
         end
         def no_console_logger
-          @builder.append ' /noConsoleLogger'
-          yield @builder if block_given?
+          b.append ' /noConsoleLogger'
+          yield b if block_given?
           self
         end
         def validate(schema=nil)
-          @builder.append ' /validate'
-          @builder.append ":#{@builder.format schema}" unless schema.nil?
-          yield @builder if block_given?
+          b.append ' /validate'
+          b.append ":#{b.format schema}" unless schema.nil?
+          yield b if block_given?
           self
         end
       end
