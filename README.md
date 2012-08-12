@@ -153,8 +153,10 @@ bundle.exec(cucumber('sample.feature'))
 
 ### Custom String Appending
 
-Each command has an underlying command builder that provides generic functions for building command line strings.
-The underlying command builder can be exposed to enable customisation of the command line:
+Each command has an underlying builder that provides generic functions for building command line strings.
+The underlying builder can be exposed to enable customisation of the command line.
+
+In the following examples, the underlying builder is exposed as the variable __b__.
 
 Desired command line:
 
@@ -177,6 +179,31 @@ Fluent Command Builder usage:
 ```ruby
 msbuild('sample 1.proj').execute! { |b| b.path = 'C:\\Program Files' }
 ```
+
+## Experimental
+
+These features are new and experimental. Use with caution.
+
+### Detect version of command on PATH
+
+Fluent Command Builder provides a consistent way of detecting the version of a command on the PATH environment variable.
+
+```ruby
+MSBuild.version # => "4.0.30319.1"
+```
+
+### Create command builder based on version of command on PATH
+
+Fluent Command Builder can dynamically create a command builder based on the version of a command on the PATH environment variable.
+
+```ruby
+require 'fluent_command_builder'
+include FluentCommandBuilder
+
+msbuild('sample.proj').target(:rebuild).property(configuration: 'release')
+```
+
+Notice there is no mention of the MSBuild version. So if MSBuild 4.0 is on the path, this would be a MSBuild 4.0 command builder.
 
 ## Supported Commands
 
