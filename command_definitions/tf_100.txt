@@ -1,5 +1,5 @@
-2010
-tf
+10.0
+tf (Team Foundation)
     add <itemSpec>
         /lock:<lockType>
         /type:<fileType>

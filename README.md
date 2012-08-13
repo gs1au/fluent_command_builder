@@ -1,3 +1,7 @@
+Official fork: [https://github.com/mattriley/fluent_command_builder](https://github.com/mattriley/fluent_command_builder)
+
+__Warning: The next release will contain breaking changes.__
+
 # Fluent Command Builder
 
 Fluent Command Builder makes building command lines easy and intuitive.
@@ -182,6 +186,8 @@ msbuild('sample 1.proj').execute! { |b| b.path = 'C:\\Program Files' }
 
 ## Experimental
 
+__These features will be available in the next release.__
+
 These features are new and experimental. Use with caution.
 
 ### Detect version of command on PATH
@@ -214,13 +220,14 @@ Notice there is no mention of the MSBuild version. So if MSBuild 4.0 is on the p
 - dotcover 1.0, 1.1, 1.2, 2.0
 - installutil 1.1, 2.0, 3.5, 4.0
 - msbuild 2.0, 3.0, 3.5, 4.0
-- msdeploy 4.0
-- mstest 2005, 2008, 2010
-- netsh 2008 (WIP)
+- msdeploy 7.1
+- mstest 8.0 (2005), 9.0 (2008), 10.0 (2010)
+- netsh 6.1 (2008) (WIP)
 - nunit 2.5, 2.6
 - rake 0.9
 - security OSX 10.7 (WIP)
 - sevenzip 9.2 (WIP)
 - simian 2.3
-- tf 2010, tee 2010
+- tf 10.0 (2010)
+- tf tee 10.0 (2010)
 - xcodebuild 4.3, 4.4

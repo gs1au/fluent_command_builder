@@ -2,11 +2,11 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_base')
 require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
-  def msdeploy_40
-    FluentCommandBuilder::MSDeploy::V40.create { |b| yield b if block_given? }
+  def msdeploy_71
+    FluentCommandBuilder::MSDeploy::V71.create { |b| yield b if block_given? }
   end
   module MSDeploy
-    module V40
+    module V71
       def self.create
         b = UnderlyingBuilder.new FluentCommandBuilder::MSDeploy::COMMAND_NAME
         c = MSDeploy.new(b)
@@ -14,7 +14,7 @@ module FluentCommandBuilder
         c
       end
       def msdeploy
-        FluentCommandBuilder::MSDeploy::V40.create { |b| yield b if block_given? }
+        FluentCommandBuilder::MSDeploy::V71.create { |b| yield b if block_given? }
       end
       class MSDeploy < CommandBase
         def initialize(underlying_builder)

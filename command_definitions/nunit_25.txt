@@ -1,5 +1,6 @@
 2.5
-nunit-console <inputFiles> (NUnit)
+nunit-console[ <inputFiles>] (NUnit)
+    <inputFiles>
     /fixture:<fixture>
     /load:<fixture>
     /run:<test>

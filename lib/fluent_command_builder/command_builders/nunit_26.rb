@@ -2,24 +2,29 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_base')
 require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
-  def nunit_26(input_files)
+  def nunit_26(input_files=nil)
     FluentCommandBuilder::NUnit::V26.create(input_files) { |b| yield b if block_given? }
   end
   module NUnit
     module V26
-      def self.create(input_files)
+      def self.create(input_files=nil)
         b = UnderlyingBuilder.new FluentCommandBuilder::NUnit::COMMAND_NAME
         c = NUnit.new(b, input_files)
         yield b if block_given?
         c
       end
-      def nunit(input_files)
+      def nunit(input_files=nil)
         FluentCommandBuilder::NUnit::V26.create(input_files) { |b| yield b if block_given? }
       end
       class NUnit < CommandBase
-        def initialize(underlying_builder, input_files)
+        def initialize(underlying_builder, input_files=nil)
           super underlying_builder
+          b.append " #{b.format input_files}" unless input_files.nil?
+        end
+        def input_files(input_files)
           b.append " #{b.format input_files}"
+          yield b if block_given?
+          self
         end
         def fixture(fixture)
           b.append " /fixture:#{b.format fixture}"

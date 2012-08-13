@@ -1,5 +1,5 @@
-TEE 2010
-tf
+10.0
+tf (Team Foundation TEE)
     add <itemSpec>
         -lock:<lockType>
         -type:<fileType>

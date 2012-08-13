@@ -2,11 +2,11 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_base')
 require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
-  def netsh_2008
-    FluentCommandBuilder::Netsh::V2008.create { |b| yield b if block_given? }
+  def netsh_61
+    FluentCommandBuilder::Netsh::V61.create { |b| yield b if block_given? }
   end
   module Netsh
-    module V2008
+    module V61
       def self.create
         b = UnderlyingBuilder.new FluentCommandBuilder::Netsh::COMMAND_NAME
         c = Netsh.new(b)
@@ -14,7 +14,7 @@ module FluentCommandBuilder
         c
       end
       def netsh
-        FluentCommandBuilder::Netsh::V2008.create { |b| yield b if block_given? }
+        FluentCommandBuilder::Netsh::V61.create { |b| yield b if block_given? }
       end
       class Netsh < CommandBase
         def initialize(underlying_builder)

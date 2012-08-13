@@ -2,11 +2,11 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_base')
 require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
-  def mstest_2010
-    FluentCommandBuilder::MSTest::V2010.create { |b| yield b if block_given? }
+  def mstest_100
+    FluentCommandBuilder::MSTest::V100.create { |b| yield b if block_given? }
   end
   module MSTest
-    module V2010
+    module V100
       def self.create
         b = UnderlyingBuilder.new FluentCommandBuilder::MSTest::COMMAND_NAME
         c = MSTest.new(b)
@@ -14,7 +14,7 @@ module FluentCommandBuilder
         c
       end
       def mstest
-        FluentCommandBuilder::MSTest::V2010.create { |b| yield b if block_given? }
+        FluentCommandBuilder::MSTest::V100.create { |b| yield b if block_given? }
       end
       class MSTest < CommandBase
         def initialize(underlying_builder)

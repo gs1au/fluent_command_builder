@@ -1,5 +1,5 @@
 9.2
-7za (sevenZip)
+7za (SevenZip)
     a <archive> <fileRef> (add)
         -i[<recurseType>]<fileRef> (include)
         -m<methodParameters> (setCompressionMethod)

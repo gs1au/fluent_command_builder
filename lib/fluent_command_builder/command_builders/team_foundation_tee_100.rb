@@ -2,21 +2,21 @@ require File.expand_path(File.dirname(__FILE__) + '/../command_base')
 require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
-  def tf_2010
-    FluentCommandBuilder::Tf::V2010.create { |b| yield b if block_given? }
+  def team_foundation_tee_100
+    FluentCommandBuilder::TeamFoundationTEE::V100.create { |b| yield b if block_given? }
   end
-  module Tf
-    module V2010
+  module TeamFoundationTEE
+    module V100
       def self.create
-        b = UnderlyingBuilder.new FluentCommandBuilder::Tf::COMMAND_NAME
-        c = Tf.new(b)
+        b = UnderlyingBuilder.new FluentCommandBuilder::TeamFoundationTEE::COMMAND_NAME
+        c = TeamFoundationTEE.new(b)
         yield b if block_given?
         c
       end
-      def tf
-        FluentCommandBuilder::Tf::V2010.create { |b| yield b if block_given? }
+      def team_foundation_tee
+        FluentCommandBuilder::TeamFoundationTEE::V100.create { |b| yield b if block_given? }
       end
-      class Tf < CommandBase
+      class TeamFoundationTEE < CommandBase
         def initialize(underlying_builder)
           super underlying_builder
         end
@@ -41,9 +41,6 @@ module FluentCommandBuilder
         def checkout(item_spec=nil)
           Checkout.new b, item_spec
         end
-        def configure(path_of_team_project=nil)
-          Configure.new b, path_of_team_project
-        end
         def delete(item_spec)
           Delete.new b, item_spec
         end
@@ -60,24 +57,21 @@ module FluentCommandBuilder
           CompareWithShelvesetVersion.new b, shelveset_item_spec
         end
         def configure_compare_tool
-          b.append ' difference /configure'
+          b.append ' difference -configure'
           yield b if block_given?
           self
         end
         def dir(item_spec)
           Dir.new b, item_spec
         end
-        def folder_diff(target_path, source_path=nil)
-          FolderDiff.new b, target_path, source_path
+        def eula
+          Eula.new b
         end
         def get(item_spec=nil)
           Get.new b, item_spec
         end
-        def help(command_name=nil)
-          b.append ' help'
-          b.append " #{b.format command_name}" unless command_name.nil?
-          yield b if block_given?
-          self
+        def getcs
+          Getcs.new b
         end
         def history(item_spec)
           History.new b, item_spec
@@ -91,9 +85,6 @@ module FluentCommandBuilder
         def labels(label_name=nil)
           Labels.new b, label_name
         end
-        def local_versions(item_spec)
-          LocalVersions.new b, item_spec
-        end
         def lock(item_spec)
           Lock.new b, item_spec
         end
@@ -103,51 +94,51 @@ module FluentCommandBuilder
         def merges(destination, source=nil)
           Merges.new b, destination, source
         end
-        def msdn(command_name=nil)
-          b.append ' msdn'
-          b.append " #{b.format command_name}" unless command_name.nil?
+        def print(item_spec)
+          Print.new b, item_spec
+        end
+        def product_key
+          ProductKey.new b
+        end
+        def copy_profile(existing_profile_name, new_profile_name)
+          b.append " profile -copy #{b.format existing_profile_name} #{b.format new_profile_name}"
           yield b if block_given?
           self
         end
-        def permission(item_spec)
-          Permission.new b, item_spec
+        def delete_profile(profile_name)
+          b.append " profile -delete #{b.format profile_name}"
+          yield b if block_given?
+          self
+        end
+        def edit_profile(existing_profile_name)
+          EditProfile.new b, existing_profile_name
+        end
+        def new_profile(new_profile_name)
+          NewProfile.new b, new_profile_name
+        end
+        def profiles
+          Profiles.new b
         end
         def properties(item_spec)
           Properties.new b, item_spec
         end
-        def configure_proxy(url)
-          ConfigureProxy.new b, url
+        def reconcile
+          Reconcile.new b
         end
-        def add_proxy_record(url)
-          AddProxyRecord.new b, url
+        def reconcile_build(build_name, item_spec=nil)
+          ReconcileBuild.new b, build_name, item_spec
         end
-        def delete_proxy_record(url)
-          DeleteProxyRecord.new b, url
+        def reconcile_changeset(changeset_name, item_spec=nil)
+          ReconcileChangeset.new b, changeset_name, item_spec
         end
-        def list_proxy_records(url)
-          ListProxyRecords.new b, url
-        end
-        def enable_proxy
-          b.append ' proxy /enabled:true'
-          yield b if block_given?
-          self
-        end
-        def disable_proxy
-          b.append ' proxy /enabled:false'
-          yield b if block_given?
-          self
+        def reconcile_forget_build(build_name, item_spec=nil)
+          ReconcileForgetBuild.new b, build_name, item_spec
         end
         def rename(old_item, new_item)
           Rename.new b, old_item, new_item
         end
         def resolve(item_spec=nil)
           Resolve.new b, item_spec
-        end
-        def rollback_to_version(version_spec, item_spec)
-          RollbackToVersion.new b, version_spec, item_spec
-        end
-        def rollback_changeset(changeset_from, changeset_to=nil, item_spec=nil)
-          RollbackChangeset.new b, changeset_from, changeset_to, item_spec
         end
         def replace_shelveset(shelveset_name)
           ReplaceShelveset.new b, shelveset_name
@@ -175,9 +166,6 @@ module FluentCommandBuilder
         end
         def unshelve(shelveset_name=nil, username=nil, item_spec=nil)
           Unshelve.new b, shelveset_name, username, item_spec
-        end
-        def view(item_spec)
-          View.new b, item_spec
         end
         def show_local_folder_mapping(local_folder)
           ShowLocalFolderMapping.new b, local_folder
@@ -222,27 +210,27 @@ module FluentCommandBuilder
           b.append " add #{b.format item_spec}"
         end
         def lock(lock_type)
-          b.append " /lock:#{b.format lock_type}"
+          b.append " -lock:#{b.format lock_type}"
           yield b if block_given?
           self
         end
         def type(file_type)
-          b.append " /type:#{b.format file_type}"
+          b.append " -type:#{b.format file_type}"
           yield b if block_given?
           self
         end
         def no_prompt
-          b.append ' /noPrompt'
+          b.append ' -noPrompt'
           yield b if block_given?
           self
         end
         def recursive
-          b.append ' /recursive'
+          b.append ' -recursive'
           yield b if block_given?
           self
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
@@ -254,47 +242,47 @@ module FluentCommandBuilder
           b.append " branch #{b.format old_item} #{b.format new_item}"
         end
         def version(version_spec)
-          b.append " /version:#{b.format version_spec}"
+          b.append " -version:#{b.format version_spec}"
           yield b if block_given?
           self
         end
         def no_get
-          b.append ' /noGet'
+          b.append ' -noGet'
           yield b if block_given?
           self
         end
         def lock(lock_type)
-          b.append " /lock:#{b.format lock_type}"
+          b.append " -lock:#{b.format lock_type}"
           yield b if block_given?
           self
         end
         def no_prompt
-          b.append ' /noPrompt'
+          b.append ' -noPrompt'
           yield b if block_given?
           self
         end
         def silent
-          b.append ' /silent'
+          b.append ' -silent'
           yield b if block_given?
           self
         end
         def checkin
-          b.append ' /checkin'
+          b.append ' -checkin'
           yield b if block_given?
           self
         end
         def comment(comment)
-          b.append " /comment:#{b.format comment}"
+          b.append " -comment:#{b.format comment}"
           yield b if block_given?
           self
         end
         def author(author_name)
-          b.append " /author:#{b.format author_name}"
+          b.append " -author:#{b.format author_name}"
           yield b if block_given?
           self
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
@@ -306,17 +294,17 @@ module FluentCommandBuilder
           b.append " branches #{b.format item_spec}"
         end
         def version(version_spec)
-          b.append " /version:#{b.format version_spec}"
+          b.append " -version:#{b.format version_spec}"
           yield b if block_given?
           self
         end
         def collection(team_project_collection_url)
-          b.append " /collection:#{b.format team_project_collection_url}"
+          b.append " -collection:#{b.format team_project_collection_url}"
           yield b if block_given?
           self
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
@@ -329,32 +317,32 @@ module FluentCommandBuilder
           b.append " #{b.format changeset_number}" unless changeset_number.nil?
         end
         def comment(comment)
-          b.append " /comment:#{b.format comment}"
+          b.append " -comment:#{b.format comment}"
           yield b if block_given?
           self
         end
         def notes(notes)
-          b.append " /notes:#{b.format notes, ';', '='}"
+          b.append " -notes:#{b.format notes, ';', '='}"
           yield b if block_given?
           self
         end
         def no_prompt
-          b.append ' /noPrompt'
+          b.append ' -noPrompt'
           yield b if block_given?
           self
         end
         def collection(team_project_collection_url)
-          b.append " /collection:#{b.format team_project_collection_url}"
+          b.append " -collection:#{b.format team_project_collection_url}"
           yield b if block_given?
           self
         end
         def latest
-          b.append ' /latest'
+          b.append ' -latest'
           yield b if block_given?
           self
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
@@ -367,58 +355,58 @@ module FluentCommandBuilder
           b.append " #{b.format item_spec}" unless item_spec.nil?
         end
         def author(author_name)
-          b.append " /author:#{b.format author_name}"
+          b.append " -author:#{b.format author_name}"
           yield b if block_given?
           self
         end
         def comment(comment)
-          b.append " /comment:#{b.format comment}"
+          b.append " -comment:#{b.format comment}"
           yield b if block_given?
           self
         end
         def no_prompt
-          b.append ' /noPrompt'
+          b.append ' -noPrompt'
           yield b if block_given?
           self
         end
         def notes(notes)
-          b.append " /notes:#{b.format notes, ';', '='}"
+          b.append " -notes:#{b.format notes, ';', '='}"
           yield b if block_given?
           self
         end
         def override(reason)
-          b.append " /override:#{b.format reason}"
+          b.append " -override:#{b.format reason}"
           yield b if block_given?
           self
         end
         def recursive
-          b.append ' /recursive'
+          b.append ' -recursive'
           yield b if block_given?
           self
         end
         def saved
-          b.append ' /saved'
+          b.append ' -saved'
           yield b if block_given?
           self
         end
         def validate
-          b.append ' /validate'
+          b.append ' -validate'
           yield b if block_given?
           self
         end
         def bypass
-          b.append ' /bypass'
+          b.append ' -bypass'
           yield b if block_given?
           self
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
         end
         def force
-          b.append ' /force'
+          b.append ' -force'
           yield b if block_given?
           self
         end
@@ -426,37 +414,37 @@ module FluentCommandBuilder
       class CheckinShelveset < CommandBase
         def initialize(underlying_builder, shelveset_name, shelveset_owner=nil)
           super underlying_builder
-          b.append " checkin /shelveset:#{b.format shelveset_name}"
+          b.append " checkin -shelveset:#{b.format shelveset_name}"
           b.append ";#{b.format shelveset_owner}" unless shelveset_owner.nil?
         end
         def bypass
-          b.append ' /bypass'
+          b.append ' -bypass'
           yield b if block_given?
           self
         end
         def no_prompt
-          b.append ' /noPrompt'
+          b.append ' -noPrompt'
           yield b if block_given?
           self
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
         end
         def collection(team_project_collection_url)
-          b.append " /collection:#{b.format team_project_collection_url}"
+          b.append " -collection:#{b.format team_project_collection_url}"
           yield b if block_given?
           self
         end
         def author(author_name)
-          b.append " /author:#{b.format author_name}"
+          b.append " -author:#{b.format author_name}"
           yield b if block_given?
           self
         end
         def force
-          b.append ' /force'
+          b.append ' -force'
           yield b if block_given?
           self
         end
@@ -468,40 +456,22 @@ module FluentCommandBuilder
           b.append " #{b.format item_spec}" unless item_spec.nil?
         end
         def lock(lock_type)
-          b.append " /lock:#{b.format lock_type}"
+          b.append " -lock:#{b.format lock_type}"
           yield b if block_given?
           self
         end
         def recursive
-          b.append ' /recursive'
+          b.append ' -recursive'
           yield b if block_given?
           self
         end
         def type(encoding)
-          b.append " /type:#{b.format encoding}"
+          b.append " -type:#{b.format encoding}"
           yield b if block_given?
           self
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
-          b.append ",#{b.format password}" unless password.nil?
-          yield b if block_given?
-          self
-        end
-      end
-      class Configure < CommandBase
-        def initialize(underlying_builder, path_of_team_project=nil)
-          super underlying_builder
-          b.append ' configure'
-          b.append " #{b.format path_of_team_project}" unless path_of_team_project.nil?
-        end
-        def collection(team_project_collection_url)
-          b.append " /collection:#{b.format team_project_collection_url}"
-          yield b if block_given?
-          self
-        end
-        def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
@@ -513,17 +483,17 @@ module FluentCommandBuilder
           b.append " delete #{b.format item_spec}"
         end
         def lock(lock_type)
-          b.append " /lock:#{b.format lock_type}"
+          b.append " -lock:#{b.format lock_type}"
           yield b if block_given?
           self
         end
         def recursive
-          b.append ' /recursive'
+          b.append ' -recursive'
           yield b if block_given?
           self
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
@@ -535,43 +505,43 @@ module FluentCommandBuilder
           b.append " destroy #{b.format item_spec}"
         end
         def keep_history
-          b.append ' /keepHistory'
+          b.append ' -keepHistory'
           yield b if block_given?
           self
         end
         def stop_at(version_spec)
-          b.append " /stopAt:#{b.format version_spec}"
+          b.append " -stopAt:#{b.format version_spec}"
           yield b if block_given?
           self
         end
         def preview
-          b.append ' /preview'
+          b.append ' -preview'
           yield b if block_given?
           self
         end
         def start_cleanup
-          b.append ' /startCleanup'
+          b.append ' -startCleanup'
           yield b if block_given?
           self
         end
         def no_prompt
-          b.append ' /noPrompt'
+          b.append ' -noPrompt'
           yield b if block_given?
           self
         end
         def silent
-          b.append ' /silent'
+          b.append ' -silent'
           yield b if block_given?
           self
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
         end
         def collection(team_project_collection_url)
-          b.append " /collection:#{b.format team_project_collection_url}"
+          b.append " -collection:#{b.format team_project_collection_url}"
           yield b if block_given?
           self
         end
@@ -582,52 +552,52 @@ module FluentCommandBuilder
           b.append " difference #{b.format item_spec}"
         end
         def version(version_spec)
-          b.append " /version:#{b.format version_spec}"
+          b.append " -version:#{b.format version_spec}"
           yield b if block_given?
           self
         end
         def type(file_type)
-          b.append " /type:#{b.format file_type}"
+          b.append " -type:#{b.format file_type}"
           yield b if block_given?
           self
         end
         def format(format)
-          b.append " /format:#{b.format format}"
+          b.append " -format:#{b.format format}"
           yield b if block_given?
           self
         end
         def ignore_space
-          b.append ' /ignoreSpace'
+          b.append ' -ignoreSpace'
           yield b if block_given?
           self
         end
         def ignore_eol
-          b.append ' /ignoreEol'
+          b.append ' -ignoreEol'
           yield b if block_given?
           self
         end
         def ignore_case
-          b.append ' /ignoreCase'
+          b.append ' -ignoreCase'
           yield b if block_given?
           self
         end
         def recursive
-          b.append ' /recursive'
+          b.append ' -recursive'
           yield b if block_given?
           self
         end
         def options
-          b.append ' /options'
+          b.append ' -options'
           yield b if block_given?
           self
         end
         def no_prompt
-          b.append ' /noPrompt'
+          b.append ' -noPrompt'
           yield b if block_given?
           self
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
@@ -639,47 +609,47 @@ module FluentCommandBuilder
           b.append " difference #{b.format item_spec} #{b.format item_spec2}"
         end
         def type(file_type)
-          b.append " /type:#{b.format file_type}"
+          b.append " -type:#{b.format file_type}"
           yield b if block_given?
           self
         end
         def format(format)
-          b.append " /format:#{b.format format}"
+          b.append " -format:#{b.format format}"
           yield b if block_given?
           self
         end
         def ignore_space
-          b.append ' /ignoreSpace'
+          b.append ' -ignoreSpace'
           yield b if block_given?
           self
         end
         def ignore_eol
-          b.append ' /ignoreEol'
+          b.append ' -ignoreEol'
           yield b if block_given?
           self
         end
         def ignore_case
-          b.append ' /ignoreCase'
+          b.append ' -ignoreCase'
           yield b if block_given?
           self
         end
         def recursive
-          b.append ' /recursive'
+          b.append ' -recursive'
           yield b if block_given?
           self
         end
         def options
-          b.append ' /options'
+          b.append ' -options'
           yield b if block_given?
           self
         end
         def no_prompt
-          b.append ' /noPrompt'
+          b.append ' -noPrompt'
           yield b if block_given?
           self
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
@@ -691,53 +661,53 @@ module FluentCommandBuilder
           b.append " difference #{b.format shelveset_item_spec}"
         end
         def shelveset(shelveset_name, shelveset_owner=nil)
-          b.append " /shelveset:#{b.format shelveset_name}"
+          b.append " -shelveset:#{b.format shelveset_name}"
           b.append ";#{b.format shelveset_owner}" unless shelveset_owner.nil?
           yield b if block_given?
           self
         end
         def type(file_type)
-          b.append " /type:#{b.format file_type}"
+          b.append " -type:#{b.format file_type}"
           yield b if block_given?
           self
         end
         def format(format)
-          b.append " /format:#{b.format format}"
+          b.append " -format:#{b.format format}"
           yield b if block_given?
           self
         end
         def ignore_space
-          b.append ' /ignoreSpace'
+          b.append ' -ignoreSpace'
           yield b if block_given?
           self
         end
         def ignore_eol
-          b.append ' /ignoreEol'
+          b.append ' -ignoreEol'
           yield b if block_given?
           self
         end
         def ignore_case
-          b.append ' /ignoreCase'
+          b.append ' -ignoreCase'
           yield b if block_given?
           self
         end
         def recursive
-          b.append ' /recursive'
+          b.append ' -recursive'
           yield b if block_given?
           self
         end
         def options
-          b.append ' /options'
+          b.append ' -options'
           yield b if block_given?
           self
         end
         def no_prompt
-          b.append ' /noPrompt'
+          b.append ' -noPrompt'
           yield b if block_given?
           self
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
@@ -749,77 +719,44 @@ module FluentCommandBuilder
           b.append " dir #{b.format item_spec}"
         end
         def version(version_spec)
-          b.append " /version:#{b.format version_spec}"
+          b.append " -version:#{b.format version_spec}"
           yield b if block_given?
           self
         end
         def recursive
-          b.append ' /recursive'
+          b.append ' -recursive'
           yield b if block_given?
           self
         end
         def folders
-          b.append ' /folders'
+          b.append ' -folders'
           yield b if block_given?
           self
         end
         def deleted
-          b.append ' /deleted'
+          b.append ' -deleted'
           yield b if block_given?
           self
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
         end
         def collection(team_project_collection_url)
-          b.append " /collection:#{b.format team_project_collection_url}"
+          b.append " -collection:#{b.format team_project_collection_url}"
           yield b if block_given?
           self
         end
       end
-      class FolderDiff < CommandBase
-        def initialize(underlying_builder, target_path, source_path=nil)
+      class Eula < CommandBase
+        def initialize(underlying_builder)
           super underlying_builder
-          b.append ' folderDiff'
-          b.append " #{b.format source_path}" unless source_path.nil?
-          b.append " #{b.format target_path}"
+          b.append ' eula'
         end
-        def recursive
-          b.append ' /recursive'
-          yield b if block_given?
-          self
-        end
-        def no_prompt
-          b.append ' /noPrompt'
-          yield b if block_given?
-          self
-        end
-        def collection(team_project_collection_url)
-          b.append " /collection:#{b.format team_project_collection_url}"
-          yield b if block_given?
-          self
-        end
-        def filter(filter)
-          b.append " /filter:#{b.format filter, ';'}"
-          yield b if block_given?
-          self
-        end
-        def filter_local_paths_only
-          b.append ' /filterLocalPathsOnly'
-          yield b if block_given?
-          self
-        end
-        def login(username, password=nil)
-          b.append " /login:#{b.format username}"
-          b.append ",#{b.format password}" unless password.nil?
-          yield b if block_given?
-          self
-        end
-        def view(view)
-          b.append " /view:#{b.format view, ','}"
+        def accept
+          b.append ' -accept'
           yield b if block_given?
           self
         end
@@ -831,48 +768,64 @@ module FluentCommandBuilder
           b.append " #{b.format item_spec}" unless item_spec.nil?
         end
         def version(version_spec)
-          b.append " /version:#{b.format version_spec}"
+          b.append " -version:#{b.format version_spec}"
           yield b if block_given?
           self
         end
         def all
-          b.append ' /all'
+          b.append ' -all'
           yield b if block_given?
           self
         end
         def overwrite
-          b.append ' /overwrite'
+          b.append ' -overwrite'
           yield b if block_given?
           self
         end
         def force
-          b.append ' /force'
+          b.append ' -force'
           yield b if block_given?
           self
         end
         def preview
-          b.append ' /preview'
+          b.append ' -preview'
           yield b if block_given?
           self
         end
         def recursive
-          b.append ' /recursive'
+          b.append ' -recursive'
           yield b if block_given?
           self
         end
         def remap
-          b.append ' /remap'
+          b.append ' -remap'
           yield b if block_given?
           self
         end
         def no_prompt
-          b.append ' /noPrompt'
+          b.append ' -noPrompt'
           yield b if block_given?
           self
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
+          yield b if block_given?
+          self
+        end
+      end
+      class Getcs < CommandBase
+        def initialize(underlying_builder)
+          super underlying_builder
+          b.append ' getcs'
+        end
+        def changeset(changeset_number)
+          b.append " -changeset:#{b.format changeset_number}"
+          yield b if block_given?
+          self
+        end
+        def latest
+          b.append ' -latest'
           yield b if block_given?
           self
         end
@@ -883,58 +836,58 @@ module FluentCommandBuilder
           b.append " history #{b.format item_spec}"
         end
         def version(version_spec)
-          b.append " /version:#{b.format version_spec}"
+          b.append " -version:#{b.format version_spec}"
           yield b if block_given?
           self
         end
         def stop_after(number)
-          b.append " /stopAfter:#{b.format number}"
+          b.append " -stopAfter:#{b.format number}"
           yield b if block_given?
           self
         end
         def recursive
-          b.append ' /recursive'
+          b.append ' -recursive'
           yield b if block_given?
           self
         end
         def user(user_name)
-          b.append " /user:#{b.format user_name}"
+          b.append " -user:#{b.format user_name}"
           yield b if block_given?
           self
         end
         def format(format)
-          b.append " /format:#{b.format format}"
+          b.append " -format:#{b.format format}"
           yield b if block_given?
           self
         end
         def slot_mode
-          b.append ' /slotMode'
+          b.append ' -slotMode'
           yield b if block_given?
           self
         end
         def item_mode
-          b.append ' /itemMode'
+          b.append ' -itemMode'
           yield b if block_given?
           self
         end
         def no_prompt
-          b.append ' /noPrompt'
+          b.append ' -noPrompt'
           yield b if block_given?
           self
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
         end
         def sort(sort)
-          b.append " /sort:#{b.format sort}"
+          b.append " -sort:#{b.format sort}"
           yield b if block_given?
           self
         end
         def collection(team_project_collection_url)
-          b.append " /collection:#{b.format team_project_collection_url}"
+          b.append " -collection:#{b.format team_project_collection_url}"
           yield b if block_given?
           self
         end
@@ -947,38 +900,38 @@ module FluentCommandBuilder
           b.append " #{b.format item_spec}"
         end
         def owner(owner_name)
-          b.append " /owner:#{b.format owner_name}"
+          b.append " -owner:#{b.format owner_name}"
           yield b if block_given?
           self
         end
         def version(version_spec)
-          b.append " /version:#{b.format version_spec}"
+          b.append " -version:#{b.format version_spec}"
           yield b if block_given?
           self
         end
         def comment(comment)
-          b.append " /comment:#{b.format comment}"
+          b.append " -comment:#{b.format comment}"
           yield b if block_given?
           self
         end
         def child(lock_type)
-          b.append " /child:#{b.format lock_type}"
+          b.append " -child:#{b.format lock_type}"
           yield b if block_given?
           self
         end
         def recursive
-          b.append ' /recursive'
+          b.append ' -recursive'
           yield b if block_given?
           self
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
         end
         def collection(team_project_collection_url)
-          b.append " /collection:#{b.format team_project_collection_url}"
+          b.append " -collection:#{b.format team_project_collection_url}"
           yield b if block_given?
           self
         end
@@ -986,18 +939,18 @@ module FluentCommandBuilder
       class DeleteLabel < CommandBase
         def initialize(underlying_builder, label_name, item_spec, scope=nil)
           super underlying_builder
-          b.append " label /delete #{b.format label_name}"
+          b.append " label -delete #{b.format label_name}"
           b.append "@#{b.format scope}" unless scope.nil?
           b.append " #{b.format item_spec}"
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
         end
         def collection(team_project_collection_url)
-          b.append " /collection:#{b.format team_project_collection_url}"
+          b.append " -collection:#{b.format team_project_collection_url}"
           yield b if block_given?
           self
         end
@@ -1009,50 +962,23 @@ module FluentCommandBuilder
           b.append " #{b.format label_name}" unless label_name.nil?
         end
         def owner(owner_name)
-          b.append " /owner:#{b.format owner_name}"
+          b.append " -owner:#{b.format owner_name}"
           yield b if block_given?
           self
         end
         def format(format)
-          b.append " /format:#{b.format format}"
+          b.append " -format:#{b.format format}"
           yield b if block_given?
           self
         end
         def collection(team_project_collection_url)
-          b.append " /collection:#{b.format team_project_collection_url}"
+          b.append " -collection:#{b.format team_project_collection_url}"
           yield b if block_given?
           self
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
-          yield b if block_given?
-          self
-        end
-      end
-      class LocalVersions < CommandBase
-        def initialize(underlying_builder, item_spec)
-          super underlying_builder
-          b.append " localVersions #{b.format item_spec}"
-        end
-        def recursive
-          b.append ' /recursive'
-          yield b if block_given?
-          self
-        end
-        def format(format)
-          b.append " /format:#{b.format format}"
-          yield b if block_given?
-          self
-        end
-        def workspace(workspace_name, workspace_owner=nil)
-          b.append " /workspace:#{b.format workspace_name}"
-          b.append ";#{b.format workspace_owner}" unless workspace_owner.nil?
-          yield b if block_given?
-          self
-        end
-        def collection(team_project_collection_url)
-          b.append " /collection:#{b.format team_project_collection_url}"
           yield b if block_given?
           self
         end
@@ -1063,29 +989,29 @@ module FluentCommandBuilder
           b.append " lock #{b.format item_spec}"
         end
         def lock(lock_type)
-          b.append " /lock:#{b.format lock_type}"
+          b.append " -lock:#{b.format lock_type}"
           yield b if block_given?
           self
         end
         def workspace(workspace_name, workspace_owner=nil)
-          b.append " /workspace:#{b.format workspace_name}"
+          b.append " -workspace:#{b.format workspace_name}"
           b.append ";#{b.format workspace_owner}" unless workspace_owner.nil?
           yield b if block_given?
           self
         end
         def recursive
-          b.append ' /recursive'
+          b.append ' -recursive'
           yield b if block_given?
           self
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
         end
         def collection(team_project_collection_url)
-          b.append " /collection:#{b.format team_project_collection_url}"
+          b.append " -collection:#{b.format team_project_collection_url}"
           yield b if block_given?
           self
         end
@@ -1096,72 +1022,72 @@ module FluentCommandBuilder
           b.append " merge #{b.format source} #{b.format destination}"
         end
         def recursive
-          b.append ' /recursive'
+          b.append ' -recursive'
           yield b if block_given?
           self
         end
         def force
-          b.append ' /force'
+          b.append ' -force'
           yield b if block_given?
           self
         end
         def candidate
-          b.append ' /candidate'
+          b.append ' -candidate'
           yield b if block_given?
           self
         end
         def discard
-          b.append ' /discard'
+          b.append ' -discard'
           yield b if block_given?
           self
         end
         def version(version_spec)
-          b.append " /version:#{b.format version_spec}"
+          b.append " -version:#{b.format version_spec}"
           yield b if block_given?
           self
         end
         def lock(lock_type)
-          b.append " /lock:#{b.format lock_type}"
+          b.append " -lock:#{b.format lock_type}"
           yield b if block_given?
           self
         end
         def preview
-          b.append ' /preview'
+          b.append ' -preview'
           yield b if block_given?
           self
         end
         def baseless
-          b.append ' /baseless'
+          b.append ' -baseless'
           yield b if block_given?
           self
         end
         def no_summary
-          b.append ' /noSummary'
+          b.append ' -noSummary'
           yield b if block_given?
           self
         end
         def no_implicit_baseless
-          b.append ' /noImplicitBaseless'
+          b.append ' -noImplicitBaseless'
           yield b if block_given?
           self
         end
         def conservative
-          b.append ' /conservative'
+          b.append ' -conservative'
           yield b if block_given?
           self
         end
         def format(format)
-          b.append " /format:#{b.format format}"
+          b.append " -format:#{b.format format}"
           yield b if block_given?
           self
         end
         def no_prompt
-          b.append ' /noPrompt'
+          b.append ' -noPrompt'
           yield b if block_given?
           self
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
@@ -1175,90 +1101,113 @@ module FluentCommandBuilder
           b.append " #{b.format destination}"
         end
         def recursive
-          b.append ' /recursive'
+          b.append ' -recursive'
           yield b if block_given?
           self
         end
         def extended
-          b.append ' /extended'
+          b.append ' -extended'
           yield b if block_given?
           self
         end
         def format(format)
-          b.append " /format:#{b.format format}"
+          b.append " -format:#{b.format format}"
           yield b if block_given?
           self
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
         end
         def show_all
-          b.append ' /showAll'
+          b.append ' -showAll'
           yield b if block_given?
           self
         end
         def collection(team_project_collection_url)
-          b.append " /collection:#{b.format team_project_collection_url}"
+          b.append " -collection:#{b.format team_project_collection_url}"
           yield b if block_given?
           self
         end
       end
-      class Permission < CommandBase
+      class Print < CommandBase
         def initialize(underlying_builder, item_spec)
           super underlying_builder
-          b.append " permission #{b.format item_spec}"
+          b.append " print #{b.format item_spec}"
         end
-        def allow(permission)
-          b.append " /allow:#{b.format permission, ','}"
+        def version(version_spec)
+          b.append " -version:#{b.format version_spec}"
           yield b if block_given?
           self
         end
-        def deny(permission)
-          b.append " /deny:#{b.format permission, ','}"
+      end
+      class ProductKey < CommandBase
+        def initialize(underlying_builder)
+          super underlying_builder
+          b.append ' productKey'
+        end
+        def set(my_product_key)
+          b.append " -set:#{b.format my_product_key}"
           yield b if block_given?
           self
         end
-        def remove(permission)
-          b.append " /remove:#{b.format permission, ','}"
+        def trial
+          b.append ' -trial'
           yield b if block_given?
           self
         end
-        def inherit(inherit)
-          b.append " /inherit:#{b.format inherit}"
+      end
+      class EditProfile < CommandBase
+        def initialize(underlying_builder, existing_profile_name)
+          super underlying_builder
+          b.append " profile -edit #{b.format existing_profile_name}"
+        end
+        def string(property_name, value)
+          b.append " -string:#{b.format property_name}=#{b.format value}"
           yield b if block_given?
           self
         end
-        def user(user_name)
-          b.append " /user:#{b.format user_name, ','}"
+        def boolean(property_name, value)
+          b.append " -boolean:#{b.format property_name}=#{b.format value}"
           yield b if block_given?
           self
         end
-        def group(group_name)
-          b.append " /group:#{b.format group_name, ','}"
+        def number(property_name, value)
+          b.append " -number:#{b.format property_name}=#{b.format value}"
           yield b if block_given?
           self
         end
-        def collection(team_project_collection_url)
-          b.append " /collection:#{b.format team_project_collection_url}"
+      end
+      class NewProfile < CommandBase
+        def initialize(underlying_builder, new_profile_name)
+          super underlying_builder
+          b.append " profile -new #{b.format new_profile_name}"
+        end
+        def string(property_name, value)
+          b.append " -string:#{b.format property_name}=#{b.format value}"
           yield b if block_given?
           self
         end
-        def recursive
-          b.append ' /recursive'
+        def boolean(property_name, value)
+          b.append " -boolean:#{b.format property_name}=#{b.format value}"
           yield b if block_given?
           self
         end
-        def global
-          b.append ' /global'
+        def number(property_name, value)
+          b.append " -number:#{b.format property_name}=#{b.format value}"
           yield b if block_given?
           self
         end
-        def login(username, password=nil)
-          b.append " /login:#{b.format username}"
-          b.append ",#{b.format password}" unless password.nil?
+      end
+      class Profiles < CommandBase
+        def initialize(underlying_builder)
+          super underlying_builder
+          b.append ' profiles'
+        end
+        def format(format)
+          b.append " -format:#{b.format format}"
           yield b if block_given?
           self
         end
@@ -1269,117 +1218,115 @@ module FluentCommandBuilder
           b.append " properties #{b.format item_spec}"
         end
         def collection(team_project_collection_url)
-          b.append " /collection:#{b.format team_project_collection_url}"
+          b.append " -collection:#{b.format team_project_collection_url}"
           yield b if block_given?
           self
         end
         def recursive
-          b.append ' /recursive'
+          b.append ' -recursive'
           yield b if block_given?
           self
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
         end
         def version(version_spec)
-          b.append " /version:#{b.format version_spec}"
+          b.append " -version:#{b.format version_spec}"
           yield b if block_given?
           self
         end
         def workspace(workspace_name, workspace_owner=nil)
-          b.append " /workspace:#{b.format workspace_name}"
+          b.append " -workspace:#{b.format workspace_name}"
           b.append ";#{b.format workspace_owner}" unless workspace_owner.nil?
           yield b if block_given?
           self
         end
       end
-      class ConfigureProxy < CommandBase
-        def initialize(underlying_builder, url)
+      class Reconcile < CommandBase
+        def initialize(underlying_builder)
           super underlying_builder
-          b.append " proxy /configure #{b.format url}"
+          b.append ' reconcile'
         end
-        def collection(team_project_collection_url)
-          b.append " /collection:#{b.format team_project_collection_url}"
+        def team_project(team_project_name)
+          b.append " -teamProject:#{b.format team_project_name}"
           yield b if block_given?
           self
         end
-        def login(username, password=nil)
-          b.append " /login:#{b.format username}"
-          b.append ",#{b.format password}" unless password.nil?
+        def workspace(workspace_name, workspace_owner=nil)
+          b.append " -workspace:#{b.format workspace_name}"
+          b.append ";#{b.format workspace_owner}" unless workspace_owner.nil?
           yield b if block_given?
           self
         end
       end
-      class AddProxyRecord < CommandBase
-        def initialize(underlying_builder, url)
+      class ReconcileBuild < CommandBase
+        def initialize(underlying_builder, build_name, item_spec=nil)
           super underlying_builder
-          b.append " proxy /add #{b.format url}"
+          b.append " reconcile -buildName:#{b.format build_name}"
+          b.append " #{b.format item_spec}" unless item_spec.nil?
         end
-        def name(name)
-          b.append " /name:#{b.format name}"
+        def team_project(team_project_name)
+          b.append " -teamProject:#{b.format team_project_name}"
           yield b if block_given?
           self
         end
-        def site(site_name)
-          b.append " /site:#{b.format site_name}"
+        def workspace(workspace_name, workspace_owner=nil)
+          b.append " -workspace:#{b.format workspace_name}"
+          b.append ";#{b.format workspace_owner}" unless workspace_owner.nil?
           yield b if block_given?
           self
         end
-        def description(description)
-          b.append " /description:#{b.format description}"
-          yield b if block_given?
-          self
-        end
-        def default(scope)
-          b.append " /default:#{b.format scope}"
-          yield b if block_given?
-          self
-        end
-        def collection(team_project_collection_url)
-          b.append " /collection:#{b.format team_project_collection_url}"
-          yield b if block_given?
-          self
-        end
-        def login(username, password=nil)
-          b.append " /login:#{b.format username}"
-          b.append ",#{b.format password}" unless password.nil?
+        def recursive
+          b.append ' -recursive'
           yield b if block_given?
           self
         end
       end
-      class DeleteProxyRecord < CommandBase
-        def initialize(underlying_builder, url)
+      class ReconcileChangeset < CommandBase
+        def initialize(underlying_builder, changeset_name, item_spec=nil)
           super underlying_builder
-          b.append " proxy /delete #{b.format url}"
+          b.append " reconcile -changeset:#{b.format changeset_name}"
+          b.append " #{b.format item_spec}" unless item_spec.nil?
         end
-        def collection(team_project_collection_url)
-          b.append " /collection:#{b.format team_project_collection_url}"
+        def team_project(team_project_name)
+          b.append " -teamProject:#{b.format team_project_name}"
           yield b if block_given?
           self
         end
-        def login(username, password=nil)
-          b.append " /login:#{b.format username}"
-          b.append ",#{b.format password}" unless password.nil?
+        def workspace(workspace_name, workspace_owner=nil)
+          b.append " -workspace:#{b.format workspace_name}"
+          b.append ";#{b.format workspace_owner}" unless workspace_owner.nil?
+          yield b if block_given?
+          self
+        end
+        def recursive
+          b.append ' -recursive'
           yield b if block_given?
           self
         end
       end
-      class ListProxyRecords < CommandBase
-        def initialize(underlying_builder, url)
+      class ReconcileForgetBuild < CommandBase
+        def initialize(underlying_builder, build_name, item_spec=nil)
           super underlying_builder
-          b.append " proxy /list #{b.format url, ' '}"
+          b.append " reconcile -forgetBuild:#{b.format build_name}"
+          b.append " #{b.format item_spec}" unless item_spec.nil?
         end
-        def collection(team_project_collection_url)
-          b.append " /collection:#{b.format team_project_collection_url}"
+        def team_project(team_project_name)
+          b.append " -teamProject:#{b.format team_project_name}"
           yield b if block_given?
           self
         end
-        def login(username, password=nil)
-          b.append " /login:#{b.format username}"
-          b.append ",#{b.format password}" unless password.nil?
+        def workspace(workspace_name, workspace_owner=nil)
+          b.append " -workspace:#{b.format workspace_name}"
+          b.append ";#{b.format workspace_owner}" unless workspace_owner.nil?
+          yield b if block_given?
+          self
+        end
+        def recursive
+          b.append ' -recursive'
           yield b if block_given?
           self
         end
@@ -1390,12 +1337,12 @@ module FluentCommandBuilder
           b.append " rename #{b.format old_item} #{b.format new_item}"
         end
         def lock(lock_type)
-          b.append " /lock:#{b.format lock_type}"
+          b.append " -lock:#{b.format lock_type}"
           yield b if block_given?
           self
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
@@ -1408,119 +1355,43 @@ module FluentCommandBuilder
           b.append " #{b.format item_spec}" unless item_spec.nil?
         end
         def auto(resolution)
-          b.append " /auto:#{b.format resolution}"
+          b.append " -auto:#{b.format resolution}"
           yield b if block_given?
           self
         end
         def preview
-          b.append ' /preview'
+          b.append ' -preview'
           yield b if block_given?
           self
         end
         def override_type(override_type)
-          b.append " /overrideType:#{b.format override_type}"
+          b.append " -overrideType:#{b.format override_type}"
           yield b if block_given?
           self
         end
         def convert_to_type(convert_type)
-          b.append " /convertToType:#{b.format convert_type}"
+          b.append " -convertToType:#{b.format convert_type}"
           yield b if block_given?
           self
         end
         def recursive
-          b.append ' /recursive'
+          b.append ' -recursive'
           yield b if block_given?
           self
         end
         def new_name(path)
-          b.append " /newName:#{b.format path}"
+          b.append " -newName:#{b.format path}"
           yield b if block_given?
           self
         end
         def no_prompt
-          b.append ' /noPrompt'
+          b.append ' -noPrompt'
           yield b if block_given?
           self
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
-          yield b if block_given?
-          self
-        end
-      end
-      class RollbackToVersion < CommandBase
-        def initialize(underlying_builder, version_spec, item_spec)
-          super underlying_builder
-          b.append " rollback /toVersion:#{b.format version_spec} #{b.format item_spec}"
-        end
-        def recursive
-          b.append ' /recursive'
-          yield b if block_given?
-          self
-        end
-        def lock(lock_type)
-          b.append " /lock:#{b.format lock_type}"
-          yield b if block_given?
-          self
-        end
-        def version(version_spec)
-          b.append " /version:#{b.format version_spec}"
-          yield b if block_given?
-          self
-        end
-        def keep_merge_history
-          b.append ' /keepMergeHistory'
-          yield b if block_given?
-          self
-        end
-        def login(username, password=nil)
-          b.append " /login:#{b.format username}"
-          b.append ",#{b.format password}" unless password.nil?
-          yield b if block_given?
-          self
-        end
-        def no_prompt
-          b.append ' /noPrompt'
-          yield b if block_given?
-          self
-        end
-      end
-      class RollbackChangeset < CommandBase
-        def initialize(underlying_builder, changeset_from, changeset_to=nil, item_spec=nil)
-          super underlying_builder
-          b.append " rollback /changeset:#{b.format changeset_from}"
-          b.append "~#{b.format changeset_to}" unless changeset_to.nil?
-          b.append " #{b.format item_spec}" unless item_spec.nil?
-        end
-        def recursive
-          b.append ' /recursive'
-          yield b if block_given?
-          self
-        end
-        def lock(lock_type)
-          b.append " /lock:#{b.format lock_type}"
-          yield b if block_given?
-          self
-        end
-        def version(version_spec)
-          b.append " /version:#{b.format version_spec}"
-          yield b if block_given?
-          self
-        end
-        def keep_merge_history
-          b.append ' /keepMergeHistory'
-          yield b if block_given?
-          self
-        end
-        def login(username, password=nil)
-          b.append " /login:#{b.format username}"
-          b.append ",#{b.format password}" unless password.nil?
-          yield b if block_given?
-          self
-        end
-        def no_prompt
-          b.append ' /noPrompt'
           yield b if block_given?
           self
         end
@@ -1528,25 +1399,25 @@ module FluentCommandBuilder
       class ReplaceShelveset < CommandBase
         def initialize(underlying_builder, shelveset_name)
           super underlying_builder
-          b.append " shelve /replace #{b.format shelveset_name}"
+          b.append " shelve -replace #{b.format shelveset_name}"
         end
         def comment(comment)
-          b.append " /comment:#{b.format comment}"
+          b.append " -comment:#{b.format comment}"
           yield b if block_given?
           self
         end
         def validate
-          b.append ' /validate'
+          b.append ' -validate'
           yield b if block_given?
           self
         end
         def no_prompt
-          b.append ' /noPrompt'
+          b.append ' -noPrompt'
           yield b if block_given?
           self
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
@@ -1558,37 +1429,37 @@ module FluentCommandBuilder
           b.append " shelve #{b.format shelveset_name} #{b.format item_spec}"
         end
         def move
-          b.append ' /move'
+          b.append ' -move'
           yield b if block_given?
           self
         end
         def replace
-          b.append ' /replace'
+          b.append ' -replace'
           yield b if block_given?
           self
         end
         def comment(comment)
-          b.append " /comment:#{b.format comment}"
+          b.append " -comment:#{b.format comment}"
           yield b if block_given?
           self
         end
         def recursive
-          b.append ' /recursive'
+          b.append ' -recursive'
           yield b if block_given?
           self
         end
         def validate
-          b.append ' /validate'
+          b.append ' -validate'
           yield b if block_given?
           self
         end
         def no_prompt
-          b.append ' /noPrompt'
+          b.append ' -noPrompt'
           yield b if block_given?
           self
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
@@ -1597,17 +1468,17 @@ module FluentCommandBuilder
       class DeleteShelveset < CommandBase
         def initialize(underlying_builder, shelveset_name, shelveset_owner=nil)
           super underlying_builder
-          b.append " shelve /delete #{b.format shelveset_name}"
+          b.append " shelve -delete #{b.format shelveset_name}"
           b.append ";#{b.format shelveset_owner}" unless shelveset_owner.nil?
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
         end
         def collection(team_project_collection_url)
-          b.append " /collection:#{b.format team_project_collection_url}"
+          b.append " -collection:#{b.format team_project_collection_url}"
           yield b if block_given?
           self
         end
@@ -1619,22 +1490,22 @@ module FluentCommandBuilder
           b.append " #{b.format shelveset_name}" unless shelveset_name.nil?
         end
         def owner(owner_name)
-          b.append " /owner:#{b.format owner_name}"
+          b.append " -owner:#{b.format owner_name}"
           yield b if block_given?
           self
         end
         def format(format)
-          b.append " /format:#{b.format format}"
+          b.append " -format:#{b.format format}"
           yield b if block_given?
           self
         end
         def collection(team_project_collection_url)
-          b.append " /collection:#{b.format team_project_collection_url}"
+          b.append " -collection:#{b.format team_project_collection_url}"
           yield b if block_given?
           self
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
@@ -1646,40 +1517,40 @@ module FluentCommandBuilder
           b.append " status #{b.format item_spec}"
         end
         def collection(team_project_collection_url)
-          b.append " /collection:#{b.format team_project_collection_url}"
+          b.append " -collection:#{b.format team_project_collection_url}"
           yield b if block_given?
           self
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
         end
         def workspace(workspace_name, workspace_owner=nil)
-          b.append " /workspace:#{b.format workspace_name}"
+          b.append " -workspace:#{b.format workspace_name}"
           b.append ";#{b.format workspace_owner}" unless workspace_owner.nil?
           yield b if block_given?
           self
         end
         def shelveset(shelveset_name, shelveset_owner=nil)
-          b.append " /shelveset:#{b.format shelveset_name}"
+          b.append " -shelveset:#{b.format shelveset_name}"
           b.append ";#{b.format shelveset_owner}" unless shelveset_owner.nil?
           yield b if block_given?
           self
         end
         def format(format)
-          b.append " /format:#{b.format format}"
+          b.append " -format:#{b.format format}"
           yield b if block_given?
           self
         end
         def recursive
-          b.append ' /recursive'
+          b.append ' -recursive'
           yield b if block_given?
           self
         end
         def user(user_name)
-          b.append " /user:#{b.format user_name}"
+          b.append " -user:#{b.format user_name}"
           yield b if block_given?
           self
         end
@@ -1691,22 +1562,22 @@ module FluentCommandBuilder
           b.append ";#{b.format deletion_id}" unless deletion_id.nil?
         end
         def no_get
-          b.append ' /noGet'
+          b.append ' -noGet'
           yield b if block_given?
           self
         end
         def lock(lock_type)
-          b.append " /lock:#{b.format lock_type}"
+          b.append " -lock:#{b.format lock_type}"
           yield b if block_given?
           self
         end
         def recursive
-          b.append ' /recursive'
+          b.append ' -recursive'
           yield b if block_given?
           self
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
@@ -1718,29 +1589,29 @@ module FluentCommandBuilder
           b.append " undo #{b.format item_spec}"
         end
         def workspace(workspace_name, workspace_owner=nil)
-          b.append " /workspace:#{b.format workspace_name}"
+          b.append " -workspace:#{b.format workspace_name}"
           b.append ";#{b.format workspace_owner}" unless workspace_owner.nil?
           yield b if block_given?
           self
         end
         def recursive
-          b.append ' /recursive'
+          b.append ' -recursive'
           yield b if block_given?
           self
         end
         def no_prompt
-          b.append ' /noPrompt'
+          b.append ' -noPrompt'
           yield b if block_given?
           self
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
         end
         def collection(team_project_collection_url)
-          b.append " /collection:#{b.format team_project_collection_url}"
+          b.append " -collection:#{b.format team_project_collection_url}"
           yield b if block_given?
           self
         end
@@ -1751,17 +1622,17 @@ module FluentCommandBuilder
           b.append " unlabel #{b.format label_name} #{b.format item_spec}"
         end
         def collection(team_project_collection_url)
-          b.append " /collection:#{b.format team_project_collection_url}"
+          b.append " -collection:#{b.format team_project_collection_url}"
           yield b if block_given?
           self
         end
         def recursive
-          b.append ' /recursive'
+          b.append ' -recursive'
           yield b if block_given?
           self
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
@@ -1776,70 +1647,22 @@ module FluentCommandBuilder
           b.append " #{b.format item_spec}" unless item_spec.nil?
         end
         def move
-          b.append ' /move'
+          b.append ' -move'
           yield b if block_given?
           self
         end
         def recursive
-          b.append ' /recursive'
+          b.append ' -recursive'
           yield b if block_given?
           self
         end
         def no_prompt
-          b.append ' /noPrompt'
+          b.append ' -noPrompt'
           yield b if block_given?
           self
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
-          b.append ",#{b.format password}" unless password.nil?
-          yield b if block_given?
-          self
-        end
-      end
-      class View < CommandBase
-        def initialize(underlying_builder, item_spec)
-          super underlying_builder
-          b.append " view #{b.format item_spec}"
-        end
-        def collection(team_project_collection_url)
-          b.append " /collection:#{b.format team_project_collection_url}"
-          yield b if block_given?
-          self
-        end
-        def console
-          b.append ' /console'
-          yield b if block_given?
-          self
-        end
-        def recursive
-          b.append ' /recursive'
-          yield b if block_given?
-          self
-        end
-        def output(local_file)
-          b.append " /output:#{b.format local_file}"
-          yield b if block_given?
-          self
-        end
-        def shelveset(shelveset_name, shelveset_owner=nil)
-          b.append " /shelveset:#{b.format shelveset_name}"
-          b.append ";#{b.format shelveset_owner}" unless shelveset_owner.nil?
-          yield b if block_given?
-          self
-        end
-        def no_prompt
-          b.append ' /noPrompt'
-          yield b if block_given?
-          self
-        end
-        def version(version_spec)
-          b.append " /version:#{b.format version_spec}"
-          yield b if block_given?
-          self
-        end
-        def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
@@ -1851,7 +1674,7 @@ module FluentCommandBuilder
           b.append " workfold #{b.format local_folder}"
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
@@ -1860,10 +1683,10 @@ module FluentCommandBuilder
       class ShowWorkspaceMappings < CommandBase
         def initialize(underlying_builder, workspace_name)
           super underlying_builder
-          b.append " workfold /workspace:#{b.format workspace_name}"
+          b.append " workfold -workspace:#{b.format workspace_name}"
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
@@ -1875,19 +1698,19 @@ module FluentCommandBuilder
           b.append " workfold #{b.format server_folder}"
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
         end
         def workspace(workspace_name, workspace_owner=nil)
-          b.append " /workspace:#{b.format workspace_name}"
+          b.append " -workspace:#{b.format workspace_name}"
           b.append ";#{b.format workspace_owner}" unless workspace_owner.nil?
           yield b if block_given?
           self
         end
         def collection(team_project_collection_url)
-          b.append " /collection:#{b.format team_project_collection_url}"
+          b.append " -collection:#{b.format team_project_collection_url}"
           yield b if block_given?
           self
         end
@@ -1895,22 +1718,22 @@ module FluentCommandBuilder
       class MapFolder < CommandBase
         def initialize(underlying_builder, server_folder, local_folder)
           super underlying_builder
-          b.append " workfold /map #{b.format server_folder} #{b.format local_folder}"
+          b.append " workfold -map #{b.format server_folder} #{b.format local_folder}"
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
         end
         def workspace(workspace_name, workspace_owner=nil)
-          b.append " /workspace:#{b.format workspace_name}"
+          b.append " -workspace:#{b.format workspace_name}"
           b.append ";#{b.format workspace_owner}" unless workspace_owner.nil?
           yield b if block_given?
           self
         end
         def collection(team_project_collection_url)
-          b.append " /collection:#{b.format team_project_collection_url}"
+          b.append " -collection:#{b.format team_project_collection_url}"
           yield b if block_given?
           self
         end
@@ -1918,27 +1741,27 @@ module FluentCommandBuilder
       class UnmapFolder < CommandBase
         def initialize(underlying_builder)
           super underlying_builder
-          b.append ' workfold /unmap'
+          b.append ' workfold -unmap'
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
         end
         def workspace(workspace_name, workspace_owner=nil)
-          b.append " /workspace:#{b.format workspace_name}"
+          b.append " -workspace:#{b.format workspace_name}"
           b.append ";#{b.format workspace_owner}" unless workspace_owner.nil?
           yield b if block_given?
           self
         end
         def collection(team_project_collection_url)
-          b.append " /collection:#{b.format team_project_collection_url}"
+          b.append " -collection:#{b.format team_project_collection_url}"
           yield b if block_given?
           self
         end
         def recursive
-          b.append ' /recursive'
+          b.append ' -recursive'
           yield b if block_given?
           self
         end
@@ -1946,22 +1769,22 @@ module FluentCommandBuilder
       class CloakFolder < CommandBase
         def initialize(underlying_builder, server_folder)
           super underlying_builder
-          b.append " workfold /cloak #{b.format server_folder}"
+          b.append " workfold -cloak #{b.format server_folder}"
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
         end
         def workspace(workspace_name, workspace_owner=nil)
-          b.append " /workspace:#{b.format workspace_name}"
+          b.append " -workspace:#{b.format workspace_name}"
           b.append ";#{b.format workspace_owner}" unless workspace_owner.nil?
           yield b if block_given?
           self
         end
         def collection(team_project_collection_url)
-          b.append " /collection:#{b.format team_project_collection_url}"
+          b.append " -collection:#{b.format team_project_collection_url}"
           yield b if block_given?
           self
         end
@@ -1969,22 +1792,22 @@ module FluentCommandBuilder
       class DecloakFolder < CommandBase
         def initialize(underlying_builder, server_folder)
           super underlying_builder
-          b.append " workfold /decloak #{b.format server_folder}"
+          b.append " workfold -decloak #{b.format server_folder}"
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
         end
         def workspace(workspace_name, workspace_owner=nil)
-          b.append " /workspace:#{b.format workspace_name}"
+          b.append " -workspace:#{b.format workspace_name}"
           b.append ";#{b.format workspace_owner}" unless workspace_owner.nil?
           yield b if block_given?
           self
         end
         def collection(team_project_collection_url)
-          b.append " /collection:#{b.format team_project_collection_url}"
+          b.append " -collection:#{b.format team_project_collection_url}"
           yield b if block_given?
           self
         end
@@ -1992,42 +1815,42 @@ module FluentCommandBuilder
       class CreateWorkspace < CommandBase
         def initialize(underlying_builder, workspace_name, workspace_owner=nil)
           super underlying_builder
-          b.append " workspace /new #{b.format workspace_name}"
+          b.append " workspace -new #{b.format workspace_name}"
           b.append ";#{b.format workspace_owner}" unless workspace_owner.nil?
         end
         def no_prompt
-          b.append ' /noPrompt'
+          b.append ' -noPrompt'
           yield b if block_given?
           self
         end
         def template(workspace_name, workspace_owner=nil)
-          b.append " /template:#{b.format workspace_name}"
+          b.append " -template:#{b.format workspace_name}"
           b.append ";#{b.format workspace_owner}" unless workspace_owner.nil?
           yield b if block_given?
           self
         end
         def computer(computer_name)
-          b.append " /computer:#{b.format computer_name}"
+          b.append " -computer:#{b.format computer_name}"
           yield b if block_given?
           self
         end
         def comment(comment)
-          b.append " /comment:#{b.format comment}"
+          b.append " -comment:#{b.format comment}"
           yield b if block_given?
           self
         end
         def collection(team_project_collection_url)
-          b.append " /collection:#{b.format team_project_collection_url}"
+          b.append " -collection:#{b.format team_project_collection_url}"
           yield b if block_given?
           self
         end
         def permission(permission)
-          b.append " /permission:#{b.format permission}"
+          b.append " -permission:#{b.format permission}"
           yield b if block_given?
           self
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
@@ -2036,16 +1859,16 @@ module FluentCommandBuilder
       class DeleteWorkspace < CommandBase
         def initialize(underlying_builder, workspace_name, workspace_owner=nil)
           super underlying_builder
-          b.append " workspace /delete #{b.format workspace_name}"
+          b.append " workspace -delete #{b.format workspace_name}"
           b.append ";#{b.format workspace_owner}" unless workspace_owner.nil?
         end
         def collection(team_project_collection_url)
-          b.append " /collection:#{b.format team_project_collection_url}"
+          b.append " -collection:#{b.format team_project_collection_url}"
           yield b if block_given?
           self
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
@@ -2059,38 +1882,38 @@ module FluentCommandBuilder
           b.append ";#{b.format workspace_owner}" unless workspace_owner.nil?
         end
         def computer(computer_name)
-          b.append " /computer:#{b.format computer_name}"
+          b.append " -computer:#{b.format computer_name}"
           yield b if block_given?
           self
         end
         def comment(comment)
-          b.append " /comment:#{b.format comment}"
+          b.append " -comment:#{b.format comment}"
           yield b if block_given?
           self
         end
         def collection(team_project_collection_url)
-          b.append " /collection:#{b.format team_project_collection_url}"
+          b.append " -collection:#{b.format team_project_collection_url}"
           yield b if block_given?
           self
         end
         def permission(permission)
-          b.append " /permission:#{b.format permission}"
+          b.append " -permission:#{b.format permission}"
           yield b if block_given?
           self
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
         end
         def new_name(workspace_name)
-          b.append " /newName:#{b.format workspace_name}"
+          b.append " -newName:#{b.format workspace_name}"
           yield b if block_given?
           self
         end
         def new_owner(owner_name)
-          b.append " /newOwner:#{b.format owner_name}"
+          b.append " -newOwner:#{b.format owner_name}"
           yield b if block_given?
           self
         end
@@ -2102,37 +1925,37 @@ module FluentCommandBuilder
           b.append " #{b.format workspace_name}" unless workspace_name.nil?
         end
         def owner(owner_name)
-          b.append " /owner:#{b.format owner_name}"
+          b.append " -owner:#{b.format owner_name}"
           yield b if block_given?
           self
         end
         def computer(computer_name)
-          b.append " /computer:#{b.format computer_name}"
+          b.append " -computer:#{b.format computer_name}"
           yield b if block_given?
           self
         end
         def collection(team_project_collection_url)
-          b.append " /collection:#{b.format team_project_collection_url}"
+          b.append " -collection:#{b.format team_project_collection_url}"
           yield b if block_given?
           self
         end
         def format(format)
-          b.append " /format:#{b.format format}"
+          b.append " -format:#{b.format format}"
           yield b if block_given?
           self
         end
         def update_user_name(old_user_name)
-          b.append " /updateUserName:#{b.format old_user_name}"
+          b.append " -updateUserName:#{b.format old_user_name}"
           yield b if block_given?
           self
         end
         def update_computer_name(old_computer_name)
-          b.append " /updateComputerName:#{b.format old_computer_name}"
+          b.append " -updateComputerName:#{b.format old_computer_name}"
           yield b if block_given?
           self
         end
         def login(username, password=nil)
-          b.append " /login:#{b.format username}"
+          b.append " -login:#{b.format username}"
           b.append ",#{b.format password}" unless password.nil?
           yield b if block_given?
           self
@@ -2141,10 +1964,10 @@ module FluentCommandBuilder
       class RemoveWorkspace < CommandBase
         def initialize(underlying_builder, workspace_name)
           super underlying_builder
-          b.append " workspaces /remove:#{b.format workspace_name, ','}"
+          b.append " workspaces -remove:#{b.format workspace_name, ','}"
         end
         def collection(team_project_collection_url)
-          b.append " /collection:#{b.format team_project_collection_url}"
+          b.append " -collection:#{b.format team_project_collection_url}"
           yield b if block_given?
           self
         end

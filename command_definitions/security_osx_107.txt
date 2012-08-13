@@ -1,5 +1,5 @@
-OSX 10.7
-security
+10.7
+security (Security OSX)
     delete-certificate
         -c <name> (commonName)
         -Z <hash> (hash)

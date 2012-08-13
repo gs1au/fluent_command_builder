@@ -1,4 +1,4 @@
-2005
+8.0
 MSTest
     /testContainer:<fileName>
     /testMetadata:<fileName>
