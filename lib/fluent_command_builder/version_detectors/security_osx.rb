@@ -1,9 +1,9 @@
 require File.expand_path(File.dirname(__FILE__) + '/lib/standard_version_detector')
 
 module FluentCommandBuilder
-  module Tf
+  module SecurityOsx
     def self.version(path=nil)
-      StandardVersionDetector.version 'tf', '', path
+      StandardVersionDetector.version 'sw_vers', '-productVersion', path
     end
   end
 end

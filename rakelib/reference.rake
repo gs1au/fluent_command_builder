@@ -42,7 +42,7 @@ namespace :ref do
 
   TaskMaker.make_task MSDeploy
 
-  TaskMaker.make_task Security do |task_maker|
+  TaskMaker.make_task SecurityOsx do |task_maker|
     output = `#{security.to_s}`
     actions_text = output.match(/security commands are:\n(.+)/m)[1]
     actions = actions_text.lines.map { |action| action.match(/    (.+?) /)[1] }
