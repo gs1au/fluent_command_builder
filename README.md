@@ -1,7 +1,5 @@
 Official fork: [https://github.com/mattriley/fluent_command_builder](https://github.com/mattriley/fluent_command_builder)
 
-__Warning: The next release will contain breaking changes.__
-
 # Fluent Command Builder
 
 Fluent Command Builder makes building command lines easy and intuitive.
@@ -186,8 +184,6 @@ msbuild('sample 1.proj').execute! { |b| b.path = 'C:\\Program Files' }
 
 ## Experimental
 
-__These features will be available in the next release.__
-
 These features are new and experimental. Use with caution.
 
 ### Detect version of command on PATH
@@ -213,21 +209,66 @@ Notice there is no mention of the MSBuild version. So if MSBuild 4.0 is on the p
 
 ## Supported Commands
 
-- appcfg.py 1.6, 1.7
-- aspnet_compiler 2.0, 3.5, 4.0
+__Please note:__
+
+The versions listed here are not tightly bound to the actual version of the command being executed.
+
+Since most commands are backwards compatible and vary only slightly between versions,
+an old version of a command builder can be used with a new version of a command.
+
+As an example, the __security__ command for OS X is listed as version 10.7 (Lion),
+but can also be used for version 10.8 (Mountain Lion).
+
+### Ruby
+
+Gems:
+
 - cucumber 1.1, 1.2
-- dev_appserver.py 1.6, 1.7
-- dotcover 1.0, 1.1, 1.2, 2.0
-- installutil 1.1, 2.0, 3.5, 4.0
-- msbuild 2.0, 3.0, 3.5, 4.0
-- msdeploy 7.1
-- mstest 8.0 (2005), 9.0 (2008), 10.0 (2010)
-- netsh 6.1 (2008) (WIP)
-- nunit 2.5, 2.6
 - rake 0.9
-- security OSX 10.7 (WIP)
-- sevenzip 9.2 (WIP)
-- simian 2.3
-- tf 10.0 (2010)
-- tf tee 10.0 (2010)
+- bundle 1.1
+
+### Google
+
+App Engine Python SDK:
+
+- appcfg.py 1.6, 1.7
+- dev_appserver.py 1.6, 1.7
+
+### Apple
+
+OS X (10.7 = Lion)
+
+- security 10.7 (WIP)
+
+XCode
+
 - xcodebuild 4.3, 4.4
+
+### Microsoft
+
+Windows (6.1 = Windows 7 / Windows Server 2008 R2)
+
+- netsh.exe 6.1 (WIP)
+
+IIS:
+
+- msdeploy.exe 7.1
+
+.NET Framework:
+
+- aspnet_compiler.exe 2.0, 3.5, 4.0
+- installutil.exe 1.1, 2.0, 3.5, 4.0
+- msbuild.exe 2.0, 3.0, 3.5, 4.0
+
+Visual Studio (8.0 = 2005, 9.0 = 2008, 10.0 = 2010):
+
+- mstest.exe 8.0, 9.0, 10.0
+- tf.exe 10.0
+- tf.exe (Team Explorer Everywhere) 10.0
+
+Other very important tools:
+
+- nunit-console.exe (NUnit) 2.5, 2.6
+- dotcover.exe 1.0, 1.1, 1.2, 2.0
+- 7za.exe (7-Zip) 9.2 (WIP)
+- simian.exe 2.3
