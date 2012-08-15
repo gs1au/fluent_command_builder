@@ -5,7 +5,7 @@ Official fork: [https://github.com/mattriley/fluent_command_builder](https://git
 Fluent Command Builder makes building command lines easy and intuitive.
 
 Automated build/test/deploy processes depend heavily on tools that provide a command line interface.
-Building command lines requires a lot of string appending and interpolation and often results in code which is not only
+Building command lines requires much string interpolation and often results in code which is not only
 hard to read and maintain but results in much unwanted duplication.
 
 Fluent Command Builder hides this complexity behind a fluent interface which dramatically improves readabilty,
@@ -256,7 +256,7 @@ IIS:
 
 .NET Framework:
 
-- aspnet_compiler.exe 2.0, 3.5, 4.0
+- aspnet_compiler.exe 2.0, 4.0
 - installutil.exe 1.1, 2.0, 3.5, 4.0
 - msbuild.exe 2.0, 3.0, 3.5, 4.0
 
