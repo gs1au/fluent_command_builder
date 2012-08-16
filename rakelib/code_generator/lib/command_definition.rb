@@ -1,5 +1,5 @@
 require_relative 'command'
-require_relative '../../../lib/fluent_command_builder/util.rb'; include FluentCommandBuilder
+require_relative '../../../lib/fluent_command_builder/version'; include FluentCommandBuilder
 
 class CommandDefinition
 
@@ -15,7 +15,7 @@ class CommandDefinition
 
   def parse_versions(line)
     versions = line.split_and_strip ','
-    versions.each { |v| raise "#{v} is not a valid version number." unless is_valid_version? v }
+    versions.each { |v| Version.new v }
     versions
   end
 

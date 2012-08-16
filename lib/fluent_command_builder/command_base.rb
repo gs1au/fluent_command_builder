@@ -1,4 +1,5 @@
 require File.expand_path(File.dirname(__FILE__) + '/../../lib/command_version_detector')
+require File.expand_path(File.dirname(__FILE__) + '/version')
 require 'rake'
 include Rake::DSL
 
@@ -28,16 +29,16 @@ module FluentCommandBuilder
     private
 
     def validate_version
-      is_valid = compact_version(version_in_use) == compact_version(version_on_path)
+      is_valid = version_in_use.compact == version_on_path.compact
       puts 'WARNING' unless is_valid
     end
 
     def version_in_use
-      module_at_index(2)::VERSION
+      Version.new module_at_index(2)::VERSION
     end
 
     def version_on_path
-      module_at_index(3).version b.path
+      Version.new module_at_index(3).version(b.path)
     end
 
     def module_at_index(index)

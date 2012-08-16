@@ -1,5 +1,5 @@
 require File.expand_path(File.dirname(__FILE__) + '/path_finder')
-require File.expand_path(File.dirname(__FILE__) + '/../../util.rb')
+require File.expand_path(File.dirname(__FILE__) + '/../../version')
 
 module FluentCommandBuilder
   class StandardVersionDetector
@@ -9,7 +9,7 @@ module FluentCommandBuilder
       executable = File.join path, executable_name
       command = %Q["#{executable}" #{executable_args} 2>&1]
       output = `#{command}`
-      match_version output
+      Version.match(output).version
     end
   end
 end

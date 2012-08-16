@@ -1,6 +1,8 @@
 module FluentCommandBuilder
   class Version
 
+    attr_accessor :version
+
     def initialize(version)
       raise "#{version} is not a valid version." unless Version.is_valid? version
       @version = version
@@ -25,9 +27,9 @@ module FluentCommandBuilder
   end
 
   def version_module(command_module)
-    version = command_module.respond_to?(:version) ? command_module.version : nil
+    version = command_module.respond_to?(:version) ? Version.new(command_module.version) : nil
     raise "Unable to determine version for #{command_module::COMMAND_NAME}." unless version
-    module_name = "#{command_module.name}::V#{compact_version version}"
+    module_name = "#{command_module.name}::V#{version.compact}"
     begin
       eval module_name
     rescue
