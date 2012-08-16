@@ -15,4 +15,12 @@ module FluentCommandBuilder
     version.match(/^\d+\.\d+/)[0].sub('.', '')
   end
 
+  def is_valid_version?(version)
+    version =~ /^(?:\d+\.)+(?:\d+)$/
+  end
+
+  def match_version(value)
+    value.match(/(?:\d+\.)+(?:\d+)/) { |m| m[0] }
+  end
+
 end
