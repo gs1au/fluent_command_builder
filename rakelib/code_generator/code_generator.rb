@@ -56,6 +56,7 @@ class CodeGenerator
         command_initializer_call: code_names.command_initializer_call,
         command_module_name: code_names.command_module_name,
         version_module_name: code_names.version_module_name,
+        version: version,
         command_class: generate_command_class(command)
     }
 

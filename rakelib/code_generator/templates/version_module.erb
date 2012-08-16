@@ -7,6 +7,7 @@ module FluentCommandBuilder
   end
   module <%= model[:command_module_name] %>
     module <%= model[:version_module_name] %>
+      VERSION = '<%= model[:version] %>'
       def <%= model[:create_method_signature] %>
         b = UnderlyingBuilder.new FluentCommandBuilder::<%= model[:command_module_name] %>::COMMAND_NAME
         c = <%= model[:command_initializer_call] %>

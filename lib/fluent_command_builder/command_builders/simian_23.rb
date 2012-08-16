@@ -7,6 +7,7 @@ module FluentCommandBuilder
   end
   module Simian
     module V23
+      VERSION = '2.3'
       def self.create
         b = UnderlyingBuilder.new FluentCommandBuilder::Simian::COMMAND_NAME
         c = Simian.new(b)

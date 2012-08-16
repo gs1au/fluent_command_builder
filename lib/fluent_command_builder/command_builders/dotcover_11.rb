@@ -7,6 +7,7 @@ module FluentCommandBuilder
   end
   module DotCover
     module V11
+      VERSION = '1.1'
       def self.create
         b = UnderlyingBuilder.new FluentCommandBuilder::DotCover::COMMAND_NAME
         c = DotCover.new(b)

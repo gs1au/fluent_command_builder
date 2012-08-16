@@ -7,6 +7,7 @@ module FluentCommandBuilder
   end
   module Rake
     module V09
+      VERSION = '0.9'
       def self.create(task=nil)
         b = UnderlyingBuilder.new FluentCommandBuilder::Rake::COMMAND_NAME
         c = Rake.new(b, task)

@@ -7,6 +7,7 @@ module FluentCommandBuilder
   end
   module DevAppserverPython
     module V16
+      VERSION = '1.6'
       def self.create(application_root=nil)
         b = UnderlyingBuilder.new FluentCommandBuilder::DevAppserverPython::COMMAND_NAME
         c = DevAppserverPython.new(b, application_root)

@@ -7,6 +7,7 @@ module FluentCommandBuilder
   end
   module AspnetCompiler
     module V20
+      VERSION = '2.0'
       def self.create(target_dir=nil)
         b = UnderlyingBuilder.new FluentCommandBuilder::AspnetCompiler::COMMAND_NAME
         c = AspnetCompiler.new(b, target_dir)

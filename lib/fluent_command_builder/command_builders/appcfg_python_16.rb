@@ -7,6 +7,7 @@ module FluentCommandBuilder
   end
   module AppCfgPython
     module V16
+      VERSION = '1.6'
       def self.create
         b = UnderlyingBuilder.new FluentCommandBuilder::AppCfgPython::COMMAND_NAME
         c = AppCfgPython.new(b)

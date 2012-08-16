@@ -7,6 +7,7 @@ module FluentCommandBuilder
   end
   module XCodeBuild
     module V43
+      VERSION = '4.3'
       def self.create
         b = UnderlyingBuilder.new FluentCommandBuilder::XCodeBuild::COMMAND_NAME
         c = XCodeBuild.new(b)

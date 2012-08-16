@@ -7,6 +7,7 @@ module FluentCommandBuilder
   end
   module InstallUtil
     module V35
+      VERSION = '3.5'
       def self.create
         b = UnderlyingBuilder.new FluentCommandBuilder::InstallUtil::COMMAND_NAME
         c = InstallUtil.new(b)

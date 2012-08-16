@@ -7,6 +7,7 @@ module FluentCommandBuilder
   end
   module SevenZip
     module V92
+      VERSION = '9.2'
       def self.create
         b = UnderlyingBuilder.new FluentCommandBuilder::SevenZip::COMMAND_NAME
         c = SevenZip.new(b)

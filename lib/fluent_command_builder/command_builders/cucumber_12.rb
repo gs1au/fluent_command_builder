@@ -7,6 +7,7 @@ module FluentCommandBuilder
   end
   module Cucumber
     module V12
+      VERSION = '1.2'
       def self.create(feature=nil)
         b = UnderlyingBuilder.new FluentCommandBuilder::Cucumber::COMMAND_NAME
         c = Cucumber.new(b, feature)

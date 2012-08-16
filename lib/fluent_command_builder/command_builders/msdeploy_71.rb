@@ -7,6 +7,7 @@ module FluentCommandBuilder
   end
   module MSDeploy
     module V71
+      VERSION = '7.1'
       def self.create
         b = UnderlyingBuilder.new FluentCommandBuilder::MSDeploy::COMMAND_NAME
         c = MSDeploy.new(b)

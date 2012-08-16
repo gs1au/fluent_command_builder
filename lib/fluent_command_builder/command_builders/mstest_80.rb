@@ -7,6 +7,7 @@ module FluentCommandBuilder
   end
   module MSTest
     module V80
+      VERSION = '8.0'
       def self.create
         b = UnderlyingBuilder.new FluentCommandBuilder::MSTest::COMMAND_NAME
         c = MSTest.new(b)

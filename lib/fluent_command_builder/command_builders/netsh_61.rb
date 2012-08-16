@@ -7,6 +7,7 @@ module FluentCommandBuilder
   end
   module Netsh
     module V61
+      VERSION = '6.1'
       def self.create
         b = UnderlyingBuilder.new FluentCommandBuilder::Netsh::COMMAND_NAME
         c = Netsh.new(b)

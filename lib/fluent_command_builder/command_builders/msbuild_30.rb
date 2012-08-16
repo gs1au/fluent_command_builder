@@ -7,6 +7,7 @@ module FluentCommandBuilder
   end
   module MSBuild
     module V30
+      VERSION = '3.0'
       def self.create(project_file=nil)
         b = UnderlyingBuilder.new FluentCommandBuilder::MSBuild::COMMAND_NAME
         c = MSBuild.new(b, project_file)

@@ -7,6 +7,7 @@ module FluentCommandBuilder
   end
   module TeamFoundationTEE
     module V100
+      VERSION = '10.0'
       def self.create
         b = UnderlyingBuilder.new FluentCommandBuilder::TeamFoundationTEE::COMMAND_NAME
         c = TeamFoundationTEE.new(b)

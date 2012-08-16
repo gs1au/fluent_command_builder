@@ -7,6 +7,7 @@ module FluentCommandBuilder
   end
   module NUnit
     module V26
+      VERSION = '2.6'
       def self.create(input_files=nil)
         b = UnderlyingBuilder.new FluentCommandBuilder::NUnit::COMMAND_NAME
         c = NUnit.new(b, input_files)

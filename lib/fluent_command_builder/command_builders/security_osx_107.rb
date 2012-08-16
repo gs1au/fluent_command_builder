@@ -7,6 +7,7 @@ module FluentCommandBuilder
   end
   module SecurityOSX
     module V107
+      VERSION = '10.7'
       def self.create
         b = UnderlyingBuilder.new FluentCommandBuilder::SecurityOSX::COMMAND_NAME
         c = SecurityOSX.new(b)

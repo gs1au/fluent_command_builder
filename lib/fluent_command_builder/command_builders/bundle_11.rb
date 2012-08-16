@@ -7,6 +7,7 @@ module FluentCommandBuilder
   end
   module Bundle
     module V11
+      VERSION = '1.1'
       def self.create
         b = UnderlyingBuilder.new FluentCommandBuilder::Bundle::COMMAND_NAME
         c = Bundle.new(b)
