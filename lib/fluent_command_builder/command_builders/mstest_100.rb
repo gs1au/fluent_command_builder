@@ -22,103 +22,103 @@ module FluentCommandBuilder
           super underlying_builder
         end
         def test_container(file_name)
-          b.append " /testContainer:#{b.format file_name}"
-          yield b if block_given?
+          @b.append " /testContainer:#{@b.format file_name}"
+          yield @b if block_given?
           self
         end
         def test_metadata(file_name)
-          b.append " /testMetadata:#{b.format file_name}"
-          yield b if block_given?
+          @b.append " /testMetadata:#{@b.format file_name}"
+          yield @b if block_given?
           self
         end
         def test_list(test_list_path)
-          b.append " /testList:#{b.format test_list_path}"
-          yield b if block_given?
+          @b.append " /testList:#{@b.format test_list_path}"
+          yield @b if block_given?
           self
         end
         def category(test_category_filter)
-          b.append " /category:#{b.format test_category_filter}"
-          yield b if block_given?
+          @b.append " /category:#{@b.format test_category_filter}"
+          yield @b if block_given?
           self
         end
         def test(test_name)
-          b.append " /test:#{b.format test_name}"
-          yield b if block_given?
+          @b.append " /test:#{@b.format test_name}"
+          yield @b if block_given?
           self
         end
         def no_isolation
-          b.append ' /noIsolation'
-          yield b if block_given?
+          @b.append ' /noIsolation'
+          yield @b if block_given?
           self
         end
         def test_settings(file_name)
-          b.append " /testSettings:#{b.format file_name}"
-          yield b if block_given?
+          @b.append " /testSettings:#{@b.format file_name}"
+          yield @b if block_given?
           self
         end
         def run_config(file_name)
-          b.append " /runConfig:#{b.format file_name}"
-          yield b if block_given?
+          @b.append " /runConfig:#{@b.format file_name}"
+          yield @b if block_given?
           self
         end
         def results_file(file_name)
-          b.append " /resultsFile:#{b.format file_name}"
-          yield b if block_given?
+          @b.append " /resultsFile:#{@b.format file_name}"
+          yield @b if block_given?
           self
         end
         def unique
-          b.append ' /unique'
-          yield b if block_given?
+          @b.append ' /unique'
+          yield @b if block_given?
           self
         end
         def detail(property_id)
-          b.append " /detail:#{b.format property_id}"
-          yield b if block_given?
+          @b.append " /detail:#{@b.format property_id}"
+          yield @b if block_given?
           self
         end
         def help
-          b.append ' /help'
-          yield b if block_given?
+          @b.append ' /help'
+          yield @b if block_given?
           self
         end
         def no_logo
-          b.append ' /noLogo'
-          yield b if block_given?
+          @b.append ' /noLogo'
+          yield @b if block_given?
           self
         end
         def use_std_err
-          b.append ' /useStdErr'
-          yield b if block_given?
+          @b.append ' /useStdErr'
+          yield @b if block_given?
           self
         end
         def publish(server_name)
-          b.append " /publish:#{b.format server_name}"
-          yield b if block_given?
+          @b.append " /publish:#{@b.format server_name}"
+          yield @b if block_given?
           self
         end
         def publish_results_file(file_name)
-          b.append " /publishResultsFile:#{b.format file_name}"
-          yield b if block_given?
+          @b.append " /publishResultsFile:#{@b.format file_name}"
+          yield @b if block_given?
           self
         end
         def publish_build(build_id)
-          b.append " /publishBuild:#{b.format build_id}"
-          yield b if block_given?
+          @b.append " /publishBuild:#{@b.format build_id}"
+          yield @b if block_given?
           self
         end
         def team_project(team_project_name)
-          b.append " /teamProject:#{b.format team_project_name}"
-          yield b if block_given?
+          @b.append " /teamProject:#{@b.format team_project_name}"
+          yield @b if block_given?
           self
         end
         def platform(platform)
-          b.append " /platform:#{b.format platform}"
-          yield b if block_given?
+          @b.append " /platform:#{@b.format platform}"
+          yield @b if block_given?
           self
         end
         def flavor(flavor)
-          b.append " /flavor:#{b.format flavor}"
-          yield b if block_given?
+          @b.append " /flavor:#{@b.format flavor}"
+          yield @b if block_given?
           self
         end
       end

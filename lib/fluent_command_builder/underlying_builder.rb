@@ -1,13 +1,19 @@
 require File.expand_path(File.dirname(__FILE__) + '/command_base')
+require File.expand_path(File.dirname(__FILE__) + '/rake_sh_executor')
 
 module FluentCommandBuilder
+
+  attr_accessor :default_executor
+  @default_executor = RakeShExecutor.new
+
   class UnderlyingBuilder
 
-    attr_accessor :command_name, :path
+    attr_accessor :command_name, :path, :executor
 
     def initialize(command_name=nil)
       @command_name = command_name
       @path = nil
+      @executor = FluentCommandBuilder.default_executor
       @args = ''
     end
 
@@ -40,6 +46,10 @@ module FluentCommandBuilder
       executable = @path ? File.join(@path, @command_name) : @command_name
       executable.gsub! '/', '\\' if executable.include? '\\'
       executable
+    end
+
+    def execute
+      @executor.execute to_s
     end
 
     private

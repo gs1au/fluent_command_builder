@@ -53,3 +53,4 @@ require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/comma
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/xcodebuild.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/xcodebuild_43.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/xcodebuild_44.rb')
+Dir[File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/version_detectors/*.rb')].each { |f| require f }

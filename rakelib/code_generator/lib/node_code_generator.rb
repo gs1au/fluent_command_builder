@@ -21,7 +21,7 @@ class NodeCodeGenerator
         render_branch_node_method_body
       else
         render_leaf_node_method_body
-        @writer.write_line 'yield b if block_given?'
+        @writer.write_line 'yield @b if block_given?'
         @writer.write_line 'self'
       end
     end
@@ -70,7 +70,7 @@ class NodeCodeGenerator
   def write_append_statement(fragment)
     return if fragment.fragment_text.empty?
     unless_condition = fragment.arg_names.map { |a| "#{a.snakecase}.nil?" }.join ' or '
-    statement = "b.append #{append_arg fragment}"
+    statement = "@b.append #{append_arg fragment}"
     statement << " unless #{unless_condition}" if fragment.optional? and fragment.has_args?
     @writer.write_line statement
   end
@@ -79,7 +79,7 @@ class NodeCodeGenerator
     value = fragment.fragment_text.gsub(/<.+?>/) do |m|
       arg = CommandArgument.new m
       format_args = [arg.arg_name.snakecase, [arg.delimiter, arg.key_value_separator].compact.map { |v| "'#{v}'" }].flatten
-      "\#{b.format #{format_args.join ', '}}"
+      "\#{@b.format #{format_args.join ', '}}"
     end
     value.include?('#{') ? %Q["#{value}"] : "'#{value}'"
   end

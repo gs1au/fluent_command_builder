@@ -1,4 +1,3 @@
-require File.expand_path(File.dirname(__FILE__) + '/../../lib/command_version_detector')
 require File.expand_path(File.dirname(__FILE__) + '/version')
 require 'rake'
 include Rake::DSL
@@ -7,23 +6,17 @@ module FluentCommandBuilder
   class CommandBase
 
     def initialize(underlying_builder)
-      @underlying_builder = underlying_builder
+      @b = underlying_builder
     end
 
     def execute!
-      yield b if block_given?
-      sh to_s
+      yield @b if block_given?
+      @b.execute
     end
 
     def to_s
-      return yield b if block_given?
-      b.to_s
-    end
-
-    protected
-
-    def b
-      @underlying_builder
+      return yield @b if block_given?
+      @b.to_s
     end
 
     private
@@ -38,7 +31,7 @@ module FluentCommandBuilder
     end
 
     def version_on_path
-      Version.new module_at_index(3).version(b.path)
+      Version.new module_at_index(3).version(@b.path)
     end
 
     def module_at_index(index)

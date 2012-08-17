@@ -84,10 +84,10 @@ class CodeGenerator
     Dir.chdir @lib_dir do
       File.open 'fluent_command_builder.rb', 'w' do |f|
         pattern = File.join @command_builders_dir, '*.rb'
-        puts pattern
         Dir[pattern].each do |command_builder_file|
           f.puts %Q[require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/#{File.basename command_builder_file}')]
         end
+        f.puts %Q[Dir[File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/version_detectors/*.rb')].each { |f| require f }]
       end
     end
   end

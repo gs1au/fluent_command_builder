@@ -1,5 +1,4 @@
 require_relative '../lib/fluent_command_builder'
-require_relative '../lib/command_version_detector'; include FluentCommandBuilder
 require_relative 'task_maker'
 
 namespace :ref do
