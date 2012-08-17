@@ -1,5 +1,5 @@
 require File.expand_path(File.dirname(__FILE__) + '/command_base')
-require File.expand_path(File.dirname(__FILE__) + '/rake_sh_executor')
+require File.expand_path(File.dirname(__FILE__) + '/command_executors/rake_sh_executor')
 
 module FluentCommandBuilder
 
