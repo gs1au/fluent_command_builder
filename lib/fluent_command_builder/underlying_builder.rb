@@ -1,10 +1,15 @@
 require File.expand_path(File.dirname(__FILE__) + '/command_base')
-require File.expand_path(File.dirname(__FILE__) + '/command_executors/rake_sh_executor')
+require File.expand_path(File.dirname(__FILE__) + '/executor')
 
 module FluentCommandBuilder
 
-  attr_accessor :default_executor
-  @default_executor = RakeShExecutor.new
+  def self.default_executor
+    @default_executor ||= self.executor.rake_sh_executor
+  end
+
+  def self.default_executor=(value)
+    @default_executor = value
+  end
 
   class UnderlyingBuilder
 

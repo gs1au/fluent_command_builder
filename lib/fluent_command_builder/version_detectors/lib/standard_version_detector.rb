@@ -8,7 +8,10 @@ module FluentCommandBuilder
       return unless path
       executable = File.join path, executable_name
       command = %Q["#{executable}" #{executable_args} 2>&1]
-      output = `#{command}`
+
+      output = FluentCommandBuilder.executor.execute_backticks command
+
+      #output = `#{command}`
       Version.match(output).version
     end
   end
