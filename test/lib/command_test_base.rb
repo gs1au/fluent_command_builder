@@ -1,6 +1,7 @@
 require 'test/unit'
 require_relative '../../lib/fluent_command_builder'
 require_relative 'mock_executor'
+require_relative 'mock_path_finder'
 include FluentCommandBuilder
 
 class CommandTestBase < Test::Unit::TestCase

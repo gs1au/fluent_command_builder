@@ -4,6 +4,7 @@ class RakeVersionTest < CommandTestBase
 
   def test_version_09
     FluentCommandBuilder.executor.backticks_executor = MockExecutor.new 'rake, version 0.9.2.2'
+    FluentCommandBuilder.path_finder = MockPathFinder.new '/'
     actual = FluentCommandBuilder::Rake.version
     assert_equal '0.9.2.2', actual
   end

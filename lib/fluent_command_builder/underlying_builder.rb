@@ -1,5 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/command_base')
 require File.expand_path(File.dirname(__FILE__) + '/executor')
+require File.expand_path(File.dirname(__FILE__) + '/path_finder')
 
 module FluentCommandBuilder
 

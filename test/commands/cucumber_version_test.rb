@@ -4,6 +4,7 @@ class CucumberVersionTest < CommandTestBase
 
   def test_version_12
     FluentCommandBuilder.executor.backticks_executor = MockExecutor.new '1.2.0'
+    FluentCommandBuilder.path_finder = MockPathFinder.new '/'
     actual = FluentCommandBuilder::Cucumber.version
     assert_equal '1.2.0', actual
   end

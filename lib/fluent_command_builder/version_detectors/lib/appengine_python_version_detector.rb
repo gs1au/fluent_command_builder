@@ -1,11 +1,10 @@
 require 'yaml'
-require File.expand_path(File.dirname(__FILE__) + '/path_finder')
 
 module FluentCommandBuilder
   class AppEnginePythonVersionDetector
 
     def self.version(executable_name, path=nil)
-      path ||= PathFinder.find_path executable_name
+      path ||= FluentCommandBuilder.path_finder.find_path executable_name
       return unless path
       version_file = File.join path, 'VERSION'
       version_hash = YAML::load_file version_file
