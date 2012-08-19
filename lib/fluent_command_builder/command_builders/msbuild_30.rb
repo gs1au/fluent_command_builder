@@ -8,8 +8,15 @@ module FluentCommandBuilder
   module MSBuild
     module V30
       VERSION = '3.0'
+      def self.default_path
+        @default_path ||= nil
+      end
+      def self.default_path=(value)
+        @default_path = value
+      end
       def self.create(project_file=nil)
         b = UnderlyingBuilder.new FluentCommandBuilder::MSBuild::COMMAND_NAME
+        b.path = self.default_path
         c = MSBuild.new(b, project_file)
         yield b if block_given?
         c

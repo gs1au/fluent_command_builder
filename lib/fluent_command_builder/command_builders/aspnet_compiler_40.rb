@@ -8,8 +8,15 @@ module FluentCommandBuilder
   module AspnetCompiler
     module V40
       VERSION = '4.0'
+      def self.default_path
+        @default_path ||= nil
+      end
+      def self.default_path=(value)
+        @default_path = value
+      end
       def self.create(target_dir=nil)
         b = UnderlyingBuilder.new FluentCommandBuilder::AspnetCompiler::COMMAND_NAME
+        b.path = self.default_path
         c = AspnetCompiler.new(b, target_dir)
         yield b if block_given?
         c

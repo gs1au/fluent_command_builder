@@ -8,8 +8,15 @@ module FluentCommandBuilder
   module InstallUtil
     module V35
       VERSION = '3.5'
+      def self.default_path
+        @default_path ||= nil
+      end
+      def self.default_path=(value)
+        @default_path = value
+      end
       def self.create
         b = UnderlyingBuilder.new FluentCommandBuilder::InstallUtil::COMMAND_NAME
+        b.path = self.default_path
         c = InstallUtil.new(b)
         yield b if block_given?
         c

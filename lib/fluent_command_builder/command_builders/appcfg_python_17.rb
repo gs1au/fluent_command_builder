@@ -8,8 +8,15 @@ module FluentCommandBuilder
   module AppCfgPython
     module V17
       VERSION = '1.7'
+      def self.default_path
+        @default_path ||= nil
+      end
+      def self.default_path=(value)
+        @default_path = value
+      end
       def self.create
         b = UnderlyingBuilder.new FluentCommandBuilder::AppCfgPython::COMMAND_NAME
+        b.path = self.default_path
         c = AppCfgPython.new(b)
         yield b if block_given?
         c

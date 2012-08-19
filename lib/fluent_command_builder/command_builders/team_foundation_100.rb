@@ -8,8 +8,15 @@ module FluentCommandBuilder
   module TeamFoundation
     module V100
       VERSION = '10.0'
+      def self.default_path
+        @default_path ||= nil
+      end
+      def self.default_path=(value)
+        @default_path = value
+      end
       def self.create
         b = UnderlyingBuilder.new FluentCommandBuilder::TeamFoundation::COMMAND_NAME
+        b.path = self.default_path
         c = TeamFoundation.new(b)
         yield b if block_given?
         c

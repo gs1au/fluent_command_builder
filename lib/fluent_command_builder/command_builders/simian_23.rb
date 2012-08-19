@@ -8,8 +8,15 @@ module FluentCommandBuilder
   module Simian
     module V23
       VERSION = '2.3'
+      def self.default_path
+        @default_path ||= nil
+      end
+      def self.default_path=(value)
+        @default_path = value
+      end
       def self.create
         b = UnderlyingBuilder.new FluentCommandBuilder::Simian::COMMAND_NAME
+        b.path = self.default_path
         c = Simian.new(b)
         yield b if block_given?
         c

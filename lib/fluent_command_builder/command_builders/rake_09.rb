@@ -8,8 +8,15 @@ module FluentCommandBuilder
   module Rake
     module V09
       VERSION = '0.9'
+      def self.default_path
+        @default_path ||= nil
+      end
+      def self.default_path=(value)
+        @default_path = value
+      end
       def self.create(task=nil)
         b = UnderlyingBuilder.new FluentCommandBuilder::Rake::COMMAND_NAME
+        b.path = self.default_path
         c = Rake.new(b, task)
         yield b if block_given?
         c

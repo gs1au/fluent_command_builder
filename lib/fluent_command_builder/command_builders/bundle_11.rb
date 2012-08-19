@@ -8,8 +8,15 @@ module FluentCommandBuilder
   module Bundle
     module V11
       VERSION = '1.1'
+      def self.default_path
+        @default_path ||= nil
+      end
+      def self.default_path=(value)
+        @default_path = value
+      end
       def self.create
         b = UnderlyingBuilder.new FluentCommandBuilder::Bundle::COMMAND_NAME
+        b.path = self.default_path
         c = Bundle.new(b)
         yield b if block_given?
         c

@@ -8,8 +8,15 @@ module FluentCommandBuilder
   module NUnit
     module V25
       VERSION = '2.5'
+      def self.default_path
+        @default_path ||= nil
+      end
+      def self.default_path=(value)
+        @default_path = value
+      end
       def self.create(input_files=nil)
         b = UnderlyingBuilder.new FluentCommandBuilder::NUnit::COMMAND_NAME
+        b.path = self.default_path
         c = NUnit.new(b, input_files)
         yield b if block_given?
         c

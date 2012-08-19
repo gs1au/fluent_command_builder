@@ -8,8 +8,15 @@ module FluentCommandBuilder
   module DotCover
     module V20
       VERSION = '2.0'
+      def self.default_path
+        @default_path ||= nil
+      end
+      def self.default_path=(value)
+        @default_path = value
+      end
       def self.create
         b = UnderlyingBuilder.new FluentCommandBuilder::DotCover::COMMAND_NAME
+        b.path = self.default_path
         c = DotCover.new(b)
         yield b if block_given?
         c

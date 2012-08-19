@@ -8,8 +8,15 @@ module FluentCommandBuilder
   module SecurityOSX
     module V107
       VERSION = '10.7'
+      def self.default_path
+        @default_path ||= nil
+      end
+      def self.default_path=(value)
+        @default_path = value
+      end
       def self.create
         b = UnderlyingBuilder.new FluentCommandBuilder::SecurityOSX::COMMAND_NAME
+        b.path = self.default_path
         c = SecurityOSX.new(b)
         yield b if block_given?
         c

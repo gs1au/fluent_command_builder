@@ -8,8 +8,15 @@ module FluentCommandBuilder
   module Cucumber
     module V12
       VERSION = '1.2'
+      def self.default_path
+        @default_path ||= nil
+      end
+      def self.default_path=(value)
+        @default_path = value
+      end
       def self.create(feature=nil)
         b = UnderlyingBuilder.new FluentCommandBuilder::Cucumber::COMMAND_NAME
+        b.path = self.default_path
         c = Cucumber.new(b, feature)
         yield b if block_given?
         c

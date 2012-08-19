@@ -8,8 +8,15 @@ module FluentCommandBuilder
   module MSDeploy
     module V71
       VERSION = '7.1'
+      def self.default_path
+        @default_path ||= nil
+      end
+      def self.default_path=(value)
+        @default_path = value
+      end
       def self.create
         b = UnderlyingBuilder.new FluentCommandBuilder::MSDeploy::COMMAND_NAME
+        b.path = self.default_path
         c = MSDeploy.new(b)
         yield b if block_given?
         c

@@ -8,8 +8,15 @@ module FluentCommandBuilder
   module DevAppserverPython
     module V17
       VERSION = '1.7'
+      def self.default_path
+        @default_path ||= nil
+      end
+      def self.default_path=(value)
+        @default_path = value
+      end
       def self.create(application_root=nil)
         b = UnderlyingBuilder.new FluentCommandBuilder::DevAppserverPython::COMMAND_NAME
+        b.path = self.default_path
         c = DevAppserverPython.new(b, application_root)
         yield b if block_given?
         c

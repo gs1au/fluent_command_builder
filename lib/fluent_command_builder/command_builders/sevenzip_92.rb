@@ -8,8 +8,15 @@ module FluentCommandBuilder
   module SevenZip
     module V92
       VERSION = '9.2'
+      def self.default_path
+        @default_path ||= nil
+      end
+      def self.default_path=(value)
+        @default_path = value
+      end
       def self.create
         b = UnderlyingBuilder.new FluentCommandBuilder::SevenZip::COMMAND_NAME
+        b.path = self.default_path
         c = SevenZip.new(b)
         yield b if block_given?
         c
