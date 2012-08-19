@@ -18,7 +18,8 @@ module FluentCommandBuilder
     end
 
     def self.is_valid?(version)
-      version =~ /^(?:\d+\.)+(?:\d+)$/
+      result = version.match(/^(?:\d+\.)+(?:\d+)$/) { |m| m[0] }
+      result != nil
     end
 
     def self.match(value)
