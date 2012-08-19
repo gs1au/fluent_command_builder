@@ -150,6 +150,11 @@ module FluentCommandBuilder
           yield @b if block_given?
           self
         end
+        def build_action(build_action)
+          @b.append " #{@b.format build_action, ' '}"
+          yield @b if block_given?
+          self
+        end
       end
       class BuildProjectScheme < CommandBase
         def initialize(underlying_builder, build_action=nil)
@@ -217,6 +222,11 @@ module FluentCommandBuilder
           yield @b if block_given?
           self
         end
+        def build_action(build_action)
+          @b.append " #{@b.format build_action, ' '}"
+          yield @b if block_given?
+          self
+        end
       end
       class BuildWorkspace < CommandBase
         def initialize(underlying_builder, workspace_name, build_action=nil)
@@ -281,6 +291,11 @@ module FluentCommandBuilder
         end
         def setting(setting, value)
           @b.append " #{@b.format setting}=#{@b.format value}"
+          yield @b if block_given?
+          self
+        end
+        def build_action(build_action)
+          @b.append " #{@b.format build_action, ' '}"
           yield @b if block_given?
           self
         end

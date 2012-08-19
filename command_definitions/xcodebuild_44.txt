@@ -15,6 +15,7 @@ xcodebuild (XCodeBuild)
         -verbose
         -xcconfig <path>
         <setting>=<value>
+        <buildAction >
     [<buildAction >] (buildProjectScheme)
         -arch <architecture> (architecture)
         -configuration <configurationName>
@@ -28,6 +29,7 @@ xcodebuild (XCodeBuild)
         -verbose
         -xcconfig <path>
         <setting>=<value>
+        <buildAction >
     -workspace <workspaceName>[ <buildAction >] (buildWorkspace)
         -arch <architecture> (architecture)
         -configuration <configurationName>
@@ -41,6 +43,7 @@ xcodebuild (XCodeBuild)
         -verbose
         -xcconfig <path>
         <setting>=<value>
+        <buildAction >
     -version
         -sdk <sdkName>
         <infoItem>
