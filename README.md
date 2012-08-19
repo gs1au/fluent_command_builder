@@ -135,7 +135,7 @@ msbuild_40('sample.proj').target(:rebuild).property(configuration: 'release').ex
 
 A warning would be generated similar to:
 
-    WARNING: Command Builder version 4.0 does not match tool version 3.5.
+    WARNING: Version validation for command "MSBuild" failed. Expected version 4.0 but was 3.5.
 
 ### The "to_s" method
 

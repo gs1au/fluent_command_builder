@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name = 'fluent_command_builder'
-  spec.version = '0.7.0'
+  spec.version = '0.7.1'
   spec.summary = 'An intuitive command line builder with a fluent interface.'
   spec.description = 'Fluent Command Builder makes building command lines easy and intuitive.'
   spec.authors = ['Matthew Riley']
@@ -8,4 +8,5 @@ Gem::Specification.new do |spec|
   spec.files = Dir['lib/**/*.rb']
   spec.homepage = 'http://rubygems.org/gems/fluent_command_builder'
   spec.add_dependency 'rake'
+  spec.add_dependency 'term-ansicolor'
 end
