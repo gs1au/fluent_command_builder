@@ -35,6 +35,8 @@ require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/comma
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/mstest_90.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/netsh.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/netsh_61.rb')
+require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/nuget.rb')
+require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/nuget_20.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/nunit.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/nunit_25.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/nunit_26.rb')

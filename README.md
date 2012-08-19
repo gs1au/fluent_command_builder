@@ -268,6 +268,7 @@ Visual Studio (8.0 = 2005, 9.0 = 2008, 10.0 = 2010):
 
 Other very important tools:
 
+- nuget.exe 2.0
 - nunit-console.exe (NUnit) 2.5, 2.6
 - dotcover.exe (.NET code coverage tool by JetBrains) 1.0, 1.1, 1.2, 2.0
 - 7za.exe (7-Zip) 9.2 (WIP)

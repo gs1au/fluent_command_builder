@@ -1,0 +1,73 @@
+2.0
+NuGet
+    config
+        -Set <name>=<value>
+        -Help
+    delete <packageId> <packageVersion>
+        -Source <source>
+        -NoPrompt
+        -ApiKey <apiKey>
+        -Help
+    help[ <command>]
+        -All
+        -Markdown
+        -Help
+    install <packageIdOrPathToPackagesConfig>
+        -Source <source>
+        -OutputDirectory <outputDirectory>
+        -Version <version>
+        -ExcludeVersion
+        -Prerelease
+        -NoCache
+        -Help
+    list[ <searchTerms>]
+        -Source <source>
+        -Verbose
+        -AllVersions
+        -Prerelease
+        -Help
+    pack <nuspecOrProject>
+        -OutputDirectory <outputDirectory>
+        -BasePath <basePath>
+        -Verbose
+        -Version <version>
+        -Exclude <pattern>
+        -Symbols
+        -Tool
+        -Build
+        -NoDefaultExcludes
+        -NoPackageAnalysis
+        -ExcludeEmptyDirectories
+        -Properties <properties;>
+        -Help
+    publish <packageId> <packageVersion> <apiKey>
+        -Source <source>
+        -Help
+    push <packagePath>
+        -CreateOnly
+        -Source <source>
+        -ApiKey <apiKey>
+        -Timeout <seconds>
+        -Help
+    setApiKey <apiKey>
+        -Source <source>
+        -Help
+    sources <action>
+        -Name <name>
+        -Source <source>
+        -UserName <userName>
+        -Password <password>
+        -Help
+    spec <packageId>
+        -AssemblyPath <assemblyPath>
+        -Force
+        -Help
+    update <packagesConfigOrSolution>
+        -Source <source>
+        -Id <packageId>
+        -RepositoryPath <repositoryPath>
+        -Safe
+        -Self
+        -Verbose
+        -Prerelease
+        -Help
