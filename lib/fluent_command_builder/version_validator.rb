@@ -9,13 +9,17 @@ module FluentCommandBuilder
       @path = path
     end
 
-    def is_valid?
-      version_in_use.compact == version_on_path.compact
+    def can_validate?
+      begin
+        is_valid?
+        return true
+      rescue
+        return false
+      end
     end
 
-    def validate
-      is_valid = version_in_use.compact == version_on_path.compact
-      puts "WARNING: Command Builder version #{version_in_use} does not match tool version #{version_on_path}." unless is_valid
+    def is_valid?
+      version_in_use.compact == version_on_path.compact
     end
 
     def version_in_use

@@ -1,6 +1,9 @@
 module FluentCommandBuilder
   class Version
 
+    VERSION_REGEX = '(?:\d+\.)+(?:\d+)'
+    SEQUENCE_SEPARATOR = '.'
+
     attr_accessor :version
 
     def initialize(version)
@@ -9,21 +12,32 @@ module FluentCommandBuilder
     end
 
     def compact
-      @version.match(/^\d+\.\d+/)[0].sub('.', '')
+      sequences(2).join
     end
 
-    def to_s(precision=nil)
-      return @version unless precision
-      @version.split('.').first(precision).join('.')
+    def to_s(count=nil)
+      count ? truncate(count) : @version
     end
 
     def self.is_valid?(version)
-      version.scan(/^(?:\d+\.)+(?:\d+)$/)[0] != nil
+      exp = Regexp.new "^#{VERSION_REGEX}$"
+      version.scan(exp)[0] != nil
     end
 
     def self.match(value)
-      version = value.scan(/(?:\d+\.)+(?:\d+)/)[0]
+      exp = Regexp.new VERSION_REGEX
+      version = value.scan(exp)[0]
       version ? Version.new(version) : nil
+    end
+
+    private
+
+    def sequences(count)
+      @version.split(SEQUENCE_SEPARATOR).first(count)
+    end
+
+    def truncate(count)
+      sequences(count).join(SEQUENCE_SEPARATOR)
     end
   end
 

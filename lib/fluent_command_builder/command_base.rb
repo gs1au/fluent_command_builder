@@ -33,7 +33,15 @@ module FluentCommandBuilder
 
     def validate_version
       validator = VersionValidator.new self.class, @b.path
-      print yellow, %Q[WARNING: Version validation for command "#{@b.command_name}" failed. Expected version #{validator.version_in_use.to_s(2)} but was #{validator.version_on_path.to_s(2)}.], reset, "\n" unless validator.is_valid?
+
+      if !validator.can_validate?
+        print yellow, %Q[WARNING: Version validation for command "#{@b.command_name}" aborted. An internal error occurred.], reset, "\n"
+        return
+      end
+
+      if !validator.is_valid?
+        print yellow, %Q[WARNING: Version validation for command "#{@b.command_name}" failed. Expected version #{validator.version_in_use.to_s(2)} but was #{validator.version_on_path.to_s(2)}.], reset, "\n"
+      end
     end
 
   end
