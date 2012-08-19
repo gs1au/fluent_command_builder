@@ -36,38 +36,65 @@ Extremely effective with [RubyMine](http://www.jetbrains.com/ruby/) intellisense
 
 ## Usage
 
-### Versions
+Fluent Command Builder supports multiple versions of the same command.
 
-Fluent Command Builder supports multiple versions of each command and offers two main usage scenarios.
+Targetting a specific version helps avoid the impact of breaking changes introduced by new versions.
 
-The first scenario involves including the modules for a specific version of each command:
+### Target a specific version by including a version specific module
+
+Example:
 
 ```ruby
 require 'fluent_command_builder'
 include FluentCommandBuilder::MSBuild::V40
-include FluentCommandBuilder::NUnit::V25
-
-msbuild('sample.proj').target(:rebuild).property(configuration: 'release')
-nunit('sample.dll').include(:unit_tests).exclude(:integration_tests)
+msbuild('sample.proj').target(:rebuild).property(configuration: 'release').execute!
 ```
 
-In this case, the msbuild method refers to MSBuild 4.0, and the nunit method refers to NUnit 2.5.
+In this example, the __msbuild__ method invokes a MSBuild 4.0 command builder.
 
-The second scenario involves calling a method for a specific version of each command:
+### Target a specific version by invoking a version specific command builder
+
+Example:
 
 ```ruby
 require 'fluent_command_builder'
 include FluentCommandBuilder
-
-msbuild_40('sample.proj').target(:rebuild).property(configuration: 'release')
-nunit_25('sample.dll').include(:unit_tests).exclude(:integration_tests)
+msbuild_40('sample.proj').target(:rebuild).property(configuration: 'release').execute!
 ```
 
-Notice how the version number forms part of the method itself.
+In this example, the __msbuild_40__ method invokes a MSBuild 4.0 command builder.
 
-### Execution
+### Don't target a specific version
 
-#### The "execute!" method
+This can be achieved by not including a version specific module and not invoking a version specific command builder.
+
+Example:
+
+```ruby
+require 'fluent_command_builder'
+include FluentCommandBuilder
+msbuild('sample.proj').target(:rebuild).property(configuration: 'release').execute!
+```
+
+In this example, the __msbuild__ method checks the version of MSBuild on the PATH and invokes the corresponding command builder dynamically.
+
+Although this approach seems incredibly flexible, it does introduce some drawbacks:
+
+- The corresponding command builder may not be implemented - be prepared to contribute one.
+- Intellisense may not work as accurately or not at all.
+- It becomes unclear what versions of the command are supported by the code.
+
+#### Detect version of command on PATH
+
+The mechanism to check the version of a command on the PATH can also be invoked independently:
+
+```ruby
+MSBuild.version # => "4.0.30319.1"
+```
+
+## Execution
+
+### The "execute!" method
 
 At any point along the chain, the __execute!__ method may be called to execute the command:
 
@@ -75,15 +102,50 @@ At any point along the chain, the __execute!__ method may be called to execute t
 msbuild('sample.proj').target(:rebuild).property(configuration: 'release').execute!
 ```
 
-The __execute!__ method executes the command using Rake's __sh__ method.
+By default, the __execute!__ method executes the command using [Rake#sh](http://rake.rubyforge.org/classes/FileUtils.html#M000018).
 
-#### The "to_s" method
+#### Custom execution
+
+The execution mechanism can be changed by setting the default executor:
+
+```ruby
+FluentCommandBuilder.default_executor = BackticksExecutor.new
+```
+
+Fluent Command Builder comes with 4 built-in executors:
+
+- __BackticksExecutor__: Executes the command and returns the output.
+- __DryRunExecutor__: Prints the command instead of executing it.
+- __RakeShExecutor__: Executes the command using [Rake#sh](http://rake.rubyforge.org/classes/FileUtils.html#M000018).
+- __SystemExecutor__: Executes the command using [Kernel#system](http://www.ruby-doc.org/core-1.9.3/Kernel.html#method-i-system) and returns true (successful), false (unsuccessful) or nil (failed).
+
+Custom executors can be used by implementing __execute(command)__.
+
+#### Version Validation
+
+When Version Validation is enabled, the command builder version will be compared with the command version just prior to execution
+and a warning will be generated if the versions do not match.
+
+As an example, if MSBuild 3.5 is on the PATH but is being invoked by an MSBuild 4.0 command builder:
+
+```ruby
+FluentCommandBuilder.version_validation_enabled = true
+msbuild_40('sample.proj').target(:rebuild).property(configuration: 'release').execute!
+```
+
+A warning would be generated similar to:
+
+    WARNING: Command Builder version 4.0 does not match tool version 3.5.
+
+### The "to_s" method
 
 At any point along the chain, the __to_s__ method may be called to get the command string:
 
 ```ruby
 command = msbuild('sample.proj').target(:rebuild).property(configuration: 'release').to_s
 ```
+
+## Capabilities
 
 ### Argument Formatting
 
@@ -181,31 +243,6 @@ Fluent Command Builder usage:
 ```ruby
 msbuild('sample 1.proj').execute! { |b| b.path = 'C:\\Program Files' }
 ```
-
-## Experimental
-
-These features are new and experimental. Use with caution.
-
-### Detect version of command on PATH
-
-Fluent Command Builder provides a consistent way of detecting the version of a command on the PATH environment variable.
-
-```ruby
-MSBuild.version # => "4.0.30319.1"
-```
-
-### Create command builder based on version of command on PATH
-
-Fluent Command Builder can dynamically create a command builder based on the version of a command on the PATH environment variable.
-
-```ruby
-require 'fluent_command_builder'
-include FluentCommandBuilder
-
-msbuild('sample.proj').target(:rebuild).property(configuration: 'release')
-```
-
-Notice there is no mention of the MSBuild version. So if MSBuild 4.0 is on the path, this would be a MSBuild 4.0 command builder.
 
 ## Supported Commands
 
