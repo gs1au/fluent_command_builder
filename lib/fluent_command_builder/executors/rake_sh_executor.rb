@@ -1,4 +1,5 @@
 require 'rake'
+include Rake::DSL
 
 module FluentCommandBuilder
   class RakeShExecutor

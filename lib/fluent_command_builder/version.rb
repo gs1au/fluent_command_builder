@@ -12,8 +12,9 @@ module FluentCommandBuilder
       @version.match(/^\d+\.\d+/)[0].sub('.', '')
     end
 
-    def to_s
-      @version
+    def to_s(precision=nil)
+      return @version unless precision
+      @version.split('.').first(precision).join('.')
     end
 
     def self.is_valid?(version)

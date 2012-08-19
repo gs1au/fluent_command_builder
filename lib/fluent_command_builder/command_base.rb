@@ -1,8 +1,16 @@
 require File.expand_path(File.dirname(__FILE__) + '/version')
-require 'rake'
-include Rake::DSL
+require File.expand_path(File.dirname(__FILE__) + '/version_validator')
 
 module FluentCommandBuilder
+
+  def self.version_validation_enabled
+    @version_validation_enabled ||= false
+  end
+
+  def self.version_validation_enabled=(value)
+    @version_validation_enabled = value
+  end
+
   class CommandBase
 
     def initialize(underlying_builder)
@@ -11,6 +19,7 @@ module FluentCommandBuilder
 
     def execute!
       yield @b if block_given?
+      validate_version if FluentCommandBuilder.version_validation_enabled
       @b.execute
     end
 
@@ -22,21 +31,8 @@ module FluentCommandBuilder
     private
 
     def validate_version
-      is_valid = version_in_use.compact == version_on_path.compact
-      puts 'WARNING' unless is_valid
-    end
-
-    def version_in_use
-      Version.new module_at_index(2)::VERSION
-    end
-
-    def version_on_path
-      Version.new module_at_index(3).version(@b.path)
-    end
-
-    def module_at_index(index)
-      module_name = self.class.name.split('::').first(index + 1).join('::')
-      eval module_name
+      validator = VersionValidator.new self.class, @b.path
+      puts "WARNING: Command Builder version #{validator.version_in_use.to_s(2)} does not match tool version #{validator.version_on_path.to_s(2)}." unless validator.is_valid?
     end
 
   end
