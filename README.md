@@ -2,7 +2,7 @@ Official fork: [https://github.com/mattriley/fluent_command_builder](https://git
 
 # Fluent Command Builder
 
-Fluent Command Builder makes building command lines easy and intuitive.
+Fluent Command Builder makes building command lines easy and clean.
 
 Automated build/test/deploy processes depend heavily on tools that provide a command line interface.
 Building command lines requires much string interpolation and often results in code which is not only
