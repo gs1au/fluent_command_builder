@@ -7,11 +7,8 @@ module FluentCommandBuilder
   end
   module SecurityOSX
     COMMAND_NAME = 'security'
-    def self.create
-      b = UnderlyingBuilder.new FluentCommandBuilder::SecurityOSX::COMMAND_NAME
-      c = version_module(SecurityOSX).create b
-      yield b if block_given?
-      c
+    def self.create(&block)
+      version_module(SecurityOSX).create &block
     end
   end
 end

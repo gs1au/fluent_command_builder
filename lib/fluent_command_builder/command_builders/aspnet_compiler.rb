@@ -7,11 +7,8 @@ module FluentCommandBuilder
   end
   module AspnetCompiler
     COMMAND_NAME = 'aspnet_compiler'
-    def self.create
-      b = UnderlyingBuilder.new FluentCommandBuilder::AspnetCompiler::COMMAND_NAME
-      c = version_module(AspnetCompiler).create b
-      yield b if block_given?
-      c
+    def self.create(&block)
+      version_module(AspnetCompiler).create &block
     end
   end
 end

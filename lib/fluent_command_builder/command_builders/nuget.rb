@@ -7,11 +7,8 @@ module FluentCommandBuilder
   end
   module NuGet
     COMMAND_NAME = 'NuGet'
-    def self.create
-      b = UnderlyingBuilder.new FluentCommandBuilder::NuGet::COMMAND_NAME
-      c = version_module(NuGet).create b
-      yield b if block_given?
-      c
+    def self.create(&block)
+      version_module(NuGet).create &block
     end
   end
 end

@@ -88,6 +88,9 @@ module FluentCommandBuilder
         def getcs
           Getcs.new @b
         end
+        def help(command=nil)
+          Help.new @b, command
+        end
         def history(item_spec)
           History.new @b, item_spec
         end
@@ -841,6 +844,18 @@ module FluentCommandBuilder
         end
         def latest
           @b.append ' -latest'
+          yield @b if block_given?
+          self
+        end
+      end
+      class Help < CommandBase
+        def initialize(underlying_builder, command=nil)
+          super underlying_builder
+          @b.append ' help'
+          @b.append " #{@b.format command}" unless command.nil?
+        end
+        def listexitcodes
+          @b.append ' -listexitcodes]'
           yield @b if block_given?
           self
         end

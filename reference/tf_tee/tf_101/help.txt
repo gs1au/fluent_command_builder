@@ -1,0 +1,11 @@
+Team Explorer Everywhere (version 10.1.0.201101271439)
+
+ help command:
+
+  Shows help for a specific command, or for all commands if no command name is supplied as an argument.  To view the exit status codes this application uses,
+  use the 'listexitcodes' option.
+
+ Valid option sets:
+
+  help [-listexitcodes] [<command>]
+

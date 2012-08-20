@@ -7,11 +7,8 @@ module FluentCommandBuilder
   end
   module Simian
     COMMAND_NAME = 'simian'
-    def self.create
-      b = UnderlyingBuilder.new FluentCommandBuilder::Simian::COMMAND_NAME
-      c = version_module(Simian).create b
-      yield b if block_given?
-      c
+    def self.create(&block)
+      version_module(Simian).create &block
     end
   end
 end

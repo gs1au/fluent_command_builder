@@ -1,0 +1,13 @@
+Team Explorer Everywhere (version 10.1.0.201101271439)
+
+ online command:
+
+  When disconnected from the network, you may edit files without pending changes to the server.  The online command will synchronize your local folders with
+  the server to pend edits, adds and deletes to files you have changed.
+  
+  You should not rename files when offline.
+
+ Valid option sets:
+
+  online [-adds] [-deletes] [-diff] [-exclude:<value>[,<value>]] [-recursive] [-preview] [<itemSpec>...]
+

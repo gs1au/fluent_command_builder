@@ -7,11 +7,8 @@ module FluentCommandBuilder
   end
   module MSBuild
     COMMAND_NAME = 'MSBuild'
-    def self.create
-      b = UnderlyingBuilder.new FluentCommandBuilder::MSBuild::COMMAND_NAME
-      c = version_module(MSBuild).create b
-      yield b if block_given?
-      c
+    def self.create(&block)
+      version_module(MSBuild).create &block
     end
   end
 end

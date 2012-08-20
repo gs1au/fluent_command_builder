@@ -7,11 +7,8 @@ module FluentCommandBuilder
   end
   module MSDeploy
     COMMAND_NAME = 'MSDeploy'
-    def self.create
-      b = UnderlyingBuilder.new FluentCommandBuilder::MSDeploy::COMMAND_NAME
-      c = version_module(MSDeploy).create b
-      yield b if block_given?
-      c
+    def self.create(&block)
+      version_module(MSDeploy).create &block
     end
   end
 end

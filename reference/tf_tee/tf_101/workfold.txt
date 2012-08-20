@@ -1,0 +1,16 @@
+Team Explorer Everywhere (version 10.1.0.201101271439)
+
+ workfold command:
+
+  Creates, modifies, or displays information about the mappings between your workspace folders and the source control server folders to which they correspond.
+
+ Valid option sets:
+
+  workfold [-collection:<url>] [-workspace:<value>] <serverFolder>
+  workfold [-map] [-collection:<url>] [-workspace:<value>] <serverFolder> <localFolder>
+  workfold [-workspace:<value>]
+  workfold <localFolder>
+  workfold -cloak [-collection:<url>] [-workspace:<value>] <serverFolder>|<localFolder>
+  workfold -decloak [-collection:<url>] [-workspace:<value>] <serverFolder>|<localFolder>
+  workfold -unmap [-collection:<url>] [-workspace:<value>] <serverFolder>|<localFolder>
+

@@ -7,11 +7,8 @@ module FluentCommandBuilder
   end
   module <%= model[:module_name] %>
     COMMAND_NAME = '<%= model[:command_name] %>'
-    def self.create
-      b = UnderlyingBuilder.new FluentCommandBuilder::<%= model[:module_name] %>::COMMAND_NAME
-      c = version_module(<%= model[:module_name] %>).create b
-      yield b if block_given?
-      c
+    def self.create(&block)
+      version_module(<%= model[:module_name] %>).create &block
     end
   end
 end

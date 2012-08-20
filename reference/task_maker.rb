@@ -20,7 +20,7 @@ class TaskMaker
   end
 
   def output_dir
-    File.join 'reference', @command_name, command_name_with_version
+    File.join @command_name, command_name_with_version
   end
 
   def self.make_task(mod)

@@ -7,11 +7,8 @@ module FluentCommandBuilder
   end
   module TeamFoundationTEE
     COMMAND_NAME = 'tf'
-    def self.create
-      b = UnderlyingBuilder.new FluentCommandBuilder::TeamFoundationTEE::COMMAND_NAME
-      c = version_module(TeamFoundationTEE).create b
-      yield b if block_given?
-      c
+    def self.create(&block)
+      version_module(TeamFoundationTEE).create &block
     end
   end
 end

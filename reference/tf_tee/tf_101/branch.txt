@@ -1,0 +1,11 @@
+Team Explorer Everywhere (version 10.1.0.201101271439)
+
+ branch command:
+
+  Creates a "branch" pending change, which copies one or more items, including history, from one source control server location to another. The local workspace
+  is updated immediately with the new copy, unless the 'noget' option is supplied.
+
+ Valid option sets:
+
+  branch [-version:<value>] [-noget] [-lock:none|checkin|checkout] [-recursive] [-checkin] <oldItemSpec> <newLocalItem>
+

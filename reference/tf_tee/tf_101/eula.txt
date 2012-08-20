@@ -1,0 +1,10 @@
+Team Explorer Everywhere (version 10.1.0.201101271439)
+
+ eula command:
+
+  Accepts the End User License Agreement for this product.  Acceptance is required for use.
+
+ Valid option sets:
+
+  eula [-accept]
+

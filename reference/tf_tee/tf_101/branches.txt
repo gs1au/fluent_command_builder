@@ -1,0 +1,10 @@
+Team Explorer Everywhere (version 10.1.0.201101271439)
+
+ branches command:
+
+  Displays the history of a branch for a specified file or folder.
+
+ Valid option sets:
+
+  branches [-version:<value>] <itemSpec>...
+

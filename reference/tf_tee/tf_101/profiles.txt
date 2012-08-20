@@ -1,0 +1,10 @@
+Team Explorer Everywhere (version 10.1.0.201101271439)
+
+ profiles command:
+
+  Shows information about login profiles saved on this computer.  Specify a profile name to display information for only that profile.
+
+ Valid option sets:
+
+  profiles [-format:brief|detailed|xml]
+

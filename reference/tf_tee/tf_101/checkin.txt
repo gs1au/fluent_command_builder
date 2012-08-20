@@ -1,0 +1,14 @@
+Team Explorer Everywhere (version 10.1.0.201101271439)
+
+ checkin command:
+
+  Checks in pending changes in the current workspace to the source control server.
+
+ Command aliases: commit submit checkin ci
+
+ Valid option sets:
+
+  checkin [-author:<value>] [-comment:<value>|@valuefile] [-notes:"note"="value"[;"note2"="value2"[;...]]|@notefile] [-override:<value>|
+          @valuefile] [-recursive] [-validate] [-bypass] [-force] [-associate:<workItemID>[,<workItemID>...]] [-resolve:<workItemID>[,<workItemID>...]]
+          [<itemSpec>...]
+

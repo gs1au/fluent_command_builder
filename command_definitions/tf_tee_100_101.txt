@@ -1,4 +1,4 @@
-10.0
+10.0, 10.1
 tf (Team Foundation TEE)
     add <itemSpec>
         -lock:<lockType>
@@ -119,6 +119,8 @@ tf (Team Foundation TEE)
     getcs
         -changeset:<changesetNumber>
         -latest
+    help[ <command>]
+        -listexitcodes]
     history <itemSpec>
         -version:<versionSpec>
         -stopAfter:<number>

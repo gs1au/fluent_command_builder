@@ -1,0 +1,21 @@
+Team Explorer Everywhere (version 10.1.0.201101271439)
+
+ reconcile command:
+
+  Displays or undoes pending changes which are identical to items in the changeset created when a gated check-in build completes successfully.  Running the
+  command with no arguments displays the gated check-ins submitted from this computer.  Use the buildName or changeset option to specify a build or changeset
+  to reconcile.  Use the forgetBuild option to remove a build from the local list of gated check-ins submitted on this computer (server information is not
+  modified).
+  
+  When item specs are supplied as free arguments, only those pending changes will be reconciled with the changeset created by the gated check-in. If no item
+  specs are supplied, all pending changes which match items in the changeset will be reconciled.
+  
+  The buildName, forgetBuild, and teamProject options may contain wildcards.
+
+ Valid option sets:
+
+  reconcile [-teamProject:<value>]
+  reconcile -buildName:<value> [-teamProject:<value>] [-recursive] [<itemSpec>...]
+  reconcile -changeset:<value> [-recursive] [<itemSpec>...]
+  reconcile -forgetBuild:<buildName> [-teamProject:<value>]
+

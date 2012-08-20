@@ -1,0 +1,11 @@
+Team Explorer Everywhere (version 10.1.0.201101271439)
+
+ undelete command:
+
+  Restores files or folders that were previously deleted.
+
+ Valid option sets:
+
+  undelete [-noget] [-lock:none|checkin|checkout] [-newname:<value>] <itemSpec>[;deletionID]...
+  undelete [-noget] [-lock:none|checkin|checkout] [-recursive] <itemSpec>[;deletionID]...
+

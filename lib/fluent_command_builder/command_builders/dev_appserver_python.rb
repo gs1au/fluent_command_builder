@@ -7,11 +7,8 @@ module FluentCommandBuilder
   end
   module DevAppserverPython
     COMMAND_NAME = 'dev_appserver.py'
-    def self.create
-      b = UnderlyingBuilder.new FluentCommandBuilder::DevAppserverPython::COMMAND_NAME
-      c = version_module(DevAppserverPython).create b
-      yield b if block_given?
-      c
+    def self.create(&block)
+      version_module(DevAppserverPython).create &block
     end
   end
 end

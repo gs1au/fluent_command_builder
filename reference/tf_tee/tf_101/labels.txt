@@ -1,0 +1,11 @@
+Team Explorer Everywhere (version 10.1.0.201101271439)
+
+ labels command:
+
+  Displays the list of labels in the source control server, optionally filtering the results with the given label name and scope.  The filter is given as
+  <labelName> or <labelName>@<scope> and may include wildcards.
+
+ Valid option sets:
+
+  labels [-owner:<value>] [-format:brief|detailed|xml] [<labelNameFilter>]
+

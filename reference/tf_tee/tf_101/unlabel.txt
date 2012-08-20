@@ -1,0 +1,10 @@
+Team Explorer Everywhere (version 10.1.0.201101271439)
+
+ unlabel command:
+
+  Removes an item from an existing label in the source control server.
+
+ Valid option sets:
+
+  unlabel [-recursive] <labelName>[@<scope>] <itemSpec>...
+

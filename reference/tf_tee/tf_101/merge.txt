@@ -1,0 +1,11 @@
+Team Explorer Everywhere (version 10.1.0.201101271439)
+
+ merge command:
+
+  Applies changes from one branch to another.
+
+ Valid option sets:
+
+  merge [-recursive] [-force] [-candidate] [-discard] [-version:<value>] [-lock:none|checkin|
+        checkout] [-preview] [-baseless] [-nosummary] [-noimplicitbaseless] <source> <destination>
+

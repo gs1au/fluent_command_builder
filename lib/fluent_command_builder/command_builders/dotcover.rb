@@ -7,11 +7,8 @@ module FluentCommandBuilder
   end
   module DotCover
     COMMAND_NAME = 'dotCover'
-    def self.create
-      b = UnderlyingBuilder.new FluentCommandBuilder::DotCover::COMMAND_NAME
-      c = version_module(DotCover).create b
-      yield b if block_given?
-      c
+    def self.create(&block)
+      version_module(DotCover).create &block
     end
   end
 end

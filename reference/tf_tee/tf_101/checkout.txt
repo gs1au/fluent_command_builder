@@ -1,0 +1,12 @@
+Team Explorer Everywhere (version 10.1.0.201101271439)
+
+ checkout command:
+
+  Makes one or more local files writable and creates "edit" pending changes for them in the current workspace.
+
+ Command aliases: co checkout edit
+
+ Valid option sets:
+
+  checkout [-recursive] [-lock:none|checkin|checkout] [-type:<value>] <itemSpec>...
+

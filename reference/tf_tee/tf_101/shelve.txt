@@ -1,0 +1,13 @@
+Team Explorer Everywhere (version 10.1.0.201101271439)
+
+ shelve command:
+
+  Sends pending changes (with comment, check-in notes, and associated work items) to the source control server without checking them in.  Shelved changes can
+  be retrieved later for editing or to be checked in.
+
+ Valid option sets:
+
+  shelve [-move] [-replace] [-comment:<value>|@valuefile] [-recursive] [-validate] <shelvesetName[;owner]> <fileSpec>...
+  shelve [-replace] [-comment:<value>|@valuefile] [-validate] <shelvesetName[;owner]>
+  shelve -delete [-collection:<url>] [-validate] <shelvesetName[;owner]>
+

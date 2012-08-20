@@ -7,11 +7,8 @@ module FluentCommandBuilder
   end
   module Rake
     COMMAND_NAME = 'rake'
-    def self.create
-      b = UnderlyingBuilder.new FluentCommandBuilder::Rake::COMMAND_NAME
-      c = version_module(Rake).create b
-      yield b if block_given?
-      c
+    def self.create(&block)
+      version_module(Rake).create &block
     end
   end
 end
