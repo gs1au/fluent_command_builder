@@ -1,5 +1,3 @@
-require 'term/ansicolor'; include Term::ANSIColor
-require File.expand_path(File.dirname(__FILE__) + '/version')
 require File.expand_path(File.dirname(__FILE__) + '/version_validator')
 
 module FluentCommandBuilder
@@ -16,6 +14,7 @@ module FluentCommandBuilder
 
     def initialize(underlying_builder)
       @b = underlying_builder
+      @printer = FluentCommandBuilder::Printer.new
     end
 
     def execute!
@@ -33,15 +32,7 @@ module FluentCommandBuilder
 
     def validate_version
       validator = VersionValidator.new self.class, @b.path
-
-      unless validator.can_validate?
-        print yellow, %Q[WARNING: Version validation for command "#{@b.command_name}" aborted. An internal error occurred.], reset, "\n"
-        return
-      end
-
-      unless validator.is_valid?
-        print yellow, %Q[WARNING: Version validation for command "#{@b.command_name}" failed. Expected version #{validator.version_in_use.to_s(2)} but was #{validator.version_on_path.to_s(2)}.], reset, "\n"
-      end
+      validator.validate
     end
 
   end

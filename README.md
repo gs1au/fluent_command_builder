@@ -232,17 +232,23 @@ Fluent Command Builder usage:
 rake(:deploy) { |b| b.append ' TARGET_ENV=TEST' }
 ```
 
-### Set the Command Path
+### Set the Path
 
-Desired command line:
-
-    "C:\Program Files\MSBuild" "sample 1.proj"
-
-Fluent Command Builder usage:
+#### Set the path for an instance of a command builder
 
 ```ruby
-msbuild('sample 1.proj').execute! { |b| b.path = 'C:\\Program Files' }
+msbuild('sample 1.proj').execute! { |b| b.path = 'C:/Windows/Microsoft.NET/Framework64/v4.0.30319' }
 ```
+
+#### Set the default path for all new instances of a command builder
+
+```ruby
+FluentCommandBuilder::MSBuild::V40.default_path = 'C:/Windows/Microsoft.NET/Framework64/v4.0.30319'
+```
+
+If the Default Path does not exist, a warning will be generated similar to:
+
+    WARNING: Default Path for command "msbuild" does not exist. Path: C:/Windows/Microsoft.NET/Framework64/v4.0.30319
 
 ## Supported Commands
 

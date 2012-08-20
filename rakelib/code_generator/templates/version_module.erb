@@ -1,4 +1,5 @@
 require File.expand_path(File.dirname(__FILE__) + '/../command_base')
+require File.expand_path(File.dirname(__FILE__) + '/../printer')
 require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
@@ -12,6 +13,12 @@ module FluentCommandBuilder
         @default_path ||= nil
       end
       def self.default_path=(value)
+        printer = FluentCommandBuilder::Printer.new
+        begin
+          printer.print_warning %Q[Default Path for command "#{FluentCommandBuilder::<%= model[:command_module_name] %>::COMMAND_NAME}" does not exist. Path: #{value}] unless File.exist? value
+        rescue
+          printer.print_warning %Q[Failed to determine whether Default Path for command "#{FluentCommandBuilder::<%= model[:command_module_name] %>::COMMAND_NAME}" exists. An internal error occurred.]
+        end
         @default_path = value
       end
       def <%= model[:create_method_signature] %>
