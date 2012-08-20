@@ -248,7 +248,7 @@ FluentCommandBuilder::MSBuild::V40.default_path = 'C:/Windows/Microsoft.NET/Fram
 
 If the Default Path does not exist, a warning will be generated similar to:
 
-    WARNING: Default Path for command "msbuild" does not exist. Path: C:/Windows/Microsoft.NET/Framework64/v4.0.30319
+    WARNING: Default Path for command "MSBuild 4.0" does not exist. Path: C:/Windows/Microsoft.NET/Framework64/v4.0.30319
 
 ## Supported Commands
 

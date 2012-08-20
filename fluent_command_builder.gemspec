@@ -1,8 +1,8 @@
 Gem::Specification.new do |spec|
   spec.name = 'fluent_command_builder'
-  spec.version = '0.7.7'
+  spec.version = '0.7.8'
   spec.summary = 'An intuitive command line builder with a fluent interface.'
-  spec.description = 'Fluent Command Builder makes building command lines easy and intuitive.'
+  spec.description = 'Fluent Command Builder makes building command lines easy and clean.'
   spec.authors = ['Matthew Riley']
   spec.email = 'matthew-github@matthewriley.name'
   spec.files = Dir['lib/**/*.rb']
