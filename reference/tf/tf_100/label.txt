@@ -1,0 +1,22 @@
+TF - Team Foundation Version Control Tool, Version 10.0.30319.1
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Attaches a label to or removes a label from a version of a file or folder
+in Team Foundation version control.
+
+tf label labelname[@scope] [/owner:ownername] itemspec
+         [/version:versionspec] [/comment:("comment"|@commentfile)]
+         [/child:(replace|merge)] [/recursive] [/login:username,[password]]
+         [/collection:TeamProjectCollectionUrl]
+
+tf label /delete labelname[@scope] itemspec 
+         [/login:username,[password]]
+         [/collection:TeamProjectCollectionUrl]
+
+Versionspec:
+    Date/Time         D"any .Net Framework-supported format"
+                      or any of the date formats of the local machine
+    Changeset number  Cnnnnnn
+    Label             Llabelname
+    Latest version    T
+    Workspace         Wworkspacename;workspaceowner

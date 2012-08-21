@@ -1,0 +1,10 @@
+TF - Team Foundation Version Control Tool, Version 10.0.30319.1
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Displays a visual representation of the differences between files in two server
+folders, in a server folder and a local folder, or in two local folders.
+
+tf folderdiff [sourcePath] targetPath [/recursive] [/noprompt]
+              [/collection:TeamProjectCollectionUrl] [/filter:filter]
+              [/filterLocalPathsOnly] [/login:username,[password]]
+              [/view:same,different,sourceOnly,targetOnly]

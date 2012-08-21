@@ -1,0 +1,8 @@
+TF - Team Foundation Version Control Tool, Version 10.0.30319.1
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Makes the local file writable and changes its pending Change status to "edit"
+in the workspace. Edit is an alias for the Checkout command.
+
+tf checkout [/lock:(none|checkin|checkout)] [/recursive] [/type:encoding]
+            itemspec [/login:username,[password]]

@@ -1,0 +1,8 @@
+TF - Team Foundation Version Control Tool, Version 10.0.30319.1
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Displays information about a set of shelved changes.
+
+tf shelvesets [/owner:ownername] [/format:(brief|detailed)]
+              [/collection:TeamProjectCollectionUrl]
+              [/login:username,[password]] shelvesetname

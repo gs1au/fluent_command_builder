@@ -1,0 +1,8 @@
+TF - Team Foundation Version Control Tool, Version 10.0.30319.1
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Removes an item from an existing label in Team Foundation version control.
+
+tf unlabel [/collection:TeamProjectCollectionUrl]
+           [/recursive] [/login:username,[password]]
+           labelname itemspec

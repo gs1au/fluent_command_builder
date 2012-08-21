@@ -1,0 +1,8 @@
+TF - Team Foundation Version Control Tool, Version 10.0.30319.1
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Removes pending changes from a workspace.
+
+tf undo [/workspace:workspacename[;workspaceowner]] 
+        [/recursive] itemspec [/noprompt] [/login:username,[password]]
+        [/collection:TeamProjectCollectionUrl]

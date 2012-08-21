@@ -1,0 +1,16 @@
+TF - Team Foundation Version Control Tool, Version 10.0.30319.1
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Retrieves a read-only copy of a file from Team Foundation Server to the local
+workspace and creates folders on disk to contain it.
+
+tf get itemspec [/version:versionspec] [/all] [/overwrite] [/force] [/preview]
+       [/recursive] [/remap] [/noprompt] [/login:username,[password]]
+
+Versionspec:
+    Date/Time         D"any .Net Framework-supported format"
+                      or any of the date formats of the local machine
+    Changeset number  Cnnnnnn
+    Label             Llabelname
+    Latest version    T
+    Workspace         Wworkspacename;workspaceowner

@@ -1,0 +1,11 @@
+TF - Team Foundation Version Control Tool, Version 10.0.30319.1
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Enables an administrator to view and change the following configuration
+settings for a team project in the Source Control Settings dialog box:
+- Check-out settings
+- Check-in policies
+- Check-in notes
+
+tf configure [path of team project] [/collection:TeamProjectCollectionUrl]
+             [/login:username,[password]]

@@ -1,0 +1,23 @@
+TF - Team Foundation Version Control Tool, Version 10.0.30319.1
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Configures the proxy setting automatically or manually. You can also use the
+proxy command to add, delete, and list proxy server records.
+
+Run the proxy command with the configure option and no url value to
+automatically detect and configure a proxy.
+
+tf proxy ([/configure [url]) [/collection:TeamProjectCollectionUrl]
+         [/login:username,[password]]
+
+tf proxy /add url [/name:name] [/site:sitename]
+         [/description:description] [/default:(global|site|all)]
+         [/collection:TeamProjectCollectionUrl] [/login:username,[password]]
+
+tf proxy /delete url [/collection:TeamProjectCollectionUrl]
+         [/login:username,[password]]
+
+tf proxy /list [url1 url2 ...]
+         [/collection:TeamProjectCollectionUrl] [/login:username,[password]]
+
+tf proxy /enabled:(true|false)

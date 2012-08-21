@@ -1,0 +1,18 @@
+TF - Team Foundation Version Control Tool, Version 10.0.30319.1
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Displays the revision history for one or more files and folders.
+
+tf history itemspec [/version:versionspec]
+           [/stopafter:number] [/recursive] [/user:username]
+           [/format:(brief|detailed)] [/slotmode] [/itemmode] [/noprompt]
+           [/login:username,[password]] [/sort:ascending,descending]
+           [/collection:TeamProjectCollectionUrl]
+
+Versionspec:
+    Date/Time         D"any .Net Framework-supported format"
+                      or any of the date formats of the local machine
+    Changeset number  Cnnnnnn
+    Label             Llabelname
+    Latest version    T
+    Workspace         Wworkspacename;workspaceowner

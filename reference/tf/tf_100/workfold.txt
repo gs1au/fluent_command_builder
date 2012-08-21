@@ -1,0 +1,30 @@
+TF - Team Foundation Version Control Tool, Version 10.0.30319.1
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Creates, modifies, or displays information about the mappings between your
+workspace folders and the Team Foundation version control folders.
+
+tf workfold localfolder [/login:username,[password]]
+
+tf workfold [/workspace:workspacename] [/login:username,[password]]
+
+tf workfold [/collection:TeamProjectCollectionUrl] [/workspace:workspacename]
+            [/login:username,[password]] serverfolder
+
+tf workfold /map serverfolder localfolder
+            [/collection:TeamProjectCollectionUrl]
+            [/workspace:workspacename] 
+            [/login:username,[password]]
+
+tf workfold /unmap [/collection:TeamProjectCollectionUrl]
+            [/workspace:workspacename]
+            [/recursive] (serverfolder|localfolder)
+            [/login:username,[password]]
+
+tf workfold /cloak serverfolder
+            [/workspace:workspacename] [/collection:TeamProjectCollectionUrl]
+            [/login:username,[password]]
+
+tf workfold /decloak serverfolder [/workspace:workspacename]
+            [/collection:TeamProjectCollectionUrl]
+            [/login:username,[password]]

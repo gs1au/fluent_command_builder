@@ -1,0 +1,8 @@
+TF - Team Foundation Version Control Tool, Version 10.0.30319.1
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Configures how client authentication certificates are used when connecting
+to TFS through a secure (https) connection.
+
+tf certificates [/machine] [/disable] [/autoselect]
+                [/thumbprints:thumbprint1[,thumbprint2,...]]

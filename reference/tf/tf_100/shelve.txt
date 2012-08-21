@@ -1,0 +1,18 @@
+TF - Team Foundation Version Control Tool, Version 10.0.30319.1
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Stores a set of pending changes, together with pending check-in notes,
+a comment, and a list of associated work items, on the Team Foundation server
+without actually checking them into version control.
+
+tf shelve [/replace] [/comment:("comment"|@commentfile)]
+          [shelvesetname] [/validate] [/noprompt]
+          [/login:username,[password]]
+
+tf shelve [/move] [/replace] [/comment:("comment"|@commentfile)] [/recursive]
+          [shelvesetname] itemspec [/validate] [/noprompt]
+          [/login:username,[password]]
+
+tf shelve /delete shelvesetname[;owner] 
+          [/login:username,[password]]
+          [/collection:TeamProjectCollectionUrl]

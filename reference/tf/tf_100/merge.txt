@@ -1,0 +1,17 @@
+TF - Team Foundation Version Control Tool, Version 10.0.30319.1
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Applies changes from one branch into another.
+
+tf merge [/recursive] [/force] [/candidate] [/discard] [/version:versionspec]
+         [/lock:(none|checkin|checkout)] [/preview] [/baseless] [/nosummary]
+         [/noimplicitbaseless] [/conservative] [/format:(brief|detailed)]  
+         [/noprompt] [/login:username,[password]] source destination
+
+Versionspec:
+    Date/Time         D"any .Net Framework-supported format"
+                      or any of the date formats of the local machine
+    Changeset number  Cnnnnnn
+    Label             Llabelname
+    Latest version    T
+    Workspace         Wworkspacename;workspaceowner

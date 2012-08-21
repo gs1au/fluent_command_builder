@@ -1,0 +1,10 @@
+TF - Team Foundation Version Control Tool, Version 10.0.30319.1
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Displays information about pending changes to items in one or more workspaces.
+
+tf status itemspec [/collection:TeamProjectCollectionUrl]
+          [/login:username,[password]]
+          ([/workspace:workspacename[;workspaceowner]]
+          | [/shelveset:shelvesetname[;shelvesetowner]])
+          [/format:(brief|detailed)] [/recursive] [/user:(*|username)]

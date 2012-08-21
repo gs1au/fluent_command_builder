@@ -1,0 +1,9 @@
+TF - Team Foundation Version Control Tool, Version 10.0.30319.1
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Displays detailed information about past merges between the specified source
+and destination branches.
+
+tf merges [source] destination [/recursive]
+          [/extended] [/format:(brief|detailed)] [/login:username,[password]]
+          [/showall] [/collection:TeamProjectCollectionUrl]

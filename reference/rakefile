@@ -50,15 +50,26 @@ namespace :ref do
     end
   end
 
-  TaskMaker.make_task TeamFoundationTEE do |task_maker|
-    output = `#{team_foundation_tee.to_s}`
-    actions_text = output.match(/Available commands and their options:\n(.+)Options accepted by most commands:/m)[1].rstrip
+  #TaskMaker.make_task TeamFoundationTEE do |task_maker|
+  #  output = `#{team_foundation_tee.to_s}`
+  #  actions_text = output.match(/Available commands and their options:\n(.+)Options accepted by most commands:/m)[1].rstrip
+  #  actions = actions_text.lines.map { |action| action.match(/^  (.+?) /) { |m| m[1].strip == '' ? nil : m[1].strip  } }
+  #  actions.compact!
+  #  actions.uniq!
+  #  actions.each do |action|
+  #    team_foundation_tee.help(action).execute! { |b| b.append %Q[ > "#{task_maker.output_dir}/#{action}.txt"] }
+  #  end
+  #end
+
+  TaskMaker.make_task TeamFoundation do |task_maker|
+    output = `#{team_foundation.to_s}`
+    actions_text = output.match(/Commands:\n(.+)/m)[1].rstrip
     puts actions_text
-    actions = actions_text.lines.map { |action| action.match(/^  (.+?) /) { |m| m[1].strip == '' ? nil : m[1].strip  } }
+    actions = actions_text.lines.map { |action| action.match(/^tf (.+?) /) { |m| m[1].strip == '' ? nil : m[1].strip  } }
     actions.compact!
     actions.uniq!
     actions.each do |action|
-      team_foundation_tee.help(action).execute! { |b| b.append %Q[ > "#{task_maker.output_dir}/#{action}.txt"] }
+      team_foundation.help(action).execute! { |b| b.append %Q[ > "#{task_maker.output_dir}/#{action}.txt"] }
     end
   end
 
