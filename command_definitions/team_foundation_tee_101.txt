@@ -1,4 +1,4 @@
-10.0, 10.1
+10.1
 tf (Team Foundation TEE)
     add <itemSpec>
         -lock:<lockType>
@@ -61,6 +61,7 @@ tf (Team Foundation TEE)
         -preview
         -startCleanup
         -noPrompt
+        -force
         -silent
         -login:<username>[,<password>]
         -collection:<teamProjectCollectionUrl>

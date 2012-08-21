@@ -140,18 +140,6 @@ module FluentCommandBuilder
         def properties(item_spec)
           Properties.new @b, item_spec
         end
-        def reconcile
-          Reconcile.new @b
-        end
-        def reconcile_build(build_name, item_spec=nil)
-          ReconcileBuild.new @b, build_name, item_spec
-        end
-        def reconcile_changeset(changeset_name, item_spec=nil)
-          ReconcileChangeset.new @b, changeset_name, item_spec
-        end
-        def reconcile_forget_build(build_name, item_spec=nil)
-          ReconcileForgetBuild.new @b, build_name, item_spec
-        end
         def rename(old_item, new_item)
           Rename.new @b, old_item, new_item
         end
@@ -412,19 +400,9 @@ module FluentCommandBuilder
           yield @b if block_given?
           self
         end
-        def bypass
-          @b.append ' -bypass'
-          yield @b if block_given?
-          self
-        end
         def login(username, password=nil)
           @b.append " -login:#{@b.format username}"
           @b.append ",#{@b.format password}" unless password.nil?
-          yield @b if block_given?
-          self
-        end
-        def force
-          @b.append ' -force'
           yield @b if block_given?
           self
         end
@@ -434,11 +412,6 @@ module FluentCommandBuilder
           super underlying_builder
           @b.append " checkin -shelveset:#{@b.format shelveset_name}"
           @b.append ";#{@b.format shelveset_owner}" unless shelveset_owner.nil?
-        end
-        def bypass
-          @b.append ' -bypass'
-          yield @b if block_given?
-          self
         end
         def no_prompt
           @b.append ' -noPrompt'
@@ -458,11 +431,6 @@ module FluentCommandBuilder
         end
         def author(author_name)
           @b.append " -author:#{@b.format author_name}"
-          yield @b if block_given?
-          self
-        end
-        def force
-          @b.append ' -force'
           yield @b if block_given?
           self
         end
@@ -544,6 +512,11 @@ module FluentCommandBuilder
         end
         def no_prompt
           @b.append ' -noPrompt'
+          yield @b if block_given?
+          self
+        end
+        def force
+          @b.append ' -force'
           yield @b if block_given?
           self
         end
@@ -1271,92 +1244,6 @@ module FluentCommandBuilder
         def workspace(workspace_name, workspace_owner=nil)
           @b.append " -workspace:#{@b.format workspace_name}"
           @b.append ";#{@b.format workspace_owner}" unless workspace_owner.nil?
-          yield @b if block_given?
-          self
-        end
-      end
-      class Reconcile < CommandBase
-        def initialize(underlying_builder)
-          super underlying_builder
-          @b.append ' reconcile'
-        end
-        def team_project(team_project_name)
-          @b.append " -teamProject:#{@b.format team_project_name}"
-          yield @b if block_given?
-          self
-        end
-        def workspace(workspace_name, workspace_owner=nil)
-          @b.append " -workspace:#{@b.format workspace_name}"
-          @b.append ";#{@b.format workspace_owner}" unless workspace_owner.nil?
-          yield @b if block_given?
-          self
-        end
-      end
-      class ReconcileBuild < CommandBase
-        def initialize(underlying_builder, build_name, item_spec=nil)
-          super underlying_builder
-          @b.append " reconcile -buildName:#{@b.format build_name}"
-          @b.append " #{@b.format item_spec}" unless item_spec.nil?
-        end
-        def team_project(team_project_name)
-          @b.append " -teamProject:#{@b.format team_project_name}"
-          yield @b if block_given?
-          self
-        end
-        def workspace(workspace_name, workspace_owner=nil)
-          @b.append " -workspace:#{@b.format workspace_name}"
-          @b.append ";#{@b.format workspace_owner}" unless workspace_owner.nil?
-          yield @b if block_given?
-          self
-        end
-        def recursive
-          @b.append ' -recursive'
-          yield @b if block_given?
-          self
-        end
-      end
-      class ReconcileChangeset < CommandBase
-        def initialize(underlying_builder, changeset_name, item_spec=nil)
-          super underlying_builder
-          @b.append " reconcile -changeset:#{@b.format changeset_name}"
-          @b.append " #{@b.format item_spec}" unless item_spec.nil?
-        end
-        def team_project(team_project_name)
-          @b.append " -teamProject:#{@b.format team_project_name}"
-          yield @b if block_given?
-          self
-        end
-        def workspace(workspace_name, workspace_owner=nil)
-          @b.append " -workspace:#{@b.format workspace_name}"
-          @b.append ";#{@b.format workspace_owner}" unless workspace_owner.nil?
-          yield @b if block_given?
-          self
-        end
-        def recursive
-          @b.append ' -recursive'
-          yield @b if block_given?
-          self
-        end
-      end
-      class ReconcileForgetBuild < CommandBase
-        def initialize(underlying_builder, build_name, item_spec=nil)
-          super underlying_builder
-          @b.append " reconcile -forgetBuild:#{@b.format build_name}"
-          @b.append " #{@b.format item_spec}" unless item_spec.nil?
-        end
-        def team_project(team_project_name)
-          @b.append " -teamProject:#{@b.format team_project_name}"
-          yield @b if block_given?
-          self
-        end
-        def workspace(workspace_name, workspace_owner=nil)
-          @b.append " -workspace:#{@b.format workspace_name}"
-          @b.append ";#{@b.format workspace_owner}" unless workspace_owner.nil?
-          yield @b if block_given?
-          self
-        end
-        def recursive
-          @b.append ' -recursive'
           yield @b if block_given?
           self
         end

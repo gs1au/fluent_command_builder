@@ -547,6 +547,11 @@ module FluentCommandBuilder
           yield @b if block_given?
           self
         end
+        def force
+          @b.append ' -force'
+          yield @b if block_given?
+          self
+        end
         def silent
           @b.append ' -silent'
           yield @b if block_given?

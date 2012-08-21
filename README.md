@@ -307,7 +307,7 @@ Visual Studio (8.0 = 2005, 9.0 = 2008, 10.0 = 2010):
 
 - mstest.exe 8.0, 9.0, 10.0
 - tf.exe 10.0
-- tf.exe (Team Explorer Everywhere) 10.0
+- tf.exe (Team Explorer Everywhere) 10.0, 10.1
 
 Other very important tools:
 

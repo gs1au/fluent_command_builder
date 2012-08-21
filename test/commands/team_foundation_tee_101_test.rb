@@ -2,12 +2,12 @@
 
 require_relative '../lib/command_test_base'
 
-class Tf100AndTee100Test < CommandTestBase
+class TeamFoundationTee101Test < CommandTestBase
 
   def assert_each_tf_command(expected_command_text)
     assert_command expected_command_text, yield(team_foundation_100)
     expected_command_text.gsub! '/', '-'
-    assert_command expected_command_text, yield(team_foundation_tee_100)
+    assert_command expected_command_text, yield(team_foundation_tee_101)
   end
 
   def test_add
@@ -156,7 +156,7 @@ class Tf100AndTee100Test < CommandTestBase
 
   def test_eula
     expected = 'tf eula -accept'
-    actual = team_foundation_tee_100.eula.accept
+    actual = team_foundation_tee_101.eula.accept
     assert_command expected, actual
   end
 
@@ -176,7 +176,7 @@ class Tf100AndTee100Test < CommandTestBase
 
   def test_getcs
     expected = 'tf getcs -changeset:changesetNumber -latest'
-    actual = team_foundation_tee_100.getcs.changeset('changesetNumber').latest
+    actual = team_foundation_tee_101.getcs.changeset('changesetNumber').latest
     assert_command expected, actual
   end
 
@@ -295,43 +295,43 @@ class Tf100AndTee100Test < CommandTestBase
 
   def test_print
     expected = 'tf print itemSpec -version:versionSpec'
-    actual = team_foundation_tee_100.print('itemSpec').version('versionSpec')
+    actual = team_foundation_tee_101.print('itemSpec').version('versionSpec')
     assert_command expected, actual
   end
 
   def test_product_key
     expected = 'tf productKey -set:myProductKey -trial'
-    actual = team_foundation_tee_100.product_key.set('myProductKey').trial
+    actual = team_foundation_tee_101.product_key.set('myProductKey').trial
     assert_command expected, actual
   end
 
   def test_copy_profile
     expected = 'tf profile -copy existingProfileName newProfileName'
-    actual = team_foundation_tee_100.copy_profile('existingProfileName', 'newProfileName')
+    actual = team_foundation_tee_101.copy_profile('existingProfileName', 'newProfileName')
     assert_command expected, actual
   end
 
   def test_delete_profile
     expected = 'tf profile -delete profileName'
-    actual = team_foundation_tee_100.delete_profile('profileName')
+    actual = team_foundation_tee_101.delete_profile('profileName')
     assert_command expected, actual
   end
 
   def test_edit_profile
     expected = 'tf profile -edit existingProfileName -string:name=value -boolean:name=value -number:name=value'
-    actual = team_foundation_tee_100.edit_profile('existingProfileName').string('name', 'value').boolean('name', 'value').number('name', 'value')
+    actual = team_foundation_tee_101.edit_profile('existingProfileName').string('name', 'value').boolean('name', 'value').number('name', 'value')
     assert_command expected, actual
   end
 
   def test_new_profile
     expected = 'tf profile -new newProfileName -string:name=value -boolean:name=value -number:name=value'
-    actual = team_foundation_tee_100.new_profile('newProfileName').string('name', 'value').boolean('name', 'value').number('name', 'value')
+    actual = team_foundation_tee_101.new_profile('newProfileName').string('name', 'value').boolean('name', 'value').number('name', 'value')
     assert_command expected, actual
   end
 
   def test_profiles
     expected = 'tf profiles -format:format'
-    actual = team_foundation_tee_100.profiles.format('format')
+    actual = team_foundation_tee_101.profiles.format('format')
     assert_command expected, actual
   end
 
@@ -380,43 +380,43 @@ class Tf100AndTee100Test < CommandTestBase
 
   def test_reconcile
     expected = 'tf reconcile -teamProject:teamProjectName -workspace:workspaceName;workspaceOwner -workspace:workspaceName'
-    actual = team_foundation_tee_100.reconcile.team_project('teamProjectName').workspace('workspaceName', 'workspaceOwner').workspace('workspaceName')
+    actual = team_foundation_tee_101.reconcile.team_project('teamProjectName').workspace('workspaceName', 'workspaceOwner').workspace('workspaceName')
     assert_command expected, actual
   end
 
   def test_reconcile_build
     expected = 'tf reconcile -buildName:buildName itemSpec -teamProject:teamProjectName -workspace:workspaceName;workspaceOwner -workspace:workspaceName -recursive'
-    actual = team_foundation_tee_100.reconcile_build('buildName', 'itemSpec').team_project('teamProjectName').workspace('workspaceName', 'workspaceOwner').workspace('workspaceName').recursive
+    actual = team_foundation_tee_101.reconcile_build('buildName', 'itemSpec').team_project('teamProjectName').workspace('workspaceName', 'workspaceOwner').workspace('workspaceName').recursive
     assert_command expected, actual
   end
 
   def test_reconcile_build_item_spec_is_optional
     expected = 'tf reconcile -buildName:buildName'
-    actual = team_foundation_tee_100.reconcile_build('buildName')
+    actual = team_foundation_tee_101.reconcile_build('buildName')
     assert_command expected, actual
   end
 
   def test_reconcile_changeset
     expected = 'tf reconcile -changeset:changesetNumber itemSpec -teamProject:teamProjectName -workspace:workspaceName;workspaceOwner -workspace:workspaceName -recursive'
-    actual = team_foundation_tee_100.reconcile_changeset('changesetNumber', 'itemSpec').team_project('teamProjectName').workspace('workspaceName', 'workspaceOwner').workspace('workspaceName').recursive
+    actual = team_foundation_tee_101.reconcile_changeset('changesetNumber', 'itemSpec').team_project('teamProjectName').workspace('workspaceName', 'workspaceOwner').workspace('workspaceName').recursive
     assert_command expected, actual
   end
 
   def test_reconcile_changeset_item_spec_is_optional
     expected = 'tf reconcile -changeset:changesetNumber'
-    actual = team_foundation_tee_100.reconcile_changeset('changesetNumber')
+    actual = team_foundation_tee_101.reconcile_changeset('changesetNumber')
     assert_command expected, actual
   end
 
   def test_reconcile_forget_build
     expected = 'tf reconcile -forgetBuild:buildName itemSpec -teamProject:teamProjectName -workspace:workspaceName;workspaceOwner -workspace:workspaceName -recursive'
-    actual = team_foundation_tee_100.reconcile_forget_build('buildName', 'itemSpec').team_project('teamProjectName').workspace('workspaceName', 'workspaceOwner').workspace('workspaceName').recursive
+    actual = team_foundation_tee_101.reconcile_forget_build('buildName', 'itemSpec').team_project('teamProjectName').workspace('workspaceName', 'workspaceOwner').workspace('workspaceName').recursive
     assert_command expected, actual
   end
 
   def test_reconcile_forget_build_item_spec_is_optional
     expected = 'tf reconcile -forgetBuild:buildName'
-    actual = team_foundation_tee_100.reconcile_forget_build('buildName')
+    actual = team_foundation_tee_101.reconcile_forget_build('buildName')
     assert_command expected, actual
   end
 
