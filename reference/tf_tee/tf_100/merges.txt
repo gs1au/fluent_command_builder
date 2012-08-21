@@ -1,0 +1,10 @@
+Team Explorer Everywhere (version 10.0.0.201003261741)
+
+ merges command:
+
+  Displays detailed information about past merges between the specified source and destination branches.
+
+ Valid option sets:
+
+  merges [-recursive] [-format:brief|detailed|xml] [<sourceItem>] <destinationItem>
+

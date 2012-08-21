@@ -1,0 +1,69 @@
+Team Explorer Everywhere (version 10.0.0.201003261741)
+
+ profile command:
+
+  Creates, deletes, edits, and copies named login profiles.  Profiles created on this computer can only be accessed
+  on this computer, and they can be used by all Team Explorer Everywhere clients.  Use the profiles command to show
+  existing profiles.
+  
+  All profiles should contain a Team Foundation Server project collection URL, and may contain other connection
+  information like user credentials and network proxy settings.  Listed below are some of the most common profile
+  properties and their types.
+  
+  'serverUrl' (string): The URL of the Team Foundation Server project collection.  All profiles should define this
+  property.
+  
+  'userName' (string): The username used to authenticate to the Team Foundation Server.  If this property is not
+  defined, Team Explorer Everywhere can prompt for it when it is needed.
+  
+  'userDomain' (string): The Windows domain used to authenticate to the Team Foundation Server.  If this property
+  is not defined, Team Explorer Everywhere can prompt for it when it is needed.
+  
+  'password' (string): The password used to authenticate to the Team Foundation Server.  If this property is not
+  defined, Team Explorer Everywhere can prompt for it when it is needed.  
+  
+  'useDefaultCredentials' (boolean): When true, and default credentials are available, they will be used instead of
+  the credentials stored in this profile to authenticate to the Team Foundation Server.  When false or not set, the
+  credentials in this profile will be used instead of any available default credentials.
+  
+  'httpProxyEnabled' (boolean): When true, an HTTP proxy is used when connecting to a Team Foundation Server.  When
+  false or not set, no HTTP proxy is used.
+  
+  'httpProxyIgnoreGlobal' (boolean): When true, the proxy server URL configured in the profile is used.  When false
+  or not set, the value of the HTTP_PROXY environment variable value is used as the proxy server URL.  When
+  httpProxyEnabled is false, this property has no effect.
+  
+  'httpProxyUrl' (string): The URL of the HTTP proxy server to use.
+  
+  'httpProxyEnableAuth' (boolean): When true, the HTTP proxy credentials in this profile are used to authenticate
+  to an HTTP proxy.  When false or not set, no authentication to the HTTP proxy is done.
+  
+  'httpProxyUsername' (string): The username used to authenticate to the configured HTTP proxy.
+  
+  'httpProxyPassword' (string): The password used to authenticate to the configured HTTP proxy.  
+  
+  'tfProxyEnabled' (boolean): When true, the Team Foundation proxy URL defined in this profile is used when
+  downloading files from a Team Foundation Server.  When false or not set, no Team Foundation proxy is used.
+  
+  'tfProxyIgnoreGlobal' (boolean): When true, the Team Foundation proxy server URL configured in the profile is
+  used to accelerate file transfers.  When false or not set, the value of the TFSPROXY environment variable value
+  is used as the proxy server URL.  When tfProxyEnabled is false, this property has no effect.
+  
+  'tfProxyUrl' (string): The URL of the Team Foundation proxy server to use.
+  
+  'acceptUntrustedCertificates' (boolean): When true, Team Explorer Everywhere will accept SSL certificates that
+  cannot be verified (trusted) without error.  If false or not set, Team Explorer Everywhere will not accept
+  untrusted SSL certificates.
+  
+  WARNING: ALL PROPERTIES, INCLUDING PASSWORDS, ARE STORED AS PLAIN TEXT IN THE PROFILE AND WORKSPACE CACHE FILES
+  AND CAN BE VIEWED BY ANYONE WITH READ ACCESS TO THESE FILES!
+
+ Valid option sets:
+
+  profile -copy <existingProfileName> <newProfileName>
+  profile -delete <profileName>
+  profile -edit [-string:<property>=[<value>]...] [-boolean:<property>=[true|false]...]
+          [-number:<property>=[<number>]...] <profileName>
+  profile -new [-string:<property>=[<value>]...] [-boolean:<property>=[true|false]...]
+          [-number:<property>=[<number>]...] <profileName>
+

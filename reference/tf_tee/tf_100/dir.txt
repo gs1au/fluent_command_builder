@@ -1,0 +1,12 @@
+Team Explorer Everywhere (version 10.0.0.201003261741)
+
+ dir command:
+
+  Displays all or part of the contents of a Team Foundation version control server.
+
+ Command aliases: ls dir
+
+ Valid option sets:
+
+  dir [-version:<value>] [-recursive] [-folders] [-deleted] <itemSpec>...
+

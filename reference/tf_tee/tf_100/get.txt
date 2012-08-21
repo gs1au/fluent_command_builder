@@ -1,0 +1,14 @@
+Team Explorer Everywhere (version 10.0.0.201003261741)
+
+ get command:
+
+  Retrieves a read-only copy of one or more files from the source control server to the local disk. Any
+  intermediate folders are created if necessary. 
+  
+  The version to retrieve may be specified through the 'version' option or as a version specification suffix to the
+  item specification (example: '$/file.txt;C34').
+
+ Valid option sets:
+
+  get [-version:<value>] [-recursive] [-preview] [-force] [-all] [-overwrite] [<itemSpec>...]
+

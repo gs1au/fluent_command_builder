@@ -1,0 +1,16 @@
+Team Explorer Everywhere (version 10.0.0.201003261741)
+
+ workspaces command:
+
+  Displays information for the named workspace (or displays information about all cached workspaces if no names are
+  provided). Also allows you to modify cached workspace information.
+  
+  Specify the remove and server options to remove matching cached workspace information.  The remove option accepts
+  the value '*' to match all workspace names.
+
+ Valid option sets:
+
+  workspaces [-owner:<value>] [-computer:<value>] [-collection:<url>] [-format:brief|detailed|xml]
+             [-updateUserName:<user@domain>|<domain\user>] [-updateComputerName:<value>] workspaceName
+  workspaces -remove:<workspace1>[,<workspace2>,...] -collection:<url>
+

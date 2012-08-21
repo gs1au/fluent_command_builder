@@ -1,0 +1,11 @@
+Team Explorer Everywhere (version 10.0.0.201003261741)
+
+ add command:
+
+  Creates an "add" pending change, which adds files and folders from the local workspace to the source control
+  server.
+
+ Valid option sets:
+
+  add [-lock:none|checkin|checkout] [-type:<value>] [-recursive] <localItemSpec>...
+
