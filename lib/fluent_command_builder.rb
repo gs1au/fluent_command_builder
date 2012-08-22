@@ -45,7 +45,7 @@ require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/comma
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/security_osx.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/security_osx_107.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/sevenzip.rb')
-require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/sevenzip_92.rb')
+require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/sevenzip_920.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/simian.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/simian_23.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/team_foundation.rb')
