@@ -10,12 +10,6 @@ class Example3Test < Test::Unit::TestCase
     assert_equal expected, actual
   end
 
-  def test_nunit_example
-    expected = 'nunit-console sample.dll /include:unit_tests /exclude:integration_tests'
-    actual = nunit_25('sample.dll').include(:unit_tests).exclude(:integration_tests).to_s
-    assert_equal expected, actual
-  end
-
 end
 
 

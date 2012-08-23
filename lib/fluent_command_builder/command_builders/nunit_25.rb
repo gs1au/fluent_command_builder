@@ -42,117 +42,117 @@ module FluentCommandBuilder
           self
         end
         def fixture(fixture)
-          @b.append " /fixture:#{@b.format fixture}"
+          @b.append " -fixture:#{@b.format fixture}"
           yield @b if block_given?
           self
         end
         def load(fixture)
-          @b.append " /load:#{@b.format fixture}"
+          @b.append " -load:#{@b.format fixture}"
           yield @b if block_given?
           self
         end
         def run(test)
-          @b.append " /run:#{@b.format test}"
+          @b.append " -run:#{@b.format test}"
           yield @b if block_given?
           self
         end
         def config(config)
-          @b.append " /config:#{@b.format config}"
+          @b.append " -config:#{@b.format config}"
           yield @b if block_given?
           self
         end
         def xml(file)
-          @b.append " /xml:#{@b.format file}"
+          @b.append " -xml:#{@b.format file}"
           yield @b if block_given?
           self
         end
         def xml_console
-          @b.append ' /xmlConsole'
+          @b.append ' -xmlConsole'
           yield @b if block_given?
           self
         end
         def output(file)
-          @b.append " /output:#{@b.format file}"
+          @b.append " -output:#{@b.format file}"
           yield @b if block_given?
           self
         end
         def out(file)
-          @b.append " /out:#{@b.format file}"
+          @b.append " -out:#{@b.format file}"
           yield @b if block_given?
           self
         end
         def err(file)
-          @b.append " /err:#{@b.format file}"
+          @b.append " -err:#{@b.format file}"
           yield @b if block_given?
           self
         end
         def labels
-          @b.append ' /labels'
+          @b.append ' -labels'
           yield @b if block_given?
           self
         end
         def trace(level)
-          @b.append " /trace:#{@b.format level}"
+          @b.append " -trace:#{@b.format level}"
           yield @b if block_given?
           self
         end
         def include(category)
-          @b.append " /include:#{@b.format category}"
+          @b.append " -include:#{@b.format category}"
           yield @b if block_given?
           self
         end
         def exclude(category)
-          @b.append " /exclude:#{@b.format category}"
+          @b.append " -exclude:#{@b.format category}"
           yield @b if block_given?
           self
         end
         def process(process)
-          @b.append " /process:#{@b.format process}"
+          @b.append " -process:#{@b.format process}"
           yield @b if block_given?
           self
         end
         def domain(domain)
-          @b.append " /domain:#{@b.format domain}"
+          @b.append " -domain:#{@b.format domain}"
           yield @b if block_given?
           self
         end
         def framework(framework)
-          @b.append " /framework:#{@b.format framework}"
+          @b.append " -framework:#{@b.format framework}"
           yield @b if block_given?
           self
         end
         def no_shadow
-          @b.append ' /noShadow'
+          @b.append ' -noShadow'
           yield @b if block_given?
           self
         end
         def no_thread
-          @b.append ' /noThread'
+          @b.append ' -noThread'
           yield @b if block_given?
           self
         end
         def timeout(timeout)
-          @b.append " /timeout:#{@b.format timeout}"
+          @b.append " -timeout:#{@b.format timeout}"
           yield @b if block_given?
           self
         end
         def wait
-          @b.append ' /wait'
+          @b.append ' -wait'
           yield @b if block_given?
           self
         end
         def no_logo
-          @b.append ' /noLogo'
+          @b.append ' -noLogo'
           yield @b if block_given?
           self
         end
         def no_dots
-          @b.append ' /noDots'
+          @b.append ' -noDots'
           yield @b if block_given?
           self
         end
         def help
-          @b.append ' /help'
+          @b.append ' -help'
           yield @b if block_given?
           self
         end
