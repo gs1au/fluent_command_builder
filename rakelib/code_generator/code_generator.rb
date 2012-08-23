@@ -3,6 +3,7 @@ require_relative 'lib/command_definition'
 require_relative 'lib/command_code_names'
 require_relative 'lib/ruby_code_writer'
 require_relative 'lib/node_code_generator'
+require_relative 'version_detectors'
 
 class CodeGenerator
 
@@ -37,7 +38,8 @@ class CodeGenerator
     model = {
         module_name: code_names.command_module_name,
         factory_method_name: code_names.command_factory_method_name,
-        command_name: command.command_name
+        command_name: command.command_name,
+        version_detector: version_detector_line(code_names.command_module_name)
     }
 
     template_file = File.expand_path(File.dirname(__FILE__) + '/templates/command_module.erb')

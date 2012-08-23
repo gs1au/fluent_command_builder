@@ -1,5 +1,4 @@
 require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
-require File.expand_path(File.dirname(__FILE__) + '/../version')
 
 module FluentCommandBuilder
   def installutil(&block)
@@ -7,6 +6,15 @@ module FluentCommandBuilder
   end
   module InstallUtil
     COMMAND_NAME = 'installUtil'
+    def self.version_detector
+      @version_detector ||= StandardVersionDetector.new COMMAND_NAME
+    end
+    def self.version_detector=(value)
+      @version_detector = value
+    end
+    def self.version(path=nil)
+      self.version_detector.version path
+    end
     def self.create(&block)
       version_module(InstallUtil).create &block
     end

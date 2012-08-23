@@ -27,7 +27,8 @@ module FluentCommandBuilder
     def self.match(value)
       exp = Regexp.new VERSION_REGEX
       version = value.scan(exp)[0]
-      version ? Version.new(version) : nil
+      return unless version
+      Version.new(version)
     end
 
     private
