@@ -1,29 +1,21 @@
-require File.expand_path(File.dirname(__FILE__) + '/../command_formatters/null_formatter.rb')
+require File.expand_path(File.dirname(__FILE__) + '/executor_base')
 
 module FluentCommandBuilder
-  class FormattableExecutor
+  class FormattableExecutor < ExecutorBase
 
     attr_accessor :formatter
 
     def initialize
-      @formatter = NullFormatter.new
+      @formatter = nil
     end
-
-    def execute(underlying_builder)
-      print underlying_builder
-      do_execute underlying_builder
-    end
-
-    protected
 
     def do_execute(underlying_builder)
-      # this is a template method
+      puts @formatter.format(underlying_builder) if @formatter
+      self.do_execute underlying_builder
     end
 
-    private
-
-    def print(underlying_builder)
-      puts @formatter.format underlying_builder
+    def failed_command_text(underlying_builder)
+      @formatter ? @formatter.format(underlying_builder) : underlying_builder.to_s
     end
 
   end
