@@ -1,7 +1,7 @@
-require File.expand_path(File.dirname(__FILE__) + '/executors/backticks_executor')
-require File.expand_path(File.dirname(__FILE__) + '/executors/dry_run_executor')
-require File.expand_path(File.dirname(__FILE__) + '/executors/rake_sh_executor')
-require File.expand_path(File.dirname(__FILE__) + '/executors/system_executor')
+require File.expand_path(File.dirname(__FILE__) + '/command_executors/backticks_executor')
+require File.expand_path(File.dirname(__FILE__) + '/command_executors/dry_run_executor')
+require File.expand_path(File.dirname(__FILE__) + '/command_executors/rake_sh_executor')
+require File.expand_path(File.dirname(__FILE__) + '/command_executors/system_executor')
 
 module FluentCommandBuilder
   class Executor

@@ -78,8 +78,14 @@ class NodeCodeGenerator
   def append_arg(fragment)
     value = fragment.fragment_text.gsub(/<.+?>/) do |m|
       arg = CommandArgument.new m
-      format_args = [arg.arg_name.snakecase, [arg.delimiter, arg.key_value_separator].compact.map { |v| "'#{v}'" }].flatten
-      "\#{@b.format #{format_args.join ', '}}"
+      is_password = arg.arg_name.downcase.include? 'password'
+
+      if is_password
+        "\#{@b.format_password #{arg.arg_name.snakecase}}"
+      else
+        format_args = [arg.arg_name.snakecase, [arg.delimiter, arg.key_value_separator].compact.map { |v| "'#{v}'" }].flatten
+        "\#{@b.format #{format_args.join ', '}}"
+      end
     end
     value.include?('#{') ? %Q["#{value}"] : "'#{value}'"
   end

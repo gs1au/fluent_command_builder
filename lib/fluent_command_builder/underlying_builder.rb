@@ -14,13 +14,14 @@ module FluentCommandBuilder
 
   class UnderlyingBuilder
 
-    attr_accessor :command_name, :path, :executor
+    attr_accessor :command_name, :path, :executor, :passwords
 
     def initialize(command_name=nil)
       @command_name = command_name
       @path = nil
       @executor = FluentCommandBuilder.default_executor
       @args = ''
+      @passwords = []
     end
 
     def format(value, delimiter=' ', key_value_separator='=')
@@ -34,6 +35,12 @@ module FluentCommandBuilder
         else
           quote_if_includes_space value.to_s
       end
+    end
+
+    def format_password(value)
+      password = quote_if_includes_space value.to_s
+      @passwords << password
+      password
     end
 
     def append(value)

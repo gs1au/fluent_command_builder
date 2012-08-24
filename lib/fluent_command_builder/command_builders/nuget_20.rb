@@ -364,7 +364,7 @@ module FluentCommandBuilder
           self
         end
         def password(password)
-          @b.append " -Password #{@b.format password}"
+          @b.append " -Password #{@b.format_password password}"
           yield @b if block_given?
           self
         end

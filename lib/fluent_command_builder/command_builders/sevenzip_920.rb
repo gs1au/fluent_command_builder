@@ -78,7 +78,7 @@ module FluentCommandBuilder
           self
         end
         def password(password)
-          @b.append " -p#{@b.format password}"
+          @b.append " -p#{@b.format_password password}"
           yield @b if block_given?
           self
         end
@@ -179,7 +179,7 @@ module FluentCommandBuilder
           self
         end
         def password(password)
-          @b.append " -p#{@b.format password}"
+          @b.append " -p#{@b.format_password password}"
           yield @b if block_given?
           self
         end
@@ -246,7 +246,7 @@ module FluentCommandBuilder
           self
         end
         def password(password)
-          @b.append " -p#{@b.format password}"
+          @b.append " -p#{@b.format_password password}"
           yield @b if block_given?
           self
         end
@@ -312,7 +312,7 @@ module FluentCommandBuilder
           self
         end
         def password(password)
-          @b.append " -p#{@b.format password}"
+          @b.append " -p#{@b.format_password password}"
           yield @b if block_given?
           self
         end
@@ -363,7 +363,7 @@ module FluentCommandBuilder
           self
         end
         def password(password)
-          @b.append " -p#{@b.format password}"
+          @b.append " -p#{@b.format_password password}"
           yield @b if block_given?
           self
         end
@@ -399,7 +399,7 @@ module FluentCommandBuilder
           self
         end
         def password(password)
-          @b.append " -p#{@b.format password}"
+          @b.append " -p#{@b.format_password password}"
           yield @b if block_given?
           self
         end
@@ -494,7 +494,7 @@ module FluentCommandBuilder
           self
         end
         def password(password)
-          @b.append " -p#{@b.format password}"
+          @b.append " -p#{@b.format_password password}"
           yield @b if block_given?
           self
         end

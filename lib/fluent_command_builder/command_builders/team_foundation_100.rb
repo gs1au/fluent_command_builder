@@ -258,7 +258,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -310,7 +310,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -332,7 +332,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -370,7 +370,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -428,7 +428,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -456,7 +456,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -499,7 +499,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -517,7 +517,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -539,7 +539,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -581,7 +581,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -643,7 +643,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -695,7 +695,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -753,7 +753,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -785,7 +785,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -829,7 +829,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -887,7 +887,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -939,7 +939,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -988,7 +988,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -1007,7 +1007,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -1040,7 +1040,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -1095,7 +1095,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -1177,7 +1177,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -1206,7 +1206,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -1273,7 +1273,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -1295,7 +1295,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -1323,7 +1323,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -1360,7 +1360,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -1377,7 +1377,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -1394,7 +1394,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -1411,7 +1411,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -1459,7 +1459,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -1491,7 +1491,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -1530,7 +1530,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -1562,7 +1562,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -1604,7 +1604,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -1617,7 +1617,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -1650,7 +1650,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -1667,7 +1667,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -1722,7 +1722,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -1750,7 +1750,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -1777,7 +1777,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -1807,7 +1807,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -1855,7 +1855,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -1867,7 +1867,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -1879,7 +1879,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -1891,7 +1891,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -1914,7 +1914,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -1937,7 +1937,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -1965,7 +1965,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -1988,7 +1988,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -2043,7 +2043,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -2061,7 +2061,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -2095,7 +2095,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end
@@ -2148,7 +2148,7 @@ module FluentCommandBuilder
         end
         def login(username, password=nil)
           @b.append " /login:#{@b.format username}"
-          @b.append ",#{@b.format password}" unless password.nil?
+          @b.append ",#{@b.format_password password}" unless password.nil?
           yield @b if block_given?
           self
         end

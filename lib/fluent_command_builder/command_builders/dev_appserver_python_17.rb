@@ -152,7 +152,7 @@ module FluentCommandBuilder
           self
         end
         def mysql_password(password)
-          @b.append " --mysql_password=#{@b.format password}"
+          @b.append " --mysql_password=#{@b.format_password password}"
           yield @b if block_given?
           self
         end
@@ -197,7 +197,7 @@ module FluentCommandBuilder
           self
         end
         def smtp_password(password)
-          @b.append " --smtp_password=#{@b.format password}"
+          @b.append " --smtp_password=#{@b.format_password password}"
           yield @b if block_given?
           self
         end

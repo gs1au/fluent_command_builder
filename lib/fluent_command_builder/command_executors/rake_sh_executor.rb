@@ -3,8 +3,10 @@ include Rake::DSL
 
 module FluentCommandBuilder
   class RakeShExecutor
-    def execute(command)
-      sh command
+
+    def execute(underlying_builder)
+      sh underlying_builder.to_s
     end
+
   end
 end
