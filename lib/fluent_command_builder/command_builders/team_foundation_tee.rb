@@ -1,3 +1,5 @@
+# Generated code. Do not modify.
+
 require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
