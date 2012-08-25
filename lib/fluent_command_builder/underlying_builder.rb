@@ -1,27 +1,18 @@
 require File.expand_path(File.dirname(__FILE__) + '/command_base')
-require File.expand_path(File.dirname(__FILE__) + '/executor')
+require File.expand_path(File.dirname(__FILE__) + '/execution_context')
 require File.expand_path(File.dirname(__FILE__) + '/path_finder')
 
 module FluentCommandBuilder
-
-  def self.default_executor
-    @default_executor ||= self.executor.rake_sh_executor
-  end
-
-  def self.default_executor=(value)
-    @default_executor = value
-  end
-
   class UnderlyingBuilder
 
-    attr_accessor :command_name, :path, :executor, :passwords
+    attr_accessor :command_name, :path, :passwords
 
     def initialize(command_name=nil)
       @command_name = command_name
       @path = nil
-      @executor = FluentCommandBuilder.default_executor
       @args = ''
       @passwords = []
+      @execution_context = FluentCommandBuilder.execution_context
     end
 
     def format(value, delimiter=' ', key_value_separator='=')
@@ -62,7 +53,7 @@ module FluentCommandBuilder
     end
 
     def execute
-      @executor.execute to_s
+      @execution_context.execute self
     end
 
     private

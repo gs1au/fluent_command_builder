@@ -3,7 +3,7 @@ require_relative '../lib/command_test_base'
 class TeamFoundationTeeVersionTest < CommandTestBase
 
   def test_version_101
-    FluentCommandBuilder.executor.backticks_executor = MockExecutor.new <<EOF
+    FluentCommandBuilder::TeamFoundationTEE.version_detector.backticks_executor = MockExecutor.new <<EOF
 Team Explorer Everywhere (version 10.1.0.201101271439)
 
  Available commands and their options:

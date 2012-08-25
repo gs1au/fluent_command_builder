@@ -3,7 +3,7 @@ require_relative '../lib/command_test_base'
 class MSDeployVersionTest < CommandTestBase
 
   def test_version_40
-    FluentCommandBuilder.executor.backticks_executor = MockExecutor.new <<EOF
+    FluentCommandBuilder::MSDeploy.version_detector.backticks_executor = MockExecutor.new <<EOF
 Microsoft (R) Web Deployment Command Line Tool (MSDeploy.exe)
 Version 7.1.618.0
 Copyright (c) Microsoft Corporation. All rights reserved.

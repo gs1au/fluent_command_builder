@@ -1,5 +1,5 @@
 module FluentCommandBuilder
-  class StandardFormatter
+  class NullFormatter
 
     def format(underlying_builder)
       underlying_builder.to_s

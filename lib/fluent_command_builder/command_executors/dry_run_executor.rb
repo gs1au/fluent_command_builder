@@ -1,6 +1,6 @@
-require File.expand_path(File.dirname(__FILE__) + '/formattable_executor')
+require File.expand_path(File.dirname(__FILE__) + '/executor_base')
 
 module FluentCommandBuilder
-  class DryRunExecutor < FormattableExecutor
+  class DryRunExecutor < ExecutorBase
   end
 end

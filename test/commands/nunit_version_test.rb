@@ -3,7 +3,7 @@ require_relative '../lib/command_test_base'
 class NUnitVersionTest < CommandTestBase
 
   def test_version_40
-    FluentCommandBuilder.executor.backticks_executor = MockExecutor.new <<EOF
+    FluentCommandBuilder::NUnit.version_detector.backticks_executor = MockExecutor.new <<EOF
 NUnit-Console version 2.6.0.12051
 Copyright (C) 2002-20011 Charlie Poole.
 Copyright (C) 2002-2004 James W. Newkirk, Michael C. Two, Alexei A. Vorontsov.

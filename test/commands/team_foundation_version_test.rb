@@ -3,7 +3,7 @@ require_relative '../lib/command_test_base'
 class TeamFoundationVersionTest < CommandTestBase
 
   def test_version_100
-    FluentCommandBuilder.executor.backticks_executor = MockExecutor.new <<EOF
+    FluentCommandBuilder::TeamFoundation.version_detector.backticks_executor = MockExecutor.new <<EOF
 TF - Team Foundation Version Control Tool, Version 10.0.30319.1
 Copyright (c) Microsoft Corporation.  All rights reserved.
 

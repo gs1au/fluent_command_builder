@@ -3,7 +3,7 @@ require_relative '../lib/command_test_base'
 class NuGetVersionTest < CommandTestBase
 
   def test_version_20
-    FluentCommandBuilder.executor.backticks_executor = MockExecutor.new <<EOF
+    FluentCommandBuilder::NuGet.version_detector.backticks_executor = MockExecutor.new <<EOF
 NuGet Version: 2.0.30619.9000
 usage: NuGet <command> [args] [options]
 Type 'NuGet help <command>' for help on a specific command.

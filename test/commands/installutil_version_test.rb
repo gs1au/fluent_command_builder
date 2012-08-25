@@ -3,7 +3,7 @@ require_relative '../lib/command_test_base'
 class InstallUtilVersionTest < CommandTestBase
 
   def test_version_40
-    FluentCommandBuilder.executor.backticks_executor = MockExecutor.new <<EOF
+    FluentCommandBuilder::InstallUtil.version_detector.backticks_executor = MockExecutor.new <<EOF
 Microsoft (R) .NET Framework Installation utility Version 4.0.30319.1
 Copyright (c) Microsoft Corporation.  All rights reserved.
 

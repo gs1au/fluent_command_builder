@@ -3,7 +3,7 @@ require_relative '../lib/command_test_base'
 class SevenZipVersionTest < CommandTestBase
 
   def test_version_92
-    FluentCommandBuilder.executor.backticks_executor = MockExecutor.new <<EOF
+    FluentCommandBuilder::SevenZip.version_detector.backticks_executor = MockExecutor.new <<EOF
 
 7-Zip (A) 9.20  Copyright (c) 1999-2010 Igor Pavlov  2010-11-18
 

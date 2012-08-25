@@ -1,12 +1,12 @@
 require 'test/unit'
 require_relative '../../../lib/fluent_command_builder'
-require_relative '../../../lib/fluent_command_builder/command_formatters/standard_formatter'
+require_relative '../../../lib/fluent_command_builder/command_formatters/null_formatter'
 include FluentCommandBuilder
 
-class StandardFormatterTest < Test::Unit::TestCase
+class NullFormatterTest < Test::Unit::TestCase
 
   def test_command_is_unchanged
-    f = StandardFormatter.new
+    f = NullFormatter.new
     b = UnderlyingBuilder.new 'command'
     b.append " -password #{b.format_password 'password123'}"
     expected = 'command -password password123'

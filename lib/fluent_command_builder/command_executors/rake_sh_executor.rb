@@ -9,5 +9,13 @@ module FluentCommandBuilder
       sh underlying_builder.to_s
     end
 
+    def prints_on_execute?
+      true
+    end
+
+    def fails_on_error?
+      true
+    end
+
   end
 end
