@@ -3,7 +3,7 @@ module FluentCommandBuilder
 
     def execute(underlying_builder)
       result = do_execute underlying_builder
-      yield $?
+      yield $? if block_given?
       result
     end
 
