@@ -11,8 +11,8 @@ class SecurityOsx107Test < CommandTestBase
   end
 
   def test_import
-    expected = 'security import inputFile -k keychain -t type -f format -w -x -P passphrase -a name value -A -T appPath'
-    actual = security_osx_107.import('inputFile').keychain('keychain').type('type').format('format').wrapped.not_extractable.passphrase('passphrase').attribute('name', 'value').allow_without_warning.allow_application('appPath')
+    expected = 'security import inputFile -k keychain -t type -f format -w -x -P password -a name value -A -T appPath'
+    actual = security_osx_107.import('inputFile').keychain('keychain').type('type').format('format').wrapped.not_extractable.password('password').attribute('name', 'value').allow_without_warning.allow_application('appPath')
     assert_command expected, actual
   end
 
