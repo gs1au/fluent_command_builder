@@ -90,6 +90,8 @@ class CodeGenerator
           f.puts %Q[require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/#{File.basename command_builder_file}')]
         end
         f.puts %Q[Dir[File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/version_detectors/*.rb')].each { |f| require f }]
+        f.puts %Q[Dir[File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_executors/*.rb')].each { |f| require f }]
+        f.puts %Q[Dir[File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_formatters/*.rb')].each { |f| require f }]
       end
     end
   end
