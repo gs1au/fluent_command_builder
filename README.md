@@ -104,14 +104,14 @@ msbuild('sample.proj').target(:rebuild).property(configuration: 'release').execu
 
 By default, the __execute!__ method executes the command using [Kernel#system](http://www.ruby-doc.org/core-1.9.3/Kernel.html#method-i-system).
 
-#### Custom execution
+#### The Execution Context
 
 __FluentCommandBuilder::execution_context__ exposes the following attributes which can be used to customise command execution:
 
 - __executor__: An object responsible for executing the command. Default: __SystemExecutor__.
 - __formatter__: An object responsible for formatting the command for display. Default: __NullFormatter__.
-- __should_print_on_execute__: A boolean that determines whether the command should be displayed when executed. Default: __true__.
-- __should_fail_on_error__: A boolean that determines whether the command should raise an exception if not successful. Default: __true__.
+- __should_print_on_execute__: Determines whether the command should be displayed when executed. Default: __true__.
+- __should_fail_on_error__: Determines whether the command should raise an exception if not successful. Default: __true__.
 
 Available executors:
 
