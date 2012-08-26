@@ -14,11 +14,23 @@ module FluentCommandBuilder
     end
 
     def execute(underlying_builder)
+      validate_should_print_on_execute
+      validate_should_fail_on_error
       visible_command = @formatter.format underlying_builder
-      puts visible_command if @should_print_on_execute && !@executor.prints_on_execute?
+      puts visible_command if @should_print_on_execute && !@executor.will_print_on_execute?
       @executor.execute(underlying_builder) do |status|
-         fail "Command failed with status (#{status.exitstatus}): [#{visible_command}]" if @should_fail_on_error && !status.success?
+        raise "Command failed with status (#{status.exitstatus}): [#{visible_command}]" if @should_fail_on_error && !status.success?
       end
+    end
+
+    private
+
+    def validate_should_print_on_execute
+      raise "should_print_on_execute must be true for #{@executor}." if !@should_print_on_execute && @executor.will_print_on_execute?
+    end
+
+    def validate_should_fail_on_error
+      raise "should_fail_on_error must be true for #{@executor}." if !@should_fail_on_error && @executor.will_fail_on_error?
     end
 
   end

@@ -7,11 +7,11 @@ module FluentCommandBuilder
       result
     end
 
-    def prints_on_execute?
+    def will_print_on_execute?
       false
     end
 
-    def fails_on_error?
+    def will_fail_on_error?
       false
     end
 
