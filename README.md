@@ -102,24 +102,39 @@ At any point along the chain, the __execute!__ method may be called to execute t
 msbuild('sample.proj').target(:rebuild).property(configuration: 'release').execute!
 ```
 
-By default, the __execute!__ method executes the command using [Rake#sh](http://rake.rubyforge.org/classes/FileUtils.html#M000018).
+By default, the __execute!__ method executes the command using [Kernel#system](http://www.ruby-doc.org/core-1.9.3/Kernel.html#method-i-system).
 
 #### Custom execution
 
-The execution mechanism can be changed by setting the default executor:
+__FluentCommandBuilder::execution_context__ exposes the following attributes which can be used to customise command execution:
 
-```ruby
-FluentCommandBuilder.default_executor = BackticksExecutor.new
-```
+- __executor__: An object responsible for executing the command. Default: __SystemExecutor__.
+- __formatter__: An object responsible for formatting the command for display. Default: __NullFormatter__.
+- __should_print_on_execute__: A boolean that determines whether the command should be displayed when executed. Default: __true__.
+- __should_fail_on_error__: A boolean that determines whether the command should raise an exception if not successful. Default: __true__.
 
-Fluent Command Builder comes with 4 built-in executors:
+Available executors:
 
 - __BackticksExecutor__: Executes the command and returns the output.
 - __DryRunExecutor__: Prints the command instead of executing it.
 - __RakeShExecutor__: Executes the command using [Rake#sh](http://rake.rubyforge.org/classes/FileUtils.html#M000018).
 - __SystemExecutor__: Executes the command using [Kernel#system](http://www.ruby-doc.org/core-1.9.3/Kernel.html#method-i-system) and returns true (successful), false (unsuccessful) or nil (failed).
 
-Custom executors can be used by implementing __execute(command)__.
+Available formatters:
+
+- __NullFormatter__: Leaves the command unaltered.
+- __HiddenPasswordFormatter__: Replaces passwords with *** (by default).
+
+Example customisation:
+
+```ruby
+FluentCommandBuilder.execution_context.executor = BackticksExecutor.new
+FluentCommandBuilder.execution_context.formatter = HiddenPasswordFormatter.new
+FluentCommandBuilder.execution_context.should_print_on_execute = false
+FluentCommandBuilder.execution_context.should_fail_on_error = true
+```
+
+It is possible to plug-in custom executors and formatters.
 
 #### Version Validation
 
