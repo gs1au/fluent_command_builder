@@ -74,7 +74,7 @@ class ExecutionContextTest < Test::Unit::TestCase
     $stdout = StringIO.new
     context.execute builder
 
-    assert_equal "command\n", $stdout.string
+    assert_include $stdout.string, 'command'
   end
 
   private
