@@ -46,4 +46,13 @@ module FluentCommandBuilder
     @execution_context = value
   end
 
+  def self.change_execution_context
+    current = @execution_context.clone
+    begin
+      return yield @execution_context
+    ensure
+      @execution_context = current
+    end
+  end
+
 end
