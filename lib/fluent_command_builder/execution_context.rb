@@ -29,6 +29,7 @@ module FluentCommandBuilder
 
     def print_command_on_execute(visible_command)
       print magenta, visible_command, reset, "\n" if @should_print_on_execute && !@executor.will_print_on_execute?
+      STDOUT.flush
     end
 
     def validate_should_print_on_execute

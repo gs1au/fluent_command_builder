@@ -6,6 +6,7 @@ module FluentCommandBuilder
 
     def print_warning(message)
       print yellow, 'WARNING: ', message, reset, "\n"
+      STDOUT.flush
     end
 
   end
