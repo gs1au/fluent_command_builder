@@ -17,6 +17,8 @@ require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/comma
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/dotcover_11.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/dotcover_12.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/dotcover_20.rb')
+require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/fastlinkchecker.rb')
+require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/fastlinkchecker_21.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/installutil.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/installutil_11.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/installutil_20.rb')

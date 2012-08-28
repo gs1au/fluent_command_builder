@@ -1,0 +1,48 @@
+2.1
+conlinkchecker (fastLinkChecker)
+    --site <url>
+    -checkHyperlinks
+    -checkImages
+    -checkOthers
+    -recheckBad <recheckTimes>
+    -disp <serverName>
+    -auth <authType>
+    -user <username> (username)
+    -pwd <password> (password)
+    -ignoreRobotsTxt
+    -checkFirstOnly
+    -checkNoExtern
+    -checkIgnoreCase
+    -ignoreCookies
+    -notIgnoreWww
+    -checkParentDir
+    -ignoreRelative
+    -getAfterHeadFail
+    -checkRestrict <checkLevel>
+    -sizeLimitAbove
+    -sizeLimitBelow <sizeLimitKB>
+    -limitLinks <linkType> <n>
+    -skipSlowLinks
+    -checkOnly <wildcards>
+    -skipFiles <wildcards>
+    -skipDomains <domainList>
+    -skipBookmarks <bookmarkslist>
+    -ignoreFormTag
+    -notIgnoreSpaces
+    --ini <iniFile>
+    --flc <flcFile>
+    --cache
+    --verbosely
+    --printBroken
+    --userAgent <agentName>
+    --report <reportType>
+    -from <address>
+    -subject <subject>
+    -attach
+    -startTls
+    -columns <columns>
+    -sort <sortColumns>
+    -unprocessed
+    <filename>
+    <email>[ smtpserver:<port> <username> <password>]
+    -h (help)
