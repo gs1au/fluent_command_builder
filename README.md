@@ -265,6 +265,10 @@ If the Default Path does not exist, a warning will be generated similar to:
 
     WARNING: Default Path for command "MSBuild 4.0" does not exist. Path: C:/Windows/Microsoft.NET/Framework64/v4.0.30319
 
+At execution time, if the path still does not exist, an error will be generated similar to:
+
+    ERROR: Path for command "MSBuild" does not exist. Path: C:/Windows/Microsoft.NET/Framework64/v4.0.30319
+
 ## Supported Commands
 
 __Please note:__
