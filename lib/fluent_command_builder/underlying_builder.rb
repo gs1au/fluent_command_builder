@@ -19,19 +19,23 @@ module FluentCommandBuilder
     end
 
     def append(value)
-      value = value.to_s
-      value = @args ? value : value.lstrip
-      @args = @args.to_s + value
+      v = value.to_s
+      v = @args ? v : v.lstrip
+      @args = @args.to_s + v
     end
 
     def executable
-      executable = @path ? File.join(@path, @command_name) : @command_name
-      executable.gsub! '/', '\\' if executable.include? '\\'
-      executable
+      e = @path ? File.join(@path, @command_name) : @command_name
+      e.gsub! '/', '\\' if e.include? '\\'
+      e
     end
 
     def execute
       @execution_context.execute self
+    end
+
+    def actual_version
+      @actual_version_lambda.call @path if @actual_version_lambda
     end
 
     def to_s

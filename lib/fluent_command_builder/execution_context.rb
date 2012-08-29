@@ -1,5 +1,5 @@
 require File.expand_path(File.dirname(__FILE__) + '/printer')
-require File.expand_path(File.dirname(__FILE__) + '/version')
+require File.expand_path(File.dirname(__FILE__) + '/version_validator')
 require File.expand_path(File.dirname(__FILE__) + '/command_executors/system_executor')
 require File.expand_path(File.dirname(__FILE__) + '/command_formatters/null_formatter')
 
@@ -39,24 +39,8 @@ module FluentCommandBuilder
     end
 
     def validate_version(underlying_builder)
-      return unless underlying_builder.version && underlying_builder.actual_version_lambda
-
-      expected_version = underlying_builder.version
-      actual_version = underlying_builder.actual_version_lambda.call underlying_builder.path
-      warning_message_partial = %Q[Version validation for command "#{underlying_builder.command_name}" failed. Expected version #{expected_version} but was ]
-
-      unless actual_version
-        @printer.print_warning warning_message_partial + 'unable to determine actual version.'
-        return
-      end
-
-      expected_version = Version.new expected_version
-      actual_version = Version.new actual_version
-      is_valid = actual_version.compact == expected_version.compact
-
-      unless is_valid
-        @printer.print_warning warning_message_partial + actual_version.to_s(2) + '.'
-      end
+      v = VersionValidator.new underlying_builder
+      v.validate
     end
 
     def validate_path(underlying_builder)
