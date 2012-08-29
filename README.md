@@ -134,17 +134,30 @@ FluentCommandBuilder.execution_context.should_print_on_execute = false
 FluentCommandBuilder.execution_context.should_fail_on_error = true
 ```
 
-It is possible to plug-in custom executors and formatters.
+The execution context can be changed temporarily using the __change_execution_context__ method:
+
+```ruby
+FluentCommandBuilder.change_execution_context do |context|
+    context.executor = BackticksExecutor.new
+    context.formatter = HiddenPasswordFormatter.new
+    context.should_print_on_execute = false
+    context.should_fail_on_error = true
+    msbuild_40('sample.proj').execute!
+end
+```
+
+Once the block has executed, the execution context will reset to it's original values.
+
+Please note that it is also possible to plug-in custom executors and formatters.
 
 #### Version Validation
 
-When Version Validation is enabled, the command builder version will be compared with the command version just prior to execution
-and a warning will be generated if the versions do not match.
+Fluent Command Builder compares the command builder version with the actual command version just prior to execution
+and generates a warning if the versions do not match.
 
 As an example, if MSBuild 3.5 is on the PATH but is being invoked by an MSBuild 4.0 command builder:
 
 ```ruby
-FluentCommandBuilder.version_validation_enabled = true
 msbuild_40('sample.proj').target(:rebuild).property(configuration: 'release').execute!
 ```
 
@@ -263,11 +276,11 @@ FluentCommandBuilder::MSBuild::V40.default_path = 'C:/Windows/Microsoft.NET/Fram
 
 If the Default Path does not exist, a warning will be generated similar to:
 
-    WARNING: Default Path for command "MSBuild 4.0" does not exist. Path: C:/Windows/Microsoft.NET/Framework64/v4.0.30319
+    WARNING: Default Path for command "MSBuild", version "4.0" does not exist. Path: C:/Windows/Microsoft.NET/Framework64/v4.0.30319
 
 At execution time, if the path still does not exist, an error will be generated similar to:
 
-    ERROR: Path for command "MSBuild" does not exist. Path: C:/Windows/Microsoft.NET/Framework64/v4.0.30319
+    ERROR: Path for command "MSBuild", version "4.0" does not exist. Path: C:/Windows/Microsoft.NET/Framework64/v4.0.30319
 
 ## Supported Commands
 
