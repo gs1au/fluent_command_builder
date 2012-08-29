@@ -6,7 +6,7 @@ module FluentCommandBuilder
     include ArgumentFormatter
 
     attr_reader :command_name, :version, :args, :passwords
-    attr_accessor :path
+    attr_accessor :path, :actual_version_lambda
 
     def initialize(command_name, version=nil)
       @command_name = command_name
@@ -14,6 +14,7 @@ module FluentCommandBuilder
       @args = nil
       @passwords = []
       @path = nil
+      @actual_version_lambda = nil
       @execution_context = FluentCommandBuilder.execution_context
     end
 

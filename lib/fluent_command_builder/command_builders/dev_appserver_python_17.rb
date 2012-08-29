@@ -17,15 +17,16 @@ module FluentCommandBuilder
       def self.default_path=(value)
         printer = FluentCommandBuilder::Printer.new
         begin
-          printer.print_warning %Q[Default Path for command #{FluentCommandBuilder::DevAppserverPython::COMMAND_NAME} #{VERSION} does not exist. Path: #{value}] unless File.exist? value
+          printer.print_warning %Q[Default Path for command "#{FluentCommandBuilder::DevAppserverPython::COMMAND_NAME}", version "#{VERSION}" does not exist. Path: #{value}] unless File.exist? value
         rescue
-          printer.print_warning %Q[Failed to determine whether Default Path for command #{FluentCommandBuilder::DevAppserverPython::COMMAND_NAME} #{VERSION} exists. An internal error occurred.]
+          printer.print_warning %Q[Failed to determine whether Default Path for command "#{FluentCommandBuilder::DevAppserverPython::COMMAND_NAME}", version "#{VERSION}" exists. An internal error occurred.]
         end
         @default_path = value
       end
       def self.create(application_root=nil)
         b = UnderlyingBuilder.new FluentCommandBuilder::DevAppserverPython::COMMAND_NAME, VERSION
         b.path = self.default_path
+        b.actual_version_lambda = lambda { |path| FluentCommandBuilder::DevAppserverPython.version path }
         c = DevAppserverPython.new(b, application_root)
         yield b if block_given?
         c

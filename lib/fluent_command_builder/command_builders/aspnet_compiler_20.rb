@@ -17,15 +17,16 @@ module FluentCommandBuilder
       def self.default_path=(value)
         printer = FluentCommandBuilder::Printer.new
         begin
-          printer.print_warning %Q[Default Path for command #{FluentCommandBuilder::AspnetCompiler::COMMAND_NAME} #{VERSION} does not exist. Path: #{value}] unless File.exist? value
+          printer.print_warning %Q[Default Path for command "#{FluentCommandBuilder::AspnetCompiler::COMMAND_NAME}", version "#{VERSION}" does not exist. Path: #{value}] unless File.exist? value
         rescue
-          printer.print_warning %Q[Failed to determine whether Default Path for command #{FluentCommandBuilder::AspnetCompiler::COMMAND_NAME} #{VERSION} exists. An internal error occurred.]
+          printer.print_warning %Q[Failed to determine whether Default Path for command "#{FluentCommandBuilder::AspnetCompiler::COMMAND_NAME}", version "#{VERSION}" exists. An internal error occurred.]
         end
         @default_path = value
       end
       def self.create(target_dir=nil)
         b = UnderlyingBuilder.new FluentCommandBuilder::AspnetCompiler::COMMAND_NAME, VERSION
         b.path = self.default_path
+        b.actual_version_lambda = lambda { |path| FluentCommandBuilder::AspnetCompiler.version path }
         c = AspnetCompiler.new(b, target_dir)
         yield b if block_given?
         c

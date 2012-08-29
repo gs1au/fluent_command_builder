@@ -17,15 +17,16 @@ module FluentCommandBuilder
       def self.default_path=(value)
         printer = FluentCommandBuilder::Printer.new
         begin
-          printer.print_warning %Q[Default Path for command #{FluentCommandBuilder::DotCover::COMMAND_NAME} #{VERSION} does not exist. Path: #{value}] unless File.exist? value
+          printer.print_warning %Q[Default Path for command "#{FluentCommandBuilder::DotCover::COMMAND_NAME}", version "#{VERSION}" does not exist. Path: #{value}] unless File.exist? value
         rescue
-          printer.print_warning %Q[Failed to determine whether Default Path for command #{FluentCommandBuilder::DotCover::COMMAND_NAME} #{VERSION} exists. An internal error occurred.]
+          printer.print_warning %Q[Failed to determine whether Default Path for command "#{FluentCommandBuilder::DotCover::COMMAND_NAME}", version "#{VERSION}" exists. An internal error occurred.]
         end
         @default_path = value
       end
       def self.create
         b = UnderlyingBuilder.new FluentCommandBuilder::DotCover::COMMAND_NAME, VERSION
         b.path = self.default_path
+        b.actual_version_lambda = lambda { |path| FluentCommandBuilder::DotCover.version path }
         c = DotCover.new(b)
         yield b if block_given?
         c
