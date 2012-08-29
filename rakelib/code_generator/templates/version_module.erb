@@ -24,7 +24,7 @@ module FluentCommandBuilder
         @default_path = value
       end
       def <%= model[:create_method_signature] %>
-        b = UnderlyingBuilder.new FluentCommandBuilder::<%= model[:command_module_name] %>::COMMAND_NAME
+        b = UnderlyingBuilder.new FluentCommandBuilder::<%= model[:command_module_name] %>::COMMAND_NAME, VERSION
         b.path = self.default_path
         c = <%= model[:command_initializer_call] %>
         yield b if block_given?

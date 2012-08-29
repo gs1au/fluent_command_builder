@@ -39,7 +39,7 @@ class Command < Node
 
   def Command.process_hash(hash, parent_node)
     hash.each_pair do |node_text, child_nodes|
-      node = Node.new " #{node_text}" # todo: remove need for leading space
+      node = Node.new " #{node_text}"
       parent_node.child_nodes << node
       process_array child_nodes, node
     end
