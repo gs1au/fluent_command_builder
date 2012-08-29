@@ -1,3 +1,4 @@
+require File.expand_path(File.dirname(__FILE__) + '/path_validator')
 require File.expand_path(File.dirname(__FILE__) + '/printer')
 require File.expand_path(File.dirname(__FILE__) + '/version_validator')
 require File.expand_path(File.dirname(__FILE__) + '/command_executors/system_executor')
@@ -44,11 +45,8 @@ module FluentCommandBuilder
     end
 
     def validate_path(underlying_builder)
-      return unless underlying_builder.path
-      return if File.exist? underlying_builder.path
-      message = %Q[Path for command "#{underlying_builder.command_name}" does not exist. Path: #{underlying_builder.path}]
-      @printer.print_error message
-      raise message
+      v = PathValidator.new underlying_builder
+      v.validate
     end
 
     def print_command(visible_command)
