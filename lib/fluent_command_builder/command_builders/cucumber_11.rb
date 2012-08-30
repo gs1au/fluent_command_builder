@@ -1,7 +1,7 @@
 # Generated code. Do not modify.
 
 require File.expand_path(File.dirname(__FILE__) + '/../command_base')
-require File.expand_path(File.dirname(__FILE__) + '/../printer')
+require File.expand_path(File.dirname(__FILE__) + '/../default_path_validator')
 require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
@@ -15,12 +15,8 @@ module FluentCommandBuilder
         @default_path ||= nil
       end
       def self.default_path=(value)
-        printer = FluentCommandBuilder::Printer.new
-        begin
-          printer.print_warning %Q[Default Path for command "#{FluentCommandBuilder::Cucumber::COMMAND_NAME}", version "#{VERSION}" does not exist. Path: #{value}] unless File.exist? value
-        rescue
-          printer.print_warning %Q[Failed to determine whether Default Path for command "#{FluentCommandBuilder::Cucumber::COMMAND_NAME}", version "#{VERSION}" exists. An internal error occurred.]
-        end
+        validator = DefaultPathValidator.new value, FluentCommandBuilder::Cucumber::COMMAND_NAME, VERSION
+        validator.validate
         @default_path = value
       end
       def self.create(feature=nil)
