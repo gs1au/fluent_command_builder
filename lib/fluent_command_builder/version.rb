@@ -31,6 +31,10 @@ module FluentCommandBuilder
       Version.new(version)
     end
 
+    def self.version_or_nil(version)
+      is_valid?(version) ? Version.new(version) : nil
+    end
+
     private
 
     def sequences(count)
@@ -43,8 +47,9 @@ module FluentCommandBuilder
   end
 
   def version_module(command_module)
-    version = command_module.respond_to?(:version) ? Version.new(command_module.version) : nil
-    raise "Unable to determine version for #{command_module::COMMAND_NAME}." unless version
+    version = command_module.version
+    raise %Q[Unable to determine version for command "#{command_module::COMMAND_NAME}".] unless version
+    version = Version.new version
     module_name = "#{command_module.name}::V#{version.compact}"
     begin
       eval module_name
@@ -52,4 +57,15 @@ module FluentCommandBuilder
       raise "Unable to load #{module_name}. Please consider contributing."
     end
   end
+
+  #def version_module(command_module)
+  #  version = command_module.respond_to?(:version) ? Version.new(command_module.version) : nil
+  #  raise "Unable to determine version for #{command_module::COMMAND_NAME}." unless version
+  #  module_name = "#{command_module.name}::V#{version.compact}"
+  #  begin
+  #    eval module_name
+  #  rescue
+  #    raise "Unable to load #{module_name}. Please consider contributing."
+  #  end
+  #end
 end
