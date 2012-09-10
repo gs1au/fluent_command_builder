@@ -20,7 +20,7 @@ module FluentCommandBuilder
       end
 
       unless is_valid?
-        message = error_message actual_version.to_s(2)
+        message = error_message actual_version.to_s(expected_version.to_a.length)
         @should_fail_on_unexpected_version ? @printer.print_error(message) : @printer.print_warning(message)
         raise message if @should_fail_on_unexpected_version
       end
@@ -33,15 +33,15 @@ module FluentCommandBuilder
     end
 
     def is_valid?
-      actual_version.compact == expected_version.compact
+      actual_version.to_a.first(expected_version.to_a.length) == expected_version.to_a
     end
 
     def expected_version
-      Version.new(@underlying_builder.version)
+      @expected_version ||= Version.new(@underlying_builder.version)
     end
 
     def actual_version
-      Version.new(@underlying_builder.actual_version) if @underlying_builder.actual_version
+      @actual_version ||= Version.new(@underlying_builder.actual_version) if @underlying_builder.actual_version
     end
 
     def error_message(actual_version)

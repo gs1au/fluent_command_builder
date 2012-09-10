@@ -11,16 +11,22 @@ module FluentCommandBuilder
   module Cucumber
     module V11
       VERSION = '1.1'
+      def self.exact_version
+        @exact_version ||= VERSION
+      end
+      def self.exact_version=(value)
+        @exact_version = value
+      end
       def self.default_path
         @default_path ||= nil
       end
       def self.default_path=(value)
-        validator = DefaultPathValidator.new value, FluentCommandBuilder::Cucumber::COMMAND_NAME, VERSION
+        validator = DefaultPathValidator.new value, FluentCommandBuilder::Cucumber::COMMAND_NAME, exact_version
         validator.validate
         @default_path = value
       end
       def self.create(feature=nil)
-        b = UnderlyingBuilder.new FluentCommandBuilder::Cucumber::COMMAND_NAME, VERSION
+        b = UnderlyingBuilder.new FluentCommandBuilder::Cucumber::COMMAND_NAME, self.exact_version
         b.path = self.default_path
         b.actual_version_lambda = lambda { |path| FluentCommandBuilder::Cucumber.version path }
         c = Cucumber.new(b, feature)

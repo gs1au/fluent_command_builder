@@ -11,16 +11,22 @@ module FluentCommandBuilder
   module SecurityOSX
     module V107
       VERSION = '10.7'
+      def self.exact_version
+        @exact_version ||= VERSION
+      end
+      def self.exact_version=(value)
+        @exact_version = value
+      end
       def self.default_path
         @default_path ||= nil
       end
       def self.default_path=(value)
-        validator = DefaultPathValidator.new value, FluentCommandBuilder::SecurityOSX::COMMAND_NAME, VERSION
+        validator = DefaultPathValidator.new value, FluentCommandBuilder::SecurityOSX::COMMAND_NAME, exact_version
         validator.validate
         @default_path = value
       end
       def self.create
-        b = UnderlyingBuilder.new FluentCommandBuilder::SecurityOSX::COMMAND_NAME, VERSION
+        b = UnderlyingBuilder.new FluentCommandBuilder::SecurityOSX::COMMAND_NAME, self.exact_version
         b.path = self.default_path
         b.actual_version_lambda = lambda { |path| FluentCommandBuilder::SecurityOSX.version path }
         c = SecurityOSX.new(b)

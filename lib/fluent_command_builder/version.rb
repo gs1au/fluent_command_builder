@@ -12,11 +12,15 @@ module FluentCommandBuilder
     end
 
     def compact
-      sequences(2).join
+      to_a.first(2).join
     end
 
     def to_s(count=nil)
       count ? truncate(count) : @version
+    end
+
+    def to_a
+      @version.split SEQUENCE_SEPARATOR
     end
 
     def self.is_valid?(version)
@@ -38,12 +42,8 @@ module FluentCommandBuilder
 
     private
 
-    def sequences(count)
-      @version.split(SEQUENCE_SEPARATOR).first(count)
-    end
-
     def truncate(count)
-      sequences(count).join(SEQUENCE_SEPARATOR)
+      to_a.first(count).join(SEQUENCE_SEPARATOR)
     end
 
   end

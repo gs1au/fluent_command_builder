@@ -11,16 +11,22 @@ module FluentCommandBuilder
   module AppCfgPython
     module V16
       VERSION = '1.6'
+      def self.exact_version
+        @exact_version ||= VERSION
+      end
+      def self.exact_version=(value)
+        @exact_version = value
+      end
       def self.default_path
         @default_path ||= nil
       end
       def self.default_path=(value)
-        validator = DefaultPathValidator.new value, FluentCommandBuilder::AppCfgPython::COMMAND_NAME, VERSION
+        validator = DefaultPathValidator.new value, FluentCommandBuilder::AppCfgPython::COMMAND_NAME, exact_version
         validator.validate
         @default_path = value
       end
       def self.create
-        b = UnderlyingBuilder.new FluentCommandBuilder::AppCfgPython::COMMAND_NAME, VERSION
+        b = UnderlyingBuilder.new FluentCommandBuilder::AppCfgPython::COMMAND_NAME, self.exact_version
         b.path = self.default_path
         b.actual_version_lambda = lambda { |path| FluentCommandBuilder::AppCfgPython.version path }
         c = AppCfgPython.new(b)

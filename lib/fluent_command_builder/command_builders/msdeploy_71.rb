@@ -11,16 +11,22 @@ module FluentCommandBuilder
   module MSDeploy
     module V71
       VERSION = '7.1'
+      def self.exact_version
+        @exact_version ||= VERSION
+      end
+      def self.exact_version=(value)
+        @exact_version = value
+      end
       def self.default_path
         @default_path ||= nil
       end
       def self.default_path=(value)
-        validator = DefaultPathValidator.new value, FluentCommandBuilder::MSDeploy::COMMAND_NAME, VERSION
+        validator = DefaultPathValidator.new value, FluentCommandBuilder::MSDeploy::COMMAND_NAME, exact_version
         validator.validate
         @default_path = value
       end
       def self.create
-        b = UnderlyingBuilder.new FluentCommandBuilder::MSDeploy::COMMAND_NAME, VERSION
+        b = UnderlyingBuilder.new FluentCommandBuilder::MSDeploy::COMMAND_NAME, self.exact_version
         b.path = self.default_path
         b.actual_version_lambda = lambda { |path| FluentCommandBuilder::MSDeploy.version path }
         c = MSDeploy.new(b)

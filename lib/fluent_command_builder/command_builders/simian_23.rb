@@ -11,16 +11,22 @@ module FluentCommandBuilder
   module Simian
     module V23
       VERSION = '2.3'
+      def self.exact_version
+        @exact_version ||= VERSION
+      end
+      def self.exact_version=(value)
+        @exact_version = value
+      end
       def self.default_path
         @default_path ||= nil
       end
       def self.default_path=(value)
-        validator = DefaultPathValidator.new value, FluentCommandBuilder::Simian::COMMAND_NAME, VERSION
+        validator = DefaultPathValidator.new value, FluentCommandBuilder::Simian::COMMAND_NAME, exact_version
         validator.validate
         @default_path = value
       end
       def self.create
-        b = UnderlyingBuilder.new FluentCommandBuilder::Simian::COMMAND_NAME, VERSION
+        b = UnderlyingBuilder.new FluentCommandBuilder::Simian::COMMAND_NAME, self.exact_version
         b.path = self.default_path
         b.actual_version_lambda = lambda { |path| FluentCommandBuilder::Simian.version path }
         c = Simian.new(b)
