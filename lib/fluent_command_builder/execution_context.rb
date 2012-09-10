@@ -7,13 +7,14 @@ require File.expand_path(File.dirname(__FILE__) + '/command_formatters/null_form
 module FluentCommandBuilder
   class ExecutionContext
 
-    attr_accessor :executor, :formatter, :should_print_on_execute, :should_fail_on_error
+    attr_accessor :executor, :formatter, :should_print_on_execute, :should_fail_on_error, :should_fail_on_unexpected_version
 
     def initialize(executor)
       @executor = executor
       @formatter = NullFormatter.new
       @should_print_on_execute = true
       @should_fail_on_error = true
+      @should_fail_on_unexpected_version = false
       @printer = FluentCommandBuilder::Printer.new
     end
 
@@ -41,6 +42,7 @@ module FluentCommandBuilder
 
     def validate_version(underlying_builder)
       v = VersionValidator.new underlying_builder
+      v.should_fail_on_unexpected_version = @should_fail_on_unexpected_version
       v.validate
     end
 

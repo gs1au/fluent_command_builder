@@ -3,21 +3,26 @@ require File.expand_path(File.dirname(__FILE__) + '/printer')
 module FluentCommandBuilder
   class VersionValidator
 
+    attr_accessor :should_fail_on_unexpected_version
+
     def initialize(underlying_builder)
       @underlying_builder = underlying_builder
       @printer = Printer.new
+      @should_fail_on_unexpected_version = false
     end
 
     def validate
       return unless can_validate?
 
       unless actual_version
-        print_warning 'unable to determine actual version'
+        @printer.print_warning error_message('unable to determine actual version')
         return
       end
 
       unless is_valid?
-        print_warning actual_version.to_s(2)
+        message = error_message actual_version.to_s(2)
+        @should_fail_on_unexpected_version ? @printer.print_error(message) : @printer.print_warning(message)
+        raise message if @should_fail_on_unexpected_version
       end
     end
 
@@ -39,8 +44,8 @@ module FluentCommandBuilder
       Version.new(@underlying_builder.actual_version) if @underlying_builder.actual_version
     end
 
-    def print_warning(message)
-      @printer.print_warning %Q[Version validation for command "#{@underlying_builder.command_name}" failed. Expected version #{expected_version} but was #{message}.]
+    def error_message(actual_version)
+      %Q[Version validation for command "#{@underlying_builder.command_name}" failed. Expected version #{expected_version} but was #{actual_version}.]
     end
 
   end

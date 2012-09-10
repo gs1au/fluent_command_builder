@@ -8,9 +8,9 @@ module FluentCommandBuilder
     end
 
     def format(underlying_builder)
-      command = underlying_builder.to_s
-      underlying_builder.passwords.each { |p| command.gsub! p, @password_replacement }
-      command
+      c = underlying_builder.to_s
+      underlying_builder.passwords.each { |p| c.gsub! p, @password_replacement }
+      c
     end
 
   end
