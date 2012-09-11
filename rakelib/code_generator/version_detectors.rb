@@ -18,6 +18,8 @@ def version_detector_line(module_name)
       %Q[AppEnginePythonVersionDetector.new COMMAND_NAME]
     when :DotCover
       standard_version_detector 'version'
+    when :FastLinkChecker
+      standard_version_detector
     when :InstallUtil
       standard_version_detector
     when :MSBuild

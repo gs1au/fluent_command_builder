@@ -10,7 +10,7 @@ module FluentCommandBuilder
   module FastLinkChecker
     COMMAND_NAME = 'conlinkchecker'
     def self.version_detector
-      @version_detector ||= DefaultVersionDetector.new COMMAND_NAME
+      @version_detector ||= StandardVersionDetector.new COMMAND_NAME
     end
     def self.version_detector=(value)
       @version_detector = value
