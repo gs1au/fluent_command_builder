@@ -1,51 +1,23 @@
-require File.expand_path(File.dirname(__FILE__) + '/printer')
+require File.expand_path(File.dirname(__FILE__) + '/stateful_version_validator')
 
 module FluentCommandBuilder
   class VersionValidator
 
-    attr_accessor :should_fail_on_unexpected_version
+    attr_accessor :warn_only, :enabled
 
-    def initialize(underlying_builder)
-      @underlying_builder = underlying_builder
-      @printer = Printer.new
-      @should_fail_on_unexpected_version = false
+    def initialize(command_name, version_detector, expected_version)
+      @command_name = command_name
+      @version_detector = version_detector
+      @expected_version = expected_version
+      @warn_only = false
+      @enabled = true
     end
 
-    def validate
-      return unless can_validate?
-
-      unless actual_version
-        @printer.print_warning error_message('unable to determine actual version')
-        return
-      end
-
-      unless is_valid?
-        message = error_message actual_version.to_s(expected_version.to_a.length)
-        @should_fail_on_unexpected_version ? @printer.print_error(message) : @printer.print_warning(message)
-        raise message if @should_fail_on_unexpected_version
-      end
-    end
-
-    private
-
-    def can_validate?
-      @underlying_builder.version && @underlying_builder.actual_version_lambda
-    end
-
-    def is_valid?
-      actual_version.to_a.first(expected_version.to_a.length) == expected_version.to_a
-    end
-
-    def expected_version
-      @expected_version ||= Version.new(@underlying_builder.version)
-    end
-
-    def actual_version
-      @actual_version ||= Version.new(@underlying_builder.actual_version) if @underlying_builder.actual_version
-    end
-
-    def error_message(actual_version)
-      %Q[Version validation for command "#{@underlying_builder.command_name}" failed. Expected version #{expected_version} but was #{actual_version}.]
+    def validate(path=nil)
+      return unless enabled
+      v = StatefulVersionValidator.new @command_name, path, @version_detector, @expected_version
+      v.warn_only = @warn_only
+      v.validate
     end
 
   end

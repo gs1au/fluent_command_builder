@@ -7,22 +7,21 @@ require File.expand_path(File.dirname(__FILE__) + '/command_formatters/null_form
 module FluentCommandBuilder
   class ExecutionContext
 
-    attr_accessor :executor, :formatter, :should_print_on_execute, :should_fail_on_error, :should_fail_on_unexpected_version
+    attr_accessor :executor, :formatter, :should_print_on_execute, :should_fail_on_error
 
     def initialize(executor)
       @executor = executor
       @formatter = NullFormatter.new
       @should_print_on_execute = true
       @should_fail_on_error = true
-      @should_fail_on_unexpected_version = false
       @printer = FluentCommandBuilder::Printer.new
     end
 
-    def execute(underlying_builder)
+    def execute(underlying_builder, version_validator=nil)
       validate_should_print_on_execute
       validate_should_fail_on_error
       validate_path underlying_builder
-      validate_version underlying_builder
+      version_validator.validate underlying_builder.path if version_validator
       visible_command = @formatter.format underlying_builder
       print_command visible_command
       @executor.execute(underlying_builder) do |status|
@@ -38,12 +37,6 @@ module FluentCommandBuilder
 
     def validate_should_fail_on_error
       raise "should_fail_on_error must be true for #{@executor}." if !@should_fail_on_error && @executor.will_fail_on_error?
-    end
-
-    def validate_version(underlying_builder)
-      v = VersionValidator.new underlying_builder
-      v.should_fail_on_unexpected_version = @should_fail_on_unexpected_version
-      v.validate
     end
 
     def validate_path(underlying_builder)

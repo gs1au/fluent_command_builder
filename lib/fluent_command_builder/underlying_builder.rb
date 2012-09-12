@@ -5,17 +5,16 @@ module FluentCommandBuilder
   class UnderlyingBuilder
     include ArgumentFormatter
 
-    attr_reader :command_name, :version, :args, :passwords
-    attr_accessor :path, :actual_version_lambda
+    attr_reader :command_name, :args, :passwords
+    attr_accessor :path, :version_validator
 
-    def initialize(command_name, version=nil)
+    def initialize(command_name)
       @command_name = command_name
-      @version = version
       @args = nil
       @passwords = []
       @path = nil
-      @actual_version_lambda = nil
       @execution_context = FluentCommandBuilder.execution_context
+      @version_validator = nil
     end
 
     def append(value)
@@ -31,11 +30,7 @@ module FluentCommandBuilder
     end
 
     def execute
-      @execution_context.execute self
-    end
-
-    def actual_version
-      @actual_version_lambda.call @path if @actual_version_lambda
+      @execution_context.execute self, @version_validator
     end
 
     def to_s

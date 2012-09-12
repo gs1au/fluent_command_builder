@@ -2,6 +2,7 @@
 
 require File.expand_path(File.dirname(__FILE__) + '/../command_base')
 require File.expand_path(File.dirname(__FILE__) + '/../default_path_validator')
+require File.expand_path(File.dirname(__FILE__) + '/../version_validator')
 require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
@@ -25,10 +26,16 @@ module FluentCommandBuilder
         validator.validate
         @default_path = value
       end
+      def self.version_validator
+        @version_validator ||= VersionValidator.new(FluentCommandBuilder::DevAppserverPython::COMMAND_NAME, FluentCommandBuilder::DevAppserverPython.version_detector, exact_version)
+      end
+      def self.version_validator=(value)
+        @version_validator = value
+      end
       def self.create(application_root=nil)
-        b = UnderlyingBuilder.new FluentCommandBuilder::DevAppserverPython::COMMAND_NAME, self.exact_version
+        b = UnderlyingBuilder.new FluentCommandBuilder::DevAppserverPython::COMMAND_NAME
         b.path = self.default_path
-        b.actual_version_lambda = lambda { |path| FluentCommandBuilder::DevAppserverPython.version path }
+        b.version_validator = self.version_validator
         c = DevAppserverPython.new(b, application_root)
         yield b if block_given?
         c
