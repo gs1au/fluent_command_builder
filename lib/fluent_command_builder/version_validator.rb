@@ -8,7 +8,7 @@ module FluentCommandBuilder
       @path = path
       @expected_version_string = expected_version
       @version_detector = version_detector
-      @options = options
+      @options = { enabled: true, warn_only: false }.merge options
       @printer = Printer.new
     end
 
@@ -32,11 +32,11 @@ module FluentCommandBuilder
     private
 
     def enabled?
-      @options[:enabled] ||= true
+      @options[:enabled]
     end
 
     def warn_only?
-      @options[:warn_only] ||= false
+      @options[:warn_only]
     end
 
     def is_valid?
@@ -48,7 +48,7 @@ module FluentCommandBuilder
     end
 
     def actual_version
-      @actual_version ||= Version.new(@actual_version_string)
+      @actual_version ||= Version.new(@actual_version_string) if @actual_version_string
     end
 
     def error_message(actual_version)

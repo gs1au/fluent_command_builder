@@ -2,7 +2,7 @@ class MockProcessStatus
 
   attr_accessor :exitstatus, :success
 
-  def initialize(options={})
+  def initialize
     @exitstatus = 0
     @success = true
   end
