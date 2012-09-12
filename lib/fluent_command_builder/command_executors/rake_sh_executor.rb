@@ -5,8 +5,8 @@ include Rake::DSL
 module FluentCommandBuilder
   class RakeShExecutor < ExecutorBase
 
-    def do_execute(underlying_builder)
-      sh underlying_builder.to_s
+    def do_execute(command)
+      sh command.to_s
     end
 
     def will_print_on_execute?

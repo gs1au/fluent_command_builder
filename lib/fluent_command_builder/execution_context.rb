@@ -1,6 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/path_validator')
 require File.expand_path(File.dirname(__FILE__) + '/printer')
-require File.expand_path(File.dirname(__FILE__) + '/version_validator')
 require File.expand_path(File.dirname(__FILE__) + '/command_executors/system_executor')
 require File.expand_path(File.dirname(__FILE__) + '/command_formatters/null_formatter')
 
@@ -17,14 +15,11 @@ module FluentCommandBuilder
       @printer = FluentCommandBuilder::Printer.new
     end
 
-    def execute(underlying_builder, version_validator=nil)
+    def execute(command, visible_command=command)
       validate_should_print_on_execute
       validate_should_fail_on_error
-      validate_path underlying_builder
-      version_validator.validate underlying_builder.path if version_validator
-      visible_command = @formatter.format underlying_builder
       print_command visible_command
-      @executor.execute(underlying_builder) do |status|
+      @executor.execute(command) do |status|
         raise "Command failed with status (#{status.exitstatus}): [#{visible_command}]" if @should_fail_on_error && !status.success?
       end
     end
@@ -37,11 +32,6 @@ module FluentCommandBuilder
 
     def validate_should_fail_on_error
       raise "should_fail_on_error must be true for #{@executor}." if !@should_fail_on_error && @executor.will_fail_on_error?
-    end
-
-    def validate_path(underlying_builder)
-      v = PathValidator.new underlying_builder
-      v.validate
     end
 
     def print_command(visible_command)

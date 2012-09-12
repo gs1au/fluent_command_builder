@@ -1,8 +1,8 @@
 module FluentCommandBuilder
   class ExecutorBase
 
-    def execute(underlying_builder)
-      result = do_execute underlying_builder
+    def execute(command)
+      result = do_execute command
       yield $? if block_given?
       result
     end
@@ -17,7 +17,7 @@ module FluentCommandBuilder
 
     protected
 
-    def do_execute(underlying_builder)
+    def do_execute(command)
       # template method
     end
 

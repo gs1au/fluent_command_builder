@@ -2,7 +2,6 @@
 
 require File.expand_path(File.dirname(__FILE__) + '/../command_base')
 require File.expand_path(File.dirname(__FILE__) + '/../default_path_validator')
-require File.expand_path(File.dirname(__FILE__) + '/../version_validator')
 require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
@@ -26,16 +25,16 @@ module FluentCommandBuilder
         validator.validate
         @default_path = value
       end
-      def self.version_validator
-        @version_validator ||= VersionValidator.new(FluentCommandBuilder::NUnit::COMMAND_NAME, FluentCommandBuilder::NUnit.version_detector, exact_version)
-      end
-      def self.version_validator=(value)
-        @version_validator = value
+      def self.version_validation_options
+        @version_validation_options ||= {}
+        yield @version_validation_options if block_given?
+        @version_validation_options
       end
       def self.create(input_files=nil)
-        b = UnderlyingBuilder.new FluentCommandBuilder::NUnit::COMMAND_NAME
+        b = UnderlyingBuilder.new FluentCommandBuilder::NUnit::COMMAND_NAME, self.exact_version
         b.path = self.default_path
-        b.version_validator = self.version_validator
+        b.version_validation_options = self.version_validation_options
+        b.version_detector = FluentCommandBuilder::NUnit.version_detector
         c = NUnit.new(b, input_files)
         yield b if block_given?
         c

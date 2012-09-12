@@ -6,7 +6,7 @@
 #
 #  def test_should_not_validate_when_version_is_nil
 #    b = UnderlyingBuilder.new 'command'
-#    v = StatefulVersionValidator.new b
+#    v = VersionValidator.new 'command', '/', '1.0',
 #    $stdout = StringIO.new
 #    v.validate
 #    assert_equal '', $stdout.string
