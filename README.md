@@ -348,3 +348,4 @@ Other very important tools:
 - dotcover.exe (.NET code coverage tool by JetBrains) 1.0, 1.1, 1.2, 2.0
 - 7za.exe (7-Zip) 9.20 (WIP)
 - simian.exe 2.3
+- conlinkchecker 2.1 (Fast Link Checker)
