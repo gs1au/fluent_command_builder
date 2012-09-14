@@ -20,13 +20,13 @@ conlinkchecker (fastLinkChecker)
     -getAfterHeadFail
     -checkRestrict <checkLevel>
     -sizeLimitAbove
-    -sizeLimitBelow <sizeLimitKB>
+    -sizeLimitBelow <sizeLimitKb>
     -limitLinks <linkType> <n>
     -skipSlowLinks
     -checkOnly <wildcards>
     -skipFiles <wildcards>
-    -skipDomains <domainList>
-    -skipBookmarks <bookmarkslist>
+    -skipDomains <domains;>
+    -skipBookmarks <bookmarks;>
     -ignoreFormTag
     -notIgnoreSpaces
     --ini <iniFile>

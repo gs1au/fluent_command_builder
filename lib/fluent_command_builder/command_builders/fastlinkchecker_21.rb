@@ -146,8 +146,8 @@ module FluentCommandBuilder
           yield @b if block_given?
           self
         end
-        def size_limit_below(size_limit_k_b)
-          @b.append " -sizeLimitBelow #{@b.format size_limit_k_b}"
+        def size_limit_below(size_limit_kb)
+          @b.append " -sizeLimitBelow #{@b.format size_limit_kb}"
           yield @b if block_given?
           self
         end
@@ -171,13 +171,13 @@ module FluentCommandBuilder
           yield @b if block_given?
           self
         end
-        def skip_domains(domain_list)
-          @b.append " -skipDomains #{@b.format domain_list}"
+        def skip_domains(domains)
+          @b.append " -skipDomains #{@b.format domains, ';'}"
           yield @b if block_given?
           self
         end
-        def skip_bookmarks(bookmarkslist)
-          @b.append " -skipBookmarks #{@b.format bookmarkslist}"
+        def skip_bookmarks(bookmarks)
+          @b.append " -skipBookmarks #{@b.format bookmarks, ';'}"
           yield @b if block_given?
           self
         end
