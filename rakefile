@@ -4,6 +4,8 @@ require 'bundler'
 Bundler::GemHelper.install_tasks
 require_relative 'rakelib/code_generator/code_generator'
 
+load 'rakelib/reference_generator/ref.rake'
+
 ROOT_DIR = File.expand_path(File.dirname(__FILE__))
 COMMAND_DEFINITIONS_DIR = File.join ROOT_DIR, 'command_definitions'
 LIB_DIR = File.join ROOT_DIR, 'lib'
