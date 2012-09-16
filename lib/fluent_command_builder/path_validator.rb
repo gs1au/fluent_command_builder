@@ -21,7 +21,7 @@ module FluentCommandBuilder
     private
 
     def is_valid?
-      File.exist? path
+      File.exist? @path
     end
 
   end
