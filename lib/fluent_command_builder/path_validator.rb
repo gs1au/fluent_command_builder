@@ -26,7 +26,11 @@ module FluentCommandBuilder
     private
 
     def path
-      @command_builder_config.path
+      is_windows? ? windows_path : @command_builder_config.path
+    end
+
+    def windows_path
+      `echo #{@command_builder_config.path}`.strip
     end
 
     def command_name
@@ -35,6 +39,10 @@ module FluentCommandBuilder
 
     def version
       @command_builder_config.version
+    end
+
+    def is_windows?
+      !ENV['WINDIR'].nil?
     end
 
   end
