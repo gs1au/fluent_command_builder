@@ -40,6 +40,10 @@ class CommandCodeNames
     format_method "FluentCommandBuilder::#{command_module_name}::#{version_module_name}.create", initializer_values
   end
 
+  def command_factory_method_call
+    format_method command_factory_method_name, initializer_values
+  end
+
   def command_initializer_call
     format_method "#{class_name}.new", %w(b) + initializer_values
   end

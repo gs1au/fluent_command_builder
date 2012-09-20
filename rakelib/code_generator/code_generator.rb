@@ -59,7 +59,10 @@ class CodeGenerator
         command_module_name: code_names.command_module_name,
         version_module_name: code_names.version_module_name,
         version: version,
-        command_class: generate_command_class(command)
+        command_class: generate_command_class(command),
+        factory_method_name: code_names.command_factory_method_name,
+        command_factory_method_call: code_names.command_factory_method_call,
+        command_name: command.command_name
     }
 
     template_file = File.expand_path(File.dirname(__FILE__) + '/templates/version_module.erb')
@@ -85,14 +88,14 @@ class CodeGenerator
   def generate_loader
     Dir.chdir @lib_dir do
       File.open 'fluent_command_builder.rb', 'w' do |f|
-        pattern = File.join @command_builders_dir, '*.rb'
-        Dir[pattern].each do |command_builder_file|
-          f.puts %Q[require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/#{File.basename command_builder_file}')]
-        end
         f.puts %Q[Dir[File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/version_detectors/*.rb')].each { |f| require f }]
         f.puts %Q[Dir[File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_executors/*.rb')].each { |f| require f }]
         f.puts %Q[Dir[File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_formatters/*.rb')].each { |f| require f }]
         f.puts %Q[require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/path_finder')]
+        pattern = File.join @command_builders_dir, '*.rb'
+        Dir[pattern].each do |command_builder_file|
+          f.puts %Q[require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/#{File.basename command_builder_file}')]
+        end
       end
     end
   end

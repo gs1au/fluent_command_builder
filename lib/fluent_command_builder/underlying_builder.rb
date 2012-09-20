@@ -1,23 +1,16 @@
 require File.expand_path(File.dirname(__FILE__) + '/argument_formatter')
 require File.expand_path(File.dirname(__FILE__) + '/execution_context')
-require File.expand_path(File.dirname(__FILE__) + '/path_validator')
-require File.expand_path(File.dirname(__FILE__) + '/version_validator')
 
 module FluentCommandBuilder
   class UnderlyingBuilder
     include ArgumentFormatter
 
-    attr_reader :command_name, :version, :args, :passwords
-    attr_accessor :path, :version_detector, :version_validation_options
+    attr_reader :command_builder_config, :args, :passwords
 
-    def initialize(command_name, version=nil)
-      @command_name = command_name
-      @version = version
+    def initialize(command_builder_config)
+      @command_builder_config = command_builder_config
       @args = nil
       @passwords = []
-      @version_validation_options = {}
-      @path = nil
-      @version_detector = nil
       @execution_context = FluentCommandBuilder.execution_context
     end
 
@@ -28,14 +21,14 @@ module FluentCommandBuilder
     end
 
     def executable
-      e = @path ? File.join(@path, @command_name) : @command_name
+      e = path ? File.join(path, command_name) : command_name
       e.gsub! '/', '\\' if e.include? '\\'
       e
     end
 
     def execute
-      validate_path if @path
-      validate_version if @version_detector
+      @command_builder_config.validate_path :fatal
+      @command_builder_config.validate_version
       visible_command = @execution_context.formatter.format self
       @execution_context.execute to_s, visible_command
     end
@@ -46,14 +39,12 @@ module FluentCommandBuilder
 
     private
 
-    def validate_path
-      v = PathValidator.new @path, @command_name, @version
-      v.validate
+    def path
+      @command_builder_config.path
     end
 
-    def validate_version
-      v = VersionValidator.new @command_name, @path, @version, @version_detector, @version_validation_options
-      v.validate
+    def command_name
+      @command_builder_config.command_name
     end
 
   end

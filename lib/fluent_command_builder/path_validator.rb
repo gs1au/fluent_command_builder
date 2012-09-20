@@ -3,25 +3,38 @@ require File.expand_path(File.dirname(__FILE__) + '/printer')
 module FluentCommandBuilder
   class PathValidator
 
-    def initialize(path, command_name, version)
-      @path = path
-      @command_name = command_name
-      @version = version
+    def initialize(command_builder_config)
+      @command_builder_config = command_builder_config
       @printer = Printer.new
     end
 
-    def validate
-      return if is_valid?
-      version = @version || '(unknown)'
-      message = %Q[Path for command "#{@command_name}", version "#{version}" does not exist. Path: #{@path}]
-      @printer.print_error message
-      raise message
+    def validate(validation_level=:warn)
+      return if File.exist? path
+      message = %Q[Path for command "#{command_name}", version "#{version}" does not exist. Path: #{path}]
+
+      case validation_level
+        when :warn
+          @printer.print_warning message
+        when :fatal
+          @printer.print_error message
+          abort
+        else
+          @printer.print_warning %Q[Path validation failed. Validation level "#{validation_level}" is not supported.]
+      end
     end
 
     private
 
-    def is_valid?
-      File.exist? @path
+    def path
+      @command_builder_config.path
+    end
+
+    def command_name
+      @command_builder_config.command_name
+    end
+
+    def version
+      @command_builder_config.version
     end
 
   end

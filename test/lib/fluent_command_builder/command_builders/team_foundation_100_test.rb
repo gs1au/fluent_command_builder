@@ -2,12 +2,11 @@
 
 require_relative '../command_test_base'
 
-class TeamFoundationTee100Test < CommandTestBase
+class TeamFoundation100Test < CommandTestBase
+  include FluentCommandBuilder::TeamFoundation::V100
 
   def assert_each_tf_command(expected_command_text)
-    assert_command expected_command_text, yield(team_foundation_100)
-    expected_command_text.gsub! '/', '-'
-    assert_command expected_command_text, yield(team_foundation_tee_100)
+    assert_command expected_command_text, yield(team_foundation)
   end
 
   def test_add
@@ -89,7 +88,7 @@ class TeamFoundationTee100Test < CommandTestBase
 
   def test_configure
     expected = 'tf configure pathOfTeamProject /collection:teamProjectCollectionUrl /login:username,password /login:username'
-    actual = team_foundation_100.configure('pathOfTeamProject').collection('teamProjectCollectionUrl').login('username', 'password').login('username')
+    actual = team_foundation.configure('pathOfTeamProject').collection('teamProjectCollectionUrl').login('username', 'password').login('username')
     assert_command expected, actual
   end
 
@@ -144,19 +143,13 @@ class TeamFoundationTee100Test < CommandTestBase
 
   def test_folder_diff
     expected = 'tf folderDiff sourcePath targetPath /recursive /noPrompt /collection:teamProjectCollectionUrl /filter:filter1;filter2 /filterLocalPathsOnly /login:username,password /login:username /view:view1,view2'
-    actual = team_foundation_100.folder_diff('targetPath', 'sourcePath').recursive.no_prompt.collection('teamProjectCollectionUrl').filter(%w(filter1 filter2)).filter_local_paths_only.login('username', 'password').login('username').view(%w(view1 view2))
+    actual = team_foundation.folder_diff('targetPath', 'sourcePath').recursive.no_prompt.collection('teamProjectCollectionUrl').filter(%w(filter1 filter2)).filter_local_paths_only.login('username', 'password').login('username').view(%w(view1 view2))
     assert_command expected, actual
   end
 
   def test_folder_diff_source_path_is_optional
     expected = 'tf folderDiff targetPath'
-    actual = team_foundation_100.folder_diff('targetPath')
-    assert_command expected, actual
-  end
-
-  def test_eula
-    expected = 'tf eula -accept'
-    actual = team_foundation_tee_100.eula.accept
+    actual = team_foundation.folder_diff('targetPath')
     assert_command expected, actual
   end
 
@@ -174,21 +167,15 @@ class TeamFoundationTee100Test < CommandTestBase
     end
   end
 
-  def test_getcs
-    expected = 'tf getcs -changeset:changesetNumber -latest'
-    actual = team_foundation_tee_100.getcs.changeset('changesetNumber').latest
-    assert_command expected, actual
-  end
-
   def test_help
     expected = 'tf help commandName'
-    actual = team_foundation_100.help('commandName')
+    actual = team_foundation.help('commandName')
     assert_command expected, actual
   end
 
   def test_help_command_command_name_is_optional
     expected = 'tf help'
-    actual = team_foundation_100.help
+    actual = team_foundation.help
     assert_command expected, actual
   end
 
@@ -243,7 +230,7 @@ class TeamFoundationTee100Test < CommandTestBase
 
   def test_local_versions
     expected = 'tf localVersions itemSpec /recursive /format:format /workspace:workspaceName;workspaceOwner /workspace:workspaceName /recursive /collection:teamProjectCollectionUrl'
-    actual = team_foundation_100.local_versions('itemSpec').recursive.format('format').workspace('workspaceName', 'workspaceOwner').workspace('workspaceName').recursive.collection('teamProjectCollectionUrl')
+    actual = team_foundation.local_versions('itemSpec').recursive.format('format').workspace('workspaceName', 'workspaceOwner').workspace('workspaceName').recursive.collection('teamProjectCollectionUrl')
     assert_command expected, actual
   end
 
@@ -277,61 +264,19 @@ class TeamFoundationTee100Test < CommandTestBase
 
   def test_msdn
     expected = 'tf msdn commandName'
-    actual = team_foundation_100.msdn('commandName')
+    actual = team_foundation.msdn('commandName')
     assert_command expected, actual
   end
 
   def test_msdn_command_name_is_optional
     expected = 'tf msdn'
-    actual = team_foundation_100.msdn
+    actual = team_foundation.msdn
     assert_command expected, actual
   end
 
   def test_permission
     expected = 'tf permission itemSpec /allow:permission1,permission2 /deny:permission1,permission2 /remove:permission1,permission2 /inherit:inherit /user:userName1,userName2 /group:groupName1,groupName2 /collection:teamProjectCollectionUrl /recursive /global /login:username,password /login:username'
-    actual = team_foundation_100.permission('itemSpec').allow(%w(permission1 permission2)).deny(%w(permission1 permission2)).remove(%w(permission1 permission2)).inherit('inherit').user(%w(userName1 userName2)).group(%w(groupName1 groupName2)).collection('teamProjectCollectionUrl').recursive.global.login('username', 'password').login('username')
-    assert_command expected, actual
-  end
-
-  def test_print
-    expected = 'tf print itemSpec -version:versionSpec'
-    actual = team_foundation_tee_100.print('itemSpec').version('versionSpec')
-    assert_command expected, actual
-  end
-
-  def test_product_key
-    expected = 'tf productKey -set:myProductKey -trial'
-    actual = team_foundation_tee_100.product_key.set('myProductKey').trial
-    assert_command expected, actual
-  end
-
-  def test_copy_profile
-    expected = 'tf profile -copy existingProfileName newProfileName'
-    actual = team_foundation_tee_100.copy_profile('existingProfileName', 'newProfileName')
-    assert_command expected, actual
-  end
-
-  def test_delete_profile
-    expected = 'tf profile -delete profileName'
-    actual = team_foundation_tee_100.delete_profile('profileName')
-    assert_command expected, actual
-  end
-
-  def test_edit_profile
-    expected = 'tf profile -edit existingProfileName -string:name=value -boolean:name=value -number:name=value'
-    actual = team_foundation_tee_100.edit_profile('existingProfileName').string('name', 'value').boolean('name', 'value').number('name', 'value')
-    assert_command expected, actual
-  end
-
-  def test_new_profile
-    expected = 'tf profile -new newProfileName -string:name=value -boolean:name=value -number:name=value'
-    actual = team_foundation_tee_100.new_profile('newProfileName').string('name', 'value').boolean('name', 'value').number('name', 'value')
-    assert_command expected, actual
-  end
-
-  def test_profiles
-    expected = 'tf profiles -format:format'
-    actual = team_foundation_tee_100.profiles.format('format')
+    actual = team_foundation.permission('itemSpec').allow(%w(permission1 permission2)).deny(%w(permission1 permission2)).remove(%w(permission1 permission2)).inherit('inherit').user(%w(userName1 userName2)).group(%w(groupName1 groupName2)).collection('teamProjectCollectionUrl').recursive.global.login('username', 'password').login('username')
     assert_command expected, actual
   end
 
@@ -344,37 +289,37 @@ class TeamFoundationTee100Test < CommandTestBase
 
   def test_configure_proxy
     expected = 'tf proxy /configure url /collection:teamProjectCollectionUrl /login:username,password /login:username'
-    actual = team_foundation_100.configure_proxy('url').collection('teamProjectCollectionUrl').login('username', 'password').login('username')
+    actual = team_foundation.configure_proxy('url').collection('teamProjectCollectionUrl').login('username', 'password').login('username')
     assert_command expected, actual
   end
 
   def test_add_proxy_record
     expected = 'tf proxy /add url /name:name /site:siteName /description:description /collection:teamProjectCollectionUrl /login:username,password /login:username'
-    actual = team_foundation_100.add_proxy_record('url').name('name').site('siteName').description('description').collection('teamProjectCollectionUrl').login('username', 'password').login('username')
+    actual = team_foundation.add_proxy_record('url').name('name').site('siteName').description('description').collection('teamProjectCollectionUrl').login('username', 'password').login('username')
     assert_command expected, actual
   end
 
   def test_delete_proxy_record
     expected = 'tf proxy /delete url /collection:teamProjectCollectionUrl /login:username,password /login:username'
-    actual = team_foundation_100.delete_proxy_record('url').collection('teamProjectCollectionUrl').login('username', 'password').login('username')
+    actual = team_foundation.delete_proxy_record('url').collection('teamProjectCollectionUrl').login('username', 'password').login('username')
     assert_command expected, actual
   end
 
   def test_list_proxy_records
     expected = 'tf proxy /list url1 url2 /collection:teamProjectCollectionUrl /login:username,password /login:username'
-    actual = team_foundation_100.list_proxy_records(%w(url1 url2)).collection('teamProjectCollectionUrl').login('username', 'password').login('username')
+    actual = team_foundation.list_proxy_records(%w(url1 url2)).collection('teamProjectCollectionUrl').login('username', 'password').login('username')
     assert_command expected, actual
   end
 
   def test_enable_proxy
     expected = 'tf proxy /enabled:true'
-    actual = team_foundation_100.enable_proxy
+    actual = team_foundation.enable_proxy
     assert_command expected, actual
   end
 
   def test_disable_proxy
     expected = 'tf proxy /enabled:false'
-    actual = team_foundation_100.disable_proxy
+    actual = team_foundation.disable_proxy
     assert_command expected, actual
   end
 
@@ -401,25 +346,25 @@ class TeamFoundationTee100Test < CommandTestBase
 
   def test_rollback_to_version
     expected = 'tf rollback /toVersion:versionSpec itemSpec /recursive /lock:lockType /version:versionSpec /keepMergeHistory /login:username,password /login:username /noPrompt'
-    actual = team_foundation_100.rollback_to_version('versionSpec', 'itemSpec').recursive.lock('lockType').version('versionSpec').keep_merge_history.login('username', 'password').login('username').no_prompt
+    actual = team_foundation.rollback_to_version('versionSpec', 'itemSpec').recursive.lock('lockType').version('versionSpec').keep_merge_history.login('username', 'password').login('username').no_prompt
     assert_command expected, actual
   end
 
   def test_rollback_changeset
     expected = 'tf rollback /changeset:changesetFrom~changesetTo itemSpec /recursive /lock:lockType /version:versionSpec /keepMergeHistory /login:username,password /login:username /noPrompt'
-    actual = team_foundation_100.rollback_changeset('changesetFrom', 'changesetTo', 'itemSpec').recursive.lock('lockType').version('versionSpec').keep_merge_history.login('username', 'password').login('username').no_prompt
+    actual = team_foundation.rollback_changeset('changesetFrom', 'changesetTo', 'itemSpec').recursive.lock('lockType').version('versionSpec').keep_merge_history.login('username', 'password').login('username').no_prompt
     assert_command expected, actual
   end
 
   def test_rollback_changeset_changeset_to_is_optional
     expected = 'tf rollback /changeset:changesetFrom'
-    actual = team_foundation_100.rollback_changeset('changesetFrom')
+    actual = team_foundation.rollback_changeset('changesetFrom')
     assert_command expected, actual
   end
 
   def test_rollback_changeset_item_spec_is_optional
     expected = 'tf rollback /changeset:changesetFrom~changesetTo'
-    actual = team_foundation_100.rollback_changeset('changesetFrom', 'changesetTo')
+    actual = team_foundation.rollback_changeset('changesetFrom', 'changesetTo')
     assert_command expected, actual
   end
 
@@ -523,7 +468,7 @@ class TeamFoundationTee100Test < CommandTestBase
 
   def test_view
     expected = 'tf view itemSpec /collection:teamProjectCollectionUrl /console /recursive /output:localFile /shelveset:shelvesetName;shelvesetOwner /shelveset:shelvesetName /noPrompt /version:versionSpec /login:username,password /login:username'
-    actual = team_foundation_100.view('itemSpec').collection('teamProjectCollectionUrl').console.recursive.output('localFile').shelveset('shelvesetName', 'shelvesetOwner').shelveset('shelvesetName').no_prompt.version('versionSpec').login('username', 'password').login('username')
+    actual = team_foundation.view('itemSpec').collection('teamProjectCollectionUrl').console.recursive.output('localFile').shelveset('shelvesetName', 'shelvesetOwner').shelveset('shelvesetName').no_prompt.version('versionSpec').login('username', 'password').login('username')
     assert_command expected, actual
   end
 

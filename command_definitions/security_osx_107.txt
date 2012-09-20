@@ -27,3 +27,4 @@ security (Security OSX)
         -u (noPassword)
         -p <password> (password)
         <keychain>
+    help

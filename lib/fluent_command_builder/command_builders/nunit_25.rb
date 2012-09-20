@@ -1,46 +1,24 @@
 # Generated code. Do not modify.
 
 require File.expand_path(File.dirname(__FILE__) + '/../command_base')
-require File.expand_path(File.dirname(__FILE__) + '/../default_path_validator')
+require File.expand_path(File.dirname(__FILE__) + '/../command_builder_config')
 require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
-  def nunit_25(input_files=nil)
-    FluentCommandBuilder::NUnit::V25.create(input_files) { |b| yield b if block_given? }
-  end
   module NUnit
     module V25
       VERSION = '2.5'
-      def self.exact_version
-        @exact_version ||= VERSION
+      @@config = CommandBuilderConfig.new FluentCommandBuilder::NUnit::COMMAND_NAME, VERSION
+      @@config.version_detector = FluentCommandBuilder::NUnit.version_detector
+      def configure_nunit
+        yield @@config
+        @@config.validate_path :warn
       end
-      def self.exact_version=(value)
-        @exact_version = value
-      end
-      def self.default_path
-        @default_path ||= nil
-      end
-      def self.default_path=(value)
-        validator = DefaultPathValidator.new value, FluentCommandBuilder::NUnit::COMMAND_NAME, exact_version
-        validator.validate
-        @default_path = value
-      end
-      def self.version_validation_options
-        @version_validation_options ||= {}
-        yield @version_validation_options if block_given?
-        @version_validation_options
-      end
-      def self.create(input_files=nil)
-        b = UnderlyingBuilder.new FluentCommandBuilder::NUnit::COMMAND_NAME, self.exact_version
-        b.path = self.default_path
-        b.version_validation_options = self.version_validation_options
-        b.version_detector = FluentCommandBuilder::NUnit.version_detector
+      def nunit(input_files=nil)
+        b = UnderlyingBuilder.new @@config
         c = NUnit.new(b, input_files)
         yield b if block_given?
         c
-      end
-      def nunit(input_files=nil)
-        FluentCommandBuilder::NUnit::V25.create(input_files) { |b| yield b if block_given? }
       end
       class NUnit < CommandBase
         def initialize(underlying_builder, input_files=nil)

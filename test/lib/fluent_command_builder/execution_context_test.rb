@@ -2,12 +2,13 @@ require 'test/unit'
 require_relative '../../mock_executor'
 require_relative '../../mock_process_status'
 require_relative '../../../lib/fluent_command_builder'
+require_relative '../../../lib/fluent_command_builder/command_builder_config'
 include FluentCommandBuilder
 
 class ExecutionContextTest < Test::Unit::TestCase
 
   def test_should_fail_when_should_not_fail_on_error_but_executor_will_fail_on_error
-    builder = UnderlyingBuilder.new 'command'
+    builder = UnderlyingBuilder.new CommandBuilderConfig.new('command', '1.0')
 
     executor = MockExecutor.new
     executor.will_fail_on_error = true
@@ -19,7 +20,7 @@ class ExecutionContextTest < Test::Unit::TestCase
   end
 
   def test_should_fail_when_should_fail_on_error_but_executor_will_not_fail_on_error
-    builder = UnderlyingBuilder.new 'command'
+    builder = UnderlyingBuilder.new CommandBuilderConfig.new('command', '1.0')
 
     status = MockProcessStatus.new
     status.exitstatus = 1
@@ -36,7 +37,7 @@ class ExecutionContextTest < Test::Unit::TestCase
   end
 
   def test_should_fail_when_should_not_print_on_execute_but_executor_will_print_on_error
-    builder = UnderlyingBuilder.new 'command'
+    builder = UnderlyingBuilder.new CommandBuilderConfig.new('command', '1.0')
 
     executor = MockExecutor.new
     executor.will_print_on_execute = true
@@ -48,7 +49,7 @@ class ExecutionContextTest < Test::Unit::TestCase
   end
 
   def test_should_not_print_on_execute
-    builder = UnderlyingBuilder.new 'command'
+    builder = UnderlyingBuilder.new CommandBuilderConfig.new('command', '1.0')
 
     executor = MockExecutor.new
     executor.will_print_on_execute = false
@@ -63,7 +64,7 @@ class ExecutionContextTest < Test::Unit::TestCase
   end
 
   def test_should_print_on_execute
-    builder = UnderlyingBuilder.new 'command'
+    builder = UnderlyingBuilder.new CommandBuilderConfig.new('command', '1.0')
 
     executor = MockExecutor.new
     executor.will_print_on_execute = false

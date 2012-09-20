@@ -1,46 +1,24 @@
 # Generated code. Do not modify.
 
 require File.expand_path(File.dirname(__FILE__) + '/../command_base')
-require File.expand_path(File.dirname(__FILE__) + '/../default_path_validator')
+require File.expand_path(File.dirname(__FILE__) + '/../command_builder_config')
 require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
-  def appcfg_python_17
-    FluentCommandBuilder::AppCfgPython::V17.create { |b| yield b if block_given? }
-  end
   module AppCfgPython
     module V17
       VERSION = '1.7'
-      def self.exact_version
-        @exact_version ||= VERSION
+      @@config = CommandBuilderConfig.new FluentCommandBuilder::AppCfgPython::COMMAND_NAME, VERSION
+      @@config.version_detector = FluentCommandBuilder::AppCfgPython.version_detector
+      def configure_appcfg_python
+        yield @@config
+        @@config.validate_path :warn
       end
-      def self.exact_version=(value)
-        @exact_version = value
-      end
-      def self.default_path
-        @default_path ||= nil
-      end
-      def self.default_path=(value)
-        validator = DefaultPathValidator.new value, FluentCommandBuilder::AppCfgPython::COMMAND_NAME, exact_version
-        validator.validate
-        @default_path = value
-      end
-      def self.version_validation_options
-        @version_validation_options ||= {}
-        yield @version_validation_options if block_given?
-        @version_validation_options
-      end
-      def self.create
-        b = UnderlyingBuilder.new FluentCommandBuilder::AppCfgPython::COMMAND_NAME, self.exact_version
-        b.path = self.default_path
-        b.version_validation_options = self.version_validation_options
-        b.version_detector = FluentCommandBuilder::AppCfgPython.version_detector
+      def appcfg_python
+        b = UnderlyingBuilder.new @@config
         c = AppCfgPython.new(b)
         yield b if block_given?
         c
-      end
-      def appcfg_python
-        FluentCommandBuilder::AppCfgPython::V17.create { |b| yield b if block_given? }
       end
       class AppCfgPython < CommandBase
         def initialize(underlying_builder)

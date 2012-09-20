@@ -1,46 +1,24 @@
 # Generated code. Do not modify.
 
 require File.expand_path(File.dirname(__FILE__) + '/../command_base')
-require File.expand_path(File.dirname(__FILE__) + '/../default_path_validator')
+require File.expand_path(File.dirname(__FILE__) + '/../command_builder_config')
 require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
-  def cucumber_11(feature=nil)
-    FluentCommandBuilder::Cucumber::V11.create(feature) { |b| yield b if block_given? }
-  end
   module Cucumber
     module V11
       VERSION = '1.1'
-      def self.exact_version
-        @exact_version ||= VERSION
+      @@config = CommandBuilderConfig.new FluentCommandBuilder::Cucumber::COMMAND_NAME, VERSION
+      @@config.version_detector = FluentCommandBuilder::Cucumber.version_detector
+      def configure_cucumber
+        yield @@config
+        @@config.validate_path :warn
       end
-      def self.exact_version=(value)
-        @exact_version = value
-      end
-      def self.default_path
-        @default_path ||= nil
-      end
-      def self.default_path=(value)
-        validator = DefaultPathValidator.new value, FluentCommandBuilder::Cucumber::COMMAND_NAME, exact_version
-        validator.validate
-        @default_path = value
-      end
-      def self.version_validation_options
-        @version_validation_options ||= {}
-        yield @version_validation_options if block_given?
-        @version_validation_options
-      end
-      def self.create(feature=nil)
-        b = UnderlyingBuilder.new FluentCommandBuilder::Cucumber::COMMAND_NAME, self.exact_version
-        b.path = self.default_path
-        b.version_validation_options = self.version_validation_options
-        b.version_detector = FluentCommandBuilder::Cucumber.version_detector
+      def cucumber(feature=nil)
+        b = UnderlyingBuilder.new @@config
         c = Cucumber.new(b, feature)
         yield b if block_given?
         c
-      end
-      def cucumber(feature=nil)
-        FluentCommandBuilder::Cucumber::V11.create(feature) { |b| yield b if block_given? }
       end
       class Cucumber < CommandBase
         def initialize(underlying_builder, feature=nil)

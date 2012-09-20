@@ -1,3 +1,7 @@
+Dir[File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/version_detectors/*.rb')].each { |f| require f }
+Dir[File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_executors/*.rb')].each { |f| require f }
+Dir[File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_formatters/*.rb')].each { |f| require f }
+require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/path_finder')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/appcfg_python.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/appcfg_python_16.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/appcfg_python_17.rb')
@@ -46,6 +50,7 @@ require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/comma
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/rake_09.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/security_osx.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/security_osx_107.rb')
+require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/security_osx_108.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/sevenzip.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/sevenzip_920.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/simian.rb')
@@ -58,7 +63,3 @@ require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/comma
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/xcodebuild.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/xcodebuild_43.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/xcodebuild_44.rb')
-Dir[File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/version_detectors/*.rb')].each { |f| require f }
-Dir[File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_executors/*.rb')].each { |f| require f }
-Dir[File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_formatters/*.rb')].each { |f| require f }
-require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/path_finder')

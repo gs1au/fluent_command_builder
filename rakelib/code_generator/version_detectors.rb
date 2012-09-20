@@ -9,7 +9,7 @@ def version_detector_line(module_name)
     when :AppCfgPython
       %Q[AppEnginePythonVersionDetector.new COMMAND_NAME]
     when :AspnetCompiler
-      %Q[MSBuild.version_detector]
+      standard_version_detector '/version', "'MSBuild'"
     when :Bundle
       standard_version_detector '--version'
     when :Cucumber

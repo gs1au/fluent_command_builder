@@ -1,46 +1,24 @@
 # Generated code. Do not modify.
 
 require File.expand_path(File.dirname(__FILE__) + '/../command_base')
-require File.expand_path(File.dirname(__FILE__) + '/../default_path_validator')
+require File.expand_path(File.dirname(__FILE__) + '/../command_builder_config')
 require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
 
 module FluentCommandBuilder
-  def sevenzip_920
-    FluentCommandBuilder::SevenZip::V920.create { |b| yield b if block_given? }
-  end
   module SevenZip
     module V920
       VERSION = '9.20'
-      def self.exact_version
-        @exact_version ||= VERSION
+      @@config = CommandBuilderConfig.new FluentCommandBuilder::SevenZip::COMMAND_NAME, VERSION
+      @@config.version_detector = FluentCommandBuilder::SevenZip.version_detector
+      def configure_sevenzip
+        yield @@config
+        @@config.validate_path :warn
       end
-      def self.exact_version=(value)
-        @exact_version = value
-      end
-      def self.default_path
-        @default_path ||= nil
-      end
-      def self.default_path=(value)
-        validator = DefaultPathValidator.new value, FluentCommandBuilder::SevenZip::COMMAND_NAME, exact_version
-        validator.validate
-        @default_path = value
-      end
-      def self.version_validation_options
-        @version_validation_options ||= {}
-        yield @version_validation_options if block_given?
-        @version_validation_options
-      end
-      def self.create
-        b = UnderlyingBuilder.new FluentCommandBuilder::SevenZip::COMMAND_NAME, self.exact_version
-        b.path = self.default_path
-        b.version_validation_options = self.version_validation_options
-        b.version_detector = FluentCommandBuilder::SevenZip.version_detector
+      def sevenzip
+        b = UnderlyingBuilder.new @@config
         c = SevenZip.new(b)
         yield b if block_given?
         c
-      end
-      def sevenzip
-        FluentCommandBuilder::SevenZip::V920.create { |b| yield b if block_given? }
       end
       class SevenZip < CommandBase
         def initialize(underlying_builder)

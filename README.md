@@ -36,61 +36,27 @@ Extremely effective with [RubyMine](http://www.jetbrains.com/ruby/) intellisense
 
 ## Usage
 
-Fluent Command Builder supports multiple versions of the same command.
-
-Targetting a specific version helps avoid the impact of breaking changes introduced by new versions.
-
-### Target a specific version by including a version specific module
-
-Example:
-
 ```ruby
 require 'fluent_command_builder'
 include FluentCommandBuilder::MSBuild::V40
 msbuild('sample.proj').target(:rebuild).property(configuration: 'release').execute!
 ```
 
-In this example, the __msbuild__ method invokes a MSBuild 4.0 command builder.
+In this example, the __msbuild__ method invokes a MSBuild 4.0 command builder and expects that MSBuild is on the PATH.
 
-### Target a specific version by invoking a version specific command builder
-
-Example:
+To set the path explicitly:
 
 ```ruby
-require 'fluent_command_builder'
-include FluentCommandBuilder
-msbuild_40('sample.proj').target(:rebuild).property(configuration: 'release').execute!
+configure_msbuild { |config| config.path = 'C:/Windows/Microsoft.NET/Framework64/v4.0.30319' }
 ```
 
-In this example, the __msbuild_40__ method invokes a MSBuild 4.0 command builder.
+If the path does not exist, a warning will be generated similar to:
 
-### Don't target a specific version
+    WARNING: Path for command "MSBuild", version "4.0" does not exist. Path: C:/Windows/Microsoft.NET/Framework64/v4.0.30319
 
-This can be achieved by not including a version specific module and not invoking a version specific command builder.
+At execution time, if the path still does not exist, an error will be generated similar to:
 
-Example:
-
-```ruby
-require 'fluent_command_builder'
-include FluentCommandBuilder
-msbuild('sample.proj').target(:rebuild).property(configuration: 'release').execute!
-```
-
-In this example, the __msbuild__ method checks the version of MSBuild on the PATH and invokes the corresponding command builder dynamically.
-
-Although this approach seems incredibly flexible, it does introduce some drawbacks:
-
-- The corresponding command builder may not be implemented - be prepared to contribute one.
-- Intellisense may not work as accurately or not at all.
-- It becomes unclear what versions of the command are supported by the code.
-
-#### Detect version of command on PATH
-
-The mechanism to check the version of a command on the PATH can also be invoked independently:
-
-```ruby
-MSBuild.version # => "4.0.30319.1"
-```
+    ERROR: Path for command "MSBuild", version "4.0" does not exist. Path: C:/Windows/Microsoft.NET/Framework64/v4.0.30319
 
 ## Execution
 
@@ -153,17 +119,18 @@ Please note that it is also possible to plug-in custom executors and formatters.
 #### Version Validation
 
 Fluent Command Builder compares the command builder version with the actual command version just prior to execution
-and generates a warning if the versions do not match.
+and aborts if the versions do not match.
 
-As an example, if MSBuild 3.5 is on the PATH but is being invoked by an MSBuild 4.0 command builder:
+As an example, if MSBuild 3.5 is on the PATH but is being invoked by an MSBuild 4.0 command builder,
+an error would be generated similar to:
+
+    ERROR: Version validation for command "MSBuild" failed. Expected version 4.0 but was 3.5.
+
+Version validation can be configured to warn instead of aborting:
 
 ```ruby
-msbuild_40('sample.proj').target(:rebuild).property(configuration: 'release').execute!
+configure_msbuild { |config| config.version_validation_level = :warn }
 ```
-
-A warning would be generated similar to:
-
-    WARNING: Version validation for command "MSBuild" failed. Expected version 4.0 but was 3.5.
 
 ### The "to_s" method
 
@@ -241,6 +208,14 @@ Fluent Command Builder usage:
 bundle.exec(cucumber('sample.feature'))
 ```
 
+#### Detect version of command on PATH
+
+Fluent Command Builder provides a consitent way of obtaining a command version:
+
+```ruby
+MSBuild.version # => "4.0.30319.1"
+```
+
 ## Customisation
 
 ### Custom String Appending
@@ -260,27 +235,7 @@ Fluent Command Builder usage:
 rake(:deploy) { |b| b.append ' TARGET_ENV=TEST' }
 ```
 
-### Set the Path
 
-#### Set the path for an instance of a command builder
-
-```ruby
-msbuild('sample 1.proj').execute! { |b| b.path = 'C:/Windows/Microsoft.NET/Framework64/v4.0.30319' }
-```
-
-#### Set the default path for all new instances of a command builder
-
-```ruby
-FluentCommandBuilder::MSBuild::V40.default_path = 'C:/Windows/Microsoft.NET/Framework64/v4.0.30319'
-```
-
-If the Default Path does not exist, a warning will be generated similar to:
-
-    WARNING: Default Path for command "MSBuild", version "4.0" does not exist. Path: C:/Windows/Microsoft.NET/Framework64/v4.0.30319
-
-At execution time, if the path still does not exist, an error will be generated similar to:
-
-    ERROR: Path for command "MSBuild", version "4.0" does not exist. Path: C:/Windows/Microsoft.NET/Framework64/v4.0.30319
 
 ## Supported Commands
 
