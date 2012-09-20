@@ -7,7 +7,7 @@ module FluentCommandBuilder
 
     attr_accessor :path, :command_name, :version, :version_detector, :version_validation_level
 
-    def initialize(command_name, version)
+    def initialize(command_name, version=nil)
       @path = nil
       @command_name = command_name
       @version = version
