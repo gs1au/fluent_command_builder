@@ -22,7 +22,7 @@ module FluentCommandBuilder
 
     def executable
       e = path ? File.join(path, command_name) : command_name
-      e.gsub! '/', '\\' if e.include? '\\'
+      e.gsub! '/', '\\' if is_windows?
       e
     end
 
@@ -49,6 +49,7 @@ module FluentCommandBuilder
     end
 
     def evaluated_path
+      return unless path
       is_windows? ? windows_path : @command_builder_config.path
     end
 
