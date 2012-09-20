@@ -34,7 +34,8 @@ module FluentCommandBuilder
     end
 
     def to_s
-      "#{quote_if_includes_space executable} #{@args}".strip
+      quoted_executable = evaluated_path.to_s.include?(' ') ? quote_if_includes_space(executable) : executable
+      "#{quoted_executable} #{@args}".strip
     end
 
     private
@@ -45,6 +46,18 @@ module FluentCommandBuilder
 
     def command_name
       @command_builder_config.command_name
+    end
+
+    def evaluated_path
+      is_windows? ? windows_path : @command_builder_config.path
+    end
+
+    def windows_path
+      `echo #{@command_builder_config.path}`.strip
+    end
+
+    def is_windows?
+      !ENV['WINDIR'].nil?
     end
 
   end
