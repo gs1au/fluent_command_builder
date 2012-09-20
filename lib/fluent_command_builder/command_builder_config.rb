@@ -27,5 +27,25 @@ module FluentCommandBuilder
       v.validate validation_level
     end
 
+    def tidy_path
+      return unless @path
+      is_windows? ? @path.gsub('/', '\\') : @path.gsub('\\', '/')
+    end
+
+    def evaluated_path
+      return unless @path
+      is_windows? ? windows_path : @path
+    end
+
+    private
+
+    def windows_path
+      `echo #{tidy_path}`.strip
+    end
+
+    def is_windows?
+      !ENV['WINDIR'].nil?
+    end
+
   end
 end

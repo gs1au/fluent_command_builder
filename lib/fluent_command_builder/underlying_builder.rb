@@ -5,10 +5,10 @@ module FluentCommandBuilder
   class UnderlyingBuilder
     include ArgumentFormatter
 
-    attr_reader :command_builder_config, :args, :passwords
+    attr_reader :args, :passwords
 
     def initialize(command_builder_config)
-      @command_builder_config = command_builder_config
+      @c = command_builder_config
       @args = nil
       @passwords = []
       @execution_context = FluentCommandBuilder.execution_context
@@ -21,44 +21,19 @@ module FluentCommandBuilder
     end
 
     def executable
-      e = path ? File.join(path, command_name) : command_name
-      e.gsub! '/', '\\' if is_windows?
-      e
+      @c.path ? File.join(@c.tidy_path, @c.command_name) : @c.command_name
     end
 
     def execute
-      @command_builder_config.validate_path :fatal
-      @command_builder_config.validate_version
+      @c.validate_path :fatal
+      @c.validate_version
       visible_command = @execution_context.formatter.format self
       @execution_context.execute to_s, visible_command
     end
 
     def to_s
-      quoted_executable = evaluated_path.to_s.include?(' ') ? %Q["#{executable}"] : executable
+      quoted_executable = @c.evaluated_path.to_s.include?(' ') ? %Q["#{executable}"] : executable
       "#{quoted_executable} #{@args}".strip
-    end
-
-    private
-
-    def path
-      @command_builder_config.path
-    end
-
-    def command_name
-      @command_builder_config.command_name
-    end
-
-    def evaluated_path
-      return unless path
-      is_windows? ? windows_path : @command_builder_config.path
-    end
-
-    def windows_path
-      `echo #{@command_builder_config.path}`.strip
-    end
-
-    def is_windows?
-      !ENV['WINDIR'].nil?
     end
 
   end
