@@ -34,7 +34,7 @@ module FluentCommandBuilder
     end
 
     def to_s
-      quoted_executable = evaluated_path.to_s.include?(' ') ? quote_if_includes_space(executable) : executable
+      quoted_executable = evaluated_path.to_s.include?(' ') ? %Q["#{executable}"] : executable
       "#{quoted_executable} #{@args}".strip
     end
 
