@@ -12,7 +12,7 @@ module FluentCommandBuilder
       @@config.version_detector = FluentCommandBuilder::SevenZip.version_detector
       def configure_sevenzip
         yield @@config
-        @@config.validate_path :warn
+        @@config.validate
       end
       def sevenzip
         b = UnderlyingBuilder.new @@config

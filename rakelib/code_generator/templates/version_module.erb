@@ -12,7 +12,7 @@ module FluentCommandBuilder
       @@config.version_detector = FluentCommandBuilder::<%= model[:command_module_name] %>.version_detector
       def configure_<%= model[:factory_method_name] %>
         yield @@config
-        @@config.validate_path :warn
+        @@config.validate
       end
       def <%= model[:command_factory_method_signature] %>
         b = UnderlyingBuilder.new @@config

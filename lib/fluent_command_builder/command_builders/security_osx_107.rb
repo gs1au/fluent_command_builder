@@ -12,7 +12,7 @@ module FluentCommandBuilder
       @@config.version_detector = FluentCommandBuilder::SecurityOSX.version_detector
       def configure_security_osx
         yield @@config
-        @@config.validate_path :warn
+        @@config.validate
       end
       def security_osx
         b = UnderlyingBuilder.new @@config

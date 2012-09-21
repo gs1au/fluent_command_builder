@@ -12,7 +12,7 @@ module FluentCommandBuilder
       @@config.version_detector = FluentCommandBuilder::MSTest.version_detector
       def configure_mstest
         yield @@config
-        @@config.validate_path :warn
+        @@config.validate
       end
       def mstest
         b = UnderlyingBuilder.new @@config

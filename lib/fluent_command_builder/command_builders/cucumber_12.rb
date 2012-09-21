@@ -12,7 +12,7 @@ module FluentCommandBuilder
       @@config.version_detector = FluentCommandBuilder::Cucumber.version_detector
       def configure_cucumber
         yield @@config
-        @@config.validate_path :warn
+        @@config.validate
       end
       def cucumber(feature=nil)
         b = UnderlyingBuilder.new @@config

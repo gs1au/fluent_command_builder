@@ -12,7 +12,7 @@ module FluentCommandBuilder
       @@config.version_detector = FluentCommandBuilder::DevAppserverPython.version_detector
       def configure_dev_appserver_python
         yield @@config
-        @@config.validate_path :warn
+        @@config.validate
       end
       def dev_appserver_python(application_root=nil)
         b = UnderlyingBuilder.new @@config

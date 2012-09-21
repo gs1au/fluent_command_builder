@@ -12,7 +12,7 @@ module FluentCommandBuilder
       @@config.version_detector = FluentCommandBuilder::InstallUtil.version_detector
       def configure_installutil
         yield @@config
-        @@config.validate_path :warn
+        @@config.validate
       end
       def installutil
         b = UnderlyingBuilder.new @@config

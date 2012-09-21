@@ -12,7 +12,7 @@ module FluentCommandBuilder
       @@config.version_detector = FluentCommandBuilder::DotCover.version_detector
       def configure_dotcover
         yield @@config
-        @@config.validate_path :warn
+        @@config.validate
       end
       def dotcover
         b = UnderlyingBuilder.new @@config

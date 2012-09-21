@@ -12,7 +12,7 @@ module FluentCommandBuilder
       @@config.version_detector = FluentCommandBuilder::TeamFoundation.version_detector
       def configure_team_foundation
         yield @@config
-        @@config.validate_path :warn
+        @@config.validate
       end
       def team_foundation
         b = UnderlyingBuilder.new @@config

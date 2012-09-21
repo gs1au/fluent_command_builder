@@ -12,7 +12,7 @@ module FluentCommandBuilder
       @@config.version_detector = FluentCommandBuilder::XCodeBuild.version_detector
       def configure_xcodebuild
         yield @@config
-        @@config.validate_path :warn
+        @@config.validate
       end
       def xcodebuild
         b = UnderlyingBuilder.new @@config

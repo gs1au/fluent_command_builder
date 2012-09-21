@@ -12,7 +12,7 @@ module FluentCommandBuilder
       @@config.version_detector = FluentCommandBuilder::MSDeploy.version_detector
       def configure_msdeploy
         yield @@config
-        @@config.validate_path :warn
+        @@config.validate
       end
       def msdeploy
         b = UnderlyingBuilder.new @@config

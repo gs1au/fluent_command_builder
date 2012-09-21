@@ -12,7 +12,7 @@ module FluentCommandBuilder
       @@config.version_detector = FluentCommandBuilder::Simian.version_detector
       def configure_simian
         yield @@config
-        @@config.validate_path :warn
+        @@config.validate
       end
       def simian
         b = UnderlyingBuilder.new @@config

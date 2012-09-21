@@ -12,7 +12,7 @@ module FluentCommandBuilder
       @@config.version_detector = FluentCommandBuilder::MSBuild.version_detector
       def configure_msbuild
         yield @@config
-        @@config.validate_path :warn
+        @@config.validate
       end
       def msbuild(project_file=nil)
         b = UnderlyingBuilder.new @@config

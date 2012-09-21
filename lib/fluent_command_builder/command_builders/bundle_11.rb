@@ -12,7 +12,7 @@ module FluentCommandBuilder
       @@config.version_detector = FluentCommandBuilder::Bundle.version_detector
       def configure_bundle
         yield @@config
-        @@config.validate_path :warn
+        @@config.validate
       end
       def bundle
         b = UnderlyingBuilder.new @@config

@@ -12,7 +12,7 @@ module FluentCommandBuilder
       @@config.version_detector = FluentCommandBuilder::Rake.version_detector
       def configure_rake
         yield @@config
-        @@config.validate_path :warn
+        @@config.validate
       end
       def rake(task=nil)
         b = UnderlyingBuilder.new @@config

@@ -12,7 +12,7 @@ module FluentCommandBuilder
       @@config.version_detector = FluentCommandBuilder::FastLinkChecker.version_detector
       def configure_fastlinkchecker
         yield @@config
-        @@config.validate_path :warn
+        @@config.validate
       end
       def fastlinkchecker
         b = UnderlyingBuilder.new @@config

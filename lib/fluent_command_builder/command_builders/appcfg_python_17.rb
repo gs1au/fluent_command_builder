@@ -12,7 +12,7 @@ module FluentCommandBuilder
       @@config.version_detector = FluentCommandBuilder::AppCfgPython.version_detector
       def configure_appcfg_python
         yield @@config
-        @@config.validate_path :warn
+        @@config.validate
       end
       def appcfg_python
         b = UnderlyingBuilder.new @@config

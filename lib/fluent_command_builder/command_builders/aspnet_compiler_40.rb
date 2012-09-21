@@ -12,7 +12,7 @@ module FluentCommandBuilder
       @@config.version_detector = FluentCommandBuilder::AspnetCompiler.version_detector
       def configure_aspnet_compiler
         yield @@config
-        @@config.validate_path :warn
+        @@config.validate
       end
       def aspnet_compiler(target_dir=nil)
         b = UnderlyingBuilder.new @@config

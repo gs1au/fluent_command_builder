@@ -5,17 +5,23 @@ require File.expand_path(File.dirname(__FILE__) + '/version_detectors/default_ve
 module FluentCommandBuilder
   class CommandBuilderConfig
 
-    attr_accessor :path, :command_name, :version, :version_detector, :version_validation_level
+    attr_accessor :path, :path_validation_level, :command_name, :version, :version_detector, :version_validation_level
 
     def initialize(command_name, version=nil)
       @path = nil
+      @path_validation_level = :fatal
       @command_name = command_name
       @version = version
       @version_detector = DefaultVersionDetector.new command_name
       @version_validation_level = :fatal
     end
 
-    def validate_path(validation_level)
+    def validate
+      validate_path
+      validate_version
+    end
+
+    def validate_path(validation_level=@path_validation_level)
       return unless @path
       v = PathValidator.new self
       v.validate validation_level
