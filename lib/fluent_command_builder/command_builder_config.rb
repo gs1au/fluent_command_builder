@@ -27,20 +27,27 @@ module FluentCommandBuilder
       v.validate validation_level
     end
 
-    def tidy_path
-      return unless @path
-      is_windows? ? @path.gsub('/', '\\') : @path.gsub('\\', '/')
+    def executable
+      e = @path ? File.join(@path, @command_name) : @command_name
+      tidy_path e
+    end
+
+    def evaluated_executable
+      evaluate_path executable
     end
 
     def evaluated_path
-      return unless @path
-      is_windows? ? windows_path : @path
+      evaluate_path @path if @path
     end
 
     private
 
-    def windows_path
-      `echo #{tidy_path}`.strip
+    def evaluate_path(path)
+      `echo #{tidy_path path}`.strip
+    end
+
+    def tidy_path(path)
+      is_windows? ? path.gsub('/', '\\') : path.gsub('\\', '/')
     end
 
     def is_windows?

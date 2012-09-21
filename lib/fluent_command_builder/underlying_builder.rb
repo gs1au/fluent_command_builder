@@ -21,7 +21,7 @@ module FluentCommandBuilder
     end
 
     def executable
-      @c.path ? File.join(@c.tidy_path, @c.command_name) : @c.command_name
+      @c.executable
     end
 
     def execute
@@ -32,8 +32,7 @@ module FluentCommandBuilder
     end
 
     def to_s
-      quoted_executable = @c.evaluated_path.to_s.include?(' ') ? %Q["#{executable}"] : executable
-      "#{quoted_executable} #{@args}".strip
+      "#{quote_if_includes_space @c.evaluated_executable} #{@args}".strip
     end
 
   end

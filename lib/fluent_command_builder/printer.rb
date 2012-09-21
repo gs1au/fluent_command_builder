@@ -5,13 +5,13 @@ module FluentCommandBuilder
     include Term::ANSIColor
 
     def print_warning(message)
-      print yellow, 'WARNING: ', message, reset, "\n"
-      STDOUT.flush
+      STDERR.print yellow, 'Warning: ', message, reset, "\n"
+      STDERR.flush
     end
 
     def print_error(message)
-      print red, 'ERROR: ', message, reset, "\n"
-      STDOUT.flush
+      STDERR.print red, 'Error: ', message, reset, "\n"
+      STDERR.flush
     end
 
     def print_command(command)
