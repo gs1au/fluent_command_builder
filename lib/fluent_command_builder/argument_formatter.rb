@@ -16,18 +16,20 @@ module FluentCommandBuilder
       end
     end
 
+    def format_password(value)
+      password = quote_if_includes_space value.to_s
+      @passwords << password
+      password
+    end
+
+    private
+
     def format_hash(hash, delimiter, key_value_separator)
       hash.map { |k, v| quote_if_includes_space(k.to_s) + key_value_separator + quote_if_includes_space(v.to_s) }.join delimiter
     end
 
     def format_array(array, delimiter)
       array.map { |v| quote_if_includes_space v }.join delimiter
-    end
-
-    def format_password(value)
-      password = quote_if_includes_space value.to_s
-      @passwords << password
-      password
     end
 
     def quote_if_includes_space(value)
