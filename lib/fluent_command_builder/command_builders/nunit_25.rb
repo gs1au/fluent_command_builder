@@ -12,7 +12,8 @@ module FluentCommandBuilder
       @@config.version_detector = FluentCommandBuilder::NUnit.version_detector
       def configure_nunit
         yield @@config
-        @@config.validate
+        @@config.validate_path
+        @@config.validate_version
       end
       def nunit(input_files=nil)
         b = UnderlyingBuilder.new @@config

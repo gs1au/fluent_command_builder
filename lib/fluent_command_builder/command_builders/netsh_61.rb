@@ -12,7 +12,8 @@ module FluentCommandBuilder
       @@config.version_detector = FluentCommandBuilder::Netsh.version_detector
       def configure_netsh
         yield @@config
-        @@config.validate
+        @@config.validate_path
+        @@config.validate_version
       end
       def netsh
         b = UnderlyingBuilder.new @@config

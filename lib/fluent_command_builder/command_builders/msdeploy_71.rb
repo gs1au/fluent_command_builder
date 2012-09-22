@@ -12,7 +12,8 @@ module FluentCommandBuilder
       @@config.version_detector = FluentCommandBuilder::MSDeploy.version_detector
       def configure_msdeploy
         yield @@config
-        @@config.validate
+        @@config.validate_path
+        @@config.validate_version
       end
       def msdeploy
         b = UnderlyingBuilder.new @@config

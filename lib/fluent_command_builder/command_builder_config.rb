@@ -5,36 +5,34 @@ require File.expand_path(File.dirname(__FILE__) + '/version_detectors/default_ve
 module FluentCommandBuilder
   class CommandBuilderConfig
 
-    attr_accessor :path, :path_validation_level, :command_name, :version, :version_detector, :version_validation_level
+    attr_accessor :path, :command_name, :version, :version_detector,
+                  :path_validation_level, :version_validation_level,
+                  :path_validator, :version_validator,
+                  :is_windows
 
     def initialize(command_name, version=nil)
       @path = nil
-      @path_validation_level = :fatal
       @command_name = command_name
       @version = version
       @version_detector = DefaultVersionDetector.new command_name
+      @path_validation_level = :fatal
       @version_validation_level = :fatal
-    end
-
-    def validate
-      validate_path
-      validate_version
+      @path_validator = PathValidator.new self
+      @version_validator = VersionValidator.new self
+      @is_windows = !ENV['WINDIR'].nil?
     end
 
     def validate_path
-      v = PathValidator.new self
-      v.validate @path_validation_level
+      @path_validator.validate
     end
 
     def validate_version
-      return unless @version
-      v = VersionValidator.new self
-      v.validate @version_validation_level
+      @version_validator.validate if @version
     end
 
     def executable
       e = @path ? File.join(@path, @command_name) : @command_name
-      tidy_path e
+      normalise_path e
     end
 
     def evaluated_executable
@@ -48,15 +46,11 @@ module FluentCommandBuilder
     private
 
     def evaluate_path(path)
-      `echo #{tidy_path path}`.strip
+      `echo #{normalise_path path}`.strip
     end
 
-    def tidy_path(path)
-      is_windows? ? path.gsub('/', '\\') : path.gsub('\\', '/')
-    end
-
-    def is_windows?
-      !ENV['WINDIR'].nil?
+    def normalise_path(path)
+      @is_windows ? path.gsub('/', '\\') : path.gsub('\\', '/')
     end
 
   end

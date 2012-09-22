@@ -12,7 +12,8 @@ module FluentCommandBuilder
       @@config.version_detector = FluentCommandBuilder::NuGet.version_detector
       def configure_nuget
         yield @@config
-        @@config.validate
+        @@config.validate_path
+        @@config.validate_version
       end
       def nuget
         b = UnderlyingBuilder.new @@config

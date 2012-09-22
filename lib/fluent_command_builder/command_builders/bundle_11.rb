@@ -12,7 +12,8 @@ module FluentCommandBuilder
       @@config.version_detector = FluentCommandBuilder::Bundle.version_detector
       def configure_bundle
         yield @@config
-        @@config.validate
+        @@config.validate_path
+        @@config.validate_version
       end
       def bundle
         b = UnderlyingBuilder.new @@config
