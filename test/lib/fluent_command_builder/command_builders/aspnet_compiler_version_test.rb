@@ -3,14 +3,16 @@ require_relative '../../../command_test_base'
 class AspNetCompilerVersionTest < CommandTestBase
 
   def test_version_40
-    FluentCommandBuilder::AspnetCompiler.version_detector.backticks_executor = MockExecutor.new <<EOF
+    output = <<EOF
 Microsoft (R) Build Engine Version 4.0.30319.1
 [Microsoft .NET Framework, Version 4.0.30319.269]
 Copyright (C) Microsoft Corporation 2007. All rights reserved.
 
 4.0.30319.1
 EOF
-    FluentCommandBuilder.path_finder = MockPathFinder.new '/'
+    executor = stub
+    executor.stubs(:execute).returns(output)
+    FluentCommandBuilder::AspnetCompiler.version_detector.backticks_executor = executor
     actual = FluentCommandBuilder::AspnetCompiler.version
     assert_equal '4.0.30319.1', actual
   end

@@ -3,59 +3,61 @@ require_relative '../../../command_test_base'
 class InstallUtilVersionTest < CommandTestBase
 
   def test_version_40
-    FluentCommandBuilder::InstallUtil.version_detector.backticks_executor = MockExecutor.new <<EOF
-Microsoft (R) .NET Framework Installation utility Version 4.0.30319.1
-Copyright (c) Microsoft Corporation.  All rights reserved.
+    output = <<EOF
+    Microsoft (R) .NET Framework Installation utility Version 4.0.30319.1
+    Copyright (c) Microsoft Corporation.  All rights reserved.
 
-Usage: InstallUtil [/u | /uninstall] [option [...]] assembly [[option [...]] assembly] [...]]
+    Usage: InstallUtil [/u | /uninstall] [option [...]] assembly [[option [...]] assembly] [...]]
 
-InstallUtil executes the installers in each given assembly.
-If the /u or /uninstall switch is specified, it uninstalls
-the assemblies, otherwise it installs them. Unlike other
-options, /u applies to all assemblies, regardless of where it
-appears on the command line.
+    InstallUtil executes the installers in each given assembly.
+    If the /u or /uninstall switch is specified, it uninstalls
+    the assemblies, otherwise it installs them. Unlike other
+    options, /u applies to all assemblies, regardless of where it
+    appears on the command line.
 
-Installation is done in a transactioned way: If one of the
-assemblies fails to install, the installations of all other
-assemblies are rolled back. Uninstall is not transactioned.
+    Installation is done in a transactioned way: If one of the
+    assemblies fails to install, the installations of all other
+    assemblies are rolled back. Uninstall is not transactioned.
 
-Options take the form /switch=[value]. Any option that occurs
-before the name of an assembly will apply to that assembly's
-installation. Options are cumulative but overridable - options
-specified for one assembly will apply to the next as well unless
-the option is specified with a new value. The default for all
-options is empty or false unless otherwise specified.
+    Options take the form /switch=[value]. Any option that occurs
+    before the name of an assembly will apply to that assembly's
+    installation. Options are cumulative but overridable - options
+    specified for one assembly will apply to the next as well unless
+    the option is specified with a new value. The default for all
+    options is empty or false unless otherwise specified.
 
-Options recognized:
+    Options recognized:
 
-Options for installing any assembly:
-/AssemblyName
- The assembly parameter will be interpreted as an assembly name (Name,
- Locale, PublicKeyToken, Version). The default is to interpret the
- assembly parameter as the filename of the assembly on disk.
+    Options for installing any assembly:
+    /AssemblyName
+     The assembly parameter will be interpreted as an assembly name (Name,
+     Locale, PublicKeyToken, Version). The default is to interpret the
+     assembly parameter as the filename of the assembly on disk.
 
-/LogFile=[filename]
- File to write progress to. If empty, do not write log. Default
- is <assemblyname>.InstallLog
+    /LogFile=[filename]
+     File to write progress to. If empty, do not write log. Default
+     is <assemblyname>.InstallLog
 
-/LogToConsole={true|false}
- If false, suppresses output to the console.
+    /LogToConsole={true|false}
+     If false, suppresses output to the console.
 
-/ShowCallStack
- If an exception occurs at any point during installation, the call
- stack will be printed to the log.
+    /ShowCallStack
+     If an exception occurs at any point during installation, the call
+     stack will be printed to the log.
 
-/InstallStateDir=[directoryname]
- Directory in which the .InstallState file will be stored. Default
- is the directory of the assembly.
+    /InstallStateDir=[directoryname]
+     Directory in which the .InstallState file will be stored. Default
+     is the directory of the assembly.
 
 
-Individual installers used within an assembly may recognize other
-options. To learn about these options, run InstallUtil with the paths
-of the assemblies on the command line along with the /? or /help option.
+    Individual installers used within an assembly may recognize other
+    options. To learn about these options, run InstallUtil with the paths
+    of the assemblies on the command line along with the /? or /help option.
 
 EOF
-    FluentCommandBuilder.path_finder = MockPathFinder.new '/'
+    executor = stub
+    executor.stubs(:execute).returns(output)
+    FluentCommandBuilder::InstallUtil.version_detector.backticks_executor = executor
     actual = FluentCommandBuilder::InstallUtil.version
     assert_equal '4.0.30319.1', actual
   end
