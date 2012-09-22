@@ -1,6 +1,6 @@
 # Note: Tests do not represent valid command line usage.
 
-require_relative '../command_test_base'
+require_relative '../../../command_test_base'
 
 class InstallUtil40Test < CommandTestBase
   include FluentCommandBuilder::InstallUtil::V40

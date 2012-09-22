@@ -1,4 +1,4 @@
-require_relative '../command_test_base'
+require_relative '../../../command_test_base'
 
 class MSTestVersionTest < CommandTestBase
 

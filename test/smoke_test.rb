@@ -1,4 +1,4 @@
-require_relative 'lib/fluent_command_builder/command_test_base'
+require_relative 'command_test_base'
 
 class SmokeTest < CommandTestBase
   include FluentCommandBuilder::Bundle::V11

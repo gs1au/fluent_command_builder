@@ -1,6 +1,6 @@
 # Note: Tests do not represent valid command line usage.
 
-require_relative '../command_test_base'
+require_relative '../../../command_test_base'
 
 class XCodeBuild43Test < CommandTestBase
   include FluentCommandBuilder::XCodeBuild::V43

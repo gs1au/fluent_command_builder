@@ -1,6 +1,6 @@
 # Note: Tests do not represent valid command line usage.
 
-require_relative '../command_test_base'
+require_relative '../../../command_test_base'
 
 class MSTest100Test < CommandTestBase
   include FluentCommandBuilder::MSTest::V100

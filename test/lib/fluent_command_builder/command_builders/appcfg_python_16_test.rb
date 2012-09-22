@@ -1,6 +1,6 @@
 # Note: Tests do not represent valid command line usage.
 
-require_relative '../command_test_base'
+require_relative '../../../command_test_base'
 
 class AppCfgPython16Test < CommandTestBase
   include FluentCommandBuilder::AppCfgPython::V16

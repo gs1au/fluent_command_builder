@@ -1,6 +1,6 @@
 # Note: Tests do not represent valid command line usage.
 
-require_relative '../command_test_base'
+require_relative '../../../command_test_base'
 
 class Netsh61Test < CommandTestBase
   include FluentCommandBuilder::Netsh::V61
