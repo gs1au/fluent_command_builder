@@ -3,24 +3,51 @@ require File.expand_path(File.dirname(__FILE__) + '/printer')
 module FluentCommandBuilder
   class PathValidator
 
+    attr_accessor :path_finder, :printer, :should_abort_on_fatal
+
     def initialize(command_builder_config)
       @c = command_builder_config
+      @path_finder = path_finder
       @printer = Printer.new
+      @should_abort_on_fatal = true
     end
 
-    def validate(validation_level=:warn)
-      return if File.exist? @c.evaluated_path
-      message = %Q[Path for command "#{@c.command_name}", version "#{@c.version}" does not exist. Path: #{@c.evaluated_path}]
+    def validate
+      validate_validation_level
+      return if validation_level == :off
+
+      if @c.path
+        path = @c.evaluated_path
+        return if File.exist? path
+        message = %Q[Path for command "#{@c.command_name}", version "#{@c.version}" does not exist. Path: #{path}]
+      else
+        return if @path_finder.find_path @c.command_name
+        message = %Q[Command "#{@c.command_name}" was not found on the PATH.]
+      end
 
       case validation_level
         when :warn
           @printer.print_warning message
         when :fatal
           @printer.print_error message
-          abort
+          abort if @should_abort_on_fatal
         else
-          @printer.print_warning %Q[Path validation failed. Validation level "#{validation_level}" is not supported.]
+          # do nothing
       end
+    end
+
+    private
+
+    def validation_level
+      @c.path_validation_level
+    end
+
+    def validate_validation_level
+      raise %Q[Validation level "#{@c.path_validation_level}" is not supported.] unless validation_level_valid?
+    end
+
+    def validation_level_valid?
+      [:off, :warn, :fatal].include? @c.path_validation_level
     end
 
   end

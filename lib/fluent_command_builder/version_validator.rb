@@ -8,7 +8,7 @@ module FluentCommandBuilder
       @printer = Printer.new
     end
 
-    def validate(validation_level)
+    def validate
       return if validation_level == :off
 
       @actual_version_string = version_detector.version(path)
@@ -34,6 +34,10 @@ module FluentCommandBuilder
     end
 
     private
+
+    def validation_level
+      @command_builder_config.version_validation_level
+    end
 
     def is_valid?
       actual_version.to_a.first(expected_version.to_a.length) == expected_version.to_a

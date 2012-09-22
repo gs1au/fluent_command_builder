@@ -21,16 +21,15 @@ module FluentCommandBuilder
       validate_version
     end
 
-    def validate_path(validation_level=@path_validation_level)
-      return unless @path
+    def validate_path
       v = PathValidator.new self
-      v.validate validation_level
+      v.validate @path_validation_level
     end
 
-    def validate_version(validation_level=@version_validation_level)
+    def validate_version
       return unless @version
       v = VersionValidator.new self
-      v.validate validation_level
+      v.validate @version_validation_level
     end
 
     def executable

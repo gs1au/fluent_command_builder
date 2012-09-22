@@ -25,8 +25,7 @@ module FluentCommandBuilder
     end
 
     def execute
-      @c.validate_path :fatal
-      @c.validate_version
+      @c.validate
       visible_command = @execution_context.formatter.format self
       @execution_context.execute to_s, visible_command
     end
