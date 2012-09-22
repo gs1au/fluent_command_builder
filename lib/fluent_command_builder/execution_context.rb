@@ -5,7 +5,7 @@ require File.expand_path(File.dirname(__FILE__) + '/command_formatters/null_form
 module FluentCommandBuilder
   class ExecutionContext
 
-    attr_accessor :executor, :formatter, :should_print_on_execute, :should_fail_on_error
+    attr_accessor :executor, :formatter, :printer, :should_print_on_execute, :should_fail_on_error
 
     def initialize(executor)
       @executor = executor

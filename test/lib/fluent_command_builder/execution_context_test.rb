@@ -1,81 +1,55 @@
 require 'test/unit'
+require 'mocha'
 require_relative '../../mock_executor'
 require_relative '../../mock_process_status'
 require_relative '../../../lib/fluent_command_builder'
-require_relative '../../../lib/fluent_command_builder/command_builder_config'
 include FluentCommandBuilder
 
 class ExecutionContextTest < Test::Unit::TestCase
 
-  def test_should_fail_when_should_not_fail_on_error_but_executor_will_fail_on_error
-    builder = UnderlyingBuilder.new CommandBuilderConfig.new('command', '1.0')
-
-    executor = MockExecutor.new
-    executor.will_fail_on_error = true
-
-    context = ExecutionContext.new executor
-    context.should_fail_on_error = false
-
-    assert_raise_message("should_fail_on_error must be true for #{executor}.") { context.execute builder }
-  end
-
-  def test_should_fail_when_should_fail_on_error_but_executor_will_not_fail_on_error
-    builder = UnderlyingBuilder.new CommandBuilderConfig.new('command', '1.0')
-
-    status = MockProcessStatus.new
-    status.exitstatus = 1
-    status.success = false
-
-    executor = MockExecutor.new
-    executor.will_fail_on_error = false
-    executor.status = status
-
-    context = ExecutionContext.new executor
-    context.should_fail_on_error = true
-
-    assert_raise_message("Command failed with status (1): [command]") { context.execute builder }
+  def setup
+    @executor = stub
+    @execution_context = ExecutionContext.new @executor
+    @printer = stub
+    @execution_context.printer = @printer
   end
 
   def test_should_fail_when_should_not_print_on_execute_but_executor_will_print_on_error
-    builder = UnderlyingBuilder.new CommandBuilderConfig.new('command', '1.0')
-
-    executor = MockExecutor.new
-    executor.will_print_on_execute = true
-
-    context = ExecutionContext.new executor
-    context.should_print_on_execute = false
-
-    assert_raise_message("should_print_on_execute must be true for #{executor}.") { context.execute builder }
+    @executor.stubs(:will_print_on_execute?).returns(true)
+    @execution_context.should_print_on_execute = false
+    assert_raise_message("should_print_on_execute must be true for #{@executor}.") { @execution_context.execute 'command' }
   end
 
   def test_should_not_print_on_execute
-    builder = UnderlyingBuilder.new CommandBuilderConfig.new('command', '1.0')
-
-    executor = MockExecutor.new
-    executor.will_print_on_execute = false
-
-    context = ExecutionContext.new executor
-    context.should_print_on_execute = false
-
-    $stdout = StringIO.new
-    context.execute builder
-
-    assert_equal '', $stdout.string
+    @executor.stubs(:will_print_on_execute?).returns(false)
+    @executor.expects(:execute)
+    @execution_context.should_print_on_execute = false
+    @execution_context.execute 'command'
   end
 
   def test_should_print_on_execute
-    builder = UnderlyingBuilder.new CommandBuilderConfig.new('command', '1.0')
+    @executor.stubs(:will_print_on_execute?).returns(false)
+    @executor.expects(:execute)
+    @execution_context.should_print_on_execute = true
+    @printer.expects(:print_command).with('command').once
+    @execution_context.execute 'command'
+  end
 
-    executor = MockExecutor.new
-    executor.will_print_on_execute = false
+  def test_should_fail_when_should_not_fail_on_error_but_executor_will_fail_on_error
+    @executor.stubs(:will_fail_on_error?).returns(true)
+    @execution_context.should_fail_on_error = false
+    assert_raise_message("should_fail_on_error must be true for #{@executor}.") { @execution_context.execute 'command' }
+  end
 
-    context = ExecutionContext.new executor
-    context.should_print_on_execute = true
-
-    $stdout = StringIO.new
-    context.execute builder
-
-    assert_include $stdout.string, 'command'
+  def test_should_fail_when_should_fail_on_error_but_executor_will_not_fail_on_error
+    @executor.stubs(:will_print_on_execute?).returns(true)
+    @executor.stubs(:will_fail_on_error?).returns(false)
+    status = mock
+    status.stubs(:success?).returns(false)
+    status.stubs(:exitstatus).returns(1)
+    @executor.expects(:execute).yields(status)
+    @execution_context.should_fail_on_error = true
+    assert_raise_message("Command failed with status (1): [command]") { @execution_context.execute 'command' }
   end
 
   private
