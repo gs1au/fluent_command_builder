@@ -43,11 +43,11 @@ module FluentCommandBuilder
     end
 
     def validate_validation_level
-      raise %Q[Validation level "#{@c.path_validation_level}" is not supported.] unless validation_level_valid?
+      raise %Q[Validation level "#{validation_level}" is not supported.] unless validation_level_valid?
     end
 
     def validation_level_valid?
-      [:off, :warn, :fatal].include? @c.path_validation_level
+      [:off, :warn, :fatal].include? validation_level
     end
 
   end
