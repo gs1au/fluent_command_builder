@@ -98,7 +98,6 @@ The execution context can be changed temporarily using the __change_execution_co
 ```ruby
 FluentCommandBuilder.change_execution_context do |context|
     context.executor = BackticksExecutor.new
-    context.formatter = HiddenPasswordFormatter.new
     context.should_print_on_execute = false
     context.should_fail_on_error = true
     msbuild_40('sample.proj').execute!
