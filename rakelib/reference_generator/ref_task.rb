@@ -1,33 +1,22 @@
 include Rake::DSL
 require_relative '../../lib/fluent_command_builder'; include FluentCommandBuilder
 
-def ref_task(mod, command_alias=nil)
-  begin
-    task_maker = TaskMaker.new mod::COMMAND_NAME.downcase, mod.version, command_alias
-    task_maker.make_task do |task_maker|
-      if block_given?
-        yield task_maker
-      else
-        c = mod.create
-        c.help if c.respond_to? :help
-        c.execute! { |b| b.append " > #{task_maker.output_dir}/help.txt" }
-      end
-    end
-  rescue
-    # do nothing
+def ref_task(command_alias, version)
+  return unless version
+  task_maker = TaskMaker.new command_alias, version
+  task_maker.make_task do |t|
+    yield t
   end
 end
 
 class TaskMaker
 
-  def initialize(command_name, version, command_alias=nil)
-    @command_name = command_name
-    @version = version
-    @command_alias = command_alias || command_name
+  def initialize(command_alias, version)
+    @command_alias = command_alias
+    @version = Version.new version
   end
 
   def make_task
-    return unless @version
     directory output_dir
     desc task_desc
     task task_name => [output_dir] do
@@ -41,26 +30,18 @@ class TaskMaker
     File.join 'reference', @command_alias, task_name
   end
 
+  def execute(command, output_file_name='help')
+    system %Q[#{command} > "#{output_dir}/#{output_file_name}.txt" 2>&1]
+  end
+
   private
 
-  def major_version
-    @version.match(/^(\d+)\.\d+/)[1]
-  end
-
-  def minor_version
-    @version.match(/^\d+\.(\d+)/)[1]
-  end
-
   def task_name
-    @command_alias + '_' + major_version + minor_version
-  end
-
-  def command_name_with_version
-    @command_name + '_' + major_version + minor_version
+    @command_alias + '_' + @version.compact
   end
 
   def task_desc
-    "Generate reference for #{@command_alias} #{@version}."
+    "Generate reference for #{@command_alias} #{@version.first 2}."
   end
 
   def generating_message

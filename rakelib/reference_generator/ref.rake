@@ -3,74 +3,83 @@ require_relative 'ref_task'
 
 namespace :ref do
 
-  ref_task AppCfgPython, 'appcfg_python' do |task_maker|
-    output = `#{appcfg_python.to_s}`
+  ref_task 'appcfg_python', AppCfgPython.version do |t|
+    output = `appcfg.py --help`
     actions_text = output.match(/Action must be one of:\n(.+)Use 'help <action>' for a detailed description./m)[1]
     actions = actions_text.lines.map { |action| action.match(/  (.+?):/)[1] }
-    actions.each do |action|
-      appcfg_python.help(action).execute! { |b| b.append %Q[ > "#{task_maker.output_dir}/#{action}.txt"] }
-    end
+    actions.each { |action| t.execute "appcfg.py --help #{action}", action }
   end
 
-  ref_task DevAppserverPython, 'dev_appserver_python'
+  ref_task 'dev_appserver_python', DevAppserverPython.version do |t|
+    t.execute 'dev_appserver.py'
+  end
 
-  ref_task FluentCommandBuilder::Bundle, 'bundler'
+  ref_task 'bundler', FluentCommandBuilder::Bundle.version do |t|
+    t.execute 'bundle --help'
+  end
 
-  ref_task FluentCommandBuilder::Cucumber
+  ref_task 'cucumber', FluentCommandBuilder::Cucumber.version do |t|
+    t.execute 'cucumber --help'
+  end
 
-  ref_task FluentCommandBuilder::Rake
+  ref_task 'rake', FluentCommandBuilder::Rake.version do |t|
+    t.execute 'rake --help'
+  end
 
-  ref_task XCodeBuild
+  ref_task 'xcodebuild', XCodeBuild.version do |t|
+    t.execute 'xcodebuild -help'
+  end
 
-  ref_task AspnetCompiler
+  ref_task 'aspnet_compiler', AspnetCompiler.version do |t|
+    t.execute 'aspnet_compiler'
+  end
 
-  ref_task InstallUtil
+  ref_task 'installutil', InstallUtil.version do |t|
+    t.execute 'installutil'
+  end
 
-  ref_task MSBuild
+  ref_task 'msbuild', MSBuild.version do |t|
+    t.execute 'msbuild /help'
+  end
 
-  ref_task DotCover do |task_maker|
-    output = `#{dotcover.to_s}`
+  ref_task 'dotcover', DotCover.version do |t|
+    output = `dotcover /help`
     actions_text = output.match(/Available commands:\n(.+)/m)[1].strip
     actions = actions_text.lines.map { |action| action.strip.match(/(.+?) /)[1] }
-    actions.each do |action|
-      dotcover.help(action).execute! { |b| b.append %Q[ > "#{task_maker.output_dir}/#{action}.txt"] }
-    end
+    actions.each { |action| t.execute "dotcover /help #{action}", action }
   end
 
-  ref_task MSTest
+  ref_task 'mstest', MSTest.version do |t|
+    t.execute 'mstest /help'
+  end
 
-  ref_task MSDeploy
+  ref_task 'msdeploy', MSDeploy.version do |t|
+    t.execute 'msdeploy /help'
+  end
 
-  ref_task SecurityOSX do |task_maker|
-    output = `#{security.to_s}`
+  ref_task 'security_osx', SecurityOSX.version do |t|
+    output = `security help`
     actions_text = output.match(/security commands are:\n(.+)/m)[1]
     actions = actions_text.lines.map { |action| action.match(/    (.+?) /)[1] }
-    actions.each do |action|
-      security.help(action).execute! { |b| b.append %Q[ > "#{task_maker.output_dir}/#{action}.txt"] }
-    end
+    actions.each { |action| t.execute "security help #{action}", action }
   end
 
-  ref_task TeamFoundationTEE, 'team_foundation_tee' do |task_maker|
-    output = `#{team_foundation_tee.to_s}`
+  ref_task 'team_foundation_tee', TeamFoundationTEE.version do |t|
+    output = `tf -help`
     actions_text = output.match(/Available commands and their options:\n(.+)Options accepted by most commands:/m)[1].rstrip
-    actions = actions_text.lines.map { |action| action.match(/^  (.+?) /) { |m| m[1].strip == '' ? nil : m[1].strip  } }
+    actions = actions_text.lines.map { |action| action.match(/^  (.+?) /) { |m| m[1].strip == '' ? nil : m[1].strip } }
     actions.compact!
     actions.uniq!
-    actions.each do |action|
-      team_foundation_tee.help(action).execute! { |b| b.append %Q[ > "#{task_maker.output_dir}/#{action}.txt"] }
-    end
+    actions.each { |action| t.execute "tf -help #{action}", action }
   end
 
-  ref_task TeamFoundation, 'team_foundation' do |task_maker|
-    output = `#{team_foundation.to_s}`
+  ref_task 'team_foundation', TeamFoundation.version do |t|
+    output = `tf /help`
     actions_text = output.match(/Commands:\n(.+)/m)[1].rstrip
-    puts actions_text
-    actions = actions_text.lines.map { |action| action.match(/^tf (.+?) /) { |m| m[1].strip == '' ? nil : m[1].strip  } }
+    actions = actions_text.lines.map { |action| action.match(/^tf (.+?) /) { |m| m[1].strip == '' ? nil : m[1].strip } }
     actions.compact!
     actions.uniq!
-    actions.each do |action|
-      team_foundation.help(action).execute! { |b| b.append %Q[ > "#{task_maker.output_dir}/#{action}.txt"] }
-    end
+    actions.each { |action| t.execute "tf /help #{action}", action }
   end
 
 end
