@@ -7,7 +7,7 @@ module FluentCommandBuilder
 
     def initialize(command_builder_config)
       @c = command_builder_config
-      @path_finder = path_finder
+      @path_finder = FluentCommandBuilder.path_finder
       @printer = Printer.new
       @should_abort_on_fatal = true
     end
