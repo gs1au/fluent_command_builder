@@ -1,7 +1,5 @@
 require 'test/unit'
 require 'mocha'
-require_relative '../../mock_executor'
-require_relative '../../mock_process_status'
 require_relative '../../../lib/fluent_command_builder'
 include FluentCommandBuilder
 

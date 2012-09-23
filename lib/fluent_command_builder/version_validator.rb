@@ -23,7 +23,7 @@ module FluentCommandBuilder
       end
 
       unless is_valid?
-        message = error_message actual_version.to_s(expected_version.to_a.length)
+        message = error_message actual_version.first(expected_version.to_a.length)
 
         case validation_level
           when :warn
