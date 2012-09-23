@@ -1,7 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builder')
+require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/password_formatter')
 Dir[File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/version_detectors/*.rb')].each { |f| require f }
 Dir[File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_executors/*.rb')].each { |f| require f }
-Dir[File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_formatters/*.rb')].each { |f| require f }
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/path_finder')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/appcfg_python.rb')
 require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/appcfg_python_16.rb')

@@ -75,7 +75,6 @@ By default, the __execute!__ method executes the command using [Kernel#system](h
 __FluentCommandBuilder::execution_context__ exposes the following attributes which can be used to customise command execution:
 
 - __executor__: An object responsible for executing the command. Default: __SystemExecutor__.
-- __formatter__: An object responsible for formatting the command for display. Default: __NullFormatter__.
 - __should_print_on_execute__: Determines whether the command should be displayed when executed. Default: __true__.
 - __should_fail_on_error__: Determines whether the command should raise an exception if not successful. Default: __true__.
 
@@ -86,16 +85,10 @@ Available executors:
 - __RakeShExecutor__: Executes the command using [Rake#sh](http://rake.rubyforge.org/classes/FileUtils.html#M000018).
 - __SystemExecutor__: Executes the command using [Kernel#system](http://www.ruby-doc.org/core-1.9.3/Kernel.html#method-i-system) and returns true (successful), false (unsuccessful) or nil (failed).
 
-Available formatters:
-
-- __NullFormatter__: Leaves the command unaltered.
-- __HiddenPasswordFormatter__: Replaces passwords with *** (by default).
-
 Example customisation:
 
 ```ruby
 FluentCommandBuilder.execution_context.executor = BackticksExecutor.new
-FluentCommandBuilder.execution_context.formatter = HiddenPasswordFormatter.new
 FluentCommandBuilder.execution_context.should_print_on_execute = false
 FluentCommandBuilder.execution_context.should_fail_on_error = true
 ```
@@ -115,6 +108,16 @@ end
 Once the block has executed, the execution context will reset to it's original values.
 
 Please note that it is also possible to plug-in custom executors and formatters.
+
+#### Password Formatting
+
+By default, passwords will be replaced with *** in the command output.
+
+To display passwords instead:
+
+```ruby
+FluentCommandBuilder.password_formatter.enabled = false
+```
 
 #### Version Validation
 
