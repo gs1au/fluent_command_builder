@@ -266,13 +266,13 @@ App Engine Python SDK:
 
 ### Apple
 
-OS X (10.7 = Lion)
+OS X (10.7 = Lion, 10.8 = Mountain Lion)
 
-- security 10.7 (WIP)
+- security 10.7, 10.8 (WIP)
 
 XCode
 
-- xcodebuild 4.3, 4.4
+- xcodebuild 4.3, 4.4, 4.5
 
 ### Microsoft
 
