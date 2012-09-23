@@ -16,6 +16,7 @@ module FluentCommandBuilder
     def version(path=nil)
       path ||= FluentCommandBuilder.path_finder.find_path @command_name
       return unless path
+      return unless File.exist? path
       Dir.chdir path do
         command = %Q["#{@command_name}" #{@command_arg} 2>&1]
         output = @backticks_executor.execute command
