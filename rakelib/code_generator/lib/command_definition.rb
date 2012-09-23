@@ -1,5 +1,5 @@
 require_relative 'command'
-require_relative '../../../lib/fluent_command_builder/version'; include FluentCommandBuilder
+require_relative '../../../lib/fluent_command_builder/internal/version'; include FluentCommandBuilder
 
 class CommandDefinition
 

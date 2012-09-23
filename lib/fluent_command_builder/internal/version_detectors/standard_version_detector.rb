@@ -1,5 +1,6 @@
+require File.expand_path(File.dirname(__FILE__) + '/../path_finder')
 require File.expand_path(File.dirname(__FILE__) + '/../version')
-require File.expand_path(File.dirname(__FILE__) + '/../command_executors/backticks_executor')
+require File.expand_path(File.dirname(__FILE__) + '/../../command_executors/backticks_executor')
 
 module FluentCommandBuilder
   class StandardVersionDetector

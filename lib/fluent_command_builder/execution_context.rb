@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/printer')
+require File.expand_path(File.dirname(__FILE__) + '/internal/printer')
 require File.expand_path(File.dirname(__FILE__) + '/command_executors/system_executor')
 
 module FluentCommandBuilder

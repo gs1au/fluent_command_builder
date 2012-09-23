@@ -1,4 +1,5 @@
 require 'yaml'
+require File.expand_path(File.dirname(__FILE__) + '/../path_finder')
 
 module FluentCommandBuilder
   class AppEnginePythonVersionDetector

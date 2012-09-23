@@ -16,7 +16,6 @@ class CodeGenerator
   def execute
     pattern = File.join @definitions_dir, '*.txt'
     Dir[pattern].each { |f| process_definition f }
-    generate_loader
   end
 
   private
@@ -83,22 +82,6 @@ class CodeGenerator
     node_code_generator = NodeCodeGenerator.new command, command, writer
     node_code_generator.render
     stream.string
-  end
-
-  def generate_loader
-    Dir.chdir @lib_dir do
-      File.open 'fluent_command_builder.rb', 'w' do |f|
-        f.puts %Q[require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builder')]
-        f.puts %Q[require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/password_formatter')]
-        f.puts %Q[Dir[File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/version_detectors/*.rb')].each { |f| require f }]
-        f.puts %Q[Dir[File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_executors/*.rb')].each { |f| require f }]
-        f.puts %Q[require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/path_finder')]
-        pattern = File.join @command_builders_dir, '*.rb'
-        Dir[pattern].each do |command_builder_file|
-          f.puts %Q[require File.expand_path(File.dirname(__FILE__) + '/fluent_command_builder/command_builders/#{File.basename command_builder_file}')]
-        end
-      end
-    end
   end
 
 end

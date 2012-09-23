@@ -1,8 +1,8 @@
 # Generated code. Do not modify.
 
-require File.expand_path(File.dirname(__FILE__) + '/../command_base')
-require File.expand_path(File.dirname(__FILE__) + '/../command_builder_config')
-require File.expand_path(File.dirname(__FILE__) + '/../underlying_builder')
+require File.expand_path(File.dirname(__FILE__) + '/../internal/command_base')
+require File.expand_path(File.dirname(__FILE__) + '/../internal/command_builder_config')
+require File.expand_path(File.dirname(__FILE__) + '/../internal/underlying_builder')
 
 module FluentCommandBuilder
   module AppCfgPython
