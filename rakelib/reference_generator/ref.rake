@@ -43,10 +43,10 @@ namespace :ref do
   end
 
   ref_task 'dotcover', DotCover.version do |t|
-    output = `dotcover /help`
+    output = `dotcover help`
     actions_text = output.match(/Available commands:\n(.+)/m)[1].strip
     actions = actions_text.lines.map { |action| action.strip.match(/(.+?) /)[1] }
-    actions.each { |action| t.execute "dotcover /help #{action}", action }
+    actions.each { |action| t.execute "dotcover help #{action}", action }
   end
 
   ref_task 'mstest', MSTest.version do |t|
