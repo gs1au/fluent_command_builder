@@ -1,9 +1,9 @@
-require_relative '../../../command_test_base'
+require_relative '../../../version_test_base'
 
-class MSTestVersionTest < CommandTestBase
+class MSTestVersionTest < VersionTestBase
 
   def test_version_100
-    output = <<EOF
+    assert_version FluentCommandBuilder::MSTest, '10.0.30319.1', <<EOF
     Microsoft (R) Test Execution Command Line Tool Version 10.0.30319.1
     Copyright (c) Microsoft Corporation. All rights reserved.
 
@@ -151,11 +151,6 @@ class MSTestVersionTest < CommandTestBase
                                         verification run.  Default value is yes
 
 EOF
-    executor = stub
-    executor.stubs(:execute).returns(output)
-    FluentCommandBuilder::MSTest.version_detector.backticks_executor = executor
-    actual = FluentCommandBuilder::MSTest.version
-    assert_equal '10.0.30319.1', actual
   end
 
 end

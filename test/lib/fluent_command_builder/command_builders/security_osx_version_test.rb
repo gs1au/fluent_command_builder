@@ -1,14 +1,9 @@
-require_relative '../../../command_test_base'
+require_relative '../../../version_test_base'
 
-class SecurityOsxVersionTest < CommandTestBase
+class SecurityOsxVersionTest < VersionTestBase
 
   def test_version_108
-    output = '10.8'
-    executor = stub
-    executor.stubs(:execute).returns(output)
-    FluentCommandBuilder::SecurityOSX.version_detector.backticks_executor = executor
-    actual = FluentCommandBuilder::SecurityOSX.version
-    assert_equal '10.8', actual
+    assert_version FluentCommandBuilder::SecurityOSX, '10.8', '10.8'
   end
 
 end

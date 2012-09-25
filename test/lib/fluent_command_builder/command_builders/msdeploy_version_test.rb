@@ -1,9 +1,9 @@
-require_relative '../../../command_test_base'
+require_relative '../../../version_test_base'
 
-class MSDeployVersionTest < CommandTestBase
+class MSDeployVersionTest < VersionTestBase
 
   def test_version_40
-    output = <<EOF
+    assert_version FluentCommandBuilder::MSDeploy, '7.1.618.0', <<EOF
     Microsoft (R) Web Deployment Command Line Tool (MSDeploy.exe)
     Version 7.1.618.0
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -117,11 +117,6 @@ class MSDeployVersionTest < CommandTestBase
 
 
 EOF
-    executor = stub
-    executor.stubs(:execute).returns(output)
-    FluentCommandBuilder::MSDeploy.version_detector.backticks_executor = executor
-    actual = FluentCommandBuilder::MSDeploy.version
-    assert_equal '7.1.618.0', actual
   end
 
 end

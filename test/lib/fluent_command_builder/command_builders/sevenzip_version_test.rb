@@ -1,9 +1,9 @@
-require_relative '../../../command_test_base'
+require_relative '../../../version_test_base'
 
-class SevenZipVersionTest < CommandTestBase
+class SevenZipVersionTest < VersionTestBase
 
   def test_version_92
-    output = <<EOF
+    assert_version FluentCommandBuilder::SevenZip, '9.20', <<EOF
 
     7-Zip (A) 9.20  Copyright (c) 1999-2010 Igor Pavlov  2010-11-18
 
@@ -43,11 +43,6 @@ class SevenZipVersionTest < CommandTestBase
       -y: assume Yes on all queries
 
 EOF
-    executor = stub
-    executor.stubs(:execute).returns(output)
-    FluentCommandBuilder::SevenZip.version_detector.backticks_executor = executor
-    actual = FluentCommandBuilder::SevenZip.version
-    assert_equal '9.20', actual
   end
 
 end

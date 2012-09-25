@@ -1,9 +1,9 @@
-require_relative '../../../command_test_base'
+require_relative '../../../version_test_base'
 
-class NUnitVersionTest < CommandTestBase
+class NUnitVersionTest < VersionTestBase
 
   def test_version_40
-    output =  <<EOF
+    assert_version FluentCommandBuilder::NUnit, '2.6.0.12051', <<EOF
     NUnit-Console version 2.6.0.12051
     Copyright (C) 2002-20011 Charlie Poole.
     Copyright (C) 2002-2004 James W. Newkirk, Michael C. Two, Alexei A. Vorontsov.
@@ -56,11 +56,6 @@ class NUnitVersionTest < CommandTestBase
     or a space to separate the option from its value.
 
 EOF
-    executor = stub
-    executor.stubs(:execute).returns(output)
-    FluentCommandBuilder::NUnit.version_detector.backticks_executor = executor
-    actual = FluentCommandBuilder::NUnit.version
-    assert_equal '2.6.0.12051', actual
   end
 
 end

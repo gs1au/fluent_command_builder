@@ -1,9 +1,9 @@
-require_relative '../../../command_test_base'
+require_relative '../../../version_test_base'
 
-class TeamFoundationTeeVersionTest < CommandTestBase
+class TeamFoundationTeeVersionTest < VersionTestBase
 
   def test_version_101
-    output = <<EOF
+    assert_version FluentCommandBuilder::TeamFoundationTEE, '10.1.0.201101271439', <<EOF
     Team Explorer Everywhere (version 10.1.0.201101271439)
 
      Available commands and their options:
@@ -96,11 +96,6 @@ class TeamFoundationTeeVersionTest < CommandTestBase
     For help on a specific command, supply the command name as an argument
     to the help command.  For example: 'tf help checkin'
 EOF
-    executor = stub
-    executor.stubs(:execute).returns(output)
-    FluentCommandBuilder::TeamFoundationTEE.version_detector.backticks_executor = executor
-    actual = FluentCommandBuilder::TeamFoundationTEE.version
-    assert_equal '10.1.0.201101271439', actual
   end
 
 end

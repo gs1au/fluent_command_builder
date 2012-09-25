@@ -1,9 +1,9 @@
-require_relative '../../../command_test_base'
+require_relative '../../../version_test_base'
 
-class NuGetVersionTest < CommandTestBase
+class NuGetVersionTest < VersionTestBase
 
   def test_version_20
-    output = <<EOF
+    assert_version FluentCommandBuilder::NuGet, '2.0.30619.9000', <<EOF
     NuGet Version: 2.0.30619.9000
     usage: NuGet <command> [args] [options]
     Type 'NuGet help <command>' for help on a specific command.
@@ -29,11 +29,6 @@ class NuGetVersionTest < CommandTestBase
     For more information, visit http://docs.nuget.org/docs/reference/command-line-reference
 
 EOF
-    executor = stub
-    executor.stubs(:execute).returns(output)
-    FluentCommandBuilder::NuGet.version_detector.backticks_executor = executor
-    actual = FluentCommandBuilder::NuGet.version
-    assert_equal '2.0.30619.9000', actual
   end
 
 end

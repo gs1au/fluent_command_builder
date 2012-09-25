@@ -5,9 +5,13 @@ module FluentCommandBuilder
 
     attr_accessor :backticks_executor
 
+    def initialize
+      @backticks_executor = BackticksExecutor.new
+    end
+
     def version(path=nil)
       d = StandardVersionDetector.new 'sw_vers', '-productVersion'
-      d.backticks_executor = @backticks_executor if @backticks_executor
+      d.backticks_executor = @backticks_executor
       d.version
     end
 

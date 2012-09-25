@@ -5,7 +5,7 @@ module FluentCommandBuilder
       executable = `which #{executable_name}`
       real_executable = `readlink #{executable}`.strip
       result = real_executable == '' ? executable : real_executable
-      return unless result
+      return if result.to_s == ''
       File.dirname result
     end
 

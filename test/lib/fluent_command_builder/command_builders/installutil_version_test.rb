@@ -1,9 +1,9 @@
-require_relative '../../../command_test_base'
+require_relative '../../../version_test_base'
 
-class InstallUtilVersionTest < CommandTestBase
+class InstallUtilVersionTest < VersionTestBase
 
   def test_version_40
-    output = <<EOF
+    assert_version FluentCommandBuilder::InstallUtil, '4.0.30319.1', <<EOF
     Microsoft (R) .NET Framework Installation utility Version 4.0.30319.1
     Copyright (c) Microsoft Corporation.  All rights reserved.
 
@@ -55,11 +55,6 @@ class InstallUtilVersionTest < CommandTestBase
     of the assemblies on the command line along with the /? or /help option.
 
 EOF
-    executor = stub
-    executor.stubs(:execute).returns(output)
-    FluentCommandBuilder::InstallUtil.version_detector.backticks_executor = executor
-    actual = FluentCommandBuilder::InstallUtil.version
-    assert_equal '4.0.30319.1', actual
   end
 
 end

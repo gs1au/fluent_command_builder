@@ -1,9 +1,9 @@
-require_relative '../../../command_test_base'
+require_relative '../../../version_test_base'
 
-class TeamFoundationVersionTest < CommandTestBase
+class TeamFoundationVersionTest < VersionTestBase
 
   def test_version_100
-    output = <<EOF
+    assert_version FluentCommandBuilder::TeamFoundation, '10.0.30319.1', <<EOF
     TF - Team Foundation Version Control Tool, Version 10.0.30319.1
     Copyright (c) Microsoft Corporation.  All rights reserved.
 
@@ -141,11 +141,6 @@ class TeamFoundationVersionTest < CommandTestBase
                    Team Foundation Server.
 
 EOF
-    executor = stub
-    executor.stubs(:execute).returns(output)
-    FluentCommandBuilder::TeamFoundation.version_detector.backticks_executor = executor
-    actual = FluentCommandBuilder::TeamFoundation.version
-    assert_equal '10.0.30319.1', actual
   end
 
 end

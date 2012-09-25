@@ -1,6 +1,6 @@
 # Generated code. Do not modify.
 
-require File.expand_path(File.dirname(__FILE__) + '/../internal/version_detectors')
+require File.expand_path(File.dirname(__FILE__) + '/../version_detectors')
 require File.expand_path(File.dirname(__FILE__) + '/../internal/underlying_builder')
 
 module FluentCommandBuilder

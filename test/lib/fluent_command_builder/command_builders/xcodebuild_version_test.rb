@@ -1,14 +1,9 @@
-require_relative '../../../command_test_base'
+require_relative '../../../version_test_base'
 
-class XCodeBuildVersionTest < CommandTestBase
+class XCodeBuildVersionTest < VersionTestBase
 
   def test_version_44
-    output = "Xcode 4.4.1\nBuild version 4F1003"
-    executor = stub
-    executor.stubs(:execute).returns(output)
-    FluentCommandBuilder::XCodeBuild.version_detector.backticks_executor = executor
-    actual = FluentCommandBuilder::XCodeBuild.version
-    assert_equal '4.4.1', actual
+    assert_version FluentCommandBuilder::XCodeBuild, '4.4.1', "Xcode 4.4.1\nBuild version 4F1003"
   end
 
 end

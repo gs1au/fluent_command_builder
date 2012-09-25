@@ -1,21 +1,24 @@
-require File.expand_path(File.dirname(__FILE__) + '/printer')
+require File.expand_path(File.dirname(__FILE__) + '/internal/printer')
 
 module FluentCommandBuilder
   class VersionValidator
 
-    attr_accessor :printer, :should_abort_on_fatal
+    attr_accessor :validation_level, :should_abort_on_fatal, :printer
 
-    def initialize(command_builder_config)
-      @c = command_builder_config
-      @printer = Printer.new
+    def initialize(target_name, version_detector)
+      @target_name = target_name
+      @version_detector = version_detector
+      @validation_level = :fatal
       @should_abort_on_fatal = true
+      @printer = FluentCommandBuilder::Printer.new
     end
 
-    def validate
+    def validate(expected_version_string, path=nil)
       validate_validation_level
-      return if validation_level == :off
+      return if @validation_level == :off
 
-      @actual_version_string = @c.version_detector.version(@c.evaluated_path)
+      @expected_version_string = expected_version_string
+      @actual_version_string = @version_detector.version path
 
       unless actual_version
         @printer.print_warning error_message('unable to determine actual version')
@@ -40,7 +43,7 @@ module FluentCommandBuilder
     private
 
     def validation_level
-      @c.version_validation_level
+      @validation_level
     end
 
     def validate_validation_level
@@ -51,15 +54,12 @@ module FluentCommandBuilder
       [:off, :warn, :fatal].include? validation_level
     end
 
-
-
-
     def is_valid?
       actual_version.to_a.first(expected_version.to_a.length) == expected_version.to_a
     end
 
     def expected_version
-      @expected_version ||= Version.new(@c.version)
+      @expected_version ||= Version.new(@expected_version_string)
     end
 
     def actual_version
@@ -67,7 +67,10 @@ module FluentCommandBuilder
     end
 
     def error_message(actual_version)
-      %Q[Version validation for command "#{@c.command_name}" failed. Expected version #{expected_version} but was #{actual_version}.]
+      m = 'Version validation '
+      m += %Q[for "#{@target_name}" ] if @target_name
+      m += "failed. Expected version #{expected_version} but was #{actual_version}."
+      m
     end
 
   end

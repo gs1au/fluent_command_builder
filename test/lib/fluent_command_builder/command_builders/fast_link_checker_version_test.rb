@@ -1,9 +1,9 @@
-require_relative '../../../command_test_base'
+require_relative '../../../version_test_base'
 
-class FastLinkCheckerVersionTest < CommandTestBase
+class FastLinkCheckerVersionTest < VersionTestBase
 
   def test_version_21
-    output = <<EOF
+    assert_version FluentCommandBuilder::FastLinkChecker, '2.1.0.604', <<EOF
           ***** Fast Link Checker Console Tool x64 Editon 2.1.0.604 *****
     *==============================================================*
     * This version is unregistered. You have 16 day(s) remaining.  *
@@ -139,11 +139,6 @@ class FastLinkCheckerVersionTest < CommandTestBase
 
 
 EOF
-    executor = stub
-    executor.stubs(:execute).returns(output)
-    FluentCommandBuilder::FastLinkChecker.version_detector.backticks_executor = executor
-    actual = FluentCommandBuilder::FastLinkChecker.version
-    assert_equal '2.1.0.604', actual
   end
 
 end

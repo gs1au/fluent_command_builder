@@ -1,14 +1,9 @@
-require_relative '../../../command_test_base'
+require_relative '../../../version_test_base'
 
-class RakeVersionTest < CommandTestBase
+class RakeVersionTest < VersionTestBase
 
   def test_version_09
-    output = 'rake, version 0.9.2.2'
-    executor = stub
-    executor.stubs(:execute).returns(output)
-    FluentCommandBuilder::Rake.version_detector.backticks_executor = executor
-    actual = FluentCommandBuilder::Rake.version
-    assert_equal '0.9.2.2', actual
+    assert_version FluentCommandBuilder::Rake, '0.9.2.2', 'rake, version 0.9.2.2'
   end
 
 end
