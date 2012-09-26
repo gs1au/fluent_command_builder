@@ -1,5 +1,5 @@
 require 'test/unit'
-require_relative '../../../lib/fluent_command_builder'
+require_relative '../../../../lib/fluent_command_builder'
 include FluentCommandBuilder
 
 class VersionTest < Test::Unit::TestCase

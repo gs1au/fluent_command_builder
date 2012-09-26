@@ -1,7 +1,7 @@
 require 'test/unit'
 require 'mocha'
 require 'tmpdir'
-require_relative '../../../lib/fluent_command_builder'
+require_relative '../../../../lib/fluent_command_builder'
 include FluentCommandBuilder
 
 class PathValidatorTest < Test::Unit::TestCase
