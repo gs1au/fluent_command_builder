@@ -1,4 +1,5 @@
 require File.expand_path(File.dirname(__FILE__) + '/internal/printer')
+require File.expand_path(File.dirname(__FILE__) + '/internal/path')
 
 module FluentCommandBuilder
   class VersionValidator
@@ -17,8 +18,9 @@ module FluentCommandBuilder
       validate_validation_level
       return if @validation_level == :off
 
+      p = Path.new path
       @expected_version_string = expected_version_string
-      @actual_version_string = @version_detector.version path
+      @actual_version_string = @version_detector.version p.evaluated_path
 
       unless actual_version
         @printer.print_warning error_message('unable to determine actual version')

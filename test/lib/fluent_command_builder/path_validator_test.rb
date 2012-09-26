@@ -37,7 +37,6 @@ class PathValidatorTest < Test::Unit::TestCase
     Dir.mktmpdir do |d|
       @config.stubs(:path_validation_level).returns(:fatal)
       @config.stubs(:path).returns(d)
-      @config.stubs(:evaluated_path).returns(d)
       @validator.validate
     end
   end
@@ -46,7 +45,6 @@ class PathValidatorTest < Test::Unit::TestCase
     d = '/unreal'
     @config.stubs(:path_validation_level).returns(:warn)
     @config.stubs(:path).returns(d)
-    @config.stubs(:evaluated_path).returns(d)
     @printer.expects(:print_warning).with(%Q[Path for command "command", version "1.0" does not exist. Path: /unreal]).once
     @validator.validate
   end
@@ -55,7 +53,6 @@ class PathValidatorTest < Test::Unit::TestCase
     d = '/unreal'
     @config.stubs(:path_validation_level).returns(:fatal)
     @config.stubs(:path).returns(d)
-    @config.stubs(:evaluated_path).returns(d)
     @printer.expects(:print_error).with(%Q[Path for command "command", version "1.0" does not exist. Path: /unreal]).once
     @validator.validate
   end

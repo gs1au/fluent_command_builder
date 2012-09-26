@@ -1,4 +1,5 @@
 require File.expand_path(File.dirname(__FILE__) + '/argument_formatter')
+require File.expand_path(File.dirname(__FILE__) + '/path')
 require File.expand_path(File.dirname(__FILE__) + '/../execution_context')
 
 module FluentCommandBuilder
@@ -33,7 +34,8 @@ module FluentCommandBuilder
     end
 
     def to_s
-      "#{quote_if_includes_space @c.evaluated_executable} #{@args}".strip
+      p = Path.new @c.executable
+      "#{quote_if_includes_space p.evaluated_path} #{@args}".strip
     end
 
     private

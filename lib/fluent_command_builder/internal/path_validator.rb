@@ -1,3 +1,4 @@
+require File.expand_path(File.dirname(__FILE__) + '/path')
 require File.expand_path(File.dirname(__FILE__) + '/printer')
 
 module FluentCommandBuilder
@@ -17,9 +18,10 @@ module FluentCommandBuilder
       return if validation_level == :off
 
       if @c.path
-        path = @c.evaluated_path
-        return if File.exist? path
-        message = %Q[Path for command "#{@c.command_name}", version "#{@c.version}" does not exist. Path: #{path}]
+        p = Path.new @c.path
+        evaluated_path = p.evaluated_path
+        return if File.exist? evaluated_path
+        message = %Q[Path for command "#{@c.command_name}", version "#{@c.version}" does not exist. Path: #{evaluated_path}]
       else
         return if @path_finder.find_path @c.command_name
         message = %Q[Command "#{@c.command_name}" was not found on the PATH.]

@@ -9,7 +9,7 @@ class UnderlyingBuilderTest < Test::Unit::TestCase
     config = stub
     config.stubs(:validate_path)
     config.stubs(:validate_version)
-    config.stubs(:evaluated_executable)
+    config.stubs(:executable)
     builder = UnderlyingBuilder.new config
 
     password_formatter = stub
