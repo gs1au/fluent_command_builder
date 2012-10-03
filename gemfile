@@ -1,4 +1,4 @@
 source :rubygems
-gem 'test-unit', :require => false #, '>= 2.5.1'
+gem 'test-unit', :require => false
 gem 'mocha', :require => false
 gem 'term-ansicolor'

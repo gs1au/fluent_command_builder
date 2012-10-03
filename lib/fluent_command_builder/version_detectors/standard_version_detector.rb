@@ -1,3 +1,4 @@
+require File.expand_path(File.dirname(__FILE__) + '/../internal/path')
 require File.expand_path(File.dirname(__FILE__) + '/../internal/path_finder')
 require File.expand_path(File.dirname(__FILE__) + '/../internal/version')
 require File.expand_path(File.dirname(__FILE__) + '/../command_executors/backticks_executor')
@@ -17,12 +18,12 @@ module FluentCommandBuilder
     def version(path=nil)
       path ||= @path_finder.find_path @command_name
       return unless path && File.exist?(path)
-      Dir.chdir path do
-        command = %Q["#{@command_name}" #{@command_arg} 2>&1]
-        output = @backticks_executor.execute command
-        v = Version.match(output)
-        v ? v.version : nil
-      end
+      path = nil if path == '.'
+      executable = path ? Path.new(path, @command_name).evaluated_path : @command_name
+      command = %Q["#{executable}" #{@command_arg} 2>&1]
+      output = @backticks_executor.execute(command).to_s
+      v = Version.match(output)
+      v ? v.version : nil
     end
 
   end

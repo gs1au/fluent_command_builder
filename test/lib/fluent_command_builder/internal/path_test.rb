@@ -5,6 +5,11 @@ include FluentCommandBuilder
 
 class PathTest < Test::Unit::TestCase
 
+  def test_should_join_path_on_initialize
+    p = Path.new 'a', 'b'
+    assert_equal 'a/b', p.path
+  end
+
   def test_should_normalise_path_on_unix
     p = Path.new '\\path'
     p.is_windows = false
@@ -29,6 +34,11 @@ class PathTest < Test::Unit::TestCase
     return unless p.is_windows
     ENV['command_path'] = 'C:\\path'
     assert_equal 'C:\\path', p.evaluated_path
+  end
+
+  def test_should_ignore_empty_path_entries
+    p = Path.new '', 'command'
+    assert_equal 'command', p.path
   end
 
 end
