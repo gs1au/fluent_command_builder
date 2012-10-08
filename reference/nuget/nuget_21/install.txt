@@ -1,0 +1,44 @@
+usage: NuGet install packageId|pathToPackagesConfig [options]
+
+Installs a package using the specified sources. If no sources are specified, all sources defined in %AppData%\NuGet\NuGet.config are used.  If NuGet.config specifies no sources, uses the default NuGet feed.
+
+     Specify the id and optionally the version of the packa
+     ge to install. If a path to a packages.config file is 
+     used instead of an id, all the packages it contains ar
+     e installed.
+
+options:
+
+ -Source +                                                 A list of packages sources to
+                              use for the install.
+ -OutputDirectory                                          Specifies the directory in wh
+                              ich packages will be installe
+                              d. If none specified, uses th
+                              e current directory.
+ -Version                                                  The version of the package to
+                              install.
+ -ExcludeVersion         (x)                               If set, the destination folde
+                              r will contain only the packa
+                              ge name, not the version numb
+                              er
+ -Prerelease                                               Allows prerelease packages to
+                              be installed. This flag is no
+                              t required when restoring pac
+                              kages by installing from pack
+                              ages.config.
+ -NoCache                                                  Disable looking up packages f
+                              rom local machine cache.
+ -RequireConsent                                           Checks if package restore con
+                              sent is granted before instal
+                              ling a package.
+ -SolutionDirectory                                        Solution root for package res
+                              tore.
+ -Help                   (?)                               help
+ -Verbosity                                                Display this amount of detail
+                              s in the output: normal, quie
+                              t, detailed.
+ -NonInteractive                                           Do not prompt for user input 
+                              or confirmations.
+
+For more information, visit http://docs.nuget.org/docs/reference/command-line-reference
+

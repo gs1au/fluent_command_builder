@@ -1,0 +1,34 @@
+usage: NuGet update <packages.config|solution>
+
+Update packages to latest available versions. This command also updates NuGet.exe itself.
+
+options:
+
+ -Source +                                           A list of package sources to sea
+                           rch for updates.
+ -Id +                                               Package ids to update.
+ -RepositoryPath                                     Path to the local packages folde
+                           r (location where packages are i
+                           nstalled).
+ -Safe                                               Looks for updates with the highe
+                           st version available within the 
+                           same major and minor version as 
+                           the installed package.
+ -Self                                               Update the running NuGet.exe to 
+                           the newest version available fro
+                           m the server.
+ -Verbose                                            Show verbose output while updati
+                           ng.
+ -Prerelease                                         Allows updating to prerelease ve
+                           rsions. This flag is not require
+                           d when updating prerelease packa
+                           ges that are already installed.
+ -Help                (?)                            help
+ -Verbosity                                          Display this amount of details i
+                           n the output: normal, quiet, det
+                           ailed.
+ -NonInteractive                                     Do not prompt for user input or 
+                           confirmations.
+
+For more information, visit http://docs.nuget.org/docs/reference/command-line-reference
+

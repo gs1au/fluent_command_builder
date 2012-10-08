@@ -1,0 +1,69 @@
+usage: NuGet pack <nuspec | project> [options]
+
+Creates a NuGet package based on the specified nuspec or project file.
+
+     Specify the location of the nuspec or project file to 
+     create a package.
+
+options:
+
+ -OutputDirectory                                                      Specifies the directory
+                                    for the created NuGet p
+                                    ackage file. If not spe
+                                    cified, uses the curren
+                                    t directory.
+ -BasePath                                                             The base path of the fi
+                                    les defined in the nusp
+                                    ec file.
+ -Verbose                                                              Shows verbose output fo
+                                    r package building.
+ -Version                                                              Overrides the version n
+                                    umber from the nuspec f
+                                    ile.
+ -Exclude +                                                            Specifies one or more w
+                                    ildcard patterns to exc
+                                    lude when creating a pa
+                                    ckage.
+ -Symbols                                                              Determines if a package
+                                    containing sources and 
+                                    symbols should be creat
+                                    ed. When specified with
+                                    a nuspec, creates a reg
+                                    ular NuGet package file
+                                    and the corresponding s
+                                    ymbols package.
+ -Tool                                                                 Determines if the outpu
+                                    t files of the project 
+                                    should be in the tool f
+                                    older. 
+ -Build                                                                Determines if the proje
+                                    ct should be built befo
+                                    re building the package
+                                    .
+ -NoDefaultExcludes                                                    Prevent default exclusi
+                                    on of NuGet package fil
+                                    es and files and folder
+                                    s starting with a dot e
+                                    .g. .svn.
+ -NoPackageAnalysis                                                    Specify if the command 
+                                    should not run package 
+                                    analysis after building
+                                    the package.
+ -ExcludeEmptyDirectories                                              Prevent inclusion of em
+                                    pty directories when bu
+                                    ilding the package.
+ -Properties +                                                         Provides the ability to
+                                    specify a semicolon ";"
+                                    delimited list of prope
+                                    rties when creating a p
+                                    ackage.
+ -Help                         (?)                                     help
+ -Verbosity                                                            Display this amount of 
+                                    details in the output: 
+                                    normal, quiet, detailed
+                                    .
+ -NonInteractive                                                       Do not prompt for user 
+                                    input or confirmations.
+
+For more information, visit http://docs.nuget.org/docs/reference/command-line-reference
+

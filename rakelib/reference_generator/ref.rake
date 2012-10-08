@@ -57,6 +57,14 @@ namespace :ref do
     t.execute 'msdeploy /help'
   end
 
+  ref_task 'nuget', NuGet.version do |t|
+    output = `nuget`
+    actions_text = output.match(/Available commands:\n(.+)/m)[1]
+    matches = actions_text.lines.map { |action| action.match(/^ (.+?) /) }.compact
+    actions = matches.map { |m| m[1].strip == '' ? nil : m[1] }.compact
+    actions.each { |action| t.execute "nuget help #{action}", action }
+  end
+
   ref_task 'security_osx', SecurityOSX.version do |t|
     output = `security help`
     actions_text = output.match(/security commands are:\n(.+)/m)[1]
