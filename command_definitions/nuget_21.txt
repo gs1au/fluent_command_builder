@@ -1,0 +1,93 @@
+2.1
+NuGet
+    config
+        -Set <name>=<value>
+        -Help
+        -Verbosity <verbosity>
+        -NonInteractive
+    delete <packageId> <packageVersion>
+        -Source <source>
+        -NoPrompt
+        -ApiKey <apiKey>
+        -Help
+        -Verbosity <verbosity>
+        -NonInteractive
+    help[ <command>]
+        -All
+        -Markdown
+        -Help
+        -Verbosity <verbosity>
+        -NonInteractive
+    install <packageIdOrPathToPackagesConfig>
+        -Source <source>
+        -OutputDirectory <outputDirectory>
+        -Version <version>
+        -ExcludeVersion
+        -Prerelease
+        -NoCache
+        -RequireConsent
+        -SolutionDirectory <solutionDirectory>
+        -Help
+        -Verbosity <verbosity>
+        -NonInteractive
+    list[ <searchTerms>]
+        -Source <source>
+        -Verbose
+        -AllVersions
+        -Prerelease
+        -Help
+        -Verbosity <verbosity>
+        -NonInteractive
+    pack <nuspecOrProject>
+        -OutputDirectory <outputDirectory>
+        -BasePath <basePath>
+        -Verbose
+        -Version <version>
+        -Exclude <pattern>
+        -Symbols
+        -Tool
+        -Build
+        -NoDefaultExcludes
+        -NoPackageAnalysis
+        -ExcludeEmptyDirectories
+        -Properties <properties;>
+        -Help
+        -Verbosity <verbosity>
+        -NonInteractive
+    push <packagePath>
+        -Source <source>
+        -ApiKey <apiKey>
+        -Timeout <seconds>
+        -Help
+        -Verbosity <verbosity>
+        -NonInteractive
+    setApiKey <apiKey>
+        -Source <source>
+        -Help
+        -Verbosity <verbosity>
+        -NonInteractive
+    sources <action>
+        -Name <name>
+        -Source <source>
+        -UserName <userName>
+        -Password <password>
+        -Help
+        -Verbosity <verbosity>
+        -NonInteractive
+    spec <packageId>
+        -AssemblyPath <assemblyPath>
+        -Force
+        -Help
+        -Verbosity <verbosity>
+        -NonInteractive
+    update <packagesConfigOrSolution>
+        -Source <source>
+        -Id <packageId>
+        -RepositoryPath <repositoryPath>
+        -Safe
+        -Self
+        -Verbose
+        -Prerelease
+        -Help
+        -Verbosity <verbosity>
+        -NonInteractive
