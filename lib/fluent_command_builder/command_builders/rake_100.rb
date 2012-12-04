@@ -6,8 +6,8 @@ require File.expand_path(File.dirname(__FILE__) + '/../internal/underlying_build
 
 module FluentCommandBuilder
   module Rake
-    module V09
-      VERSION = '0.9'
+    module V100
+      VERSION = '10.0'
       @@config = CommandBuilderConfig.new FluentCommandBuilder::Rake::COMMAND_NAME, VERSION
       @@config.version_detector = FluentCommandBuilder::Rake.version_detector
       def configure_rake
@@ -26,14 +26,29 @@ module FluentCommandBuilder
           super underlying_builder
           @b.append " #{@b.format task, ' '}" unless task.nil?
         end
+        def all
+          @b.append ' --all'
+          yield @b if block_given?
+          self
+        end
+        def backtrace(out=nil)
+          @b.append ' --backtrace'
+          @b.append "=#{@b.format out}" unless out.nil?
+          yield @b if block_given?
+          self
+        end
         def classic_namespace
           @b.append ' --classic-namespace'
           yield @b if block_given?
           self
         end
-        def describe(pattern=nil)
-          @b.append ' --describe'
-          @b.append " #{@b.format pattern}" unless pattern.nil?
+        def comments
+          @b.append ' --comments'
+          yield @b if block_given?
+          self
+        end
+        def describe(pattern)
+          @b.append " --describe #{@b.format pattern}"
           yield @b if block_given?
           self
         end
@@ -62,8 +77,25 @@ module FluentCommandBuilder
           yield @b if block_given?
           self
         end
+        def jobs(number=nil)
+          @b.append ' --jobs'
+          @b.append " #{@b.format number}" unless number.nil?
+          yield @b if block_given?
+          self
+        end
+        def job_stats(level=nil)
+          @b.append ' --job-stats'
+          @b.append " #{@b.format level}" unless level.nil?
+          yield @b if block_given?
+          self
+        end
         def libdir(lib_dir)
           @b.append " --libdir #{@b.format lib_dir}"
+          yield @b if block_given?
+          self
+        end
+        def multitask
+          @b.append ' --multitask'
           yield @b if block_given?
           self
         end
@@ -117,6 +149,11 @@ module FluentCommandBuilder
           yield @b if block_given?
           self
         end
+        def suppress_backtrace(pattern)
+          @b.append " --suppress-backtrace #{@b.format pattern}"
+          yield @b if block_given?
+          self
+        end
         def system
           @b.append ' --system'
           yield @b if block_given?
@@ -128,8 +165,9 @@ module FluentCommandBuilder
           yield @b if block_given?
           self
         end
-        def trace
+        def trace(out=nil)
           @b.append ' --trace'
+          @b.append "=#{@b.format out}" unless out.nil?
           yield @b if block_given?
           self
         end

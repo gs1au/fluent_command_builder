@@ -1,13 +1,19 @@
-0.9
+10.0
 rake[ <task >]
+    --all
+    --backtrace[=<out>]
     --classic-namespace
-    --describe[ <pattern>]
+    --comments
+    --describe <pattern>
     --dry-run
     --execute <code>
     --execute-continue <code>
     --execute-print <code>
     --help
+    --jobs[ <number>]
+    --job-stats[ <level>]
     --libdir <libDir>
+    --multitask
     --no-deprecation-warnings
     --no-search
     --no-system
@@ -18,9 +24,10 @@ rake[ <task >]
     --require <file>
     --rules
     --silent
+    --suppress-backtrace <pattern>
     --system
     --tasks[ <pattern>]
-    --trace
+    --trace[=<out>]
     --verbose
     --version
     --where[ <pattern>]
