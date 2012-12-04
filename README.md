@@ -256,7 +256,7 @@ but can also be used for version 10.8 (Mountain Lion).
 Gems:
 
 - cucumber 1.1, 1.2
-- rake 0.9
+- rake 0.9, 10.0
 - bundle 1.1
 
 ### Google
@@ -302,7 +302,7 @@ Other very important tools:
 
 - nuget.exe 2.0, 2.1
 - nunit-console.exe (NUnit) 2.5, 2.6
-- dotcover.exe (.NET code coverage tool by JetBrains) 1.0, 1.1, 1.2, 2.0, 2.1
+- dotcover.exe (.NET code coverage tool by JetBrains) 1.0, 1.1, 1.2, 2.0, 2.1, 2.2
 - 7za.exe (7-Zip) 9.20 (WIP)
 - simian.exe 2.3
 - conlinkchecker.exe (Fast Link Checker) 2.1
