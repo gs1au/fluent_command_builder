@@ -257,7 +257,7 @@ Gems:
 
 - cucumber 1.1, 1.2
 - rake 0.9, 10.0
-- bundle 1.1
+- bundle 1.1, 1.2
 
 ### Google
 
