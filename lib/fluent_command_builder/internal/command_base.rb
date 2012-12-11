@@ -5,6 +5,10 @@ module FluentCommandBuilder
       @b = underlying_builder
     end
 
+    def configure!
+      yield @b if block_given?
+    end
+
     def execute!
       yield @b if block_given?
       @b.execute
