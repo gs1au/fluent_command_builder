@@ -9,7 +9,7 @@ module FluentCommandBuilder
     attr_accessor :path, :command_name, :version, :version_detector,
                   :path_validation_level, :version_validation_level,
                   :path_validator, :version_validator,
-                  :is_windows
+                  :is_windows, :execution_context
 
     def initialize(command_name, version=nil)
       @path = nil
@@ -21,6 +21,7 @@ module FluentCommandBuilder
       @path_validator = PathValidator.new self
       @version_validator = nil
       @is_windows = !ENV['WINDIR'].nil?
+      @execution_context = FluentCommandBuilder.execution_context
     end
 
     def validate_path

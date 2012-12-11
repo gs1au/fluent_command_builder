@@ -14,7 +14,7 @@ module FluentCommandBuilder
       @args = nil
       @passwords = []
       @password_formatter = FluentCommandBuilder.password_formatter
-      @execution_context = FluentCommandBuilder.execution_context
+      @execution_context = @c.execution_context
     end
 
     def append(value)
