@@ -281,6 +281,7 @@ XCode
 Windows (6.1 = Windows 7 / Windows Server 2008 R2)
 
 - netsh.exe 6.1 (WIP)
+- schtasks.exe 6.1 (WIP)
 
 IIS:
 

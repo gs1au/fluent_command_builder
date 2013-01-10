@@ -1,0 +1,28 @@
+6.1
+schtasks
+    /create
+        /sc <scheduleType> (scheduleType)
+        /tn <taskName> (taskName)
+        /tr <taskRun> (taskRun)
+        /s <computer>[ /u <username>][ /p <password>] (computer)
+        /ru <username> /rp <password> (runAs)
+        /mo <modifier> (modifier)
+        /d <day,> (day)
+        /m <month,> (month)
+        /i <idleTime> (idleTime)
+        /st <startTime> (startTime)
+        /ri <interval> (repetitionInterval)
+        /et <endTime> (endTime)
+        /du <duration> (duration)
+        /k (kill)
+        /sd <startDate> (startDate)
+        /ed <endDate> (endDate)
+        /it (runOnlyWhenLoggedIn)
+        /z (deleteUponCompletion)
+        /f (force)
+        /? (help)
+    /delete
+        /tn <taskName> (taskName)
+        /f (force)
+        /s <computer>[ /u <username>][ /p <password>] (computer)
+        /? (help)
