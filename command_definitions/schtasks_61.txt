@@ -21,6 +21,37 @@ schtasks
         /z (deleteUponCompletion)
         /f (force)
         /? (help)
+    /change
+        /tn <taskName> (taskName)
+        /s <computer>[ /u <username>][ /p <password>] (computer)
+        /ru <username> /rp <password> (runAs)
+        /tr <taskRun> (taskRun)
+        /st <startTime> (startTime)
+        /ri <interval> (repetitionInterval)
+        /et <endTime> (endTime)
+        /du <duration> (duration)
+        /k (kill)
+        /sd <startDate> (startDate)
+        /ed <endDate> (endDate)
+        /enable
+        /disable
+        /it (runOnlyWhenLoggedIn)
+        /z (deleteUponCompletion)
+        /? (help)
+    /run
+        /tn <taskName> (taskName)
+        /s <computer>[ /u <username>][ /p <password>] (computer)
+        /? (help)
+    /end
+        /tn <taskName> (taskName)
+        /s <computer>[ /u <username>][ /p <password>] (computer)
+        /? (help)
+    /query
+        /fo <format> (format)
+        /nh (noHeadings)
+        /v (advancedProperties)
+        /s <computer>[ /u <username>][ /p <password>] (computer)
+        /? (help)
     /delete
         /tn <taskName> (taskName)
         /f (force)
