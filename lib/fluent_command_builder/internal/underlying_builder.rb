@@ -1,6 +1,6 @@
-require File.expand_path(File.dirname(__FILE__) + '/argument_formatter')
-require File.expand_path(File.dirname(__FILE__) + '/path')
-require File.expand_path(File.dirname(__FILE__) + '/../execution_context')
+require_relative 'argument_formatter'
+require_relative 'path'
+require_relative '../execution_context'
 
 module FluentCommandBuilder
   class UnderlyingBuilder

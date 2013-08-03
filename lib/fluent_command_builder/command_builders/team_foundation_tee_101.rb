@@ -1,8 +1,8 @@
 # Generated code. Do not modify.
 
-require File.expand_path(File.dirname(__FILE__) + '/../internal/command_base')
-require File.expand_path(File.dirname(__FILE__) + '/../internal/command_builder_config')
-require File.expand_path(File.dirname(__FILE__) + '/../internal/underlying_builder')
+require_relative '../internal/command_base'
+require_relative '../internal/command_builder_config'
+require_relative '../internal/underlying_builder'
 
 module FluentCommandBuilder
   module TeamFoundationTEE

@@ -1,7 +1,7 @@
 # Generated code. Do not modify.
 
 require 'getversion'
-require File.expand_path(File.dirname(__FILE__) + '/../internal/underlying_builder')
+require_relative '../internal/underlying_builder'
 
 module FluentCommandBuilder
   module XCodeBuild

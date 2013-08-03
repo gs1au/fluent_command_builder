@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/executor_base')
+require_relative 'executor_base'
 
 module FluentCommandBuilder
   class SystemExecutor < ExecutorBase

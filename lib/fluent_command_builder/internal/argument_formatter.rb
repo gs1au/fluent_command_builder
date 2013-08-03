@@ -1,4 +1,4 @@
-require File.expand_path(File.dirname(__FILE__) + '/command_base')
+require_relative 'command_base'
 
 module FluentCommandBuilder
   module ArgumentFormatter

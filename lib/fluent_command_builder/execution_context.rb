@@ -1,5 +1,5 @@
-require File.expand_path(File.dirname(__FILE__) + '/internal/printer')
-require File.expand_path(File.dirname(__FILE__) + '/command_executors/system_executor')
+require_relative 'internal/printer'
+require_relative 'command_executors/system_executor'
 
 module FluentCommandBuilder
   class ExecutionContext

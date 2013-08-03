@@ -1,5 +1,5 @@
-require File.expand_path(File.dirname(__FILE__) + '/path')
-require File.expand_path(File.dirname(__FILE__) + '/printer')
+require_relative 'path'
+require_relative 'printer'
 
 module FluentCommandBuilder
   class PathValidator
