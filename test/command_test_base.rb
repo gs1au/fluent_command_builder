@@ -1,9 +1,9 @@
 require 'test/unit'
-require 'mocha'
+require 'mocha/setup'
 require_relative '../lib/fluent_command_builder'
-include FluentCommandBuilder
 
 class CommandTestBase < Test::Unit::TestCase
+  include FluentCommandBuilder
 
   def assert_command(expected_command_text, actual_command_obj)
     assert_equal expected_command_text, actual_command_obj.to_s

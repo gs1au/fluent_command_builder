@@ -1,8 +1,8 @@
 require 'test/unit'
 require_relative '../../../../lib/fluent_command_builder'
-include FluentCommandBuilder
 
 class PrinterTest < Test::Unit::TestCase
+  include FluentCommandBuilder
 
   def test_should_print_warning_in_yellow
     $stderr = StringIO.new

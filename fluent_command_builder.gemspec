@@ -12,4 +12,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'getversion', '~> 0.0.8'
   s.add_dependency 'wicked_witch', '~> 0.0.3'
   s.add_development_dependency 'test-unit', '~> 2.5.2'
+  s.add_development_dependency 'mocha', '~> 0.14.0'
 end

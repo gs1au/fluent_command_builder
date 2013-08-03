@@ -1,9 +1,9 @@
 require 'test/unit'
-require 'mocha'
+require 'mocha/setup'
 require_relative '../../../../lib/fluent_command_builder'
-include FluentCommandBuilder
 
 class PathTest < Test::Unit::TestCase
+  include FluentCommandBuilder
 
   def test_should_join_path_on_initialize
     p = Path.new 'a', 'b'

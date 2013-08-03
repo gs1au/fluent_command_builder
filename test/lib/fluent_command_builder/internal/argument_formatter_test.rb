@@ -1,8 +1,8 @@
 require 'test/unit'
 require_relative '../../../../lib/fluent_command_builder'
-include FluentCommandBuilder
 
 class ArgumentFormatterTest < Test::Unit::TestCase
+  include FluentCommandBuilder
   include ArgumentFormatter
 
   def test_format_array_using_delimiter

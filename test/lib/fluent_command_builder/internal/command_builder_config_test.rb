@@ -1,15 +1,14 @@
 require 'test/unit'
-require 'mocha'
+require 'mocha/setup'
 require_relative '../../../../lib/fluent_command_builder'
-include FluentCommandBuilder
 
 class CommandBuilderConfigTest < Test::Unit::TestCase
+  include FluentCommandBuilder
 
   def setup
     @path_validator = stub
     @version_validator = stub
     @config = CommandBuilderConfig.new 'command'
-    @config.is_windows = false
     @config.path_validator = @path_validator
     @config.version_validator = @version_validator
   end

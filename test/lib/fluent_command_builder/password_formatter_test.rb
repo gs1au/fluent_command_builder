@@ -1,8 +1,8 @@
 require 'test/unit'
 require_relative '../../../lib/fluent_command_builder'
-include FluentCommandBuilder
 
 class PasswordFormatterTest < Test::Unit::TestCase
+  include FluentCommandBuilder
 
   def test_default_format
     f = PasswordFormatter.new

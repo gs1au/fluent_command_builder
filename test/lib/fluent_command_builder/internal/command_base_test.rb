@@ -1,9 +1,9 @@
 require 'test/unit'
-require 'mocha'
+require 'mocha/setup'
 require_relative '../../../../lib/fluent_command_builder'
-include FluentCommandBuilder
 
 class CommandBaseTest < Test::Unit::TestCase
+  include FluentCommandBuilder
 
   def setup
     @underlying_builder = stub

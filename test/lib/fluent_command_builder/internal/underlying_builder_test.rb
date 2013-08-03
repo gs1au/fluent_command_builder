@@ -1,9 +1,10 @@
 require 'test/unit'
-require 'mocha'
+require 'mocha/setup'
 require_relative '../../../../lib/fluent_command_builder'
-include FluentCommandBuilder
+
 
 class UnderlyingBuilderTest < Test::Unit::TestCase
+  include FluentCommandBuilder
 
   def test_should_format_passwords_on_execute
     config = stub

@@ -1,14 +1,14 @@
-require File.expand_path(File.dirname(__FILE__) + '/../version_validator')
-require File.expand_path(File.dirname(__FILE__) + '/path')
-require File.expand_path(File.dirname(__FILE__) + '/path_validator')
+require 'getversion'
+require_relative '../version_validator'
+require_relative 'path'
+require_relative 'path_validator'
 
 module FluentCommandBuilder
   class CommandBuilderConfig
 
     attr_accessor :path, :command_name, :version,
                   :path_validation_level, :version_validation_level,
-                  :path_validator, :version_validator,
-                  :is_windows
+                  :path_validator, :version_validator
 
     def initialize(command_name, version=nil)
       @path = nil
@@ -18,7 +18,6 @@ module FluentCommandBuilder
       @version_validation_level = :fatal
       @path_validator = PathValidator.new self
       @version_validator = nil
-      @is_windows = !ENV['WINDIR'].nil?
     end
 
     def validate_path
@@ -27,7 +26,7 @@ module FluentCommandBuilder
 
     def validate_version
       return unless @version
-      v = @version_validator || VersionValidator.new(@command_name)
+      v = @version_validator || version_validator.new(@command_name) { |path| GetVersion[path] }
       p = Path.new @path
       v.validate @version, p.evaluated_path
     end

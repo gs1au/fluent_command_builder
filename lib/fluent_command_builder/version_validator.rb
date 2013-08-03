@@ -1,17 +1,18 @@
-require 'getversion'
-require File.expand_path(File.dirname(__FILE__) + '/internal/printer')
-require File.expand_path(File.dirname(__FILE__) + '/internal/path')
+require_relative 'internal/printer'
+require_relative 'internal/path'
+require_relative 'internal/version'
 
 module FluentCommandBuilder
   class VersionValidator
 
-    attr_accessor :validation_level, :should_abort_on_fatal, :printer
+    attr_accessor :validation_level, :should_abort_on_fatal, :printer, :get_version
 
-    def initialize(target_name)
+    def initialize(target_name, &get_version)
       @target_name = target_name
       @validation_level = :fatal
       @should_abort_on_fatal = true
       @printer = FluentCommandBuilder::Printer.new
+      @get_version = get_version
     end
 
     def validate(expected_version_string, path=nil)
@@ -20,7 +21,7 @@ module FluentCommandBuilder
 
       p = Path.new path
       @expected_version_string = expected_version_string
-      @actual_version_string = GetVersion[File.join(p.evaluated_path, @target_name)]
+      @actual_version_string = get_version File.join(p.evaluated_path, @target_name)
 
       unless actual_version
         @printer.print_warning error_message('unable to determine actual version')
@@ -43,6 +44,10 @@ module FluentCommandBuilder
     end
 
     private
+
+    def get_version(path)
+      @get_version.call path
+    end
 
     def validation_level
       @validation_level
