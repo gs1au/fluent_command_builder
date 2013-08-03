@@ -1,8 +1,0 @@
-Usage: set-identity-preference [-n] [-c identity] [-s service] [-u keyUsage] [-Z hash] [keychain...]
-    -n  Specify no identity (clears existing preference for service)
-    -c  Specify identity by common name of the certificate
-    -s  Specify service (may be a URL, RFC822 email address, DNS host, or
-        other name) for which this identity is to be preferred
-    -u  Specify key usage (optional) - see man page for values
-    -Z  Specify identity by SHA-1 hash of certificate (optional)
-

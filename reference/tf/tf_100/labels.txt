@@ -1,8 +1,0 @@
-TF - Team Foundation Version Control Tool, Version 10.0.30319.1
-Copyright (c) Microsoft Corporation.  All rights reserved.
-
-Displays the list of labels in Team Foundation version control.
-
-tf labels [/owner:ownername] [/format:(brief|detailed)]
-          [/collection:TeamProjectCollectionUrl]
-          [labelname] [/login:username,[password]]

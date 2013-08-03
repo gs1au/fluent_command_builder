@@ -1,6 +1,0 @@
-Usage: leaks [-cycles] [-nocontext] [-nostacks] [-exclude symbol]
-    -cycles       Use a stricter algorithm ("man leaks" for details)
-    -nocontext    Withhold hex dumps of the leaked memory
-    -nostacks     Don't show stack traces of leaked memory
-    -exclude      Ignore leaks called from "symbol"
-(Set the environment variable MallocStackLogging to get symbolic traces.)

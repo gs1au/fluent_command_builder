@@ -4,11 +4,10 @@ require File.expand_path(File.dirname(__FILE__) + '/printer')
 module FluentCommandBuilder
   class PathValidator
 
-    attr_accessor :path_finder, :printer, :should_abort_on_fatal
+    attr_accessor :printer, :should_abort_on_fatal
 
     def initialize(command_builder_config)
       @c = command_builder_config
-      @path_finder = FluentCommandBuilder.path_finder
       @printer = Printer.new
       @should_abort_on_fatal = true
     end
@@ -23,7 +22,7 @@ module FluentCommandBuilder
         return if File.exist? evaluated_path
         message = %Q[Path for command "#{@c.command_name}", version "#{@c.version}" does not exist. Path: #{evaluated_path}]
       else
-        return if @path_finder.find_path @c.command_name
+        return if WickedWitch[@c.command_name]
         message = %Q[Command "#{@c.command_name}" was not found on the PATH.]
       end
 

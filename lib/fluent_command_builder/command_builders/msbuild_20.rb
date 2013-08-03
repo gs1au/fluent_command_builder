@@ -9,7 +9,6 @@ module FluentCommandBuilder
     module V20
       VERSION = '2.0'
       @@config = CommandBuilderConfig.new FluentCommandBuilder::MSBuild::COMMAND_NAME, VERSION
-      @@config.version_detector = FluentCommandBuilder::MSBuild.version_detector
       def configure_msbuild
         yield @@config
         @@config.validate_path

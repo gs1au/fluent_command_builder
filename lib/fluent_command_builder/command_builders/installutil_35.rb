@@ -9,7 +9,6 @@ module FluentCommandBuilder
     module V35
       VERSION = '3.5'
       @@config = CommandBuilderConfig.new FluentCommandBuilder::InstallUtil::COMMAND_NAME, VERSION
-      @@config.version_detector = FluentCommandBuilder::InstallUtil.version_detector
       def configure_installutil
         yield @@config
         @@config.validate_path

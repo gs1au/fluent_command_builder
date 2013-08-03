@@ -1,4 +1,0 @@
-Usage: default-keychain [-d user|system|common|dynamic] [-s [keychain]]
-    -d  Use the specified preference domain
-    -s  Set the default keychain to the specified keychain
-With no parameters, display the default keychain.

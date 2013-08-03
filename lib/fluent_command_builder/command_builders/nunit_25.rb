@@ -9,7 +9,6 @@ module FluentCommandBuilder
     module V25
       VERSION = '2.5'
       @@config = CommandBuilderConfig.new FluentCommandBuilder::NUnit::COMMAND_NAME, VERSION
-      @@config.version_detector = FluentCommandBuilder::NUnit.version_detector
       def configure_nunit
         yield @@config
         @@config.validate_path

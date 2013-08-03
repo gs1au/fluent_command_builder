@@ -1,4 +1,0 @@
-Usage: remove-trusted-cert  [-d] [-D] [certFile]
-    -d                  Remove from admin cert store (default is user)
-    -D                  Remove default setting instead of per-cert setting
-    certFile            Certificate(s)

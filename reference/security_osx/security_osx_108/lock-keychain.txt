@@ -1,2 +1,0 @@
-Usage: lock-keychain [-a | keychain]
-    -a  Lock all keychains

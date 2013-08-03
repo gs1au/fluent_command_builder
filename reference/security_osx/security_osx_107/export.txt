@@ -1,9 +1,0 @@
-Usage: export [-k keychain] [-t type] [-f format] [-w] [-p] [-P passphrase] [-o outfile]
-    -k  keychain to export items from
-    -t  Type = certs|allKeys|pubKeys|privKeys|identities|all  (Default: all)
-    -f  Format = openssl|openssh1|openssh2|bsafe|pkcs7|pkcs8|pkcs12|pemseq|x509
-        ...default format is pemseq for aggregate, openssl for single
-    -w  Private keys are wrapped
-    -p  PEM encode the output
-    -P  Specify wrapping passphrase immediately (default is secure passphrase via GUI)
-    -o  Specify output file (default is stdout)

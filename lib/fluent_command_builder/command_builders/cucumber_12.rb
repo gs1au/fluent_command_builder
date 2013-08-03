@@ -9,7 +9,6 @@ module FluentCommandBuilder
     module V12
       VERSION = '1.2'
       @@config = CommandBuilderConfig.new FluentCommandBuilder::Cucumber::COMMAND_NAME, VERSION
-      @@config.version_detector = FluentCommandBuilder::Cucumber.version_detector
       def configure_cucumber
         yield @@config
         @@config.validate_path

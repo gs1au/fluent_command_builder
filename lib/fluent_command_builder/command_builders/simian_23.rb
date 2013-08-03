@@ -9,7 +9,6 @@ module FluentCommandBuilder
     module V23
       VERSION = '2.3'
       @@config = CommandBuilderConfig.new FluentCommandBuilder::Simian::COMMAND_NAME, VERSION
-      @@config.version_detector = FluentCommandBuilder::Simian.version_detector
       def configure_simian
         yield @@config
         @@config.validate_path

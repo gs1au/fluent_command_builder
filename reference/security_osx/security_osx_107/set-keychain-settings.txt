@@ -1,5 +1,0 @@
-Usage: set-keychain-settings [-lu] [-t timeout] [keychain]
-    -l  Lock keychain when the system sleeps
-    -u  Lock keychain after timeout interval
-    -t  Timeout in seconds (omitting this option specifies "no timeout")
-

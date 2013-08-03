@@ -9,7 +9,6 @@ module FluentCommandBuilder
     module V90
       VERSION = '9.0'
       @@config = CommandBuilderConfig.new FluentCommandBuilder::MSTest::COMMAND_NAME, VERSION
-      @@config.version_detector = FluentCommandBuilder::MSTest.version_detector
       def configure_mstest
         yield @@config
         @@config.validate_path

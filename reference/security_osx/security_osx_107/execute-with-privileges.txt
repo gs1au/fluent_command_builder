@@ -1,2 +1,0 @@
-Usage: execute-with-privileges <program> [args...]
-On success, stdin will be read and forwarded to the tool.

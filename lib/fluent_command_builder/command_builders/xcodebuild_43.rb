@@ -9,7 +9,6 @@ module FluentCommandBuilder
     module V43
       VERSION = '4.3'
       @@config = CommandBuilderConfig.new FluentCommandBuilder::XCodeBuild::COMMAND_NAME, VERSION
-      @@config.version_detector = FluentCommandBuilder::XCodeBuild.version_detector
       def configure_xcodebuild
         yield @@config
         @@config.validate_path

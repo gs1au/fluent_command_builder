@@ -9,7 +9,6 @@ module FluentCommandBuilder
     module V09
       VERSION = '0.9'
       @@config = CommandBuilderConfig.new FluentCommandBuilder::Rake::COMMAND_NAME, VERSION
-      @@config.version_detector = FluentCommandBuilder::Rake.version_detector
       def configure_rake
         yield @@config
         @@config.validate_path

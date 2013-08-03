@@ -9,7 +9,6 @@ module FluentCommandBuilder
     module V11
       VERSION = '1.1'
       @@config = CommandBuilderConfig.new FluentCommandBuilder::Bundle::COMMAND_NAME, VERSION
-      @@config.version_detector = FluentCommandBuilder::Bundle.version_detector
       def configure_bundle
         yield @@config
         @@config.validate_path

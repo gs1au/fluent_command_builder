@@ -1,8 +1,0 @@
-TF - Team Foundation Version Control Tool, Version 10.0.30319.1
-Copyright (c) Microsoft Corporation.  All rights reserved.
-
-Removes files and folders from Team Foundation version control and deletes them
-from the disk.
-
-tf delete [/lock:(none|checkin|checkout)] [/recursive]
-          [/login:username,[password]] itemspec

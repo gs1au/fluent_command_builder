@@ -9,7 +9,6 @@ module FluentCommandBuilder
     module V100
       VERSION = '10.0'
       @@config = CommandBuilderConfig.new FluentCommandBuilder::TeamFoundationTEE::COMMAND_NAME, VERSION
-      @@config.version_detector = FluentCommandBuilder::TeamFoundationTEE.version_detector
       def configure_team_foundation_tee
         yield @@config
         @@config.validate_path

@@ -1,12 +1,11 @@
 require File.expand_path(File.dirname(__FILE__) + '/../version_validator')
-require File.expand_path(File.dirname(__FILE__) + '/../version_detectors/default_version_detector')
 require File.expand_path(File.dirname(__FILE__) + '/path')
 require File.expand_path(File.dirname(__FILE__) + '/path_validator')
 
 module FluentCommandBuilder
   class CommandBuilderConfig
 
-    attr_accessor :path, :command_name, :version, :version_detector,
+    attr_accessor :path, :command_name, :version,
                   :path_validation_level, :version_validation_level,
                   :path_validator, :version_validator,
                   :is_windows
@@ -15,7 +14,6 @@ module FluentCommandBuilder
       @path = nil
       @command_name = command_name
       @version = version
-      @version_detector = DefaultVersionDetector.new command_name
       @path_validation_level = :fatal
       @version_validation_level = :fatal
       @path_validator = PathValidator.new self
@@ -29,7 +27,7 @@ module FluentCommandBuilder
 
     def validate_version
       return unless @version
-      v = @version_validator || VersionValidator.new(@command_name, @version_detector)
+      v = @version_validator || VersionValidator.new(@command_name)
       p = Path.new @path
       v.validate @version, p.evaluated_path
     end

@@ -1,8 +1,0 @@
-TF - Team Foundation Version Control Tool, Version 10.0.30319.1
-Copyright (c) Microsoft Corporation.  All rights reserved.
-
-Displays the version of one or more items in a workspace.
-
-tf localversions itemspec [/recursive] [/format:brief|detailed]
-                 [/workspace:workspacename[;workspaceowner]]
-                 [/collection:TeamProjectCollectionUrl]

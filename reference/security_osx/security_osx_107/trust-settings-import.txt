@@ -1,3 +1,0 @@
-Usage: trust-settings-import  [-d] settings_file
-    -d                  Import admin trust settings (default is user)
-

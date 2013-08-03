@@ -1,1 +1,0 @@
-Dir[File.expand_path(File.dirname(__FILE__) + '/version_detectors/*.rb')].each { |f| require f }

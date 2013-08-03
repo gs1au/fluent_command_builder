@@ -1,3 +1,0 @@
-Usage: unlock-keychain [-u] [-p password] [keychain]
-    -p  Use "password" as the password to unlock the keychain
-    -u  Do not use the password

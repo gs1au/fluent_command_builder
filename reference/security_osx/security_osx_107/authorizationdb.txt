@@ -1,6 +1,0 @@
-Usage: authorizationdb read <right-name>
-       authorizationdb remove <right-name>
-       authorizationdb write <right-name> [allow|deny|<rulename>]
-If no rulename is specified, write will read a plist from stdin.
-       authorizationdb merge source [destination]
-If no destination path is specified, merge will merge to /etc/authorization.

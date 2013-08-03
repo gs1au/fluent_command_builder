@@ -1,5 +1,3 @@
-.bundle
-.DS_Store
-.idea
-coverage
-*.gem
+.idea/
+.pkg/
+temp/

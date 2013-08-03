@@ -9,7 +9,6 @@ module FluentCommandBuilder
     module V107
       VERSION = '10.7'
       @@config = CommandBuilderConfig.new FluentCommandBuilder::SecurityOSX::COMMAND_NAME, VERSION
-      @@config.version_detector = FluentCommandBuilder::SecurityOSX.version_detector
       def configure_security_osx
         yield @@config
         @@config.validate_path

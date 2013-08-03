@@ -1,5 +1,0 @@
-JetBrains dotCover Console Runner v2.0.425.54. Copyright (c) 2009-2012 JetBrains s.r.o. All rights reserved.
-
-help: Show console runner help.
-Type 'dotCover help <command>' for help on a specific command, parameters and configuration xml format
-Type 'dotCover help <command> <file name>' to write configuration xml example to the specified file

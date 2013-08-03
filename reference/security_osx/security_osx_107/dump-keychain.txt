@@ -1,5 +1,0 @@
-Usage: dump-keychain [-adir] [keychain...]
-    -a  Dump access control list of items
-    -d  Dump (decrypted) data of items
-    -i  Interactive access control list editing mode
-    -r  Dump the raw (encrypted) data of items

@@ -1,4 +1,0 @@
-Usage: trust-settings-export  [-s] [-d] settings_file
-    -s                  Export system trust settings (default is user)
-    -d                  Export admin trust settings (default is user)
-

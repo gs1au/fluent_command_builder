@@ -9,7 +9,6 @@ module FluentCommandBuilder
     module V17
       VERSION = '1.7'
       @@config = CommandBuilderConfig.new FluentCommandBuilder::AppCfgPython::COMMAND_NAME, VERSION
-      @@config.version_detector = FluentCommandBuilder::AppCfgPython.version_detector
       def configure_appcfg_python
         yield @@config
         @@config.validate_path

@@ -9,7 +9,6 @@ module FluentCommandBuilder
     module V61
       VERSION = '6.1'
       @@config = CommandBuilderConfig.new FluentCommandBuilder::Netsh::COMMAND_NAME, VERSION
-      @@config.version_detector = FluentCommandBuilder::Netsh.version_detector
       def configure_netsh
         yield @@config
         @@config.validate_path

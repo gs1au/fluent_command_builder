@@ -1,8 +1,0 @@
-Usage: get-identity-preference [-s service] [-u keyUsage] [-p] [-c] [-Z] [keychain...]
-    -s  Specify service (may be a URL, RFC822 email address, DNS host, or
-        other name)
-    -u  Specify key usage (optional) - see man page for values
-    -p  Output identity certificate in pem format
-    -c  Print common name of the preferred identity certificate
-    -Z  Print SHA-1 hash of the preferred identity certificate
-

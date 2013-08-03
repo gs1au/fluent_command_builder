@@ -1,9 +1,0 @@
-TF - Team Foundation Version Control Tool, Version 10.0.30319.1
-Copyright (c) Microsoft Corporation.  All rights reserved.
-
-Restores shelved file revisions, check-in notes, comments, and work item
-associations to the current workspace or removes an existing shelveset from
-the server.
-
-tf unshelve [/move] [shelvesetname[;username]] [itemspec] [/recursive]
-            [/noprompt] [/login:username,[password]]

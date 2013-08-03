@@ -9,7 +9,6 @@ module FluentCommandBuilder
     module <%= model[:version_module_name] %>
       VERSION = '<%= model[:version] %>'
       @@config = CommandBuilderConfig.new FluentCommandBuilder::<%= model[:command_module_name] %>::COMMAND_NAME, VERSION
-      @@config.version_detector = FluentCommandBuilder::<%= model[:command_module_name] %>.version_detector
       def configure_<%= model[:factory_method_name] %>
         yield @@config
         @@config.validate_path

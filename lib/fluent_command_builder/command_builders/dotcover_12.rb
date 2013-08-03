@@ -9,7 +9,6 @@ module FluentCommandBuilder
     module V12
       VERSION = '1.2'
       @@config = CommandBuilderConfig.new FluentCommandBuilder::DotCover::COMMAND_NAME, VERSION
-      @@config.version_detector = FluentCommandBuilder::DotCover.version_detector
       def configure_dotcover
         yield @@config
         @@config.validate_path

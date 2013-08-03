@@ -9,7 +9,6 @@ module FluentCommandBuilder
     module V21
       VERSION = '2.1'
       @@config = CommandBuilderConfig.new FluentCommandBuilder::NuGet::COMMAND_NAME, VERSION
-      @@config.version_detector = FluentCommandBuilder::NuGet.version_detector
       def configure_nuget
         yield @@config
         @@config.validate_path

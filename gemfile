@@ -1,4 +1,2 @@
-source :rubygems
-gem 'test-unit', :require => false
-gem 'mocha', :require => false
-gem 'term-ansicolor'
+source 'http://rubygems.org'
+gemspec

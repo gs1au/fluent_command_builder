@@ -1,8 +1,0 @@
-TF - Team Foundation Version Control Tool, Version 10.0.30319.1
-Copyright (c) Microsoft Corporation.  All rights reserved.
-
-Adds new files and folders from a local file system location to Team Foundation
-version control.
-
-tf add itemspec [/lock:(none|checkin|checkout)] [/type:filetype] [/noprompt]
-       [/recursive] [/login:username,[password]]

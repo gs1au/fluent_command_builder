@@ -9,7 +9,6 @@ module FluentCommandBuilder
     module V21
       VERSION = '2.1'
       @@config = CommandBuilderConfig.new FluentCommandBuilder::FastLinkChecker::COMMAND_NAME, VERSION
-      @@config.version_detector = FluentCommandBuilder::FastLinkChecker.version_detector
       def configure_fastlinkchecker
         yield @@config
         @@config.validate_path

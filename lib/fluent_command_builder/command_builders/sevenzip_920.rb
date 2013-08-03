@@ -9,7 +9,6 @@ module FluentCommandBuilder
     module V920
       VERSION = '9.20'
       @@config = CommandBuilderConfig.new FluentCommandBuilder::SevenZip::COMMAND_NAME, VERSION
-      @@config.version_detector = FluentCommandBuilder::SevenZip.version_detector
       def configure_sevenzip
         yield @@config
         @@config.validate_path

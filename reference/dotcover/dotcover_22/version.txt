@@ -1,8 +1,0 @@
-JetBrains dotCover Console Runner v2.2.515.8. Copyright (c) 2009-2012 JetBrains s.r.o. All rights reserved.
-
-version: Write dotCover version info to the specified file.
-usage: dotCover version <output file name> [parameters]
-
-Global parameters:
-  /LogFile=ARG    : (Optional) Enables logging and specifies log file name
-

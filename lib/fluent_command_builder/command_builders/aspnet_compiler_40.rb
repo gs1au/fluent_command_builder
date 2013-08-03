@@ -9,7 +9,6 @@ module FluentCommandBuilder
     module V40
       VERSION = '4.0'
       @@config = CommandBuilderConfig.new FluentCommandBuilder::AspnetCompiler::COMMAND_NAME, VERSION
-      @@config.version_detector = FluentCommandBuilder::AspnetCompiler.version_detector
       def configure_aspnet_compiler
         yield @@config
         @@config.validate_path

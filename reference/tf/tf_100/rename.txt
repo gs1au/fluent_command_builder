@@ -1,8 +1,0 @@
-TF - Team Foundation Version Control Tool, Version 10.0.30319.1
-Copyright (c) Microsoft Corporation.  All rights reserved.
-
-Changes the name or the path of a file or folder. You can use the rename
-command or the alias move, to move a file or folder to a new location.
-
-tf rename [/lock:(none|checkout|checkin)] [/login:username,[password]]
-          olditem newitem

@@ -9,7 +9,6 @@ module FluentCommandBuilder
     module V71
       VERSION = '7.1'
       @@config = CommandBuilderConfig.new FluentCommandBuilder::MSDeploy::COMMAND_NAME, VERSION
-      @@config.version_detector = FluentCommandBuilder::MSDeploy.version_detector
       def configure_msdeploy
         yield @@config
         @@config.validate_path

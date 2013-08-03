@@ -1,7 +1,0 @@
-TF - Team Foundation Version Control Tool, Version 10.0.30319.1
-Copyright (c) Microsoft Corporation.  All rights reserved.
-
-Restores items that were previously deleted.
-
-tf undelete [/noget] [/lock:(none|checkin|checkout)]
-            [/recursive] itemspec[;deletionID] [/login:username,[password]]
