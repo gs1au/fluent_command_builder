@@ -1,11 +1,11 @@
 PATH
   remote: .
   specs:
-    fluent_command_builder (0.9.7)
-      getversion (~> 0.0.8)
-      rake (~> 10.1.0)
-      term-ansicolor (~> 1.0.7)
-      wicked_witch (~> 0.0.3)
+    fluent_command_builder (0.9.8)
+      getversion (~> 0.0)
+      rake (~> 10.1)
+      term-ansicolor (~> 1.0)
+      wicked_witch (~> 0.0)
 
 GEM
   remote: http://rubygems.org/
@@ -25,5 +25,5 @@ PLATFORMS
 
 DEPENDENCIES
   fluent_command_builder!
-  mocha (~> 0.14.0)
-  test-unit (~> 2.5.2)
+  mocha (~> 0.14)
+  test-unit (~> 2.5)
