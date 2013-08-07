@@ -15,15 +15,15 @@ directory COMMAND_BUILDERS_DIR
 task :default => [:test_gem]
 
 desc 'Test gem.'
-Rake::TestTask.new :test_gem => [:build] do |t|
+Rake::TestTask.new :test_gem => [:generate] do |t|
   t.verbose = true
   test_files = FileList['test/**/*.rb'] # TODO: rename test files to start with "test_"
   raise 'No tests found.' unless test_files.length > 0
   t.test_files = test_files
 end
 
-desc 'Build.'
-task :build => [:test_code_generator, :clobber, COMMAND_BUILDERS_DIR] do
+desc 'Generate.'
+task :generate => [:test_code_generator, :clobber, COMMAND_BUILDERS_DIR] do
   code_generator = CodeGenerator.new COMMAND_DEFINITIONS_DIR, LIB_DIR
   code_generator.execute
 end

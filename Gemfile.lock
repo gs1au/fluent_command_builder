@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    fluent_command_builder (0.9.9)
+    fluent_command_builder (0.9.10)
       getversion (~> 0.0.11)
       rake (~> 10.1)
       term-ansicolor (~> 1.0)
