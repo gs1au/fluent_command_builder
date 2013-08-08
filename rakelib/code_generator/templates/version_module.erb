@@ -11,8 +11,6 @@ module FluentCommandBuilder
       @@config = CommandBuilderConfig.new FluentCommandBuilder::<%= model[:command_module_name] %>::COMMAND_NAME, VERSION
       def configure_<%= model[:factory_method_name] %>
         yield @@config
-        @@config.validate_path
-        @@config.validate_version
       end
       def <%= model[:command_factory_method_signature] %>
         b = UnderlyingBuilder.new @@config

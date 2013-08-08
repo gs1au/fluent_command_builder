@@ -11,8 +11,6 @@ module FluentCommandBuilder
       @@config = CommandBuilderConfig.new FluentCommandBuilder::NUnit::COMMAND_NAME, VERSION
       def configure_nunit
         yield @@config
-        @@config.validate_path
-        @@config.validate_version
       end
       def nunit(input_files=nil)
         b = UnderlyingBuilder.new @@config

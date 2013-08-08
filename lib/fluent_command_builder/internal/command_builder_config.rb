@@ -20,13 +20,23 @@ module FluentCommandBuilder
       @version_validator = nil
     end
 
+    def path=(path)
+      @path = path
+      validate_path
+    end
+
+    def version=(version)
+      @version = version
+      validate_version
+    end
+
     def validate_path
       @path_validator.validate
     end
 
     def validate_version
       return unless @version
-      v = @version_validator || VersionValidator.new(@command_name) { |path| GetVersion[path] }
+      v = VersionValidator.new(@command_name) { |path| GetVersion[path] }
       p = Path.new @path
       v.validate @version, p.evaluated_path
     end

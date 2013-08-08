@@ -11,8 +11,6 @@ module FluentCommandBuilder
       @@config = CommandBuilderConfig.new FluentCommandBuilder::TeamFoundation::COMMAND_NAME, VERSION
       def configure_team_foundation
         yield @@config
-        @@config.validate_path
-        @@config.validate_version
       end
       def team_foundation
         b = UnderlyingBuilder.new @@config

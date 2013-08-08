@@ -11,8 +11,6 @@ module FluentCommandBuilder
       @@config = CommandBuilderConfig.new FluentCommandBuilder::Rake::COMMAND_NAME, VERSION
       def configure_rake
         yield @@config
-        @@config.validate_path
-        @@config.validate_version
       end
       def rake(task=nil)
         b = UnderlyingBuilder.new @@config

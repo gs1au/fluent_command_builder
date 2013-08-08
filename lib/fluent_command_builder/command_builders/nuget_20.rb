@@ -11,8 +11,6 @@ module FluentCommandBuilder
       @@config = CommandBuilderConfig.new FluentCommandBuilder::NuGet::COMMAND_NAME, VERSION
       def configure_nuget
         yield @@config
-        @@config.validate_path
-        @@config.validate_version
       end
       def nuget
         b = UnderlyingBuilder.new @@config

@@ -11,8 +11,6 @@ module FluentCommandBuilder
       @@config = CommandBuilderConfig.new FluentCommandBuilder::XCodeBuild::COMMAND_NAME, VERSION
       def configure_xcodebuild
         yield @@config
-        @@config.validate_path
-        @@config.validate_version
       end
       def xcodebuild
         b = UnderlyingBuilder.new @@config

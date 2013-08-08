@@ -11,8 +11,6 @@ module FluentCommandBuilder
       @@config = CommandBuilderConfig.new FluentCommandBuilder::InstallUtil::COMMAND_NAME, VERSION
       def configure_installutil
         yield @@config
-        @@config.validate_path
-        @@config.validate_version
       end
       def installutil
         b = UnderlyingBuilder.new @@config

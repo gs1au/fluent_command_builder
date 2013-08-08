@@ -11,8 +11,6 @@ module FluentCommandBuilder
       @@config = CommandBuilderConfig.new FluentCommandBuilder::AppCfgPython::COMMAND_NAME, VERSION
       def configure_appcfg_python
         yield @@config
-        @@config.validate_path
-        @@config.validate_version
       end
       def appcfg_python
         b = UnderlyingBuilder.new @@config

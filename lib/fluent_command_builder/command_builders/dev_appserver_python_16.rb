@@ -11,8 +11,6 @@ module FluentCommandBuilder
       @@config = CommandBuilderConfig.new FluentCommandBuilder::DevAppserverPython::COMMAND_NAME, VERSION
       def configure_dev_appserver_python
         yield @@config
-        @@config.validate_path
-        @@config.validate_version
       end
       def dev_appserver_python(application_root=nil)
         b = UnderlyingBuilder.new @@config

@@ -11,8 +11,6 @@ module FluentCommandBuilder
       @@config = CommandBuilderConfig.new FluentCommandBuilder::AspnetCompiler::COMMAND_NAME, VERSION
       def configure_aspnet_compiler
         yield @@config
-        @@config.validate_path
-        @@config.validate_version
       end
       def aspnet_compiler(target_dir=nil)
         b = UnderlyingBuilder.new @@config

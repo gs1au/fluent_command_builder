@@ -11,8 +11,6 @@ module FluentCommandBuilder
       @@config = CommandBuilderConfig.new FluentCommandBuilder::MSTest::COMMAND_NAME, VERSION
       def configure_mstest
         yield @@config
-        @@config.validate_path
-        @@config.validate_version
       end
       def mstest
         b = UnderlyingBuilder.new @@config

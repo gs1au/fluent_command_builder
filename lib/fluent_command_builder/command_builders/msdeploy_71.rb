@@ -11,8 +11,6 @@ module FluentCommandBuilder
       @@config = CommandBuilderConfig.new FluentCommandBuilder::MSDeploy::COMMAND_NAME, VERSION
       def configure_msdeploy
         yield @@config
-        @@config.validate_path
-        @@config.validate_version
       end
       def msdeploy
         b = UnderlyingBuilder.new @@config

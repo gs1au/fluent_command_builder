@@ -11,8 +11,6 @@ module FluentCommandBuilder
       @@config = CommandBuilderConfig.new FluentCommandBuilder::SecurityOSX::COMMAND_NAME, VERSION
       def configure_security_osx
         yield @@config
-        @@config.validate_path
-        @@config.validate_version
       end
       def security_osx
         b = UnderlyingBuilder.new @@config

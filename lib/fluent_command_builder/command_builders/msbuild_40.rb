@@ -11,8 +11,6 @@ module FluentCommandBuilder
       @@config = CommandBuilderConfig.new FluentCommandBuilder::MSBuild::COMMAND_NAME, VERSION
       def configure_msbuild
         yield @@config
-        @@config.validate_path
-        @@config.validate_version
       end
       def msbuild(project_file=nil)
         b = UnderlyingBuilder.new @@config

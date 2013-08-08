@@ -11,8 +11,6 @@ module FluentCommandBuilder
       @@config = CommandBuilderConfig.new FluentCommandBuilder::Simian::COMMAND_NAME, VERSION
       def configure_simian
         yield @@config
-        @@config.validate_path
-        @@config.validate_version
       end
       def simian
         b = UnderlyingBuilder.new @@config
