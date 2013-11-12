@@ -29,6 +29,6 @@ end
 
 desc 'Generate.'
 task :generate => [:clobber, COMMAND_BUILDERS_DIR] do
-  code_generator = CommandBuilder::CodeGenerator::Generator.new command_builders_dir: COMMAND_BUILDERS_DIR
+  code_generator = CommandBuilder::CodeGenerator::Generator.new module_name: 'FluentCommandBuilder', command_builders_dir: COMMAND_BUILDERS_DIR
   code_generator.execute
 end

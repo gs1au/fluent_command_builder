@@ -13,5 +13,5 @@ Gem::Specification.new do |s|
   s.add_dependency 'wicked_witch', '~> 0.0.3'
   s.add_development_dependency 'test-unit', '~> 2.5'
   s.add_development_dependency 'mocha', '~> 0.14'
-  s.add_development_dependency 'command_builder', '0.0.4'
+  s.add_development_dependency 'command_builder', '0.0.7'
 end
