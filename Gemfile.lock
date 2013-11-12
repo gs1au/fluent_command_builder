@@ -8,8 +8,9 @@ PATH
       wicked_witch (~> 0.0.3)
 
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
+    command_builder (0.0.4)
     getversion (0.0.11)
       wicked_witch (~> 0.0.3)
     metaclass (0.0.1)
@@ -26,6 +27,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  command_builder (= 0.0.4)
   fluent_command_builder!
   mocha (~> 0.14)
   test-unit (~> 2.5)

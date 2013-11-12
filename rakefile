@@ -1,8 +1,13 @@
 require 'rake/clean'
 require 'rake/testtask'
+
+require 'bundler/setup'
+require 'command_builder/code_generator'
+
 require 'bundler'
 Bundler::GemHelper.install_tasks
-require_relative 'rakelib/code_generator/code_generator'
+
+
 
 ROOT_DIR = File.expand_path(File.dirname(__FILE__))
 COMMAND_DEFINITIONS_DIR = File.join ROOT_DIR, 'command_definitions'
@@ -23,15 +28,7 @@ Rake::TestTask.new :test_gem => [:generate] do |t|
 end
 
 desc 'Generate.'
-task :generate => [:test_code_generator, :clobber, COMMAND_BUILDERS_DIR] do
-  code_generator = CodeGenerator.new COMMAND_DEFINITIONS_DIR, LIB_DIR
+task :generate => [:clobber, COMMAND_BUILDERS_DIR] do
+  code_generator = CommandBuilder::CodeGenerator::Generator.new command_builders_dir: COMMAND_BUILDERS_DIR
   code_generator.execute
-end
-
-desc 'Test code generator.'
-Rake::TestTask.new :test_code_generator do |t|
-  t.verbose = true
-  test_files = FileList['rakelib/code_generator_tests/**/test_*.rb']
-  raise 'No tests found.' unless test_files.length > 0
-  t.test_files = test_files
 end
