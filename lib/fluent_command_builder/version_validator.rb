@@ -17,7 +17,7 @@ module FluentCommandBuilder
 
     def validate(expected_version_string, path=nil)
       validate_validation_level
-      return if @validation_level == :off
+      return if validation_level == :off
 
       p = Path.new path
       @expected_version_string = expected_version_string
@@ -30,7 +30,6 @@ module FluentCommandBuilder
 
       unless is_valid?
         message = error_message actual_version.first(expected_version.to_a.length)
-
         case validation_level
           when :warn
             @printer.print_warning message
@@ -47,10 +46,6 @@ module FluentCommandBuilder
 
     def get_version(path)
       @get_version.call path
-    end
-
-    def validation_level
-      @validation_level
     end
 
     def validate_validation_level

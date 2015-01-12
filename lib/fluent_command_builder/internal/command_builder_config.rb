@@ -38,6 +38,7 @@ module FluentCommandBuilder
       return unless @version
       v = VersionValidator.new(@command_name) { |path| GetVersion[path] }
       p = Path.new @path
+      v.validation_level = @version_validation_level
       v.validate @version, p.evaluated_path
     end
 
