@@ -1,2 +1,3 @@
 source 'https://rubygems.org'
+source 'http://worf.melb.gs1au.org:8808/'
 gemspec
