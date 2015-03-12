@@ -23,7 +23,7 @@ module FluentCommandBuilder
           super underlying_builder
         end
         def allow_untrusted(bool)
-          @b.append " -allowUntrusted:#{@b.format bool}"
+          @b.append ' -allowUntrusted'
           yield @b if block_given?
           self
         end

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    gs1au_fluent_command_builder (0.10.1)
+    gs1au_fluent_command_builder (0.10.2)
       getversion (~> 0.0.11)
       rake (~> 10.1)
       term-ansicolor (~> 1.0)
